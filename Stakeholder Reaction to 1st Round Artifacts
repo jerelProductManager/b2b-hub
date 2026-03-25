@@ -1,0 +1,149 @@
+Here's a detailed summary and action items from the session.
+
+---
+
+## Meeting Summary
+
+**Session Type:** Working Review — CMS Prototype & PRD Walkthrough
+**Attendees:** Jerel (PM), Shia Bernstein (B2B Tech Lead), Sam Herman (BDBTools Owner)
+**Purpose:** Walk through current-state documentation, PRD, and the CMS prototype; align on architecture direction and get stakeholder feedback before the April 14 architect session.
+
+---
+
+## Detailed Notes
+
+### 1. Stakeholder Approval Process — Manny
+- Any customer-facing changes need to go through **Manny** for approval before shipping. Jerel acknowledged this and framed Phase 2 (sign-up centered flow) as the point where that process kicks in — Phase 1 (JSON/CMS) is backend/admin and doesn't require his sign-off yet.
+- Manny has seen the high-level direction (sign-up flow concept) and is generally on board, but formal review of specific changes will need lead time.
+- **Manny is out until approximately May** (NAB travel, Germany trip) — this should be factored into Phase 2 timeline planning.
+
+---
+
+### 2. Current State Documentation Walkthrough
+Jerel walked through three views of current state: **Admin**, **Customer**, and **Technical**.
+- Content update flow can take **months** end-to-end (ticket → dev → QA → deploy).
+- Pain points pulled directly from prior stakeholder interviews.
+- Quick peek at **BDBTools** included — not deep-dived.
+- Documentation captures: segments, contracts, verification paths (D&B, email domain whitelist, manual review), and customer flow step-by-step.
+- Goal: establish a documented baseline so architecture debates have a shared reference point — *"when architects talk, they reference things from 7 years ago."*
+
+---
+
+### 3. PRD Walkthrough (v1.2)
+- Two phases clearly delineated:
+  - **Phase 1:** Thin JSON config layer replacing all hard-coded hub content
+  - **Phase 2:** Full GUI CMS interface
+- Covers: executive summary, problems to solve, feature prioritization, architectural approach, scope (in/out/quick wins), RACI, and timeline.
+- **B2B Hub Health Dashboard** — Jerel wants a live metrics dashboard (similar to Splunk) operational *before* go-live, covering the 6 PRD success metrics. Goal: be able to answer "how are we doing?" immediately at the 30-day mark post-launch.
+- RACI included — flagged as potentially needing adjustment; Shia/Sam should review and flag any changes.
+
+---
+
+### 4. CMS Prototype Demo (bhb2b-cms.jsx)
+Jerel walked through the prototype live. Key points:
+
+**Architecture:**
+- Three page categories: Core Pages, Internal Pages, Contract Pages
+- Modeled after the current site — directional, not pixel-perfect
+- Phase 1 scope = JSON config only
+
+**Org Types vs. Segments:**
+- **Org Types** = customer-facing labels (what the user sees)
+- **Segments** = backend routing logic
+- These are intentionally decoupled — you can split one segment into two org types for marketing purposes without changing backend routing. Example: State/Local and K-12 could be presented separately to customers but route to the same portal.
+
+**Contract Entity Management:**
+- Contracts have: name, local URL, contract number, logo
+- Logo changes in one place propagate everywhere — eliminates the current multi-location logo problem
+- **Image auto-resize** flagged as a hard requirement: the system must dynamically resize images to fit the allocated space (or resize the space to fit the image) — currently hard-coded image dimensions are a pain point
+- Sam noted: BDBTools has an image tab with size validation (40×100 or 80×200 px with auto-resize) — the path reference approach may be sufficient; exact solution TBD
+
+**Draft/Preview vs. Live:**
+- Current prototype: "Ariel" role can save and go live immediately; non-Ariel users submit for approval
+- Shia raised the question: can an editor see what the change looks like *before* it goes live?
+- **Jerel's response:** Phase 1 dirty version = edit the JSON file and reference the live page manually. The true draft/preview split is where Phase 1 starts to merge into Phase 2.
+- In SQA/dev environments the tool will be available; it won't exist in production as-is.
+
+**Sign-Up Form (Phase 2 Preview):**
+- Jerel walked through a qualification-first sign-up concept embedded in the prototype
+- Fields: org type, state, email, org name, phone, spend level, current B&H account number
+- **Existing customer account linking** surfaced as a key requirement — customers sometimes create a new B2B account when they already have a retail account, causing merge issues. Allowing them to self-report their existing account number at sign-up would streamline backend matching (currently handled via address/phone matching against UNIX records).
+- Sign-up flow: answers → segment/contract mapping → account creation
+- Shia confirmed: this is an existing operational pain point — the logic exists but is imperfect
+- **Research needed** before finalizing sign-up stages — competitive analysis (CDW, Amazon, others already done by Jay)
+
+**Segments / Drag-and-Drop:**
+- Drag-and-drop reordering for both segments (homepage tabs) and contracts (on segment pages) — was in a prior version, will be added back
+- Ability to deactivate segments and contracts
+- **Contract start/end dates** — Shia enthusiastically flagged this as a major need; contracts should auto-deactivate on expiration dates. This is optional (can default to far-future date like 2050) but must be supported.
+
+**Error States:**
+- D&B mismatch and domain mismatch errors need user-facing messaging with clear next steps
+- Options: "Request Manual Review," "Try Again"
+- Goal: reduce funnel drop-off by giving users a recovery path instead of a dead end
+
+**State-Based Contract Routing:**
+- Shia raised an important gap: **contracts are state-dependent** (e.g., E&I + Virginia → Portal 55; E&I + Utah → different portal)
+- The prototype shows contracts at the segment level but doesn't yet model state → portal ID mapping
+- **Decision needed:** Should state/portal ID routing live in this new CMS tool, or stay in BDBTools (portal management tool)?
+  - Sam's lean: the portal ID and its parameters should stay in BDBTools because that's where the validation and deduplication logic lives, and operators already know the portal ID from there
+  - Jerel's lean: from a UX perspective, having operators juggle two tools is friction — ideally everything lives in one place
+  - **Agreed path forward:** Jerel will mock up what the state→contract→portal routing UI would look like *inside* the CMS tool, so the team can evaluate both options side-by-side before deciding
+  - If the two systems can **talk to each other** (e.g., CMS calls BDBTools to surface portal ID options by contract + state), that's the optimal middle ground
+  - Long-term Phase 5/6 thinking: fold portal management entirely into the new CMS and retire BDBTools technical debt (including ~60 stale parameters)
+
+---
+
+### 5. Design / Jay Linder Alignment
+- Jay has been through multiple iterations of the hub redesign — this is her **third** iteration. She's understandably protective of the work.
+- The most recent round of changes (qualification-first vs. segment-first sign-up, competitor research) shifted the direction after she had finalized designs.
+- Jerel's approach: it's not about destroying her work — it's about incorporating new findings as the product evolves. Jay hasn't historically worked with product in this way; this is a new dynamic for her.
+- **B&H design philosophy** briefly debated — site consistently ranks well on usability benchmarks (US News, Consumer Reports), but the team acknowledged the B2B side has room to modernize.
+- Phase 1 focus: **control the elements before applying design** — the CMS/JSON layer needs to be in place first; design is applied on top. Some existing elements (news/tips/advice sections, static promo areas) will be removed in the redesign — Jerel deliberately excluded them from the prototype.
+
+---
+
+### 6. Architect Session — April 14
+- Ariel has booked the architects for a session on **April 14** (afternoon)
+- Jerel wants this session to be meaningfully different — he wants Shia and Sam to have reviewed the docs and prototype *before* then, so the architecture conversation is substantive
+- Also wants to loop in Ariel (if not already in the April 14 meeting) with a pre-read session
+
+---
+
+### 7. Confluence Access & Artifact Links
+- All three artifacts (Current State doc, PRD, prototype) are in Confluence
+- Jerel offered to enable Confluence approval workflow so Shia/Sam can be designated approvers
+- Jerel will share direct links for simplicity
+- Prototype note: it only works within its own tab — changes don't sync across two open tabs (prototype limitation, not a production concern)
+
+---
+
+### 8. Permalink / URL Strategy (Closing Thread)
+- Brief mention of a pending conversation with **Web Ops and Product Ops** about permalink structure and potentially splitting work into different sprints — Brendan flagged this, no resolution in this session
+
+---
+
+## ✅ Next Steps
+
+| # | Action Item | Owner | Timing |
+|---|---|---|---|
+| 1 | **Review all three artifacts in full:** Current State doc, PRD v1.2, and CMS prototype | Shia Bernstein, Sam Herman | Before April 14 architect session |
+| 2 | **Provide written feedback** on the three artifacts — flag anything inaccurate, missing, or out of scope | Shia, Sam | Before April 14 |
+| 3 | **Mock up state → contract → portal routing UI** inside the CMS prototype as a decision artifact — show what it would look like to manage state-based portal assignment from within the new tool | Jerel | Before April 14 session |
+| 4 | **Draft Phase 1 JSON UX improvements** — explore JSONC (commented JSON) or a JSON viewer/editor tool that supports collapsible sections and inline comments to make the JSON config easier for Ariel to manage without the full CMS UI | Jerel | Near-term |
+| 5 | **Document image auto-resize requirement formally** in PRD — specify that the system must dynamically resize logos to fit allocated space (or vice versa), not rely on hard-coded dimensions | Jerel | Next PRD update |
+| 6 | **Add contract start/end date fields** to the contract entity in both the prototype and PRD/Tech Architecture — auto-deactivation on expiration is a firm requirement (optional field, defaults to far-future date) | Jerel | Next PRD/prototype update |
+| 7 | **Add existing B&H account number field** to sign-up form requirements — allows new B2B sign-ups to self-report existing retail accounts and streamline UNIX matching | Jerel | Phase 2 sign-up spec |
+| 8 | **Confirm architect meeting on April 14** — determine who is in the room (Shia, Sam, Ariel, Brendan, Jerel minimum); note the meeting can shift if needed | Jerel / Ariel | Immediately |
+| 9 | **Pre-brief Ariel on the PRD and prototype** before the April 14 architect session — Jerel held off until after this session with Shia/Sam | Jerel | Before April 14 |
+| 10 | **Align with Jay Linder** on design sequencing — communicate that Phase 1 is about element control before design application; position the prototype as a living spec she can react to rather than a replacement for her work | Jerel | Ongoing |
+| 11 | **Permalink / sprint structure conversation** with Web Ops and Product Ops | Brendan | TBD |
+| 12 | **Shia/Sam to play with the prototype independently**, make notes, and flag any portal-management overlap questions before the working sessions | Shia, Sam | Before mid-April |
+
+---
+
+## Key Open Questions
+1. **Where does state → contract → portal routing live?** CMS tool, BDBTools, or a read-integration between the two? (Decision artifact from Action Item #3 will inform this)
+2. **What is the right Phase 1 JSON editing experience?** JSONC with comments, a lightweight JSON editor with folding, or something else — without bloating scope into a full CMS prematurely
+3. **Manny approval process:** What's the formal review timeline/SLA for customer-facing changes, and who is the backup approver while Manny is out until May?
+4. **Sign-up flow research:** Competitive analysis (CDW, Amazon, others) should be synthesized before Phase 2 sign-up form is finalized — Jay has screenshots; needs a structured review session

@@ -227,7 +227,7 @@ const INITIAL_CONFIG = {
       featuredBody:"B&H Photo Video is a GSA-approved vendor, giving federal agencies direct access to competitive pricing on our full catalog without the need to open a competitive bid.",
       featuredBenefits:["GSA Schedule pricing on thousands of products","Dedicated federal account managers","Electronic PO and requisition support","Compliant with FAR and agency-specific requirements"],
       featuredSignupCta:"Sign Up", featuredLearnMoreCta:"Learn More",
-      otherContractIds:["naspo"], otherContractsTitle:"Other Contracts", phoneNumber:"212.239.7503",
+      otherContractIds:[], otherContractsTitle:"", phoneNumber:"212.239.7503",
       heroImageUrl:"", signupUrl:"https://www.bhphotovideo.com/find/shared/b2bHub/signup.jsp",
     },
     state_local: {
@@ -249,7 +249,7 @@ const INITIAL_CONFIG = {
       featuredBody:"Sign up today to become eligible for special discounts and promotions and streamlined purchasing, backed by our signature service.",
       featuredBenefits:["Easy online quotes","Net terms*","Fast & free shipping","Tax exemption*","Custom pricing for larger orders"],
       featuredSignupCta:"Sign Up", featuredLearnMoreCta:"Learn More",
-      otherContractIds:["ei"], otherContractsTitle:"Cooperative Contracts", phoneNumber:"212.239.7503",
+      otherContractIds:[], otherContractsTitle:"", phoneNumber:"212.239.7503",
       heroImageUrl:"", signupUrl:"https://www.bhphotovideo.com/find/shared/b2bHub/signup.jsp",
     },
     healthcare: {
@@ -805,16 +805,8 @@ function SegmentPageView({ segmentId, config: c, onGoHub, onGoSegment, onGoContr
         <span style={{ color: T.gray4 }}>›</span><span style={{ color: T.gray5 }}>{sp.headline}</span>
       </div>
       <HeroBanner imageUrl={sp.heroImageUrl} fallbackStyle={{ background: `linear-gradient(135deg,${seg.color}dd 0%,#1a1a1a 100%)` }} minHeight={220}>
-        <div style={{ display: "flex", alignItems: "flex-end", position: "relative" }}>
-          {sp.signupBannerTitle && (
-            <div style={{ position: "absolute", top: 16, right: 24, background: T.white, borderRadius: 6, padding: "16px 20px", width: 260, boxShadow: "0 2px 12px rgba(0,0,0,.15)", zIndex: 2 }}>
-              <div style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 700, fontSize: 14, marginBottom: 8, color: T.gray6 }}>{sp.signupBannerTitle}</div>
-              <div style={{ fontSize: 12, color: T.gray5, lineHeight: 1.5, marginBottom: 12 }}>{sp.signupBannerBody}</div>
-              <button onClick={onSignUp} style={{ width: "100%", background: T.green, color: T.white, border: "none", padding: 10, borderRadius: 4, fontWeight: 700, fontSize: 13, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>Sign Up</button>
-              <div style={{ marginTop: 8, fontSize: 11, color: T.gray5, textAlign: "center" }}>Already registered? <span style={{ color: T.bond, cursor: "pointer", fontWeight: 600 }}>Log In</span></div>
-            </div>
-          )}
-          <div style={{ position: "relative", zIndex: 1, padding: "32px 24px 24px", flex: 1 }}>
+        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", padding: "24px 24px" }}>
+          <div style={{ flex: 1, paddingTop: 8 }}>
             <h1 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 32, fontWeight: 800, color: T.white, marginBottom: 12 }}>{sp.headline}</h1>
             <select
               value={segmentId}
@@ -825,6 +817,14 @@ function SegmentPageView({ segmentId, config: c, onGoHub, onGoSegment, onGoContr
               {c.signupForm.orgTypes.map(ot => <option key={ot.id} value={ot.segment}>{ot.label}</option>)}
             </select>
           </div>
+          {sp.signupBannerTitle && (
+            <div style={{ background: T.white, borderRadius: 6, padding: "16px 20px", width: 260, boxShadow: "0 2px 12px rgba(0,0,0,.15)", flexShrink: 0 }}>
+              <div style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 700, fontSize: 14, marginBottom: 8, color: T.gray6 }}>{sp.signupBannerTitle}</div>
+              <div style={{ fontSize: 12, color: T.gray5, lineHeight: 1.5, marginBottom: 12 }}>{sp.signupBannerBody}</div>
+              <button onClick={onSignUp} style={{ width: "100%", background: T.green, color: T.white, border: "none", padding: 10, borderRadius: 4, fontWeight: 700, fontSize: 13, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>Sign Up</button>
+              <div style={{ marginTop: 8, fontSize: 11, color: T.gray5, textAlign: "center" }}>Already registered? <span style={{ color: T.bond, cursor: "pointer", fontWeight: 600 }}>Log In</span></div>
+            </div>
+          )}
         </div>
       </HeroBanner>
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "32px 24px" }}>

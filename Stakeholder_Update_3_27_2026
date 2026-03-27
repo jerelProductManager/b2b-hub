@@ -1,0 +1,64 @@
+Changes Made Today
+New Feature: State × Segment Portal Mappings
+The CMS contracts editor now supports managing which portal ID a customer is routed to based on their state and organization type. E&I and Omnia have been pre-populated with real portal IDs from BDBTools (E&I Virginia [944], E&I Utah [952], Omnia Florida K-12 [1443], Omnia Florida Higher Ed [1445], and more).
+Contract Logos
+Real logos for E&I, Omnia, Equalis, TIPS, BuyBoard, and PEPPM are now embedded. They appear in the featured contract panel, on contract pages, and in the sidebar contract list on segment pages.
+Org Type Dropdown Navigation
+The "Choose Organization Type" dropdown now appears on every segment page and functions as navigation — selecting a different org type takes you directly to that segment's page.
+Higher Ed Label
+The home page tile changed from "College / University" to "Higher Ed" to match the live site.
+State Filter on Higher Ed
+The Higher Ed segment page now shows the state filter in the sidebar by default.
+Sign-Up Card Fix
+The sign-up card on segment pages was being cut off. The hero overflow clipping and height have been corrected — the full card is now visible.
+
+Stakeholder Testing Steps
+Home Page
+
+Confirm the org type tile reads "Higher Ed" (not "College / University")
+Click any org type tile and confirm it navigates to the correct segment page
+Click any contract badge in the contract strip at the bottom and confirm it navigates to that contract's page
+
+Org Type Dropdown
+
+Navigate to any segment page (e.g. K-12)
+Use the "Choose Organization Type" dropdown in the hero banner
+Confirm it navigates to the selected segment without a page reload
+
+Sign-Up Card
+
+On any segment page, confirm the sign-up banner card in the top right is fully visible and not cut off
+
+Contract Logos — Segment Sidebar
+
+Go to the K-12 segment page
+Confirm the sidebar under "Other Contracts" shows real logos (TIPS eagle logo, BuyBoard logo, PEPPM logo, Equalis logo) instead of text badges
+
+State × Portal Mapping
+
+Go to the K-12 segment page
+Select FL from the "Select Your State" dropdown in the sidebar
+Confirm Omnia shows Portal [1443] beneath it in the sidebar
+Try UT — Omnia should show Portal [1427]
+Go to the Higher Ed segment page, select VA from the state filter
+The E&I contract in the sidebar should show Portal [944]
+
+Sign-Up Flow Portal Resolution
+
+From the home page, click "Get Started"
+Step 1: Select College / University
+Step 2: Fill in details, select VA as state
+Step 3: Select any purchasing need, click "Find My Portal"
+On the result screen, E&I should show a blue chip reading Portal [944] — E&I Virginia
+
+CMS — Contracts Editor (Ariel only)
+
+Click ✏️ CMS in the nav bar
+Click Contracts in the left sidebar
+Each contract now has a 🔗 State / Segment Portal Mappings section
+Confirm E&I shows its pre-populated mappings (Virginia, Utah, national defaults)
+Try adding a new row with the "+ Add State / Segment Portal Mapping" button
+Confirm the summary chips update at the bottom of each contract
+
+Live URL:
+https://jerelproductmanager.github.io/b2b-hub/ Sonnet 4.6Extended

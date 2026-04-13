@@ -72,6 +72,31 @@ const INITIAL_CONFIG = {
       { id:"diversity",   label:"Diversity Supplier",             segment:"diversity",   icon:"⭐" },
       { id:"intl",        label:"International Organization",     segment:"intl",        icon:"🌐" },
     ],
+    // ── Step 2: Tell us about yourself ──────────────────────────────────────
+    step2Title:           "Tell us about yourself",
+    step2ContinueCta:     "Continue",
+    labelFirstName:       "First Name",
+    labelLastName:        "Last Name",
+    labelBusinessEmail:   "Business Email",
+    labelOrgName:         "Organization Name",
+    labelPhone:           "Business Phone",
+    labelState:           "State",
+    labelPurchaseVolume:  "Annual Purchase Volume",
+    labelHasB2CAccount:   "Do you already have a B&H.com account?",
+    labelB2CEmail:        "Your B&H.com account email",
+    hintB2CEmail:         "We\'ll link your consumer account to your new B2B account.",
+    // ── Step 3: One last thing ───────────────────────────────────────────────
+    step3Title:    "One last thing",
+    step3Subtitle: "This helps us find the right contracts and portal for you.",
+    step3Options:  [
+      "Equipment for a specific project",
+      "Ongoing / recurring hardware purchases",
+      "Cooperative contract compliance",
+      "Setting up an eProcurement integration",
+      "Net terms / credit account",
+      "Just exploring options",
+    ],
+    step3Cta: "Find My Portal",
   },
 
   segments: {
@@ -497,7 +522,7 @@ export default function App() {
   const [route,    setRoute]    = useState({ view: "hub", id: null });
   const [mainTab,  setMainTab]  = useState("hub");
   const [hubStep,       setHubStep]       = useState("entry");
-  const [signupData,    setSignupData]    = useState({ orgType: null, state: "", firstName: "", lastName: "", email: "", orgName: "", phone: "", purchaseVolume: "", primaryNeed: "" });
+  const [signupData,    setSignupData]    = useState({ orgType: null, state: "", firstName: "", lastName: "", email: "", orgName: "", phone: "", purchaseVolume: "", primaryNeed: "", hasB2CAccount: null, b2cEmail: "" });
   const [deducedSegment, setDeducedSegment] = useState(null);
   const [adminTab,     setAdminTab]     = useState("form");
   const [activeSection, setActiveSection] = useState("hero");
@@ -625,7 +650,7 @@ export default function App() {
 function HubView({ config: c, hubStep, setHubStep, signupData, setSignupData, deducedSegment, setDeducedSegment, deduceSegment, onGoSegment, onGoContract }) {
   const seg = deducedSegment ? c.segments[deducedSegment] : null;
   const relContracts = deducedSegment ? c.contracts.filter(ct => ct.active && ct.segments.includes(deducedSegment)) : [];
-  const resetHub = () => { setHubStep("entry"); setSignupData({ orgType: null, state: "", firstName: "", lastName: "", email: "", orgName: "", phone: "", purchaseVolume: "", primaryNeed: "" }); setDeducedSegment(null); };
+  const resetHub = () => { setHubStep("entry"); setSignupData({ orgType: null, state: "", firstName: "", lastName: "", email: "", orgName: "", phone: "", purchaseVolume: "", primaryNeed: "", hasB2CAccount: null, b2cEmail: "" }); setDeducedSegment(null); };
 
   return (
     <div style={{ maxWidth: 1100, margin: "0 auto", padding: "32px 24px" }}>
@@ -689,31 +714,68 @@ function HubView({ config: c, hubStep, setHubStep, signupData, setSignupData, de
 
       {hubStep === "step2" && (
         <div style={{ animation: "fadeUp .3s ease", maxWidth: 720, margin: "0 auto" }}>
-          <StepHeader step={2} total={3} title="Tell us about yourself" subtitle={`Getting set up for ${signupData.orgType?.label || "your organization"}`} onBack={() => setHubStep("step1")} />
+          <StepHeader step={2} total={3} title={c.signupForm.step2Title || "Tell us about yourself"} subtitle={`Getting set up for ${signupData.orgType?.label || "your organization"}`} onBack={() => setHubStep("step1")} />
           <div style={{ background: T.white, borderRadius: 12, border: `1px solid ${T.gray2}`, padding: 32 }}>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
-              <FormField label="First Name" value={signupData.firstName} onChange={v => setSignupData(p => ({ ...p, firstName: v }))} placeholder="Jane" />
-              <FormField label="Last Name"  value={signupData.lastName}  onChange={v => setSignupData(p => ({ ...p, lastName: v }))}  placeholder="Smith" />
+              <FormField label={c.signupForm.labelFirstName || "First Name"} value={signupData.firstName} onChange={v => setSignupData(p => ({ ...p, firstName: v }))} placeholder="Jane" />
+              <FormField label={c.signupForm.labelLastName  || "Last Name"}  value={signupData.lastName}  onChange={v => setSignupData(p => ({ ...p, lastName: v }))}  placeholder="Smith" />
             </div>
-            <div style={{ marginBottom: 16 }}><FormField label="Business Email" value={signupData.email} onChange={v => setSignupData(p => ({ ...p, email: v }))} placeholder="jane@university.edu" type="email" /></div>
+            <div style={{ marginBottom: 16 }}><FormField label={c.signupForm.labelBusinessEmail || "Business Email"} value={signupData.email} onChange={v => setSignupData(p => ({ ...p, email: v }))} placeholder="jane@university.edu" type="email" /></div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
-              <FormField label="Organization Name" value={signupData.orgName} onChange={v => setSignupData(p => ({ ...p, orgName: v }))} placeholder="State University" />
-              <FormField label="Business Phone"    value={signupData.phone}   onChange={v => setSignupData(p => ({ ...p, phone: v }))}   placeholder="(212) 555-0100" type="tel" />
+              <FormField label={c.signupForm.labelOrgName || "Organization Name"} value={signupData.orgName} onChange={v => setSignupData(p => ({ ...p, orgName: v }))} placeholder="State University" />
+              <FormField label={c.signupForm.labelPhone   || "Business Phone"}    value={signupData.phone}   onChange={v => setSignupData(p => ({ ...p, phone: v }))}   placeholder="(212) 555-0100" type="tel" />
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
               <div>
-                <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 6 }}>State</label>
+                <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 6 }}>{c.signupForm.labelState || "State"}</label>
                 <select value={signupData.state} onChange={e => setSignupData(p => ({ ...p, state: e.target.value }))} style={{ width: "100%", padding: "11px 12px", border: `1.5px solid ${T.gray3}`, borderRadius: 7, fontSize: 14, background: T.white }}>
                   <option value="">Select state…</option>{STATES.map(s => <option key={s} value={s}>{s}</option>)}
                 </select>
               </div>
               <div>
-                <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 6 }}>Annual Purchase Volume</label>
+                <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 6 }}>{c.signupForm.labelPurchaseVolume || "Annual Purchase Volume"}</label>
                 <select value={signupData.purchaseVolume} onChange={e => setSignupData(p => ({ ...p, purchaseVolume: e.target.value }))} style={{ width: "100%", padding: "11px 12px", border: `1.5px solid ${T.gray3}`, borderRadius: 7, fontSize: 14, background: T.white }}>
                   <option value="">Estimate…</option><option>Under $10,000</option><option>$10,000 – $50,000</option><option>$50,000 – $250,000</option><option>$250,000 – $1M</option><option>Over $1M</option>
                 </select>
               </div>
             </div>
+
+            {/* ── Existing B&H account ── */}
+            <div style={{ marginTop: 20 }}>
+              <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 10 }}>{c.signupForm.labelHasB2CAccount || "Do you already have a B&H.com account?"}</label>
+              <div style={{ display: "flex", gap: 12 }}>
+                {[["yes", "Yes"], ["no", "No"]].map(([val, lab]) => (
+                  <button
+                    key={val}
+                    onClick={() => {
+                      const isYes = val === "yes";
+                      setSignupData(p => ({ ...p, hasB2CAccount: isYes, b2cEmail: isYes ? p.b2cEmail : "" }));
+                    }}
+                    style={{
+                      flex: 1, padding: "11px 0", borderRadius: 7, cursor: "pointer",
+                      border: `2px solid ${signupData.hasB2CAccount === (val === "yes") ? T.bond : T.gray3}`,
+                      background: signupData.hasB2CAccount === (val === "yes") ? T.bondLight : T.white,
+                      fontSize: 14, fontWeight: 600,
+                      color: signupData.hasB2CAccount === (val === "yes") ? T.bond : T.gray5,
+                      transition: "all 0.15s",
+                    }}
+                  >{lab}</button>
+                ))}
+              </div>
+              {signupData.hasB2CAccount === true && (
+                <div style={{ marginTop: 14 }}>
+                  <FormField
+                    label={c.signupForm.labelB2CEmail || "Your B&H.com account email"}
+                    value={signupData.b2cEmail}
+                    onChange={v => setSignupData(p => ({ ...p, b2cEmail: v }))}
+                    placeholder="you@email.com"
+                    type="email"
+                  />
+                  <div style={{ fontSize: 11, color: T.gray4, marginTop: 4 }}>{c.signupForm.hintB2CEmail || "We'll link your consumer account to your new B2B account."}</div>
+                </div>
+              )}
+            </div>
+
             <div style={{ marginTop: 24, display: "flex", justifyContent: "space-between" }}>
               <button onClick={() => setHubStep("step1")} style={{ background: "none", border: "none", color: T.gray5, cursor: "pointer", fontSize: 14 }}>← Back</button>
               <button onClick={() => setHubStep("step3")} style={{ background: T.scarlet, color: T.white, border: "none", padding: "14px 32px", borderRadius: 8, fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>Continue →</button>
@@ -724,10 +786,10 @@ function HubView({ config: c, hubStep, setHubStep, signupData, setSignupData, de
 
       {hubStep === "step3" && (
         <div style={{ animation: "fadeUp .3s ease", maxWidth: 720, margin: "0 auto" }}>
-          <StepHeader step={3} total={3} title="One last thing" subtitle="This helps us find the right contracts and portal for you." onBack={() => setHubStep("step2")} />
+          <StepHeader step={3} total={3} title={c.signupForm.step3Title || "One last thing"} subtitle={c.signupForm.step3Subtitle || "This helps us find the right contracts and portal for you."} onBack={() => setHubStep("step2")} />
           <div style={{ background: T.white, borderRadius: 12, border: `1px solid ${T.gray2}`, padding: 32 }}>
             <label style={{ fontSize: 13, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .5, display: "block", marginBottom: 16 }}>What's your primary purchasing need?</label>
-            {["Equipment for a specific project", "Ongoing / recurring hardware purchases", "Cooperative contract compliance", "Setting up an eProcurement integration", "Net terms / credit account", "Just exploring options"].map(opt => (
+            {(c.signupForm.step3Options || []).map(opt => (
               <button key={opt} onClick={() => setSignupData(p => ({ ...p, primaryNeed: opt }))} style={{ display: "block", width: "100%", marginBottom: 10, background: signupData.primaryNeed === opt ? T.scarletLight : "#fafafa", border: `2px solid ${signupData.primaryNeed === opt ? T.scarlet : T.gray2}`, borderRadius: 8, padding: "14px 20px", cursor: "pointer", textAlign: "left", fontSize: 14, fontWeight: signupData.primaryNeed === opt ? 700 : 500 }}>{opt}</button>
             ))}
             <div style={{ background: T.gray1, borderRadius: 8, padding: 16, marginTop: 20, fontSize: 13, color: T.gray5 }}>
@@ -735,7 +797,7 @@ function HubView({ config: c, hubStep, setHubStep, signupData, setSignupData, de
             </div>
             <div style={{ marginTop: 24, display: "flex", justifyContent: "space-between" }}>
               <button onClick={() => setHubStep("step2")} style={{ background: "none", border: "none", color: T.gray5, cursor: "pointer", fontSize: 14 }}>← Back</button>
-              <button onClick={deduceSegment} style={{ background: T.scarlet, color: T.white, border: "none", padding: "16px 36px", borderRadius: 8, fontWeight: 800, fontSize: 16, cursor: "pointer", fontFamily: "Montserrat,sans-serif", boxShadow: `0 4px 16px rgba(153,0,0,.3)` }}>Find My Portal →</button>
+              <button onClick={deduceSegment} style={{ background: T.scarlet, color: T.white, border: "none", padding: "16px 36px", borderRadius: 8, fontWeight: 800, fontSize: 16, cursor: "pointer", fontFamily: "Montserrat,sans-serif", boxShadow: `0 4px 16px rgba(153,0,0,.3)` }}>{c.signupForm.step3Cta || "Find My Portal"} →</button>
             </div>
           </div>
         </div>
@@ -1538,6 +1600,45 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
             <span style={{ fontSize: 11, color: T.gray4, background: T.bondLight, padding: "3px 8px", borderRadius: 4 }}>→ {ot.segment}</span>
           </div>
         ))}
+      </div>
+
+      {/* ── Step 2 ── */}
+      <div style={{ marginTop: 32, paddingTop: 24, borderTop: `2px solid ${T.gray2}` }}>
+        <div style={{ fontSize: 13, fontWeight: 800, color: T.gray6, fontFamily: "Montserrat,sans-serif", marginBottom: 18 }}>Step 2 — Tell Us About Yourself</div>
+        <EditField label="Step 2 Title"             value={config.signupForm.step2Title}          onChange={v => onChange(d => { d.signupForm.step2Title = v; })} />
+        <EditField label="Continue Button Label"    value={config.signupForm.step2ContinueCta}    onChange={v => onChange(d => { d.signupForm.step2ContinueCta = v; })} />
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+          <EditField label="First Name Label"       value={config.signupForm.labelFirstName}      onChange={v => onChange(d => { d.signupForm.labelFirstName = v; })} />
+          <EditField label="Last Name Label"        value={config.signupForm.labelLastName}       onChange={v => onChange(d => { d.signupForm.labelLastName = v; })} />
+          <EditField label="Business Email Label"   value={config.signupForm.labelBusinessEmail}  onChange={v => onChange(d => { d.signupForm.labelBusinessEmail = v; })} />
+          <EditField label="Org Name Label"         value={config.signupForm.labelOrgName}        onChange={v => onChange(d => { d.signupForm.labelOrgName = v; })} />
+          <EditField label="Phone Label"            value={config.signupForm.labelPhone}          onChange={v => onChange(d => { d.signupForm.labelPhone = v; })} />
+          <EditField label="State Label"            value={config.signupForm.labelState}          onChange={v => onChange(d => { d.signupForm.labelState = v; })} />
+          <EditField label="Purchase Volume Label"  value={config.signupForm.labelPurchaseVolume} onChange={v => onChange(d => { d.signupForm.labelPurchaseVolume = v; })} />
+        </div>
+        <div style={{ marginTop: 4 }}>
+          <EditField label="Existing B&H Account Question" value={config.signupForm.labelHasB2CAccount} onChange={v => onChange(d => { d.signupForm.labelHasB2CAccount = v; })} hint="Yes/No toggle label shown to ask if they have a consumer account" />
+          <EditField label="B&H Account Email Label"       value={config.signupForm.labelB2CEmail}      onChange={v => onChange(d => { d.signupForm.labelB2CEmail = v; })} />
+          <EditField label="B&H Account Email Helper Text" value={config.signupForm.hintB2CEmail}       onChange={v => onChange(d => { d.signupForm.hintB2CEmail = v; })} hint="Shown below the email field when user selects Yes" />
+        </div>
+      </div>
+
+      {/* ── Step 3 ── */}
+      <div style={{ marginTop: 32, paddingTop: 24, borderTop: `2px solid ${T.gray2}` }}>
+        <div style={{ fontSize: 13, fontWeight: 800, color: T.gray6, fontFamily: "Montserrat,sans-serif", marginBottom: 18 }}>Step 3 — One Last Thing</div>
+        <EditField label="Step 3 Title"    value={config.signupForm.step3Title}    onChange={v => onChange(d => { d.signupForm.step3Title = v; })} />
+        <EditField label="Step 3 Subtitle" value={config.signupForm.step3Subtitle} onChange={v => onChange(d => { d.signupForm.step3Subtitle = v; })} />
+        <EditField label="Submit CTA Label" value={config.signupForm.step3Cta}     onChange={v => onChange(d => { d.signupForm.step3Cta = v; })} hint="Button text — '→' is appended automatically" />
+        <div style={{ marginBottom: 18 }}>
+          <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 6 }}>Purchasing Need Options (one per line)</label>
+          <div style={{ fontSize: 11, color: T.gray4, marginBottom: 6 }}>Each line becomes a selectable option on Step 3. Order is preserved.</div>
+          <textarea
+            value={(config.signupForm.step3Options || []).join("\n")}
+            onChange={e => onChange(d => { d.signupForm.step3Options = e.target.value.split("\n").filter(Boolean); })}
+            rows={8}
+            style={{ width: "100%", border: `1.5px solid ${T.gray3}`, borderRadius: 7, padding: "10px 12px", fontSize: 13, resize: "vertical", fontFamily: "Open Sans,sans-serif" }}
+          />
+        </div>
       </div>
     </div>
   );

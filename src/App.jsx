@@ -365,6 +365,7 @@ const INITIAL_CONFIG = {
       signupCta:"Sign Up", contractInfoCta:"Contract Info",
       promoTitle:"Enjoy the benefits the pros have come to expect!", promoBullets:["The Most Technology - In Stock, Always","Fast & Free Shipping","Amazing Prices","Expert Advice"],
       heroImageUrl:"", signupUrl:"https://www.bhphotovideo.com/find/shared/b2bHub/signup.jsp",
+      portalId:"", portalName:"",
     },
     equalis: {
       headline:"Equalis Group", subheadline:"Equalis Group Portal at B&H",
@@ -373,6 +374,7 @@ const INITIAL_CONFIG = {
       signupCta:"Sign Up", contractInfoCta:"Contract Info",
       promoTitle:"Enjoy the benefits the pros have come to expect!", promoBullets:["The Most Technology - In Stock, Always","Fast & Free Shipping","Amazing Prices","Expert Advice"],
       heroImageUrl:"", signupUrl:"https://www.bhphotovideo.com/find/shared/b2bHub/signup.jsp",
+      portalId:"", portalName:"",
     },
     omnia: {
       headline:"Omnia K-12", subheadline:"Omnia K-12 Portal at B&H",
@@ -381,6 +383,7 @@ const INITIAL_CONFIG = {
       signupCta:"Sign Up", contractInfoCta:"Contract Info",
       promoTitle:"Enjoy the benefits the pros have come to expect!", promoBullets:["The Most Technology - In Stock, Always","Fast & Free Shipping","Amazing Prices","Expert Advice"],
       heroImageUrl:"", signupUrl:"https://www.bhphotovideo.com/find/shared/b2bHub/signup.jsp",
+      portalId:"", portalName:"",
     },
     tips: {
       headline:"TIPS-USA", subheadline:"TIPS Portal at B&H",
@@ -389,6 +392,7 @@ const INITIAL_CONFIG = {
       signupCta:"Sign Up", contractInfoCta:"Contract Info",
       promoTitle:"Enjoy the benefits the pros have come to expect!", promoBullets:["The Most Technology - In Stock, Always","Fast & Free Shipping","Amazing Prices","Expert Advice"],
       heroImageUrl:"", signupUrl:"https://www.bhphotovideo.com/find/shared/b2bHub/signup.jsp",
+      portalId:"", portalName:"",
     },
     buyboard: {
       headline:"BuyBoard", subheadline:"BuyBoard Portal at B&H",
@@ -397,6 +401,7 @@ const INITIAL_CONFIG = {
       signupCta:"Sign Up", contractInfoCta:"Contract Info",
       promoTitle:"Enjoy the benefits the pros have come to expect!", promoBullets:["The Most Technology - In Stock, Always","Fast & Free Shipping","Amazing Prices","Expert Advice"],
       heroImageUrl:"", signupUrl:"https://www.bhphotovideo.com/find/shared/b2bHub/signup.jsp",
+      portalId:"", portalName:"",
     },
     peppm: {
       headline:"PEPPM K-12", subheadline:"PEPPM Portal at B&H",
@@ -405,6 +410,7 @@ const INITIAL_CONFIG = {
       signupCta:"Sign Up", contractInfoCta:"Contract Info",
       promoTitle:"Enjoy the benefits the pros have come to expect!", promoBullets:["The Most Technology - In Stock, Always","Fast & Free Shipping","Amazing Prices","Expert Advice"],
       heroImageUrl:"", signupUrl:"https://www.bhphotovideo.com/find/shared/b2bHub/signup.jsp",
+      portalId:"", portalName:"",
     },
     mhec: {
       headline:"MHEC", subheadline:"MHEC Portal at B&H",
@@ -413,6 +419,7 @@ const INITIAL_CONFIG = {
       signupCta:"Sign Up", contractInfoCta:"Contract Info",
       promoTitle:"Enjoy the benefits the pros have come to expect!", promoBullets:["The Most Technology - In Stock, Always","Fast & Free Shipping","Amazing Prices","Expert Advice"],
       heroImageUrl:"", signupUrl:"https://www.bhphotovideo.com/find/shared/b2bHub/signup.jsp",
+      portalId:"", portalName:"",
     },
     naspo: {
       headline:"NASPO ValuePoint", subheadline:"NASPO ValuePoint Portal at B&H",
@@ -421,6 +428,7 @@ const INITIAL_CONFIG = {
       signupCta:"Sign Up", contractInfoCta:"Contract Info",
       promoTitle:"Enjoy the benefits the pros have come to expect!", promoBullets:["The Most Technology - In Stock, Always","Fast & Free Shipping","Amazing Prices","Expert Advice"],
       heroImageUrl:"", signupUrl:"https://www.bhphotovideo.com/find/shared/b2bHub/signup.jsp",
+      portalId:"", portalName:"",
     },
     gsa: {
       headline:"GSA Schedule", subheadline:"GSA Schedule Portal at B&H",
@@ -429,6 +437,7 @@ const INITIAL_CONFIG = {
       signupCta:"Sign Up", contractInfoCta:"Contract Info",
       promoTitle:"Enjoy the benefits the pros have come to expect!", promoBullets:["The Most Technology - In Stock, Always","Fast & Free Shipping","Amazing Prices","Expert Advice"],
       heroImageUrl:"", signupUrl:"https://www.bhphotovideo.com/find/shared/b2bHub/signup.jsp",
+      portalId:"", portalName:"",
     },
   },
 };

@@ -680,7 +680,7 @@ function HubView({ config: c, hubStep, setHubStep, signupData, setSignupData, de
                 <div style={{ background: T.scarlet, color: T.white, fontSize: 11, fontWeight: 700, padding: "4px 12px", borderRadius: 20, display: "inline-block", marginBottom: 16, letterSpacing: 1 }}>{c.hero.badge}</div>
                 <h1 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 42, fontWeight: 800, color: T.white, marginBottom: 14, lineHeight: 1.1 }}>{c.hero.headline}</h1>
                 <p style={{ color: "rgba(255,255,255,0.88)", fontSize: 16, marginBottom: 28, lineHeight: 1.65, maxWidth: 480 }}>{c.hero.subheadline}</p>
-                <button onClick={() => setHubStep("step1")} style={{ background: T.white, color: T.scarlet, border: "none", padding: "16px 28px", borderRadius: 8, fontWeight: 800, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif", boxShadow: "0 4px 20px rgba(0,0,0,.3)", marginBottom: 10, display: "block" }}>
+                <button onClick={() => setHubStep("step1")} style={{ background: T.green, color: T.white, border: "none", padding: "16px 28px", borderRadius: 8, fontWeight: 800, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif", boxShadow: "0 4px 20px rgba(63,154,89,.35)", marginBottom: 10, display: "block" }}>
                   {c.hero.ctaLabel} →
                 </button>
                 <div style={{ color: "rgba(255,255,255,0.6)", fontSize: 12 }}>{c.hero.ctaSubtext}</div>
@@ -720,9 +720,11 @@ function HubView({ config: c, hubStep, setHubStep, signupData, setSignupData, de
               </div>
               <div style={{ position: "absolute", bottom: 16, left: 20, color: "rgba(255,255,255,0.6)", fontSize: 12, fontWeight: 600, zIndex: 1 }}>B&H B2B — Your Professional Purchasing Partner</div>
             </div>
-            <button onClick={() => onGoStatic("about")} style={{ background: T.green, color: T.white, border: "none", padding: "12px 28px", borderRadius: 6, fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>
-              Learn More About B&H →
-            </button>
+            <div style={{ textAlign: "center" }}>
+              <button onClick={() => onGoStatic("about")} style={{ display: "inline-block", minWidth: 360, background: T.green, color: T.white, border: "none", padding: "16px 32px", borderRadius: 8, fontWeight: 800, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif", boxShadow: "0 4px 20px rgba(63,154,89,.35)" }}>
+                Learn More About B&H →
+              </button>
+            </div>
           </div>
 
           {/* ── The Studio @ B&H ── */}

@@ -619,7 +619,7 @@ export default function App() {
         {[
           { label: "Home",             action: goHub },
           { label: "About B&H",        action: () => goStatic("about") },
-          { label: "Segments",         action: goSegmentsNav },
+          { label: "Industries",         action: goSegmentsNav },
           { label: "Contracts",        action: () => goStatic("contracts") },
           { label: "eProcurement",     action: () => goStatic("eprocurement") },
           { label: "The Studio",       action: () => goStatic("studio") },

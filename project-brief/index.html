@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>B2B Hub Modernization — Phase 1 Project Brief</title>
+  <title>B2B Hub — PMO-5000 Project Brief</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
@@ -423,15 +423,14 @@
   <header class="site-header">
     <div class="site-header__brand">
       <span class="site-header__logo">B&H</span>
-      <span class="site-header__title">B2B Hub · Phase 1 Project Brief</span>
+      <span class="site-header__title">B2B Hub · PMO-5000 Project Brief</span>
     </div>
     <nav class="site-header__nav">
-      <a href="#context">Context</a>
+      <a href="#problem">Problem</a>
       <a href="#pivots">Pivots</a>
-      <a href="#ux">UX Flow</a>
       <a href="#json">JSON Layer</a>
       <a href="#timeline">Timeline</a>
-      <a href="#ask">The Ask</a>
+      <a href="#questions">Questions</a>
     </nav>
   </header>
 
@@ -441,15 +440,14 @@
   <div class="band--dark">
     <div class="cover">
       <div class="cover__inner">
-        <div class="slide-counter">01 / 10 &nbsp;·&nbsp; B2B Hub Modernization</div>
-        <h1 class="cover__title">Phase 1<br>Project Brief</h1>
+        <div class="slide-counter">01 / 07 &nbsp;·&nbsp; B2B Hub Modernization</div>
+        <h1 class="cover__title">PMO-5000<br>Project Brief</h1>
         <p class="cover__sub">Presented to UX · Project Management · Architecture</p>
 
         <div class="cover__tags">
           <span class="tag tag--scarlet">Weblogic → Aperture</span>
           <span class="tag tag--bond">Segment → Sign-Up Centered</span>
-          <span class="tag tag--green">JSON Content Layer</span>
-          <span class="tag tag--orange">Contract × Segment × State Routing</span>
+          <span class="tag tag--green">Dev Only Updates → JSON Content Layer</span>
         </div>
 
         <div class="cover__meta">
@@ -460,6 +458,10 @@
           <div class="cover__meta-item">
             <label>Product Manager</label>
             <span>Jerel Smith</span>
+          </div>
+          <div class="cover__meta-item">
+            <label>Title</label>
+            <span>Senior Product Manager</span>
           </div>
           <div class="cover__meta-item">
             <label>Executive Sponsor</label>
@@ -479,52 +481,12 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- 02  CONTEXT — Two Transformations                               -->
+  <!-- 02  PROBLEM SPACE                                               -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
-  <div class="band--cream" id="context">
+  <div class="band--white" id="problem">
     <div class="section">
-      <div class="slide-counter slide-counter--light">02 / 10</div>
-      <div class="section-label">Context</div>
-      <h2 class="display-lg">Two Simultaneous Transformations</h2>
-      <p class="subtitle">Phase 1 is not an incremental update — it's a coordinated platform and UX reset delivered in parallel.</p>
-
-      <div class="two-col">
-        <!-- Platform -->
-        <div class="card">
-          <div class="card__accent card__accent--scarlet"></div>
-          <div class="card__label card__label--scarlet" style="margin-top:6px">Platform</div>
-          <div class="card__heading">Weblogic → Aperture</div>
-          <div class="card__body">
-            The B2B Hub is migrating off Weblogic onto Aperture. All Phase 1 deliverables are built on Aperture from day one — not patched onto the legacy stack.
-            <br><br>
-            Weblogic's hard-coded architecture is a root cause of content drift and operational bottlenecks. Aperture removes those constraints and makes the JSON content layer architecturally viable.
-          </div>
-        </div>
-
-        <!-- UX Model -->
-        <div class="card">
-          <div class="card__accent card__accent--bond"></div>
-          <div class="card__label card__label--bond" style="margin-top:6px">UX Model</div>
-          <div class="card__heading">Segment-Centered → Sign-Up Centered</div>
-          <div class="card__body">
-            The hub was built as a browsing model — visitors navigate segment pages before finding a sign-up path. Phase 1 makes sign-up the primary CTA on entry.
-            <br><br>
-            A qualification-first funnel collects org type, state, and contact info upfront. Cooperative contract options are revealed only after qualification — reducing misrouting and support overhead.
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <hr class="divider" />
-
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- 03  PROBLEM                                                      -->
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <div class="band--white">
-    <div class="section">
-      <div class="slide-counter slide-counter--light">03 / 10</div>
-      <div class="section-label">Problem</div>
+      <div class="slide-counter slide-counter--light">02 / 07</div>
+      <div class="section-label">Problem Space</div>
       <h2 class="display-lg">Why the Current Hub Isn't Working</h2>
 
       <div class="four-col">
@@ -532,19 +494,19 @@
           <div class="card__accent card__accent--scarlet"></div>
           <div style="font-size:22px;margin:14px 0 10px">📄</div>
           <div class="card__heading" style="font-size:15px">Content Is Locked in Code</div>
-          <div class="card__body">Every headline, logo, and contract listing is hard-coded. A single copy change requires a Jira ticket, dev time, QA, and a deployment cycle. Even a logo update can take months.</div>
+          <div class="card__body">All updates to a headline, logo, and contract listing requires a Jira ticket, dev time, QA, and a deployment cycle. Even a logo update can take months. Insufficient GA4 tagging obscures customer engagement analysis.</div>
         </div>
         <div class="card">
           <div class="card__accent card__accent--bond"></div>
           <div style="font-size:22px;margin:14px 0 10px">→</div>
           <div class="card__heading" style="font-size:15px">Sign-Up Is Buried</div>
-          <div class="card__body">Users must browse segments and sub-pages before reaching a registration option. No contact info is captured upfront, creating misrouting and wasted rep time.</div>
+          <div class="card__body">Users must browse segments and sub-pages before reaching a registration option. No organizational, state, or account info is required upfront, creating misrouting and wasted rep time.</div>
         </div>
         <div class="card">
           <div class="card__accent card__accent--green"></div>
           <div style="font-size:22px;margin:14px 0 10px">📍</div>
-          <div class="card__heading" style="font-size:15px">Routing Logic Is Hard-Coded</div>
-          <div class="card__body">State-to-contract-to-portal routing is embedded in the codebase. Adding a new state, contract, or portal association requires a developer — no self-service path exists.</div>
+          <div class="card__heading" style="font-size:15px">Routing Logic Is Hard-Coded; Verification Impeded</div>
+          <div class="card__body">State-to-contract-to-portal routing is embedded in the codebase. Adding a new state, contract, or portal association requires a developer. No self-service path exists. We are likely using an outdated D&amp;B API.</div>
         </div>
         <div class="card">
           <div class="card__accent card__accent--orange"></div>
@@ -557,12 +519,12 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- 04  FOUR PIVOTS                                                  -->
+  <!-- 03  UPDATED SCOPE — FOUR PIVOTS                                 -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <div class="band--dark" id="pivots">
     <div class="section-wrap">
-      <div class="slide-counter">04 / 10</div>
-      <div class="section-label section-label--light">Phase 1 Scope</div>
+      <div class="slide-counter">03 / 07</div>
+      <div class="section-label section-label--light">Updated Scope</div>
       <h2 class="display-lg display-lg--light">Four Strategic Pivots</h2>
       <p class="subtitle subtitle--light" style="margin-bottom:36px">What is concretely changing in Phase 1.</p>
 
@@ -571,7 +533,7 @@
           <div class="pivot-card__num" style="background:var(--scarlet)">01</div>
           <div class="pivot-card__content">
             <div class="pivot-card__title">Weblogic → Aperture</div>
-            <div class="pivot-card__body">All Phase 1 deliverables built on Aperture. No new work on Weblogic. Platform migration and hub modernization are coordinated, not sequential.</div>
+            <div class="pivot-card__body">All deliverables built on Aperture. No new work on Weblogic. Platform migration and hub modernization are coordinated, not sequential. All elements GA4 tagged at launch.</div>
           </div>
         </div>
         <div class="pivot-card">
@@ -585,14 +547,14 @@
           <div class="pivot-card__num" style="background:var(--green)">03</div>
           <div class="pivot-card__content">
             <div class="pivot-card__title">Hard-Coded → JSON Content Layer</div>
-            <div class="pivot-card__body">All hub, segment, and contract page content driven by JSON config. CMS admin panel enables the B2B team to publish changes without developer involvement.</div>
+            <div class="pivot-card__body">All hub, segment, and contract page content driven by JSON config, enabling the B2B team to publish changes without developer involvement.</div>
           </div>
         </div>
         <div class="pivot-card">
           <div class="pivot-card__num" style="background:var(--orange)">04</div>
           <div class="pivot-card__content">
             <div class="pivot-card__title">Fixed Routing → JSON-Managed</div>
-            <div class="pivot-card__body">Contract × segment × state routing logic moved from hard-coded to JSON-configurable. New associations added via CMS — no code change required.</div>
+            <div class="pivot-card__body">Contract × segment × state routing logic moved from hard-coded to JSON-configurable. New associations added via JSON config — no code change required. Updated D&amp;B API and validation of improved verification outcomes.</div>
           </div>
         </div>
       </div>
@@ -600,52 +562,11 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- 05  UX TRANSFORMATION                                           -->
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <div class="band--cream" id="ux">
-    <div class="section">
-      <div class="slide-counter slide-counter--light">05 / 10</div>
-      <div class="section-label">UX Transformation</div>
-      <h2 class="display-lg">From Segment Browsing to Qualification-First Sign-Up</h2>
-      <p class="subtitle">The customer journey restructured around conversion, not exploration.</p>
-
-      <div class="ba-grid">
-        <!-- Before -->
-        <div class="ba-col">
-          <div class="ba-col__header ba-col__header--before">BEFORE &nbsp;·&nbsp; Weblogic &nbsp;·&nbsp; Segment-Centered</div>
-          <div class="ba-col__row">1. &nbsp;Hub landing page → browse 12 segment tiles</div>
-          <div class="ba-col__row">2. &nbsp;Click into segment page → read content</div>
-          <div class="ba-col__row">3. &nbsp;Find sign-up link → start registration</div>
-          <div class="ba-col__row">4. &nbsp;D&amp;B verification (high failure rate, poor errors)</div>
-          <div class="ba-col__row">5. &nbsp;Routing to portal — often wrong segment</div>
-        </div>
-
-        <!-- Arrow -->
-        <div class="ba-arrow">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </div>
-
-        <!-- After -->
-        <div class="ba-col">
-          <div class="ba-col__header ba-col__header--after">AFTER &nbsp;·&nbsp; Aperture &nbsp;·&nbsp; Sign-Up Centered</div>
-          <div class="ba-col__row ba-col__row--after">1. &nbsp;Hub landing → Sign-Up CTA is hero-level</div>
-          <div class="ba-col__row ba-col__row--after">2. &nbsp;Step 1: Org type + State (deduces segment)</div>
-          <div class="ba-col__row ba-col__row--after">3. &nbsp;Step 2: Contact info + optional B2C account link</div>
-          <div class="ba-col__row ba-col__row--after">4. &nbsp;Step 3: Review → cooperative contracts revealed</div>
-          <div class="ba-col__row ba-col__row--after">5. &nbsp;Account created → routed to correct portal</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <hr class="divider" />
-
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- 06  JSON CONTENT LAYER                                          -->
+  <!-- 04  JSON CONTENT LAYER                                          -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <div class="band--white" id="json">
     <div class="section">
-      <div class="slide-counter slide-counter--light">06 / 10</div>
+      <div class="slide-counter slide-counter--light">04 / 07</div>
       <div class="section-label">JSON Content Layer</div>
       <h2 class="display-lg">Replacing Hard-Code with Configurable JSON</h2>
       <p class="subtitle">Every content field and routing rule becomes editable — no dev ticket required.</p>
@@ -659,7 +580,6 @@
             <div class="json-zone__item">Body copy + benefit bullets</div>
             <div class="json-zone__item">CTA labels + routing URLs</div>
             <div class="json-zone__item">FAQ items + SEO meta fields</div>
-            <div class="json-zone__item">D&amp;B error copy per error code</div>
           </div>
         </div>
 
@@ -670,7 +590,6 @@
             <div class="json-zone__item">Contract name, logo, blurb</div>
             <div class="json-zone__item">Contract number + eligibility states</div>
             <div class="json-zone__item">Primary + secondary CTA URLs</div>
-            <div class="json-zone__item">portalId + portalName entity link</div>
             <div class="json-zone__item">Add / update without code change</div>
           </div>
         </div>
@@ -681,25 +600,20 @@
           <div class="json-zone__body">
             <div class="json-zone__item">State → cooperative contract mapping</div>
             <div class="json-zone__item">Segment → portal routing rules</div>
-            <div class="json-zone__item">New associations via CMS admin</div>
+            <div class="json-zone__item">New associations via JSON config</div>
             <div class="json-zone__item">No code deploy required</div>
-            <div class="json-zone__item">Two options pending architect decision</div>
           </div>
         </div>
-      </div>
-
-      <div class="note">
-        <strong>CMS Admin Panel</strong> (React prototype → production equivalent): three-group sidebar · draft/publish workflow · audit log · role-based access · Ariel Goldman direct publish rights · Josh Bernstein submit-only
       </div>
     </div>
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- 07  CONSTRAINTS                                                  -->
+  <!-- 05  CONSTRAINTS                                                  -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <div class="band--cream">
     <div class="section">
-      <div class="slide-counter slide-counter--light">07 / 10</div>
+      <div class="slide-counter slide-counter--light">05 / 07</div>
       <div class="section-label">Constraints</div>
       <h2 class="display-lg">Constraints the Team Needs to Navigate</h2>
       <p class="subtitle" style="margin-bottom:32px">Known gates and open decisions that affect sequencing.</p>
@@ -707,8 +621,8 @@
       <div class="constraint-row">
         <div class="constraint-row__bar" style="background:var(--scarlet)"></div>
         <div class="constraint-row__content">
-          <div class="constraint-row__title">⛔ Manny Approval Gate</div>
-          <div class="constraint-row__body">Customer-facing changes require Manny's sign-off before going live. Manny is unavailable until approximately May 2026. Phase 1 build can proceed in parallel — launch is gated on this approval.</div>
+          <div class="constraint-row__title">⛔ Manny Steigman Approval Gate</div>
+          <div class="constraint-row__body">Customer-facing changes require Manny Steigman's sign-off before going live. Manny is unavailable until approximately May 2026. Phase 1 build can proceed in parallel — launch is gated on this approval.</div>
         </div>
       </div>
 
@@ -716,7 +630,7 @@
         <div class="constraint-row__bar" style="background:var(--orange)"></div>
         <div class="constraint-row__content">
           <div class="constraint-row__title">⚠️ Aperture Migration Sequencing</div>
-          <div class="constraint-row__body">All Phase 1 work must be built on Aperture. Any deliverable shipped on Weblogic first creates porting liability. Migration timeline alignment is open question #1 for the April 14 architect session.</div>
+          <div class="constraint-row__body">Phase 1 must be built on Aperture. Any work delivered on Weblogic first creates porting liability. Migration timeline alignment is open question #1 for the architect session.</div>
         </div>
       </div>
 
@@ -727,23 +641,15 @@
           <div class="constraint-row__body">Routing logic for existing B2B accounts is architecturally unresolved. Current lean: apply new routing logic only to new sign-ups, leave existing accounts unchanged. Not formally closed.</div>
         </div>
       </div>
-
-      <div class="constraint-row">
-        <div class="constraint-row__bar" style="background:var(--green)"></div>
-        <div class="constraint-row__content">
-          <div class="constraint-row__title">🔒 BDBTools Preserved Read-Only in Phase 1</div>
-          <div class="constraint-row__body">The ~350-parameter portal management tool (Sam Herman) remains read-only in Phase 1. The JSON layer wraps above it without replacing it. Full parameter migration is Phase 2 scope.</div>
-        </div>
-      </div>
     </div>
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- 08  TIMELINE                                                     -->
+  <!-- 06  TIMELINE                                                     -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <div class="band--dark" id="timeline">
     <div class="section-wrap">
-      <div class="slide-counter">08 / 10</div>
+      <div class="slide-counter">06 / 07</div>
       <div class="section-label section-label--light">Timeline</div>
       <h2 class="display-lg display-lg--light">Path to Phase 1 Launch</h2>
       <p class="subtitle subtitle--light" style="margin-bottom:44px">Six milestones from this session to production handoff.</p>
@@ -754,37 +660,37 @@
           <div class="timeline__item timeline__item--scarlet">
             <div class="timeline__date timeline__date--scarlet">Now</div>
             <div class="timeline__title">Feasibility Discussion</div>
-            <div class="timeline__body">Architects confirm Aperture readiness and migration sequencing. JSON routing model and CMS auth approach agreed. State/contract routing ownership decided (CMS vs. BDBTools).</div>
+            <div class="timeline__body">Architects confirm Aperture readiness, migration sequencing, JSON routing model, and state/contract routing ownership.</div>
           </div>
 
           <div class="timeline__item timeline__item--scarlet">
-            <div class="timeline__date timeline__date--scarlet">Apr – May 2026</div>
+            <div class="timeline__date timeline__date--scarlet">Apr 2026</div>
             <div class="timeline__title">UX Sizing &amp; Alignment</div>
-            <div class="timeline__body">Meet with UX leadership and designers (Jay Linder) to size the sign-up flow, hub landing, segment pages, and CMS admin panel. Effort estimate produced.</div>
+            <div class="timeline__body">Meet with UX to size the sign-up flow, core and segment pages. Effort estimate produced and shared with project management.</div>
+          </div>
+
+          <div class="timeline__item timeline__item--bond">
+            <div class="timeline__date timeline__date--bond">Apr 2026</div>
+            <div class="timeline__title">Prototype &amp; Requirements Refinement</div>
+            <div class="timeline__body">Prototype iterated with stakeholder feedback. Requirements locked with Ariel Goldman, Shia Bernstein, Brendan Bagley, and UX.</div>
           </div>
 
           <div class="timeline__item timeline__item--bond">
             <div class="timeline__date timeline__date--bond">May 2026</div>
-            <div class="timeline__title">Prototype &amp; Requirements Refinement</div>
-            <div class="timeline__body">Prototype iterated with stakeholder feedback. Requirements locked with Ariel Goldman, Brendan Bagley, and the B2B team before design begins.</div>
-          </div>
-
-          <div class="timeline__item timeline__item--bond">
-            <div class="timeline__date timeline__date--bond">May – Jun 2026</div>
             <div class="timeline__title">UX Design Mockups</div>
-            <div class="timeline__body">Jay Linder produces high-fidelity designs for the qualification-first sign-up flow, hub landing, segment pages, contract pages, and CMS admin panel.</div>
+            <div class="timeline__body">Jaye Linder produces high-fidelity designs for the sign-up flow, core pages, segment pages, and contract pages.</div>
           </div>
 
           <div class="timeline__item timeline__item--green">
-            <div class="timeline__date timeline__date--green">Jun 2026</div>
+            <div class="timeline__date timeline__date--green">May 2026</div>
             <div class="timeline__title">Stakeholder Approval</div>
-            <div class="timeline__body">Ariel Goldman and Manny sign off on customer-facing designs. Manny availability (~May 2026) gates this milestone. No customer-facing launch without this approval.</div>
+            <div class="timeline__body">Ariel Goldman and Manny Steigman sign off on customer-facing designs. Manny availability (~May 2026) gates this milestone.</div>
           </div>
 
           <div class="timeline__item timeline__item--green">
-            <div class="timeline__date timeline__date--green">Jun – Jul 2026</div>
+            <div class="timeline__date timeline__date--green">May 2026</div>
             <div class="timeline__title">Handoff to Project Management</div>
-            <div class="timeline__body">Approved designs and requirements handed to PM for sprint planning, ticket grooming, and developer assignment. Phase 1 build begins.</div>
+            <div class="timeline__body">Approved designs and requirements handed to PM for sprint planning, ticket grooming, and developer assignment.</div>
           </div>
 
         </div>
@@ -793,64 +699,22 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- 09  OPEN QUESTIONS                                              -->
+  <!-- 07  OPEN QUESTIONS                                              -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
-  <div class="band--white">
+  <div class="band--white" id="questions">
     <div class="section">
-      <div class="slide-counter slide-counter--light">09 / 10</div>
+      <div class="slide-counter slide-counter--light">07 / 07</div>
       <div class="section-label">Open Questions</div>
       <h2 class="display-lg">Questions We Need to Answer Together</h2>
-      <p class="subtitle" style="margin-bottom:32px">Grouped by audience. Unresolved answers block sequencing.</p>
+      <p class="subtitle" style="margin-bottom:32px">Unresolved answers block sequencing and design start.</p>
 
       <div class="question-row">
         <div class="question-row__badge" style="background:var(--scarlet)">Architecture</div>
-        <div class="question-row__text">Migration sequencing: which Phase 1 components land on Aperture first vs. Weblogic? Who owns the migration timeline and how does it gate our build start?</div>
-      </div>
-      <div class="question-row">
-        <div class="question-row__badge" style="background:var(--scarlet)">Architecture</div>
-        <div class="question-row__text">State/contract routing location: does routing config live in the new JSON/CMS tool, or remain in BDBTools? Two options need to be compared and a decision reached before the data model is finalized.</div>
-      </div>
-      <div class="question-row">
-        <div class="question-row__badge" style="background:var(--scarlet)">Architecture</div>
-        <div class="question-row__text">CMS authentication: should we leverage existing B&H admin infrastructure or stand up a separate system?</div>
+        <div class="question-row__text">State/contract routing location: does routing config live in the new JSON config, or remain in the B2B App? A decision is required before the data model can be finalized.</div>
       </div>
       <div class="question-row">
         <div class="question-row__badge" style="background:var(--bond)">UX</div>
-        <div class="question-row__text">Effort sizing: what is the design effort for the qualification-first sign-up flow, hub landing redesign, segment pages, and CMS admin panel? Resource availability for Jay Linder?</div>
-      </div>
-      <div class="question-row">
-        <div class="question-row__badge" style="background:var(--green)">PM</div>
-        <div class="question-row__text">Sprint planning readiness: once UX designs and requirements are approved, what is the lead time to first sprint? What grooming format does the team prefer for handoff?</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- 10  THE ASK                                                      -->
-  <!-- ═══════════════════════════════════════════════════════════════ -->
-  <div class="band--dark" id="ask">
-    <div class="section-wrap">
-      <div class="slide-counter">10 / 10</div>
-      <div class="section-label section-label--light">The Ask</div>
-      <h2 class="display-lg display-lg--light">What We Need From This Room</h2>
-      <p class="subtitle subtitle--light" style="margin-bottom:36px">One concrete action per audience to move Phase 1 forward.</p>
-
-      <div class="three-col">
-        <div class="ask-card" style="border-color:var(--scarlet)">
-          <div class="ask-card__icon">🏛️</div>
-          <div class="ask-card__title">Architecture</div>
-          <div class="ask-card__body">Confirm Aperture migration sequencing for Phase 1 deliverables. Align on the JSON routing model (CMS vs. BDBTools) and CMS authentication approach at the April 14 architect session.</div>
-        </div>
-        <div class="ask-card" style="border-color:var(--bond)">
-          <div class="ask-card__icon">🎨</div>
-          <div class="ask-card__title">UX Leadership</div>
-          <div class="ask-card__body">Schedule a sizing session with Jay Linder and the design team. Confirm resource availability for the sign-up flow, hub landing redesign, and CMS admin panel design effort.</div>
-        </div>
-        <div class="ask-card" style="border-color:var(--green)">
-          <div class="ask-card__icon">✅</div>
-          <div class="ask-card__title">Project Management</div>
-          <div class="ask-card__body">Confirm grooming and sprint planning format. Align on handoff readiness criteria so PM can begin planning as soon as UX designs and requirements are approved.</div>
-        </div>
+        <div class="question-row__text">Effort sizing: what is the design effort for the qualification-first sign-up flow, hub landing redesign, and segment pages? Resource availability for Jaye Linder?</div>
       </div>
     </div>
   </div>

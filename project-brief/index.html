@@ -246,7 +246,7 @@
       font-family: 'Montserrat', sans-serif; font-weight: 900;
       font-size: 22px; color: var(--white);
     }
-    .pivot-card__content { padding: 20px 20px 20px 0; flex: 1; }
+    .pivot-card__content { padding: 20px 20px 20px 24px; flex: 1; }
     .pivot-card__title {
       font-family: 'Montserrat', sans-serif; font-weight: 700;
       font-size: 15px; color: var(--white); margin-bottom: 8px;
@@ -500,13 +500,13 @@
           <div class="card__accent card__accent--bond"></div>
           <div style="font-size:22px;margin:14px 0 10px">→</div>
           <div class="card__heading" style="font-size:15px">Sign-Up Is Buried</div>
-          <div class="card__body">Users must browse segments and sub-pages before reaching a registration option. No organizational, state, or account info is required upfront, creating misrouting and wasted rep time.</div>
+          <div class="card__body">Users must browse segments and sub-pages before reaching a registration option. No organizational, state, or account info is required upfront, leading to erroneous routing and wasted rep time.</div>
         </div>
         <div class="card">
           <div class="card__accent card__accent--green"></div>
           <div style="font-size:22px;margin:14px 0 10px">📍</div>
           <div class="card__heading" style="font-size:15px">Routing Logic Is Hard-Coded; Verification Impeded</div>
-          <div class="card__body">State-to-contract-to-portal routing is embedded in the codebase. Adding a new state, contract, or portal association requires a developer. No self-service path exists. We are likely using an outdated D&amp;B API.</div>
+          <div class="card__body">State-to-contract-to-portal routing is embedded in the codebase. Adding a new state, contract, or portal association requires a developer. No self-service path exists.</div>
         </div>
         <div class="card">
           <div class="card__accent card__accent--orange"></div>
@@ -525,7 +525,7 @@
     <div class="section-wrap">
       <div class="slide-counter">03 / 07</div>
       <div class="section-label section-label--light">Updated Scope</div>
-      <h2 class="display-lg display-lg--light">Four Strategic Pivots</h2>
+      <h2 class="display-lg display-lg--light">Three Strategic Pivots</h2>
       <p class="subtitle subtitle--light" style="margin-bottom:36px">What is concretely changing in Phase 1.</p>
 
       <div class="two-col">
@@ -543,18 +543,11 @@
             <div class="pivot-card__body">Sign-up is the hero CTA. Qualification-first funnel collects org type, state, and contact info before surfacing cooperative contracts or portal options.</div>
           </div>
         </div>
-        <div class="pivot-card">
+        <div class="pivot-card" style="grid-column: 1 / -1;">
           <div class="pivot-card__num" style="background:var(--green)">03</div>
           <div class="pivot-card__content">
-            <div class="pivot-card__title">Hard-Coded → JSON Content Layer</div>
-            <div class="pivot-card__body">All hub, segment, and contract page content driven by JSON config, enabling the B2B team to publish changes without developer involvement.</div>
-          </div>
-        </div>
-        <div class="pivot-card">
-          <div class="pivot-card__num" style="background:var(--orange)">04</div>
-          <div class="pivot-card__content">
-            <div class="pivot-card__title">Fixed Routing → JSON-Managed</div>
-            <div class="pivot-card__body">Contract × segment × state routing logic moved from hard-coded to JSON-configurable. New associations added via JSON config — no code change required. Updated D&amp;B API and validation of improved verification outcomes.</div>
+            <div class="pivot-card__title">Hard-Coded → JSON-Configurable Content &amp; Routing</div>
+            <div class="pivot-card__body">All hub, segment, and contract page content driven by JSON config, enabling the B2B team to publish changes without developer involvement. Contract × segment × state routing logic is also moved to JSON-configurable — new associations added via JSON config, no code change required.</div>
           </div>
         </div>
       </div>
@@ -601,7 +594,6 @@
             <div class="json-zone__item">State → cooperative contract mapping</div>
             <div class="json-zone__item">Segment → portal routing rules</div>
             <div class="json-zone__item">New associations via JSON config</div>
-            <div class="json-zone__item">No code deploy required</div>
           </div>
         </div>
       </div>

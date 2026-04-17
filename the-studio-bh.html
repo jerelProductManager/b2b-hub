@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Studio — B&H</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --red: #C8102E;
+    --red-dark: #9e0d23;
+    --black: #0a0a0a;
+    --dark: #141414;
+    --mid: #1e1e1e;
+    --border: rgba(255,255,255,0.08);
+    --text: #f0f0f0;
+    --muted: #888;
+    --gold: #D4A843;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--black);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px;
+    height: 64px;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-brand {
+    display: flex; align-items: center; gap: 14px;
+    text-decoration: none;
+  }
+
+  .nav-logo-block {
+    background: var(--red);
+    color: #fff;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.05em;
+    padding: 4px 10px;
+    line-height: 1;
+  }
+
+  .nav-divider {
+    width: 1px; height: 28px;
+    background: var(--border);
+  }
+
+  .nav-studio-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    color: var(--text);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex; gap: 32px; list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-cta {
+    background: var(--red);
+    color: #fff !important;
+    padding: 8px 20px;
+    font-size: 11px !important;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700 !important;
+    text-decoration: none;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--red-dark) !important; color: #fff !important; }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 80px 80px;
+    position: relative;
+    overflow: hidden;
+    background: var(--black);
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 70% 50%, rgba(200,16,46,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(212,168,67,0.06) 0%, transparent 50%),
+      linear-gradient(160deg, #0a0a0a 0%, #141414 50%, #0a0a0a 100%);
+  }
+
+  /* Grid overlay */
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
+  }
+
+  /* Accent line */
+  .hero-accent-line {
+    position: absolute;
+    top: 0; left: 240px;
+    width: 1px; height: 45vh;
+    background: linear-gradient(to bottom, transparent, var(--red), transparent);
+    opacity: 0.6;
+    animation: pulse-line 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-line {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.9; }
+  }
+
+  .hero-eyebrow {
+    position: relative;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 40px; height: 1px;
+    background: var(--red);
+  }
+
+  .hero-headline {
+    position: relative;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 10vw, 148px);
+    line-height: 0.9;
+    letter-spacing: 0.01em;
+    color: var(--text);
+    max-width: 900px;
+    margin-bottom: 32px;
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    font-family: 'DM Serif Display', serif;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    position: relative;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 44px;
+    font-weight: 300;
+  }
+
+  .hero-actions {
+    position: relative;
+    display: flex; gap: 16px; align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--red);
+    color: #fff;
+    text-decoration: none;
+    padding: 16px 36px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+  .btn-ghost {
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--text);
+    text-decoration: none;
+    padding: 15px 36px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.5); }
+
+  .hero-scroll-hint {
+    position: absolute;
+    right: 80px; bottom: 80px;
+    writing-mode: vertical-rl;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-scroll-hint::after {
+    content: '';
+    display: block;
+    width: 1px; height: 60px;
+    background: linear-gradient(to bottom, var(--muted), transparent);
+  }
+
+  /* ─── STAT BAR ─── */
+  .stat-bar {
+    background: var(--mid);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    overflow: hidden;
+  }
+
+  .stat-item {
+    flex: 1;
+    padding: 32px 40px;
+    border-right: 1px solid var(--border);
+    position: relative;
+    transition: background 0.3s;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-item:hover { background: rgba(255,255,255,0.03); }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: var(--red);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .section-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--red);
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+  }
+  .section-eyebrow::before, .section-eyebrow::after {
+    content: '';
+    display: block; width: 32px; height: 1px;
+    background: var(--red);
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .section-desc {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ─── SERVICES CATEGORIES ─── */
+  #services {
+    padding: 96px 0 80px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 0 48px;
+  }
+
+  .service-card {
+    background: var(--dark);
+    padding: 48px 40px;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 3px; height: 0;
+    background: var(--red);
+    transition: height 0.4s ease;
+  }
+
+  .service-card:hover { background: #1a1a1a; }
+  .service-card:hover::before { height: 100%; }
+
+  .service-icon {
+    font-size: 28px;
+    margin-bottom: 20px;
+    display: block;
+    filter: grayscale(1);
+    transition: filter 0.3s;
+  }
+  .service-card:hover .service-icon { filter: grayscale(0); }
+
+  .service-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--red);
+    margin-bottom: 10px;
+    opacity: 0.7;
+  }
+
+  .service-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+
+  .service-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .service-arrow {
+    position: absolute;
+    right: 32px; bottom: 32px;
+    color: var(--red);
+    font-size: 20px;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .service-card:hover .service-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* ─── CAPABILITIES (what we do) ─── */
+  #capabilities {
+    padding: 96px 80px;
+    background: var(--mid);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cap-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    margin-top: 64px;
+  }
+
+  .cap-item {
+    position: relative;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    transition: border-color 0.3s;
+  }
+  .cap-item:hover { border-color: var(--red); }
+
+  .cap-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    color: rgba(200,16,46,0.12);
+    line-height: 1;
+    position: absolute;
+    right: 0; top: 10px;
+    pointer-events: none;
+    transition: color 0.3s;
+  }
+  .cap-item:hover .cap-num { color: rgba(200,16,46,0.25); }
+
+  .cap-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .cap-body {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .cap-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 16px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--red);
+    text-decoration: none;
+    font-weight: 600;
+    transition: gap 0.2s;
+  }
+  .cap-link:hover { gap: 10px; }
+
+  /* ─── WHO WE SERVE ─── */
+  #clients {
+    padding: 96px 80px;
+  }
+
+  .client-scroll {
+    display: flex; gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+    margin-top: 64px;
+  }
+  .client-scroll::-webkit-scrollbar { display: none; }
+
+  .client-pill {
+    flex-shrink: 0;
+    background: var(--mid);
+    border: 1px solid var(--border);
+    padding: 14px 28px;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s;
+    white-space: nowrap;
+    font-weight: 400;
+  }
+  .client-pill:hover,
+  .client-pill.active {
+    background: var(--red);
+    border-color: var(--red);
+    color: #fff;
+  }
+
+  /* ─── CASE STUDY / PROOF ─── */
+  #proof {
+    padding: 96px 80px;
+    background: var(--mid);
+    border-top: 1px solid var(--border);
+  }
+
+  .proof-feature {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    margin-top: 64px;
+  }
+
+  .proof-visual {
+    aspect-ratio: 16/10;
+    background:
+      linear-gradient(135deg, rgba(200,16,46,0.15) 0%, rgba(212,168,67,0.08) 100%),
+      var(--dark);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .proof-visual-label {
+    position: absolute;
+    bottom: 16px; left: 16px;
+    background: rgba(0,0,0,0.7);
+    padding: 6px 12px;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .proof-tag {
+    display: inline-block;
+    background: rgba(200,16,46,0.15);
+    border: 1px solid rgba(200,16,46,0.3);
+    color: var(--red);
+    padding: 5px 12px;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .proof-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .proof-body {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
+
+  .proof-specs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 36px;
+  }
+
+  .proof-spec-item {
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+  }
+
+  .proof-spec-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+
+  .proof-spec-val {
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  /* ─── TECHNOLOGY CENTER ─── */
+  #tech-center {
+    padding: 96px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tc-inner {
+    display: grid;
+    grid-template-columns: 5fr 4fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .tc-body {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin: 24px 0 36px;
+    font-weight: 300;
+  }
+
+  .tc-features {
+    display: flex; flex-direction: column; gap: 20px;
+    margin-top: 36px;
+  }
+
+  .tc-feature-row {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 20px;
+    background: var(--mid);
+    border: 1px solid var(--border);
+    transition: border-color 0.3s;
+    cursor: default;
+  }
+  .tc-feature-row:hover { border-color: rgba(200,16,46,0.4); }
+
+  .tc-feature-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--red);
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+
+  .tc-feature-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .tc-feature-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .tc-aside {
+    background: var(--mid);
+    border: 1px solid var(--border);
+    padding: 48px 40px;
+    position: relative;
+  }
+
+  .tc-aside-head {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+
+  .tc-aside-body {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .tc-phone {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+
+  .tc-addr {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.6;
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── INTAKE FUNNEL ─── */
+  #contact {
+    padding: 96px 80px;
+    background: linear-gradient(160deg, var(--dark) 0%, var(--black) 100%);
+    border-top: 1px solid var(--border);
+  }
+
+  .contact-wrapper {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .contact-form-inner {
+    background: var(--mid);
+    border: 1px solid var(--border);
+    padding: 56px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    display: flex; flex-direction: column; gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .form-group.half { margin-bottom: 0; }
+
+  .form-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .form-input, .form-select, .form-textarea {
+    background: var(--dark);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 14px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .form-input::placeholder, .form-textarea::placeholder { color: #444; }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--red);
+  }
+
+  .form-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23888' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.6;
+  }
+
+  .form-note {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 16px;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  .form-submit {
+    width: 100%;
+    background: var(--red);
+    color: #fff;
+    border: none;
+    padding: 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    margin-top: 8px;
+  }
+  .form-submit:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+  .or-divider {
+    display: flex; align-items: center; gap: 16px;
+    margin: 28px 0;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .or-divider::before, .or-divider::after {
+    content: ''; flex: 1; height: 1px;
+    background: var(--border);
+  }
+
+  .full-intake-btn {
+    display: block;
+    text-align: center;
+    border: 1px solid rgba(200,16,46,0.4);
+    color: var(--red);
+    padding: 16px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+  .full-intake-btn:hover {
+    background: var(--red);
+    border-color: var(--red);
+    color: #fff;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--black);
+    border-top: 1px solid var(--border);
+    padding: 48px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .footer-brand {
+    display: flex; flex-direction: column; gap: 8px;
+  }
+
+  .footer-copy {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .footer-links {
+    display: flex; gap: 32px; list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 11px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--red); }
+
+  /* ─── MODAL OVERLAY ─── */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(8px);
+    align-items: center; justify-content: center;
+    padding: 40px;
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal-box {
+    background: var(--dark);
+    border: 1px solid var(--border);
+    max-width: 640px; width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 48px;
+    position: relative;
+    animation: slide-up 0.3s ease;
+  }
+
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .modal-close {
+    position: absolute; top: 20px; right: 20px;
+    background: none; border: none;
+    color: var(--muted); font-size: 24px;
+    cursor: pointer; line-height: 1;
+    transition: color 0.2s;
+  }
+  .modal-close:hover { color: var(--text); }
+
+  .modal-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+
+  .modal-sub {
+    font-size: 13px; color: var(--muted);
+    margin-bottom: 32px; line-height: 1.6;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* stagger */
+  .fade-in:nth-child(2) { transition-delay: 0.1s; }
+  .fade-in:nth-child(3) { transition-delay: 0.2s; }
+  .fade-in:nth-child(4) { transition-delay: 0.3s; }
+  .fade-in:nth-child(5) { transition-delay: 0.4s; }
+  .fade-in:nth-child(6) { transition-delay: 0.5s; }
+
+  /* ─── TOAST ─── */
+  .toast {
+    position: fixed; bottom: 32px; right: 32px; z-index: 300;
+    background: var(--mid);
+    border: 1px solid var(--red);
+    padding: 20px 28px;
+    display: none;
+    animation: toast-in 0.3s ease;
+    max-width: 360px;
+  }
+  .toast.show { display: block; }
+  @keyframes toast-in {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .toast-title {
+    font-weight: 600; font-size: 14px; margin-bottom: 4px; color: var(--text);
+  }
+  .toast-sub { font-size: 12px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+<nav>
+  <a href="#hero" class="nav-brand">
+    <span class="nav-logo-block">B&H</span>
+    <span class="nav-divider"></span>
+    <span class="nav-studio-text">The Studio</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#capabilities">Capabilities</a></li>
+    <li><a href="#proof">Case Studies</a></li>
+    <li><a href="#tech-center">Technology Center</a></li>
+    <li><a href="#contact" class="nav-cta">Start a Project</a></li>
+  </ul>
+</nav>
+
+
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-accent-line"></div>
+
+  <div class="hero-eyebrow">B&H The Studio — New York City</div>
+
+  <h1 class="hero-headline">
+    Where <em>Vision</em><br>
+    Meets<br>
+    Infrastructure
+  </h1>
+
+  <p class="hero-sub">
+    Full-cycle systems integration, consultation, and deployment for digital cinema, broadcast, post-production, and virtual production — built by specialists who work in the field.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">Tell Us About Your Project</a>
+    <a href="#services" class="btn-ghost">Explore Services</a>
+  </div>
+
+  <div class="hero-scroll-hint">Scroll to explore</div>
+</section>
+
+
+<!-- ═══════════════════════════════ STAT BAR ═══════════════════════════════ -->
+<div class="stat-bar">
+  <div class="stat-item fade-in">
+    <div class="stat-num">15+</div>
+    <div class="stat-label">Years of Deployment Experience</div>
+  </div>
+  <div class="stat-item fade-in">
+    <div class="stat-num">500K+</div>
+    <div class="stat-label">Products In Stock, Every Day</div>
+  </div>
+  <div class="stat-item fade-in">
+    <div class="stat-num">3,000+</div>
+    <div class="stat-label">Brands Across Every Category</div>
+  </div>
+  <div class="stat-item fade-in">
+    <div class="stat-num">1</div>
+    <div class="stat-label">Studio Technology Center — NYC</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ SERVICES ═══════════════════════════════ -->
+<section id="services">
+  <div class="section-header fade-in">
+    <div class="section-eyebrow">Disciplines</div>
+    <h2 class="section-title">Built for Every Stage<br>of Production</h2>
+    <p class="section-desc">From acquisition to delivery, our specialists cover every discipline across the media production workflow.</p>
+  </div>
+
+  <div class="services-grid">
+    <a href="#contact" class="service-card fade-in" onclick="openModal('Digital Cinema')">
+      <span class="service-icon">🎬</span>
+      <div class="service-number">01</div>
+      <div class="service-name">Digital Cinema</div>
+      <div class="service-desc">Camera system builds, lens packages, DIT workflows, on-set storage and color science solutions for feature and episodic production.</div>
+      <div class="service-arrow">→</div>
+    </a>
+    <a href="#contact" class="service-card fade-in" onclick="openModal('Broadcast & Streaming')">
+      <span class="service-icon">📡</span>
+      <div class="service-number">02</div>
+      <div class="service-name">Broadcast & Streaming</div>
+      <div class="service-desc">Turnkey broadcast infrastructure, live IP production, encoding, playout, and streaming architecture for networks and OTT.</div>
+      <div class="service-arrow">→</div>
+    </a>
+    <a href="#contact" class="service-card fade-in" onclick="openModal('Studio & ENG')">
+      <span class="service-icon">🎙</span>
+      <div class="service-number">03</div>
+      <div class="service-name">Studio & ENG</div>
+      <div class="service-desc">Studio fit-outs, control room builds, ENG packages, and field kits for news organizations, sports, and live events.</div>
+      <div class="service-arrow">→</div>
+    </a>
+    <a href="#contact" class="service-card fade-in" onclick="openModal('Virtual Production')">
+      <span class="service-icon">🖥</span>
+      <div class="service-number">04</div>
+      <div class="service-name">Virtual Production</div>
+      <div class="service-desc">LED volume design, real-time render pipeline configuration, camera tracking, and in-camera VFX workflow integration.</div>
+      <div class="service-arrow">→</div>
+    </a>
+    <a href="#contact" class="service-card fade-in" onclick="openModal('Post-Production')">
+      <span class="service-icon">🎨</span>
+      <div class="service-number">05</div>
+      <div class="service-name">Editing, Color & Post</div>
+      <div class="service-desc">Edit bay and color suite design, SAN/NAS shared storage architecture, codec workflow consulting, and software licensing.</div>
+      <div class="service-arrow">→</div>
+    </a>
+    <a href="#contact" class="service-card fade-in" onclick="openModal('System Design')">
+      <span class="service-icon">⚙️</span>
+      <div class="service-number">06</div>
+      <div class="service-name">System Design & Integration</div>
+      <div class="service-desc">End-to-end system architecture, signal flow design, rack build, cable plant, commissioning, and long-term support.</div>
+      <div class="service-arrow">→</div>
+    </a>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ CAPABILITIES ═══════════════════════════════ -->
+<section id="capabilities">
+  <div class="section-header fade-in">
+    <div class="section-eyebrow">What We Do</div>
+    <h2 class="section-title">A Full-Cycle Partner,<br>Not Just a Vendor</h2>
+    <p class="section-desc">The Studio goes far beyond equipment sales. We embed with your team from concept through commissioning.</p>
+  </div>
+
+  <div class="cap-grid">
+    <div class="cap-item fade-in">
+      <div class="cap-num">01</div>
+      <div class="cap-title">Consultation & System Design</div>
+      <div class="cap-body">Unsure which technology fits your project? Our applications specialists work with you to define requirements, map signal flows, and spec the right tools before a single purchase is made.</div>
+      <a href="#contact" class="cap-link" onclick="openModal('Consultation')">Start a Consultation →</a>
+    </div>
+    <div class="cap-item fade-in">
+      <div class="cap-num">02</div>
+      <div class="cap-title">Installation & Integration</div>
+      <div class="cap-body">From independent content creators to major broadcasters, The Studio deploys and integrates complete systems — rack builds, cabling, configuration, and sign-off.</div>
+      <a href="#contact" class="cap-link" onclick="openModal('Installation')">Discuss Your Build →</a>
+    </div>
+    <div class="cap-item fade-in">
+      <div class="cap-num">03</div>
+      <div class="cap-title">Technology Training</div>
+      <div class="cap-body">From quick refreshers to crash intensives, Studio experts bring your team up to speed on the latest tools and workflows — on-site or at our Technology Center.</div>
+      <a href="#contact" class="cap-link" onclick="openModal('Training')">Schedule Training →</a>
+    </div>
+    <div class="cap-item fade-in">
+      <div class="cap-num">04</div>
+      <div class="cap-title">Workshops & Seminars</div>
+      <div class="cap-body">Hands-on workshops and seminars hosted in The Studio's staging area and B&H Event Space. Ongoing programming across disciplines and skill levels.</div>
+      <a href="#contact" class="cap-link" onclick="openModal('Workshop')">View Upcoming Events →</a>
+    </div>
+    <div class="cap-item fade-in">
+      <div class="cap-num">05</div>
+      <div class="cap-title">Technology Demonstrations</div>
+      <div class="cap-body">State-of-the-art access to high-end equipment in a real-world environment. Test real system configurations before you commit.</div>
+      <a href="#contact" class="cap-link" onclick="openModal('Demo')">Book a Demo →</a>
+    </div>
+    <div class="cap-item fade-in">
+      <div class="cap-num">06</div>
+      <div class="cap-title">Testing & Troubleshooting</div>
+      <div class="cap-body">The Studio team boosts operational efficiency by troubleshooting everything from individual components to entire systems — and prototyping configurations before deployment.</div>
+      <a href="#contact" class="cap-link" onclick="openModal('Testing')">Get Support →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ WHO WE SERVE ═══════════════════════════════ -->
+<section id="clients">
+  <div class="section-header fade-in">
+    <div class="section-eyebrow">Who We Work With</div>
+    <h2 class="section-title">From Crew of Ten<br>to Ten Thousand</h2>
+    <p class="section-desc">Whether you're a boutique post house or a national broadcast network, our Studio experts provide the guidance and depth your project demands.</p>
+  </div>
+
+  <div class="client-scroll">
+    <a href="#contact" class="client-pill active" onclick="openModal('TV Networks')">TV Networks</a>
+    <a href="#contact" class="client-pill" onclick="openModal('Production Companies')">Production Companies</a>
+    <a href="#contact" class="client-pill" onclick="openModal('Equipment Rental')">Equipment Rental Companies</a>
+    <a href="#contact" class="client-pill" onclick="openModal('Houses of Worship')">Houses of Worship</a>
+    <a href="#contact" class="client-pill" onclick="openModal('Media Publishers')">Media Publishers</a>
+    <a href="#contact" class="client-pill" onclick="openModal('News Organizations')">News Organizations</a>
+    <a href="#contact" class="client-pill" onclick="openModal('Film & TV')">Film & TV Professionals</a>
+    <a href="#contact" class="client-pill" onclick="openModal('Corporate AV')">Corporate AV</a>
+    <a href="#contact" class="client-pill" onclick="openModal('Education')">Higher Education</a>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ CASE STUDY ═══════════════════════════════ -->
+<section id="proof">
+  <div class="section-header fade-in">
+    <div class="section-eyebrow">Case Studies</div>
+    <h2 class="section-title">Proof in Production</h2>
+    <p class="section-desc">Real deployments, real results. See how The Studio has helped organizations build lasting infrastructure.</p>
+  </div>
+
+  <div class="proof-feature">
+    <div class="proof-visual fade-in">
+      🎥
+      <div class="proof-visual-label">XR Stage — Interactive Media Lab</div>
+    </div>
+    <div class="fade-in">
+      <div class="proof-tag">Featured Project</div>
+      <h3 class="proof-title">Cleveland Institute of Art — XR Stage & Virtual Production Infrastructure</h3>
+      <p class="proof-body">
+        A fully operational LED volume and virtual production workflow — designed, specified, and integrated by The Studio team — giving CIA students and industry partners access to broadcast-grade XR capabilities within a working educational environment.
+      </p>
+      <div class="proof-specs">
+        <div class="proof-spec-item">
+          <div class="proof-spec-label">Category</div>
+          <div class="proof-spec-val">Virtual Production</div>
+        </div>
+        <div class="proof-spec-item">
+          <div class="proof-spec-label">Scope</div>
+          <div class="proof-spec-val">System Design + Integration</div>
+        </div>
+        <div class="proof-spec-item">
+          <div class="proof-spec-label">Facility Type</div>
+          <div class="proof-spec-val">Academic / Industry Hybrid</div>
+        </div>
+        <div class="proof-spec-item">
+          <div class="proof-spec-label">Location</div>
+          <div class="proof-spec-val">Cleveland, OH</div>
+        </div>
+      </div>
+      <a href="#contact" class="btn-primary" onclick="openModal('Case Study Inquiry')">Request the Full Case Study</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ TECH CENTER ═══════════════════════════════ -->
+<section id="tech-center">
+  <div class="tc-inner">
+    <div class="fade-in">
+      <div class="section-eyebrow" style="justify-content:flex-start; text-align:left;">
+        <span style="width:32px;height:1px;background:var(--red);display:block;"></span>
+        Studio Technology Center
+      </div>
+      <h2 class="section-title" style="text-align:left; margin-bottom:0;">The STC — New York City</h2>
+      <p class="tc-body">
+        A unique, solution-based environment at 420 9th Ave dedicated to all professional media markets. Not a showroom. A working facility where organizations of all sizes and high-end professionals gain unparalleled access to state-of-the-art technology in real-world configurations.
+      </p>
+
+      <div class="tc-features">
+        <div class="tc-feature-row fade-in">
+          <div class="tc-feature-dot"></div>
+          <div>
+            <div class="tc-feature-name">Hands-On Technology Access</div>
+            <div class="tc-feature-desc">Test real system configurations with actual high-end equipment before committing to a purchase or deployment.</div>
+          </div>
+        </div>
+        <div class="tc-feature-row fade-in">
+          <div class="tc-feature-dot"></div>
+          <div>
+            <div class="tc-feature-name">Applications Specialists On-Site</div>
+            <div class="tc-feature-desc">Active industry professionals — not just sales staff — available for consultation and deep-dive sessions.</div>
+          </div>
+        </div>
+        <div class="tc-feature-row fade-in">
+          <div class="tc-feature-dot"></div>
+          <div>
+            <div class="tc-feature-name">Emerging Technology Lab</div>
+            <div class="tc-feature-desc">A space for experimentation, innovation, and exploration of cutting-edge tools and digital workflows.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tc-aside fade-in">
+      <h3 class="tc-aside-head">Schedule a Visit</h3>
+      <p class="tc-aside-body">
+        The Technology Center is open to anyone. We recommend scheduling an appointment to ensure the right specialist is available for your project's needs.
+      </p>
+      <div class="tc-phone">212.465.0106</div>
+      <div class="tc-addr">
+        420 9th Avenue<br>
+        New York, NY 10001<br>
+        Mon–Thu, Sat: 9am–7pm<br>
+        Fri: 9am–2pm · Sun: 10am–6pm
+      </div>
+      <br>
+      <a href="#contact" class="btn-primary" style="display:block;text-align:center;text-decoration:none;" onclick="openModal('Schedule Visit')">Request an Appointment</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ CONTACT / FUNNEL ═══════════════════════════════ -->
+<section id="contact">
+  <div class="contact-wrapper fade-in">
+    <div class="section-header">
+      <div class="section-eyebrow">Get Started</div>
+      <h2 class="section-title">Tell Us About<br>Your Project</h2>
+      <p class="section-desc">Our team responds within one business day. The more detail you share, the faster we can match you to the right specialist.</p>
+    </div>
+
+    <div class="contact-form-inner">
+      <div class="form-row">
+        <div class="form-group half">
+          <label class="form-label">Full Name *</label>
+          <input type="text" class="form-input" placeholder="Jane Smith" />
+        </div>
+        <div class="form-group half">
+          <label class="form-label">Email Address *</label>
+          <input type="email" class="form-input" placeholder="jane@studio.com" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group half">
+          <label class="form-label">Organization</label>
+          <input type="text" class="form-input" placeholder="Company / Network / Org" />
+        </div>
+        <div class="form-group half">
+          <label class="form-label">Phone Number</label>
+          <input type="tel" class="form-input" placeholder="212 000 0000" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Project Category *</label>
+        <select class="form-input form-select">
+          <option value="" disabled selected>Select the closest match...</option>
+          <option>Digital Cinema</option>
+          <option>Broadcast & Streaming</option>
+          <option>Studio & ENG</option>
+          <option>Virtual Production</option>
+          <option>Editing, Color & Post-Production</option>
+          <option>System Design & Integration</option>
+          <option>Technology Training</option>
+          <option>Schedule a Visit / Demo</option>
+          <option>Not sure — I need a consultation</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Tell us about your project *</label>
+        <textarea class="form-textarea" placeholder="Share as much as you can — project scope, timeline, budget range, existing equipment, facility details, and what outcome you're aiming for..."></textarea>
+      </div>
+
+      <button class="form-submit" onclick="handleSubmit()">Send Project Brief →</button>
+
+      <p class="form-note">
+        Or call us directly at <strong style="color:var(--text)">212.465.0106</strong> · Mon–Thu 9–7, Fri 9–2, Sat 9–7, Sun 10–6
+      </p>
+
+      <div class="or-divider">or</div>
+
+      <a href="#" class="full-intake-btn" onclick="showFullIntake(); return false;">
+        Complete Our Full Project Questionnaire →
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+<footer>
+  <div class="footer-brand">
+    <div style="display:flex;gap:12px;align-items:center;">
+      <span class="nav-logo-block" style="font-size:18px;">B&H</span>
+      <span style="font-family:'DM Serif Display',serif;font-size:15px;color:var(--muted);">The Studio</span>
+    </div>
+    <div class="footer-copy">© 2026 B & H Foto & Electronics Corp. · 420 9th Ave, New York, NY 10001</div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#proof">Case Studies</a></li>
+    <li><a href="#tech-center">Visit the STC</a></li>
+    <li><a href="https://bhphotovideo.com" target="_blank">B&H Consumer Site</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</footer>
+
+
+<!-- ═══════════════════════════════ MODAL ═══════════════════════════════ -->
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h2 class="modal-title" id="modal-title">Start a Project</h2>
+    <p class="modal-sub" id="modal-sub">Tell us about your project and a Studio specialist will be in touch within one business day.</p>
+
+    <div class="form-group">
+      <label class="form-label">Full Name *</label>
+      <input type="text" class="form-input" id="m-name" placeholder="Your name" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email Address *</label>
+      <input type="email" class="form-input" id="m-email" placeholder="your@email.com" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">Organization</label>
+      <input type="text" class="form-input" id="m-org" placeholder="Company / Network" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">Project Details</label>
+      <textarea class="form-textarea" id="m-msg" placeholder="Describe your project, timeline, and goals..."></textarea>
+    </div>
+    <button class="form-submit" onclick="handleModalSubmit()">Send to The Studio →</button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ TOAST ═══════════════════════════════ -->
+<div class="toast" id="toast">
+  <div class="toast-title">✓ Message Received</div>
+  <div class="toast-sub">A Studio specialist will be in touch within one business day.</div>
+</div>
+
+
+<script>
+  // Intersection observer for fade-ins
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Client pill toggle
+  document.querySelectorAll('.client-pill').forEach(pill => {
+    pill.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelectorAll('.client-pill').forEach(p => p.classList.remove('active'));
+      this.classList.add('active');
+      openModal(this.textContent.trim());
+    });
+  });
+
+  // Modal
+  let currentCategory = '';
+
+  function openModal(category) {
+    currentCategory = category;
+    const modal = document.getElementById('modal');
+    const title = document.getElementById('modal-title');
+    const sub = document.getElementById('modal-sub');
+
+    title.textContent = category || 'Start a Project';
+    sub.textContent = `Tell us about your ${category ? category.toLowerCase() + ' ' : ''}project and a Studio specialist will follow up within one business day.`;
+
+    // Pre-fill message if category set
+    const msg = document.getElementById('m-msg');
+    if (category && msg.value === '') {
+      msg.placeholder = `I'm interested in ${category}. Here's my project: ...`;
+    }
+
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('modal')) closeModal();
+  }
+
+  function handleSubmit() {
+    showToast();
+  }
+
+  function handleModalSubmit() {
+    closeModal();
+    showToast();
+  }
+
+  function showToast() {
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 5000);
+  }
+
+  function showFullIntake() {
+    openModal('Full Project Questionnaire');
+    document.getElementById('modal-sub').textContent =
+      'For complex projects, our full questionnaire ensures you get matched to the right specialist quickly. Fill in what you can below — we\'ll do the rest.';
+  }
+
+  // Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
+</body>
+</html>

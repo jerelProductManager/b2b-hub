@@ -1,0 +1,79 @@
+Here's a clean summary of the meeting:
+
+---
+
+## Meeting Notes — Ariel & Jerel Working Session
+
+### Topics Covered
+
+---
+
+**1. Tax Exemption — B2C → B2B Account Conversion**
+
+**Decision: All-or-nothing opt-in with opt-out checkbox (default = keep all exemptions).**
+
+- The conversion flow already prompts the user to identify their industry/segment, so they're already in the right headspace when deciding whether to carry over tax exemptions.
+- Edge case raised (Jay's concern): user with both a nonprofit and a for-profit business commingled in one account. **Consensus:** Users in that scenario should have two separate accounts. B&H's responsibility ends at prompting segment selection — the customer self-selects purpose.
+- No additional in-line copy needed to address this edge case given how rare it is.
+
+---
+
+**2. State/Local vs. K-12 Split**
+
+**Decision: Split State & Local from K-12 in the sign-up routing — confirmed as part of PMO 5000 scope.**
+
+- Higher Ed, K-12, and State/Local are separate on the portal side (33 divisions total; K-12 and State/Local are currently grouped together on the hub page).
+- Contracts like Omnia, SchoolBuys, CivicBuys, and CollegeBox map to different segments and need to be routed correctly.
+- Example: LAUSD portal is K-12, not State/Local.
+- Label "State and Local Government" confirmed as the right term (vs. just "State").
+- **Takeaway for Jerel:** Do a quick audit to confirm all portals are correctly mapped to K-12 vs. State/Local routing rules. Some are already clearly split; others may need review.
+
+---
+
+**3. Contracts Per Segment (State/Local vs. K-12)**
+
+- **Omnia remains the featured/promoted contract for State & Local.**
+- Most cooperatives span both sub-segments; no hard exclusive-to-one contracts immediately identified.
+- Ariel to do a pass to confirm whether any cooperative is strictly K-12 or strictly State/Local only.
+
+---
+
+**4. Sign-Up Flow — Field Review**
+
+**Step 2: Org Information fields discussed:**
+
+- **Role field:** Current list includes Procurement Officer/Purchasing Manager, IT Director/Technology Buyer, Small Business Owner, Faith/Nonprofit Administrator, International Buyer, and Other (free text). Ariel to cross-reference Salesforce contact role picklist to validate/cherry-pick appropriate options.
+- **Department field:** Decision deferred to prototype testing. Consensus is department is valuable across *all* segments/industries but adds form length. **Action: Keep it, mark it optional, time the form completion, and remove if it creates friction.**
+- **Annual Spend tiers:** Current 5-option bucketing reviewed. Ariel felt the jumps weren't too large but wants to validate with business development team to confirm which splits are meaningful for BD outreach. Follow-up with BD team.
+
+---
+
+**5. Net Terms (Flagged — Not Fully Discussed)**
+
+- Jerel flagged a topic around net terms related to UNIX customer codes vs. web accounts. Partially started but cut off — **carry into next session.**
+
+---
+
+### Decisions Made
+
+| # | Decision | Owner |
+|---|----------|-------|
+| 1 | Tax exemption conversion = all-or-nothing opt-in (opt-out checkbox, default on) | Jerel / Jay |
+| 2 | State/Local and K-12 split confirmed for PMO 5000 routing scope | Ariel / Jerel |
+| 3 | Label: "State and Local Government" | Confirmed |
+| 4 | Omnia = featured contract for State & Local | Ariel |
+| 5 | Department field: keep, make optional, validate via prototype timing test | Jerel / Jay |
+| 6 | "Industry" confirmed as the term for segment selection in the UI | Jerel |
+
+---
+
+### Next Steps
+
+| Action | Owner |
+|--------|-------|
+| Audit portal-to-segment routing rules for K-12 vs. State/Local split | Jerel |
+| Review Salesforce contact role picklist to refine Role field options | Ariel |
+| Validate annual spend tiers with BD team | Ariel |
+| Confirm if any cooperative contracts are exclusive to K-12 or State/Local only | Ariel |
+| Prototype the full Step 2 form and time completion — use to decide on Department field | Jerel / Jay |
+| Resume net terms / UNIX customer code discussion | Next session |

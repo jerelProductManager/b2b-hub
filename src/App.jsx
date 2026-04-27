@@ -646,6 +646,7 @@ export default function App() {
             )}
           </button>
         </div>
+      {showSignUp && <SignUpFlow onClose={() => setShowSignUp(false)} />}
       </div>
 
       {/* Pages */}
@@ -655,7 +656,7 @@ export default function App() {
       {mainTab === "hub" && route.view === "contract" && route.id && <ContractPageView contractId={route.id} config={c} onGoHub={goHub} onGoContract={goContract} onSignUp={handleSignUp} />}
       {mainTab === "admin" && <AdminView config={draftConfig} liveConfig={liveConfig} onChange={updateDraft} adminTab={adminTab} setAdminTab={setAdminTab} jsonText={jsonText} jsonError={jsonError} onJsonChange={handleJsonChange} currentUser={currentUser} onPublishOrSubmit={handlePublishOrSubmit} hasUnsaved={hasUnsaved} activeSection={activeSection} setActiveSection={setActiveSection} onGoSegment={goSegment} onGoContract={goContract} />}
       {mainTab === "approvals" && <ApprovalsView pendingChanges={pendingChanges} liveConfig={liveConfig} currentUser={currentUser} onApprove={handleApprove} onReject={handleReject} />}
-      {showSignUp && <SignUpFlow onClose={() => setShowSignUp(false)} />}
+
     </div>
   );
 }

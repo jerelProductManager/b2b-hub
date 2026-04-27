@@ -682,7 +682,7 @@ function HubView({ config: c, hubStep, setHubStep, signupData, setSignupData, de
                 <div style={{ background: T.scarlet, color: T.white, fontSize: 11, fontWeight: 700, padding: "4px 12px", borderRadius: 20, display: "inline-block", marginBottom: 16, letterSpacing: 1 }}>{c.hero.badge}</div>
                 <h1 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 42, fontWeight: 800, color: T.white, marginBottom: 14, lineHeight: 1.1 }}>{c.hero.headline}</h1>
                 <p style={{ color: "rgba(255,255,255,0.88)", fontSize: 16, marginBottom: 28, lineHeight: 1.65, maxWidth: 480 }}>{c.hero.subheadline}</p>
-                <button onClick={() => setHubStep("step1")} style={{ background: T.green, color: T.white, border: "none", padding: "16px 28px", borderRadius: 8, fontWeight: 800, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif", boxShadow: "0 4px 20px rgba(63,154,89,.35)", marginBottom: 10, display: "block" }}>
+                <button onClick={onSignUp} style={{ background: T.green, color: T.white, border: "none", padding: "16px 28px", borderRadius: 8, fontWeight: 800, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif", boxShadow: "0 4px 20px rgba(63,154,89,.35)", marginBottom: 10, display: "block" }}>
                   {c.hero.ctaLabel} →
                 </button>
                 <div style={{ color: "rgba(255,255,255,0.6)", fontSize: 12 }}>{c.hero.ctaSubtext}</div>

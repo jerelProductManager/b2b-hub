@@ -582,7 +582,7 @@ export default function App() {
 
   const goHub        = () => { setRoute({ view: "hub", id: null }); setMainTab("hub"); setHubStep("entry"); };
   const goSegmentsNav = () => { setRoute({ view: "hub", id: null }); setMainTab("hub"); setHubStep("segments_browse"); window.scrollTo(0, 0); };
-  const handleSignUp = () => { setRoute({ view: "hub", id: null }); setMainTab("hub"); setHubStep("step1"); window.scrollTo(0, 0); };
+  const handleSignUp = () => setShowSignUp(true);
   const goStatic   = (id) => { setRoute({ view: "static", id }); setMainTab("hub"); window.scrollTo(0, 0); };
   const goSegment  = (id) => { setRoute({ view: "segment", id }); setMainTab("hub"); window.scrollTo(0, 0); };
   const goContract = (id) => { setRoute({ view: "contract", id }); setMainTab("hub"); window.scrollTo(0, 0); };

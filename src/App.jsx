@@ -1,3 +1,4 @@
+import SignUpFlow from "./SignUpFlow";
 import { useState, useCallback } from "react";
 
 // ─── B&H Design Tokens ───────────────────────────────────────────────────────
@@ -587,7 +588,7 @@ export default function App() {
   const goContract = (id) => { setRoute({ view: "contract", id }); setMainTab("hub"); window.scrollTo(0, 0); };
   const goAdmin    = () => { setRoute({ view: "admin", id: null }); setMainTab("admin"); };
   const goApprovals = () => { setRoute({ view: "approvals", id: null }); setMainTab("approvals"); };
-
+  const [showSignUp, setShowSignUp] = useState(false);
   const c = liveConfig;
 
   return (
@@ -654,6 +655,7 @@ export default function App() {
       {mainTab === "hub" && route.view === "contract" && route.id && <ContractPageView contractId={route.id} config={c} onGoHub={goHub} onGoContract={goContract} onSignUp={handleSignUp} />}
       {mainTab === "admin" && <AdminView config={draftConfig} liveConfig={liveConfig} onChange={updateDraft} adminTab={adminTab} setAdminTab={setAdminTab} jsonText={jsonText} jsonError={jsonError} onJsonChange={handleJsonChange} currentUser={currentUser} onPublishOrSubmit={handlePublishOrSubmit} hasUnsaved={hasUnsaved} activeSection={activeSection} setActiveSection={setActiveSection} onGoSegment={goSegment} onGoContract={goContract} />}
       {mainTab === "approvals" && <ApprovalsView pendingChanges={pendingChanges} liveConfig={liveConfig} currentUser={currentUser} onApprove={handleApprove} onReject={handleReject} />}
+      {showSignUp && <SignUpFlow onClose={() => setShowSignUp(false)} />}
     </div>
   );
 }

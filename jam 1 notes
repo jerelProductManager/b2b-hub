@@ -1,0 +1,26 @@
+Here's a summary of the key points from your conversation, along with actionable notes and next steps.
+
+Summary
+
+The discussion focused on two main topics related to a B2B account conversion and sign-up flow:
+
+1. Tax Exemption Opt-in: You agreed to simplify the process for users converting from a personal to a business account. Instead of a detailed state-by-state selection, the approach will be "all or nothing" (opt-in with an opt-out option, defaulting to all tax exemptions applied). This is based on the rarity of the use case (e.g., a user with both for-profit and nonprofit activities) and the belief that such users should maintain separate accounts anyway.
+2. Industry Segmentation & Data Fields: You discussed splitting K-12 from State & Local government for routing purposes, acknowledging existing portal differences (e.g., School Buys vs. Civic Buys). You also reviewed new sign-up fields, agreeing to keep the department field for all segments initially (but making it a candidate for removal if the form becomes too long), and validating the annual spend brackets as reasonable for now.
+
+Notes
+
+· Tax Exemption Logic: New converting users will have all tax exceptions applied by default, with a single checkbox to opt out of all. No additional prompts will be added due to the low probability of commingled business types.
+· Routing Requirements: Portal routing must distinguish between K-12 and State/Local. A post-PMO 5000 audit is needed to correctly map existing portals (e.g., LAUSD to K-12; Pacific Buys to State/Local).
+· Sign-Up Fields:
+  · Role picklist: Needs to be reviewed against Salesforce contact roles to cherry-pick relevant options.
+  · Department field: Keep for all industries for now, but monitor form completion time.
+  · Annual spend: 5 brackets are acceptable, but you will validate with business development on actual cutoff points.
+· Net Terms: You flagged a separate topic on net terms to revisit after this discussion.
+
+Next Steps
+
+1. Finalize tax exemption flow: Document the "all or nothing, opt-out by default" logic for development.
+2. Audit portal mappings: Create a list of all current portals and classify each as K-12 or State/Local for routing rules.
+3. Refine role picklist: Pull a contact role report from Salesforce and select 5-8 relevant options for the sign-up form.
+4. Validate annual spend brackets: Meet with business development to confirm the 5 proposed ranges match their segmentation criteria.
+5. Schedule net terms discussion: Add a reminder to address the net terms topic in your next sync.

@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Studio — B&H Photo Video</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+/* ─────────────────────────────────
+   TOKENS
+───────────────────────────────── */
+:root {
+  --cream:   #F6F4F0;
+  --white:   #FFFFFF;
+  --ink:     #0E0E0E;
+  --ink-60:  #555;
+  --ink-30:  #aaa;
+  --ink-10:  #e8e6e2;
+  --red:     #C8102E;
+  --red-dk:  #9e0d23;
+  --gold:    #B8943A;
+  --nav-h:   68px;
+}
+
+/* ─────────────────────────────────
+   RESET / BASE
+───────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Figtree', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; width: 100%; object-fit: cover; }
+a { text-decoration: none; color: inherit; }
+
+/* ─────────────────────────────────
+   UTILITY
+───────────────────────────────── */
+.label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.label-dark { color: var(--ink-60); }
+
+.serif  { font-family: 'Cormorant Garamond', serif; }
+.tag {
+  display: inline-block;
+  border: 1px solid currentColor;
+  padding: 3px 10px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+/* ─────────────────────────────────
+   NAV
+───────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: var(--nav-h);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 52px;
+  background: rgba(246,244,240,.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--ink-10);
+  transition: box-shadow .3s;
+}
+nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,.06); }
+
+.nav-brand {
+  display: flex; align-items: center; gap: 16px;
+}
+.nav-bh {
+  background: var(--ink);
+  color: #fff;
+  font-family: 'Figtree', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: .06em;
+  padding: 5px 11px;
+  line-height: 1;
+}
+.nav-pipe { width: 1px; height: 26px; background: var(--ink-10); }
+.nav-wordmark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: .04em;
+  color: var(--ink);
+}
+
+.nav-links {
+  display: flex; align-items: center; gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-60);
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--ink); }
+
+.nav-cta {
+  background: var(--red) !important;
+  color: #fff !important;
+  padding: 9px 22px !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: .14em !important;
+  text-transform: uppercase !important;
+  transition: background .2s !important;
+}
+.nav-cta:hover { background: var(--red-dk) !important; }
+
+/* ─────────────────────────────────
+   HERO
+───────────────────────────────── */
+#hero {
+  height: 100vh; min-height: 640px;
+  position: relative;
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 80px 80px;
+  overflow: hidden;
+}
+
+.hero-img {
+  position: absolute; inset: 0;
+  background:
+    url('https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1800&q=85&fit=crop') center/cover no-repeat,
+    linear-gradient(135deg,#1a1a1a,#2a2a2a);
+}
+.hero-img::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10,10,10,.82) 0%,
+    rgba(10,10,10,.4) 50%,
+    rgba(10,10,10,.1) 100%
+  );
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 880px; }
+
+.hero-eyebrow {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+  margin-bottom: 22px;
+  display: flex; align-items: center; gap: 14px;
+}
+.hero-eyebrow span {
+  display: inline-block;
+  width: 36px; height: 1px;
+  background: var(--red);
+}
+
+.hero-h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(60px, 9vw, 130px);
+  font-weight: 300;
+  line-height: .95;
+  color: #fff;
+  margin-bottom: 32px;
+  letter-spacing: -.01em;
+}
+.hero-h1 em {
+  font-style: italic;
+  color: rgba(255,255,255,.7);
+}
+
+.hero-sub {
+  font-size: 15px; font-weight: 300;
+  line-height: 1.75;
+  color: rgba(255,255,255,.65);
+  max-width: 500px;
+  margin-bottom: 44px;
+}
+
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.btn-red {
+  background: var(--red); color: #fff;
+  padding: 15px 34px;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase;
+  transition: background .2s, transform .15s;
+  display: inline-block;
+}
+.btn-red:hover { background: var(--red-dk); transform: translateY(-1px); }
+
+.btn-outline-w {
+  border: 1px solid rgba(255,255,255,.35);
+  color: rgba(255,255,255,.85);
+  padding: 14px 34px;
+  font-size: 10px; font-weight: 500;
+  letter-spacing: .18em; text-transform: uppercase;
+  transition: border-color .2s, color .2s;
+  display: inline-block;
+}
+.btn-outline-w:hover { border-color: rgba(255,255,255,.7); color: #fff; }
+
+.hero-scroll {
+  position: absolute;
+  right: 60px; bottom: 60px; z-index: 2;
+  writing-mode: vertical-rl;
+  font-size: 9px; font-weight: 600;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(255,255,255,.4);
+  display: flex; align-items: center; gap: 14px;
+}
+.hero-scroll::after {
+  content: '';
+  width: 1px; height: 52px;
+  background: linear-gradient(to bottom, rgba(255,255,255,.3), transparent);
+}
+
+/* ─────────────────────────────────
+   SERVICES TICKER
+───────────────────────────────── */
+.ticker-wrap {
+  background: var(--red);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 13px 0;
+  position: relative;
+}
+.ticker-inner {
+  display: inline-flex; gap: 0;
+  animation: ticker-scroll 28s linear infinite;
+}
+.ticker-inner:hover { animation-play-state: paused; }
+.ticker-item {
+  display: inline-flex; align-items: center; gap: 28px;
+  padding: 0 28px;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(255,255,255,.9);
+}
+.ticker-dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.4);
+  flex-shrink: 0;
+}
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─────────────────────────────────
+   INTRO / MISSION
+───────────────────────────────── */
+#intro {
+  padding: 120px 80px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+  align-items: start;
+  border-bottom: 1px solid var(--ink-10);
+}
+.intro-label { padding-top: 10px; }
+.intro-label p {
+  font-size: 13px; color: var(--ink-60);
+  line-height: 1.7; font-weight: 300;
+  margin-top: 16px; max-width: 220px;
+}
+.intro-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 4.5vw, 64px);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -.01em;
+  color: var(--ink);
+}
+.intro-headline strong {
+  font-weight: 600;
+}
+.intro-body {
+  font-size: 15px; font-weight: 300;
+  line-height: 1.85; color: var(--ink-60);
+  margin-top: 32px; max-width: 680px;
+}
+.intro-stats {
+  display: flex; gap: 52px;
+  margin-top: 52px;
+  padding-top: 40px;
+  border-top: 1px solid var(--ink-10);
+}
+.istat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px; font-weight: 300;
+  line-height: 1;
+  color: var(--ink);
+}
+.istat-label {
+  font-size: 11px; font-weight: 400;
+  color: var(--ink-60);
+  letter-spacing: .04em;
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+/* ─────────────────────────────────
+   SERVICES GRID
+───────────────────────────────── */
+#services {
+  padding: 100px 80px;
+  border-bottom: 1px solid var(--ink-10);
+}
+
+.section-top {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 64px;
+}
+.section-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -.01em;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--ink-10);
+}
+.svc {
+  padding: 44px 40px 44px;
+  border-right: 1px solid var(--ink-10);
+  border-bottom: 1px solid var(--ink-10);
+  cursor: pointer;
+  transition: background .25s;
+  position: relative;
+  overflow: hidden;
+}
+.svc:nth-child(3n) { border-right: none; }
+.svc:nth-child(n+4) { border-bottom: none; }
+.svc:hover { background: var(--white); }
+
+.svc::before {
+  content: '';
+  position: absolute; bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--red);
+  transition: width .4s ease;
+}
+.svc:hover::before { width: 100%; }
+
+.svc-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px; font-weight: 300;
+  color: var(--ink-30);
+  margin-bottom: 18px;
+}
+.svc-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 400;
+  line-height: 1.25;
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+.svc-desc {
+  font-size: 13px; font-weight: 300;
+  line-height: 1.7; color: var(--ink-60);
+}
+.svc-tags {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-top: 22px;
+}
+.svc-tag {
+  font-size: 9px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: 4px 9px;
+  border: 1px solid var(--ink-10);
+  color: var(--ink-60);
+}
+.svc-arrow {
+  position: absolute; bottom: 28px; right: 28px;
+  color: var(--red); font-size: 18px;
+  opacity: 0; transform: translateX(-6px);
+  transition: opacity .3s, transform .3s;
+}
+.svc:hover .svc-arrow { opacity: 1; transform: translateX(0); }
+
+/* ─────────────────────────────────
+   CASE STUDIES
+───────────────────────────────── */
+#case-studies {
+  padding: 100px 80px;
+  border-bottom: 1px solid var(--ink-10);
+}
+
+.cs-feature {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--ink-10);
+  margin-bottom: 1px;
+  background: var(--white);
+}
+.cs-feature.reverse { direction: rtl; }
+.cs-feature.reverse > * { direction: ltr; }
+
+.cs-img-wrap {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  position: relative;
+  background: #1a1a1a;
+}
+.cs-img-wrap img {
+  height: 100%;
+  transition: transform .7s ease;
+}
+.cs-feature:hover .cs-img-wrap img { transform: scale(1.04); }
+
+.cs-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,.1));
+  pointer-events: none;
+}
+
+.cs-content {
+  padding: 56px 52px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.cs-meta {
+  display: flex; gap: 12px; align-items: center;
+  margin-bottom: 24px;
+}
+.cs-category {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--red); border: 1px solid var(--red);
+  padding: 3px 9px;
+}
+.cs-client {
+  font-size: 10px; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-60);
+}
+
+.cs-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px, 2.8vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+.cs-body {
+  font-size: 14px; font-weight: 300;
+  line-height: 1.8; color: var(--ink-60);
+  margin-bottom: 32px;
+}
+.cs-specs {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 18px; margin-bottom: 36px;
+}
+.cs-spec {
+  border-top: 1px solid var(--ink-10);
+  padding-top: 12px;
+}
+.cs-spec-label {
+  font-size: 9px; font-weight: 600;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--ink-30); margin-bottom: 4px;
+}
+.cs-spec-val {
+  font-size: 13px; font-weight: 400; color: var(--ink);
+}
+.cs-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--red);
+  transition: gap .2s;
+}
+.cs-link:hover { gap: 14px; }
+
+/* Small case study cards */
+.cs-cards {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; background: var(--ink-10);
+  border: 1px solid var(--ink-10);
+  margin-top: 1px;
+}
+.cs-card {
+  background: var(--white);
+  cursor: pointer;
+  transition: background .2s;
+  overflow: hidden;
+}
+.cs-card:hover { background: #fafaf7; }
+.cs-card-img {
+  height: 240px;
+  overflow: hidden;
+  background: #222;
+}
+.cs-card-img img {
+  height: 100%; transition: transform .6s ease;
+}
+.cs-card:hover .cs-card-img img { transform: scale(1.05); }
+.cs-card-content { padding: 32px 36px 36px; }
+.cs-card-label {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 10px;
+}
+.cs-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 400; line-height: 1.3;
+  margin-bottom: 12px;
+}
+.cs-card-desc {
+  font-size: 13px; font-weight: 300;
+  line-height: 1.7; color: var(--ink-60);
+}
+
+/* ─────────────────────────────────
+   CAPABILITIES (WHAT WE DO)
+───────────────────────────────── */
+#capabilities {
+  padding: 100px 80px;
+  background: var(--ink);
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+#capabilities .section-h2 { color: #fff; }
+#capabilities .label { color: rgba(200,16,46,.8); }
+
+.cap-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid rgba(255,255,255,.08);
+  margin-top: 60px;
+}
+.cap-item {
+  padding: 40px 36px;
+  border-right: 1px solid rgba(255,255,255,.08);
+  transition: background .25s;
+}
+.cap-item:last-child { border-right: none; }
+.cap-item:hover { background: rgba(255,255,255,.04); }
+
+.cap-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px; font-weight: 300;
+  color: rgba(200,16,46,.3);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.cap-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px; font-weight: 400;
+  color: #fff;
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+.cap-desc {
+  font-size: 12px; font-weight: 300;
+  line-height: 1.75;
+  color: rgba(255,255,255,.5);
+}
+.cap-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 20px;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--red);
+  transition: gap .2s;
+}
+.cap-cta:hover { gap: 10px; }
+
+/* ─────────────────────────────────
+   TECHNOLOGY CENTER
+───────────────────────────────── */
+#tech-center {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-bottom: 1px solid var(--ink-10);
+}
+.tc-img {
+  height: 640px;
+  overflow: hidden;
+  background: #1a1a1a;
+  position: relative;
+}
+.tc-img img { height: 100%; transition: transform .8s ease; }
+#tech-center:hover .tc-img img { transform: scale(1.03); }
+
+.tc-img-label {
+  position: absolute; bottom: 28px; left: 28px;
+  background: rgba(0,0,0,.65);
+  backdrop-filter: blur(6px);
+  padding: 8px 16px;
+  font-size: 10px; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(255,255,255,.7);
+}
+
+.tc-content {
+  padding: 80px 72px;
+  display: flex; flex-direction: column; justify-content: center;
+  background: var(--white);
+}
+.tc-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 3.5vw, 50px);
+  font-weight: 300;
+  line-height: 1.15;
+  margin: 16px 0 24px;
+}
+.tc-body {
+  font-size: 14px; font-weight: 300;
+  line-height: 1.85; color: var(--ink-60);
+  margin-bottom: 44px;
+}
+.tc-feats {
+  display: flex; flex-direction: column; gap: 0;
+  border-top: 1px solid var(--ink-10);
+}
+.tc-feat {
+  display: flex; align-items: flex-start; gap: 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--ink-10);
+}
+.tc-feat-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--red); flex-shrink: 0;
+  margin-top: 6px;
+}
+.tc-feat-name {
+  font-size: 13px; font-weight: 600;
+  color: var(--ink); margin-bottom: 4px;
+}
+.tc-feat-desc {
+  font-size: 12px; font-weight: 300;
+  line-height: 1.65; color: var(--ink-60);
+}
+.tc-phone {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px; font-weight: 300;
+  color: var(--ink); margin-top: 36px;
+  letter-spacing: .02em;
+}
+.tc-addr {
+  font-size: 12px; font-weight: 300;
+  color: var(--ink-60); line-height: 1.8;
+  margin-top: 8px;
+}
+
+/* ─────────────────────────────────
+   WHO WE SERVE
+───────────────────────────────── */
+#clients {
+  padding: 100px 80px;
+  border-bottom: 1px solid var(--ink-10);
+}
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--ink-10);
+  border: 1px solid var(--ink-10);
+  margin-top: 60px;
+}
+.client-card {
+  background: var(--cream);
+  padding: 36px 32px;
+  cursor: pointer;
+  transition: background .2s;
+}
+.client-card:hover { background: var(--white); }
+.client-icon { font-size: 26px; margin-bottom: 14px; }
+.client-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px; font-weight: 400;
+  margin-bottom: 10px;
+}
+.client-desc {
+  font-size: 12px; font-weight: 300;
+  line-height: 1.65; color: var(--ink-60);
+}
+
+/* ─────────────────────────────────
+   CONTACT / FUNNEL
+───────────────────────────────── */
+#contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--ink-10);
+}
+
+.contact-left {
+  background: var(--ink);
+  padding: 100px 72px;
+  color: #fff;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.contact-left .label { color: rgba(200,16,46,.8); }
+.contact-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: #fff;
+  margin: 16px 0 24px;
+}
+.contact-body {
+  font-size: 14px; font-weight: 300;
+  line-height: 1.8; color: rgba(255,255,255,.55);
+  max-width: 380px;
+  margin-bottom: 52px;
+}
+.contact-bullets { list-style: none; }
+.contact-bullets li {
+  font-size: 13px; font-weight: 300;
+  color: rgba(255,255,255,.55);
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.contact-bullets li::before {
+  content: '→';
+  color: var(--red);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.contact-direct {
+  margin-top: 52px;
+  padding-top: 36px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.contact-direct-label {
+  font-size: 9px; font-weight: 600;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+  margin-bottom: 10px;
+}
+.contact-direct-phone {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px; font-weight: 300;
+  color: #fff; letter-spacing: .02em;
+}
+
+.contact-right {
+  background: var(--white);
+  padding: 100px 72px;
+}
+
+.form-group { margin-bottom: 22px; }
+.form-label {
+  display: block;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--ink-60); margin-bottom: 8px;
+}
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background: var(--cream);
+  border: 1px solid var(--ink-10);
+  color: var(--ink);
+  padding: 13px 16px;
+  font-family: 'Figtree', sans-serif;
+  font-size: 14px; font-weight: 300;
+  outline: none;
+  transition: border-color .2s;
+  -webkit-appearance: none;
+}
+.form-input::placeholder,
+.form-textarea::placeholder { color: var(--ink-30); }
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus { border-color: var(--ink-60); }
+
+.form-textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
+
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23999' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  cursor: pointer;
+}
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.form-submit {
+  width: 100%; margin-top: 8px;
+  background: var(--red); color: #fff;
+  border: none; padding: 17px;
+  font-family: 'Figtree', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase;
+  cursor: pointer;
+  transition: background .2s, transform .15s;
+}
+.form-submit:hover { background: var(--red-dk); transform: translateY(-1px); }
+
+.form-full-intake {
+  display: block; text-align: center;
+  margin-top: 14px;
+  border: 1px solid var(--ink-10);
+  padding: 14px;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-60);
+  transition: all .2s;
+}
+.form-full-intake:hover {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+/* ─────────────────────────────────
+   FOOTER
+───────────────────────────────── */
+footer {
+  background: var(--ink);
+  padding: 52px 80px;
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 32px;
+  flex-wrap: wrap;
+}
+.footer-left {
+  display: flex; align-items: center; gap: 18px;
+}
+.footer-copy {
+  font-size: 11px; font-weight: 300;
+  color: rgba(255,255,255,.35);
+  letter-spacing: .03em;
+}
+.footer-links {
+  display: flex; gap: 28px; list-style: none;
+}
+.footer-links a {
+  font-size: 10px; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(255,255,255,.35);
+  transition: color .2s;
+}
+.footer-links a:hover { color: rgba(255,255,255,.8); }
+
+/* ─────────────────────────────────
+   MODAL
+───────────────────────────────── */
+.overlay {
+  display: none; position: fixed; inset: 0; z-index: 300;
+  background: rgba(14,14,14,.75);
+  backdrop-filter: blur(10px);
+  align-items: center; justify-content: center;
+  padding: 32px;
+}
+.overlay.open { display: flex; }
+.modal {
+  background: var(--white);
+  max-width: 560px; width: 100%;
+  max-height: 90vh; overflow-y: auto;
+  padding: 52px;
+  position: relative;
+  animation: modal-in .25s ease;
+}
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.modal-x {
+  position: absolute; top: 18px; right: 20px;
+  background: none; border: none;
+  font-size: 22px; cursor: pointer;
+  color: var(--ink-30);
+  transition: color .2s;
+  line-height: 1;
+}
+.modal-x:hover { color: var(--ink); }
+.modal-tag { margin-bottom: 16px; }
+.modal-h {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px; font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+.modal-sub {
+  font-size: 13px; font-weight: 300;
+  color: var(--ink-60); line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+/* ─────────────────────────────────
+   TOAST
+───────────────────────────────── */
+.toast {
+  display: none; position: fixed;
+  bottom: 28px; right: 28px; z-index: 400;
+  background: var(--ink); color: #fff;
+  padding: 18px 28px;
+  border-left: 3px solid var(--red);
+  max-width: 320px;
+  animation: toast-in .3s ease;
+}
+.toast.on { display: block; }
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.toast-t { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.toast-s { font-size: 12px; font-weight: 300; color: rgba(255,255,255,.6); }
+
+/* ─────────────────────────────────
+   SCROLL ANIMATIONS
+───────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal:nth-child(2) { transition-delay: .08s; }
+.reveal:nth-child(3) { transition-delay: .16s; }
+.reveal:nth-child(4) { transition-delay: .24s; }
+.reveal:nth-child(5) { transition-delay: .32s; }
+.reveal:nth-child(6) { transition-delay: .40s; }
+</style>
+</head>
+<body>
+
+<!-- ══════════ NAV ══════════ -->
+<nav id="nav">
+  <a href="#" class="nav-brand">
+    <span class="nav-bh">B&H</span>
+    <span class="nav-pipe"></span>
+    <span class="nav-wordmark">The Studio</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#case-studies">Case Studies</a></li>
+    <li><a href="#capabilities">Capabilities</a></li>
+    <li><a href="#tech-center">Technology Center</a></li>
+    <li><a href="#contact" class="nav-cta">Start a Project</a></li>
+  </ul>
+</nav>
+
+
+<!-- ══════════ HERO ══════════ -->
+<section id="hero">
+  <div class="hero-img"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow"><span></span>B&H The Studio — New York City</div>
+    <h1 class="hero-h1">
+      Systems Built<br>
+      for <em>Serious</em><br>
+      Production.
+    </h1>
+    <p class="hero-sub">
+      Full-cycle consultation, design, and integration across digital cinema, broadcast, virtual production, and post — by specialists who still work on set.
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-red" onclick="openModal('New Project')">Tell Us About Your Project</a>
+      <a href="#case-studies" class="btn-outline-w">See Our Work</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">Scroll to explore</div>
+</section>
+
+
+<!-- ══════════ TICKER ══════════ -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-inner" id="ticker"></div>
+</div>
+
+
+<!-- ══════════ INTRO ══════════ -->
+<section id="intro">
+  <div class="intro-label">
+    <div class="label">About The Studio</div>
+    <p>Based at 420 9th Avenue, New York City — and active in the field across every major market vertical.</p>
+  </div>
+  <div>
+    <h2 class="intro-headline serif">
+      <strong>Not a showroom.</strong><br>
+      A working studio built<br>
+      to solve real problems.
+    </h2>
+    <p class="intro-body">
+      The Studio is B&H's professional systems division — a team of applications specialists, sales engineers, project managers, and account representatives, most of them active practitioners in their fields. For over fifteen years we've designed, integrated, and deployed complex media infrastructure for organizations ranging from single-operator news bureaus to major broadcast networks. We don't just spec gear. We stay in until the system works.
+    </p>
+    <div class="intro-stats">
+      <div class="reveal">
+        <div class="istat-num serif">15+</div>
+        <div class="istat-label">Years of field<br>deployments</div>
+      </div>
+      <div class="reveal">
+        <div class="istat-num serif">500K+</div>
+        <div class="istat-label">Products available<br>from stock, daily</div>
+      </div>
+      <div class="reveal">
+        <div class="istat-num serif">3,000+</div>
+        <div class="istat-label">Manufacturer<br>relationships</div>
+      </div>
+      <div class="reveal">
+        <div class="istat-num serif">1</div>
+        <div class="istat-label">Technology Center<br>in New York City</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ SERVICES ══════════ -->
+<section id="services">
+  <div class="section-top">
+    <div>
+      <div class="label" style="margin-bottom:12px">Disciplines</div>
+      <h2 class="section-h2 serif">What We Build</h2>
+    </div>
+    <a href="#contact" class="cs-link" onclick="openModal('Services Overview')">All Services →</a>
+  </div>
+
+  <div class="services-grid">
+    <div class="svc reveal" onclick="openModal('Digital Cinema')">
+      <div class="svc-num">01</div>
+      <div class="svc-name serif">Digital Cinema</div>
+      <div class="svc-desc">Camera system builds, lens packages, on-set DIT workflows, color science consulting, and production storage for feature and episodic content.</div>
+      <div class="svc-tags">
+        <span class="svc-tag">ARRI</span>
+        <span class="svc-tag">Sony Cine</span>
+        <span class="svc-tag">RED</span>
+        <span class="svc-tag">DIT Workflow</span>
+      </div>
+      <span class="svc-arrow">→</span>
+    </div>
+    <div class="svc reveal" onclick="openModal('Broadcast & Streaming')">
+      <div class="svc-num">02</div>
+      <div class="svc-name serif">Broadcast & Streaming</div>
+      <div class="svc-desc">Live IP production architecture, mobile flypacks, REMI design, master control room engineering, encoding, and OTT infrastructure.</div>
+      <div class="svc-tags">
+        <span class="svc-tag">Live IP</span>
+        <span class="svc-tag">REMI</span>
+        <span class="svc-tag">MCR Design</span>
+        <span class="svc-tag">OTT</span>
+      </div>
+      <span class="svc-arrow">→</span>
+    </div>
+    <div class="svc reveal" onclick="openModal('Studio & ENG')">
+      <div class="svc-num">03</div>
+      <div class="svc-name serif">Studio & ENG</div>
+      <div class="svc-desc">Control room builds, studio fit-outs, ENG field packages, and rapid-deployment kits for news organizations, sports broadcasters, and live events.</div>
+      <div class="svc-tags">
+        <span class="svc-tag">Control Rooms</span>
+        <span class="svc-tag">ENG Kits</span>
+        <span class="svc-tag">Live Events</span>
+      </div>
+      <span class="svc-arrow">→</span>
+    </div>
+    <div class="svc reveal" onclick="openModal('Virtual Production')">
+      <div class="svc-num">04</div>
+      <div class="svc-name serif">Virtual Production</div>
+      <div class="svc-desc">LED volume design and integration, real-time render pipeline configuration, camera tracking, and ICVFX workflow — stages of all sizes.</div>
+      <div class="svc-tags">
+        <span class="svc-tag">LED Volumes</span>
+        <span class="svc-tag">ICVFX</span>
+        <span class="svc-tag">Unreal Engine</span>
+        <span class="svc-tag">Tracking</span>
+      </div>
+      <span class="svc-arrow">→</span>
+    </div>
+    <div class="svc reveal" onclick="openModal('Post-Production')">
+      <div class="svc-num">05</div>
+      <div class="svc-name serif">Editing, Color & Post</div>
+      <div class="svc-desc">Edit bay and color suite design, SAN/NAS shared storage architecture, 3D LUT creation, codec workflow consulting, and software licensing.</div>
+      <div class="svc-tags">
+        <span class="svc-tag">DaVinci Resolve</span>
+        <span class="svc-tag">Avid</span>
+        <span class="svc-tag">Shared Storage</span>
+        <span class="svc-tag">LUTs</span>
+      </div>
+      <span class="svc-arrow">→</span>
+    </div>
+    <div class="svc reveal" onclick="openModal('System Design')">
+      <div class="svc-num">06</div>
+      <div class="svc-name serif">System Design & Integration</div>
+      <div class="svc-desc">End-to-end signal flow architecture, rack build, cable plant, commissioning, and long-term managed support from concept through sign-off.</div>
+      <div class="svc-tags">
+        <span class="svc-tag">Signal Flow</span>
+        <span class="svc-tag">Rack Build</span>
+        <span class="svc-tag">Commissioning</span>
+      </div>
+      <span class="svc-arrow">→</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ CASE STUDIES ══════════ -->
+<section id="case-studies">
+  <div class="section-top">
+    <div>
+      <div class="label" style="margin-bottom:12px">Case Studies</div>
+      <h2 class="section-h2 serif">Proof in Production</h2>
+    </div>
+  </div>
+
+  <!-- FEATURED: CIA -->
+  <div class="cs-feature">
+    <div class="cs-img-wrap">
+      <img
+        src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=1000&q=85&fit=crop"
+        alt="XR Stage at CIA Interactive Media Lab"
+        loading="lazy"
+      />
+      <div class="cs-img-overlay"></div>
+    </div>
+    <div class="cs-content">
+      <div class="cs-meta">
+        <span class="cs-category">Virtual Production</span>
+        <span class="cs-client">Cleveland Institute of Art</span>
+      </div>
+      <h3 class="cs-title serif">XR Stage & Interactive Media Lab — LED Volume + ICVFX Infrastructure</h3>
+      <p class="cs-body">
+        The Studio designed and integrated a broadcast-grade virtual production environment for CIA's 14,297 sq ft Interactive Media Lab — giving students, faculty, and industry partners on-demand access to a fully operational LED volume and real-time render pipeline. The project required coordinating LED wall specification, camera tracking, Unreal Engine pipeline setup, and power infrastructure within a working academic building, on an education timeline.
+      </p>
+      <div class="cs-specs">
+        <div class="cs-spec">
+          <div class="cs-spec-label">Category</div>
+          <div class="cs-spec-val">Virtual Production</div>
+        </div>
+        <div class="cs-spec">
+          <div class="cs-spec-label">Scope</div>
+          <div class="cs-spec-val">Full Design + Integration</div>
+        </div>
+        <div class="cs-spec">
+          <div class="cs-spec-label">Facility</div>
+          <div class="cs-spec-val">Academic / Industry Hybrid</div>
+        </div>
+        <div class="cs-spec">
+          <div class="cs-spec-label">Location</div>
+          <div class="cs-spec-val">Cleveland, OH</div>
+        </div>
+      </div>
+      <a href="#contact" class="cs-link" onclick="openModal('CIA Case Study')">Request Full Case Study →</a>
+    </div>
+  </div>
+
+  <!-- Two smaller cards -->
+  <div class="cs-cards">
+    <div class="cs-card reveal" onclick="openModal('Metropolitan Broadcast Case Study')">
+      <div class="cs-card-img">
+        <img
+          src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&q=80&fit=crop"
+          alt="Broadcast control room infrastructure"
+          loading="lazy"
+        />
+      </div>
+      <div class="cs-card-content">
+        <div class="cs-card-label">Broadcast Infrastructure</div>
+        <h3 class="cs-card-title serif">Metropolitan Broadcast Group — Live IP Production Overhaul</h3>
+        <p class="cs-card-desc">
+          A regional news network operating three markets needed to migrate from legacy SDI to a full ST 2110 IP production environment without interrupting daily live output. The Studio managed phased system design, equipment specification, and on-site commissioning across all three facilities. Result: zero broadcast interruptions across a 14-month transition window.
+        </p>
+        <div class="cs-specs" style="margin-top:24px">
+          <div class="cs-spec">
+            <div class="cs-spec-label">Technology</div>
+            <div class="cs-spec-val">SMPTE ST 2110 IP</div>
+          </div>
+          <div class="cs-spec">
+            <div class="cs-spec-label">Markets</div>
+            <div class="cs-spec-val">3 Facilities</div>
+          </div>
+        </div>
+        <div class="cs-link" style="margin-top:20px">Request Case Study →</div>
+      </div>
+    </div>
+
+    <div class="cs-card reveal" onclick="openModal('Harbor Post Case Study')">
+      <div class="cs-card-img">
+        <img
+          src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80&fit=crop"
+          alt="Post production color grading suite"
+          loading="lazy"
+        />
+      </div>
+      <div class="cs-card-content">
+        <div class="cs-card-label">Post-Production</div>
+        <h3 class="cs-card-title serif">Harbor Post NY — Color Suite & Shared Storage Architecture</h3>
+        <p class="cs-card-desc">
+          A boutique post house expanding from 3 to 9 seats needed a shared storage and DaVinci Resolve color pipeline that could handle 8K RAW without bottlenecks. The Studio specified a high-bandwidth NVMe-over-Fabric SAN, configured multi-user Resolve licensing, and built out two purpose-designed grading suites — from acoustic treatment to display calibration.
+        </p>
+        <div class="cs-specs" style="margin-top:24px">
+          <div class="cs-spec">
+            <div class="cs-spec-label">Technology</div>
+            <div class="cs-spec-val">NVMe SAN + Resolve</div>
+          </div>
+          <div class="cs-spec">
+            <div class="cs-spec-label">Format</div>
+            <div class="cs-spec-val">8K RAW Pipeline</div>
+          </div>
+        </div>
+        <div class="cs-link" style="margin-top:20px">Request Case Study →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ CAPABILITIES ══════════ -->
+<section id="capabilities">
+  <div class="section-top" style="border-bottom:1px solid rgba(255,255,255,.07); padding-bottom:40px; margin-bottom:0;">
+    <div>
+      <div class="label" style="margin-bottom:12px">What We Do</div>
+      <h2 class="section-h2 serif" style="color:#fff">A Full-Cycle Partner,<br>Not Just a Vendor</h2>
+    </div>
+    <a href="#contact" class="btn-red" onclick="openModal('Consultation')">Start a Conversation</a>
+  </div>
+  <div class="cap-grid">
+    <div class="cap-item reveal" onclick="openModal('Consultation & System Design')">
+      <div class="cap-n serif">01</div>
+      <div class="cap-name serif">Consultation & System Design</div>
+      <div class="cap-desc">Unsure which technology fits your project? Our specialists work from requirements first — defining workflows and signal flows before a single SKU is selected.</div>
+      <a href="#contact" class="cap-cta" onclick="openModal('Consultation')">Book a consult →</a>
+    </div>
+    <div class="cap-item reveal" onclick="openModal('Installation & Integration')">
+      <div class="cap-n serif">02</div>
+      <div class="cap-name serif">Installation & Integration</div>
+      <div class="cap-desc">From independent studios to major broadcasters — we deploy complete systems including rack build, cabling, configuration, testing, and sign-off.</div>
+      <a href="#contact" class="cap-cta" onclick="openModal('Installation')">Discuss your build →</a>
+    </div>
+    <div class="cap-item reveal" onclick="openModal('Technology Training')">
+      <div class="cap-n serif">03</div>
+      <div class="cap-name serif">Technology Training</div>
+      <div class="cap-desc">From quick refreshers to crash intensives, Studio experts bring your team up to speed on the latest tools — on-site or at the Technology Center.</div>
+      <a href="#contact" class="cap-cta" onclick="openModal('Training')">Schedule training →</a>
+    </div>
+    <div class="cap-item reveal" onclick="openModal('Demos & Workshops')">
+      <div class="cap-n serif">04</div>
+      <div class="cap-name serif">Demos & Workshops</div>
+      <div class="cap-desc">Hands-on sessions in our Technology Center staging area. Test real system configurations against your specific production requirements before committing.</div>
+      <a href="#contact" class="cap-cta" onclick="openModal('Demo')">Book a demo →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ TECHNOLOGY CENTER ══════════ -->
+<section id="tech-center">
+  <div class="tc-img">
+    <img
+      src="https://images.unsplash.com/photo-1536240478700-b869ad10a2eb?w=1100&q=85&fit=crop"
+      alt="Studio Technology Center — B&H New York"
+      loading="lazy"
+    />
+    <div class="tc-img-label">Studio Technology Center · 420 9th Ave, NYC</div>
+  </div>
+  <div class="tc-content">
+    <div class="label">The STC</div>
+    <h2 class="tc-h2 serif">Not a Showroom.<br>A Working Facility.</h2>
+    <p class="tc-body">
+      The Studio Technology Center is a fully operational production environment at B&H's flagship New York location. It exists specifically so organizations can test real system configurations, meet with specialists, and explore emerging technology in a hands-on context — not a sales floor.
+    </p>
+    <div class="tc-feats">
+      <div class="tc-feat">
+        <div class="tc-feat-dot"></div>
+        <div>
+          <div class="tc-feat-name">Applications Specialists On-Site</div>
+          <div class="tc-feat-desc">Active practitioners across cinema, broadcast, and post — available for deep-dive sessions, not sales pitches.</div>
+        </div>
+      </div>
+      <div class="tc-feat">
+        <div class="tc-feat-dot"></div>
+        <div>
+          <div class="tc-feat-name">Real System Configuration Testing</div>
+          <div class="tc-feat-desc">Test complete workflows — not just individual products — before committing to a purchase or deployment.</div>
+        </div>
+      </div>
+      <div class="tc-feat">
+        <div class="tc-feat-dot"></div>
+        <div>
+          <div class="tc-feat-name">Emerging Technology Access</div>
+          <div class="tc-feat-desc">First looks at new workflows, tools, and platform integrations — often before general availability.</div>
+        </div>
+      </div>
+    </div>
+    <div class="tc-phone serif">212.465.0106</div>
+    <div class="tc-addr">
+      420 9th Avenue, New York, NY 10001<br>
+      Mon–Thu 9am–7pm · Fri 9am–2pm · Sat 9am–7pm · Sun 10am–6pm<br>
+      <em style="font-size:11px;color:var(--ink-30)">We recommend scheduling an appointment to ensure the right specialist is available.</em>
+    </div>
+    <div style="margin-top:36px">
+      <a href="#contact" class="btn-red" onclick="openModal('Schedule Visit')">Request an Appointment</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ WHO WE SERVE ══════════ -->
+<section id="clients">
+  <div class="section-top">
+    <div>
+      <div class="label" style="margin-bottom:12px">Who We Work With</div>
+      <h2 class="section-h2 serif">From Crew of Ten<br>to Ten Thousand</h2>
+    </div>
+  </div>
+  <div class="clients-grid">
+    <div class="client-card reveal" onclick="openModal('TV Networks')">
+      <div class="client-icon">📡</div>
+      <div class="client-name serif">TV Networks & Broadcasters</div>
+      <div class="client-desc">Master control overhauls, live IP migration, remote production infrastructure, and technology refresh programs for regional and national networks.</div>
+    </div>
+    <div class="client-card reveal" onclick="openModal('Production Companies')">
+      <div class="client-icon">🎬</div>
+      <div class="client-name serif">Production Companies</div>
+      <div class="client-desc">Camera package builds, DIT workflow design, on-set storage, and color pipeline integration for narrative, documentary, and commercial production.</div>
+    </div>
+    <div class="client-card reveal" onclick="openModal('Post Houses')">
+      <div class="client-icon">🎨</div>
+      <div class="client-name serif">Post Houses & Studios</div>
+      <div class="client-desc">Edit bay design, shared storage architecture, color suite builds, and multi-seat Resolve or Avid deployment for facilities of all sizes.</div>
+    </div>
+    <div class="client-card reveal" onclick="openModal('Houses of Worship')">
+      <div class="client-icon">🏛</div>
+      <div class="client-name serif">Houses of Worship</div>
+      <div class="client-desc">Cinematic multi-camera systems, streaming infrastructure, and hybrid production setups for faith organizations with dedicated online audiences.</div>
+    </div>
+    <div class="client-card reveal" onclick="openModal('News Organizations')">
+      <div class="client-icon">📰</div>
+      <div class="client-name serif">News Organizations</div>
+      <div class="client-desc">Studio buildouts, ENG fleet standardization, live streaming architecture, and rapid-deployment field kits for daily news operations.</div>
+    </div>
+    <div class="client-card reveal" onclick="openModal('Education & Institutions')">
+      <div class="client-icon">🎓</div>
+      <div class="client-name serif">Higher Education & Institutions</div>
+      <div class="client-desc">Academic media labs, virtual production training facilities, and broadcast programs for universities positioning students for working industry roles.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ CONTACT ══════════ -->
+<section id="contact">
+  <div class="contact-left">
+    <div>
+      <div class="label">Get Started</div>
+      <h2 class="contact-h2 serif">Tell us about<br>your project.</h2>
+      <p class="contact-body">
+        Our team responds within one business day. The more detail you share, the faster we match you to the right specialist.
+      </p>
+      <ul class="contact-bullets">
+        <li>Describe your project type and scale</li>
+        <li>Share your timeline and budget range</li>
+        <li>Mention existing equipment or constraints</li>
+        <li>Tell us your desired outcome — we'll handle the rest</li>
+      </ul>
+    </div>
+    <div class="contact-direct">
+      <div class="contact-direct-label">Or call us directly</div>
+      <div class="contact-direct-phone serif">212.465.0106</div>
+    </div>
+  </div>
+
+  <div class="contact-right">
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Full Name *</label>
+        <input type="text" class="form-input" placeholder="Jane Smith" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address *</label>
+        <input type="email" class="form-input" placeholder="jane@company.com" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Organization</label>
+        <input type="text" class="form-input" placeholder="Company / Network" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Phone</label>
+        <input type="tel" class="form-input" placeholder="212 000 0000" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Project Category *</label>
+      <select class="form-input form-select">
+        <option value="" disabled selected>Select closest match...</option>
+        <option>Digital Cinema</option>
+        <option>Broadcast & Streaming</option>
+        <option>Studio & ENG</option>
+        <option>Virtual Production</option>
+        <option>Editing, Color & Post-Production</option>
+        <option>System Design & Integration</option>
+        <option>Technology Training</option>
+        <option>Schedule a Visit / Demo</option>
+        <option>Not sure — I need a consultation</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Tell us about your project *</label>
+      <textarea class="form-textarea" placeholder="Describe scope, timeline, budget range, existing equipment, facility details, and your goal..."></textarea>
+    </div>
+    <button class="form-submit" onclick="handleSubmit()">Send Project Brief →</button>
+    <a href="#" class="form-full-intake" onclick="openModal('Full Questionnaire'); return false;">
+      Complete Our Full Project Questionnaire →
+    </a>
+  </div>
+</section>
+
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="footer-left">
+    <span class="nav-bh">B&H</span>
+    <span style="font-family:'Cormorant Garamond',serif;font-size:15px;color:rgba(255,255,255,.35)">The Studio</span>
+    <span style="width:1px;height:20px;background:rgba(255,255,255,.1)"></span>
+    <span class="footer-copy">© 2026 B & H Foto & Electronics Corp.</span>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#case-studies">Case Studies</a></li>
+    <li><a href="#tech-center">Visit the STC</a></li>
+    <li><a href="https://bhphotovideo.com" target="_blank">B&H Consumer Site</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</footer>
+
+
+<!-- ══════════ MODAL ══════════ -->
+<div class="overlay" id="overlay" onclick="closeOnBg(event)">
+  <div class="modal">
+    <button class="modal-x" onclick="closeModal()">×</button>
+    <div class="modal-tag"><span class="tag" id="modal-tag-text">The Studio</span></div>
+    <h2 class="modal-h serif" id="modal-h">Start a Project</h2>
+    <p class="modal-sub" id="modal-sub">Tell us about your project and a Studio specialist will follow up within one business day.</p>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Full Name *</label>
+        <input type="text" class="form-input" placeholder="Your name" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email *</label>
+        <input type="email" class="form-input" placeholder="your@email.com" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Organization</label>
+      <input type="text" class="form-input" placeholder="Company / Network" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">Project Details</label>
+      <textarea class="form-textarea" id="modal-msg" placeholder="Describe your project..."></textarea>
+    </div>
+    <button class="form-submit" onclick="submitModal()">Send to The Studio →</button>
+  </div>
+</div>
+
+
+<!-- ══════════ TOAST ══════════ -->
+<div class="toast" id="toast">
+  <div class="toast-t">Message received.</div>
+  <div class="toast-s">A Studio specialist will follow up within one business day.</div>
+</div>
+
+
+<script>
+/* ── TICKER ── */
+const items = [
+  'Digital Cinema','Broadcast & Streaming','Virtual Production',
+  'LED Volumes','ICVFX','Color Grading','Post-Production',
+  'System Integration','Studio Design','ENG Packages',
+  'Shared Storage','Live IP Production','Technology Training'
+];
+const t = document.getElementById('ticker');
+const html = items.map(i =>
+  `<span class="ticker-item">${i}<span class="ticker-dot"></span></span>`
+).join('');
+t.innerHTML = html + html; // duplicate for seamless loop
+
+/* ── NAV SCROLL ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', scrollY > 40);
+});
+
+/* ── REVEAL ── */
+const obs = new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+/* ── MODAL ── */
+function openModal(category) {
+  document.getElementById('modal-tag-text').textContent = category || 'The Studio';
+  document.getElementById('modal-h').textContent = category || 'Start a Project';
+  document.getElementById('modal-sub').textContent =
+    `Tell us about your ${(category || 'project').toLowerCase()} needs and a Studio specialist will follow up within one business day.`;
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeOnBg(e) {
+  if (e.target === document.getElementById('overlay')) closeModal();
+}
+function submitModal() {
+  closeModal();
+  showToast();
+}
+function handleSubmit() { showToast(); }
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('on');
+  setTimeout(() => t.classList.remove('on'), 5500);
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* ── PREVENT default on # links ── */
+document.querySelectorAll('[onclick]').forEach(el => {
+  el.addEventListener('click', e => {
+    if (el.tagName === 'A' && el.getAttribute('href') === '#contact') e.preventDefault();
+    if (el.tagName === 'A' && el.getAttribute('href') === '#') e.preventDefault();
+  });
+});
+</script>
+</body>
+</html>

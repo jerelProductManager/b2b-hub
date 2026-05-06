@@ -56,6 +56,8 @@ const INITIAL_CONFIG = {
   },
 
   signupForm: {
+    title:    "Let\'s find the right solution for you.",
+    subtitle: "Answer a few questions and we\'ll match you with the contracts, pricing, and portal that fit your organization.",
     orgTypes: [
       { id:"higher_ed",   label:"Higher Ed",           segment:"higher_ed",   icon:"🎓" },
       { id:"k12",         label:"K-12 School / District",         segment:"k12",         icon:"🏫" },
@@ -70,6 +72,19 @@ const INITIAL_CONFIG = {
       { id:"diversity",   label:"Diversity Supplier",             segment:"diversity",   icon:"⭐" },
       { id:"intl",        label:"International Organization",     segment:"intl",        icon:"🌐" },
     ],
+    // ── Step 2: Tell us about yourself ──────────────────────────────────────
+    step2Title:           "Tell us about yourself",
+    step2ContinueCta:     "Continue",
+    labelFirstName:       "First Name",
+    labelLastName:        "Last Name",
+    labelBusinessEmail:   "Business Email",
+    labelOrgName:         "Organization Name",
+    labelPhone:           "Business Phone",
+    labelState:           "State",
+    labelPurchaseVolume:  "Annual Purchase Volume",
+    labelHasB2CAccount:   "Do you already have a B&H.com account?",
+    labelB2CEmail:        "Your B&H.com account email",
+    hintB2CEmail:         "We\'ll link your consumer account to your new B2B account.",
     // ── Tray Org Info options ────────────────────────────────────────────────
     roleOptions: [
       "IT/Technology",
@@ -89,60 +104,33 @@ const INITIAL_CONFIG = {
       "Net terms/Credit account",
       "Just exploring options",
     ],
-    // ── Sign-Up Tray — Step 1: Account ──────────────────────────────────────
-    trayTitle:             "Sign Up for a Free B&H B2B Account",
-    trayStepLabels:        ["Create Account", "Org Info", "Billing"],
-    trayCreateLabel:       "Create a New B&H B2B Account",
-    trayCreateHint:        "Use an email address issued by private email client—webmail addresses (gmail, yahoo, etc.) do not qualify.",
-    trayConvertLabel:      "Convert an Existing B&H Account",
-    trayConvertHint:       "Your consumer account and accompanying details (shipping/billing address, etc.) will be converted to a new B&H B2B Account.",
-    trayConvertFormTitle:  "Log In to an Existing B&H Consumer Account",
-    trayNewsletterText:    "Please sign me up for B&H B2B newsletters and send occasional updates to my inbox.",
-    trayProceedCta:        "Proceed to Next Step",
-    trayLoginProceedCta:   "Log In & Proceed to Next Step",
-    // ── Sign-Up Tray — Step 2: Org Info ──────────────────────────────────────
-    trayOrgInfoTitle:           "Organization Information",
-    trayPurchasingNeedsTitle:   "Purchasing Needs",
-    trayLabelOrgType:           "Organization Type",
-    trayLabelOrgTypePlaceholder:"Select a Type",
-    trayLabelOrgName:           "Organization Name",
-    trayLabelDept:              "Department",
-    // ── Sign-Up Tray — Step 3: Billing ───────────────────────────────────────
-    trayBillingTitle: "Billing Address",
-    trayCompleteCta:  "Complete Registration",
-    // ── Sign-Up Tray — Completion States ─────────────────────────────────────
-    // Tokens: {User} = first name, {email} = email, {Segment} = org type label,
-    //         {Vertical} = suggested segment label, {Vertical2} = second option
-    trayFinishTitle:        "Verify Your Account",
-    trayFinishBody:         "Thank you, {User}.\n\nWe've sent a verification email to {email}.\n\nOnce verified, you'll be shopping at B&H B2B for {Segment} whenever you log in at bhphoto.com.",
-    trayDeniedTitle:        "Application Denied",
-    trayDeniedBody:         "Thank you, {User}.\n\nUnfortunately, your application for a B&H B2B account was not approved. We have created a B2C (consumer) account so you can enjoy our award-winning shopping experience anytime.\n\nIf you have questions about your account status or any other concerns, please contact a B&H B2B Specialist.",
-    trayUnverifiedTitle:    "Unable to Verify",
-    trayUnverifiedBody1:    "Thank you, {User}.\n\nWe were unable to verify your company's industry. However, you do qualify for B&H B2B for {Vertical}—feel free to join and enjoy enterprise-level discounts, service and more.",
-    trayUnverifiedBody2:    "Thank you, {User}.\n\nWe were unable to verify your company's industry. However, you do qualify for B&H B2B for {Vertical} or B&H B2B for {Vertical2}—feel free to join either and enjoy enterprise-level discounts, service and more.",
-    trayUnverifiedFooter1:  "If you don't feel {Vertical} is a good fit for you or if you have any other questions, please contact a B&H B2B Specialist.\n\nMeanwhile, we have created a B2C (consumer) account so you can enjoy our award-winning shopping experience anytime.",
-    trayUnverifiedFooter2:  "If you don't feel {Vertical} or {Vertical2} is a good fit for you, or if you have any other questions, please contact a B&H B2B Specialist.\n\nMeanwhile, we have created a B2C (consumer) account so you can enjoy our award-winning shopping experience anytime.",
-    trayJoinCta:            "Join B&H B2B for {Vertical}",
-    trayShopB2cCta:         "Shop B&H B2C",
-    trayContactTitle:       "Contact a B&H B2B Specialist",
-    trayContactDisclaimer:  "Please don't disclose private data (e.g. credit card details, etc.) on this form.",
-    trayContactSubmitCta:   "Submit",
+    // ── Step 3: One last thing ───────────────────────────────────────────────
+    step3Title:    "One last thing",
+    step3Subtitle: "This helps us find the right contracts and portal for you.",
+    step3Options:  [
+      "Equipment for a specific project",
+      "Ongoing / recurring hardware purchases",
+      "Cooperative contract compliance",
+      "Setting up an eProcurement integration",
+      "Net terms / credit account",
+      "Just exploring options",
+    ],
+    step3Cta: "Find My Portal",
   },
 
-  // ── Segments (12) ─────────────────────────────────────────────────────────
   segments: {
-    higher_ed:   { name:"Higher Education",            color:"#007AB8", description:"E&I, MHEC, and education cooperative contracts. Auto-verified via .edu domain." },
-    k12:         { name:"K-12 / State & Local",        color:"#3F9A59", description:"TIPS, BuyBoard, Omnia, and Equalis contracts for public schools and districts." },
-    federal:     { name:"Federal Marketplace",         color:"#C8102E", description:"GSA Schedule and NASPO ValuePoint cooperative." },
-    state_local: { name:"State & Local Government",    color:"#5B4DA7", description:"Equalis, Omnia, TIPS, BuyBoard, and NASPO ValuePoint for government entities." },
-    nonprofit:   { name:"Nonprofit / Faith",           color:"#E67300", description:"Tax exemption, net terms, and special discounts for nonprofit organizations." },
-    healthcare:  { name:"Healthcare",                  color:"#0078A0", description:"GHX integration and specialized procurement support." },
-    corporate:   { name:"Corporate / Enterprise",      color:"#333333", description:"Direct pricing agreements and instant sign-up for enterprises." },
-    smb:         { name:"Small Business",              color:"#6D9E47", description:"Fast, easy purchasing for small and medium-sized businesses." },
-    creative:    { name:"Creative, Production & Post", color:"#8B008B", description:"Equipment and solutions for media and production professionals." },
-    si:          { name:"Systems Integrator",          color:"#00796B", description:"Technology sourcing and procurement solutions for systems integrators." },
-    diversity:   { name:"Diversity Suppliers",         color:"#FFA000", description:"Purchasing solutions for diversity-certified businesses." },
-    intl:        { name:"International",               color:"#1565C0", description:"International purchasing and export support." },
+    higher_ed:   { name:"Higher Education",         color:"#007AB8", description:"E&I, MHEC, and education cooperative contracts. Auto-verified via .edu domain." },
+    k12:         { name:"K-12 / State & Local",     color:"#3F9A59", description:"TIPS, BuyBoard, Omnia, and Equalis contracts for public schools and districts." },
+    federal:     { name:"Federal Marketplace",      color:"#990000", description:"GSA Schedule and federal procurement portals with dedicated government pricing." },
+    state_local: { name:"State & Local Government", color:"#E67300", description:"Cooperative purchasing through TIPS, Omnia, and Equalis with .gov auto-verification." },
+    nonprofit:   { name:"Nonprofit / Faith",        color:"#8B4513", description:"Tax-exempt purchasing with net terms eligibility and simplified sign-up." },
+    healthcare:  { name:"Healthcare",               color:"#2E86AB", description:"HIPAA-aware procurement with D&B verified organizational accounts." },
+    corporate:   { name:"Corporate / Enterprise",   color:"#333333", description:"Custom portals, eProcurement integration, and dedicated account management." },
+    smb:         { name:"Small Business",           color:"#6B21A8", description:"Straightforward B2B pricing with net terms and business verification." },
+    creative:    { name:"Production & Post",        color:"#B45309", description:"Studio Hub — specialized gear sourcing for production houses and post facilities." },
+    si:          { name:"Systems Integrator",       color:"#0F766E", description:"Volume pricing, project support, and integration partner benefits." },
+    diversity:   { name:"Diversity Suppliers",      color:"#BE185D", description:"MBE, WBE, and SBE certified supplier accounts with tailored support." },
+    intl:        { name:"International",            color:"#1D4ED8", description:"Export licensing, international shipping, and English-speaking rep access." },
   },
 
   // ── Contracts ──────────────────────────────────────────────────────────────
@@ -585,9 +573,9 @@ export default function App() {
   const [pendingChanges, setPendingChanges] = useState([]);
   const [route,    setRoute]    = useState({ view: "hub", id: null });
   const [mainTab,  setMainTab]  = useState("hub");
-  const [hubStep,        setHubStep]        = useState("entry");
-  const [showSignupTray, setShowSignupTray]  = useState(false);
-  const [signupPath,     setSignupPath]      = useState(null); // null | "create" | "convert"
+  const [hubStep,       setHubStep]       = useState("entry");
+  const [signupData,    setSignupData]    = useState({ orgType: null, state: "", firstName: "", lastName: "", email: "", orgName: "", phone: "", purchaseVolume: "", primaryNeed: "", hasB2CAccount: null, b2cEmail: "" });
+  const [deducedSegment, setDeducedSegment] = useState(null);
   const [adminTab,     setAdminTab]     = useState("form");
   const [activeSection, setActiveSection] = useState("hero");
   const [jsonText,     setJsonText]     = useState(JSON.stringify(INITIAL_CONFIG, null, 2));
@@ -604,6 +592,10 @@ export default function App() {
     try { const p = JSON.parse(text); setJsonError(null); setDraftConfig(p); } catch (e) { setJsonError(e.message.split("\n")[0]); }
   }, []);
 
+  const deduceSegment = useCallback(() => {
+    setDeducedSegment(signupData.orgType?.segment || "corporate");
+    setHubStep("result");
+  }, [signupData]);
 
   const handlePublishOrSubmit = useCallback(() => {
     const diff = computeDiff(liveConfig, draftConfig);
@@ -632,7 +624,7 @@ export default function App() {
 
   const goHub        = () => { setRoute({ view: "hub", id: null }); setMainTab("hub"); setHubStep("entry"); };
   const goSegmentsNav = () => { setRoute({ view: "hub", id: null }); setMainTab("hub"); setHubStep("segments_browse"); window.scrollTo(0, 0); };
-  const handleSignUp = () => { setSignupPath(null); setShowSignupTray(true); };
+  const handleSignUp = () => { setRoute({ view: "hub", id: null }); setMainTab("hub"); setHubStep("step1"); window.scrollTo(0, 0); };
   const goStatic   = (id) => { setRoute({ view: "static", id }); setMainTab("hub"); window.scrollTo(0, 0); };
   const goSegment  = (id) => { setRoute({ view: "segment", id }); setMainTab("hub"); window.scrollTo(0, 0); };
   const goContract = (id) => { setRoute({ view: "contract", id }); setMainTab("hub"); window.scrollTo(0, 0); };
@@ -699,7 +691,7 @@ export default function App() {
       </div>
 
       {/* Pages */}
-      {mainTab === "hub" && route.view === "hub" && <HubView config={c} hubStep={hubStep} setHubStep={setHubStep} showSignupTray={showSignupTray} setShowSignupTray={setShowSignupTray} signupPath={signupPath} setSignupPath={setSignupPath} onGoSegment={goSegment} onGoContract={goContract} onGoStatic={goStatic} />}
+      {mainTab === "hub" && route.view === "hub" && <HubView config={c} hubStep={hubStep} setHubStep={setHubStep} signupData={signupData} setSignupData={setSignupData} deducedSegment={deducedSegment} setDeducedSegment={setDeducedSegment} deduceSegment={deduceSegment} onGoSegment={goSegment} onGoContract={goContract} onGoStatic={goStatic} />}
       {mainTab === "hub" && route.view === "static" && route.id && <StaticPageView pageId={route.id} config={c} onGoHub={goHub} onGoSegment={goSegment} onGoContract={goContract} onSignUp={handleSignUp} />}
       {mainTab === "hub" && route.view === "segment" && route.id && <SegmentPageView segmentId={route.id} config={c} onGoHub={goHub} onGoSegment={goSegment} onGoContract={goContract} onSignUp={handleSignUp} />}
       {mainTab === "hub" && route.view === "contract" && route.id && <ContractPageView contractId={route.id} config={c} onGoHub={goHub} onGoContract={goContract} onSignUp={handleSignUp} />}
@@ -756,7 +748,7 @@ function FloatSelect({ label, value, onChange, options }) {
 }
 
 // ─── Newsletter Checkbox helper ───────────────────────────────────────────────
-function NewsletterCheckbox({ checked, onChange, text }) {
+function NewsletterCheckbox({ checked, onChange }) {
   return (
     <label style={{ display: "flex", alignItems: "flex-start", gap: 10, cursor: "pointer" }}>
       <div
@@ -765,7 +757,7 @@ function NewsletterCheckbox({ checked, onChange, text }) {
       >
         {checked && <span style={{ color: T.white, fontSize: 14, lineHeight: 1 }}>✓</span>}
       </div>
-      <span style={{ fontSize: 13, color: T.gray6, lineHeight: 1.55 }}>{text || "Please sign me up for B&H B2B newsletters and send occasional updates to my inbox."}</span>
+      <span style={{ fontSize: 13, color: T.gray6, lineHeight: 1.55 }}>Please sign me up for B&H B2B newsletters and send occasional updates to my inbox.</span>
     </label>
   );
 }
@@ -843,22 +835,6 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
   const [billExt,          setBillExt]          = useState("");
   const [transferExemption,setTransferExemption]= useState(true);
 
-  // ── Completion state ──
-  const [demoResult,       setDemoResult]       = useState("finish"); // "finish"|"denied"|"denied1"|"denied2"
-  const [contactName,      setContactName]      = useState("");
-  const [contactEmail2,    setContactEmail2]    = useState("");
-  const [contactPhone,     setContactPhone]     = useState("");
-  const [contactMessage,   setContactMessage]   = useState("");
-
-  // Token replacement helper
-  const fill = (text, tokens) => (text || "").replace(/\{(\w+)\}/g, (_, k) => tokens[k] !== undefined ? tokens[k] : `{${k}}`);
-
-  // Derive token values from collected form data
-  const userName    = createFirstName || "User";
-  const userEmail   = createEmail || "";
-  const orgLabel    = (config?.signupForm?.orgTypes || ORG_TYPES).find(o => o.id === orgType)?.label || orgType || "your organization";
-  const vertical2   = "Small Business";
-
   const selectedOrgType = ORG_TYPES.find(o => o.id === orgType);
   const extraField      = selectedOrgType?.extra ?? null;
   const toggleNeed = need => setNeeds(prev => prev.includes(need) ? prev.filter(n => n !== need) : [...prev, need]);
@@ -869,30 +845,21 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
   const [selectedContract, setSelectedContract] = useState("");
 
   // ── Step config ──
-  const sf = config?.signupForm || {};
-  const STEPS = sf.trayStepLabels || ["Create Account", "Org Info", "Billing"];
+  const STEPS = ["Create Account", "Org Info", "Billing"];
   const stepIndex = trayStep === "account" ? 0 : trayStep === "orgInfo" ? 1 : 2;
 
   const handleBack = () => {
-    if (["finish","denied","denied1","denied2"].includes(trayStep)) { /* no back from final result */ return; }
-    if (trayStep === "contact") { setTrayStep("billing"); return; }
     if (trayStep === "orgInfo")  { setTrayStep("account"); return; }
     if (trayStep === "billing")  { setTrayStep("orgInfo");  return; }
     if (trayStep === "account" && signupPath) { setSignupPath(null); }
   };
 
-  const showBack = !["finish","denied","denied1","denied2"].includes(trayStep) && (signupPath || trayStep !== "account");
-
-  const isResultStep = ["finish","denied","denied1","denied2","contact"].includes(trayStep);
+  const showBack = signupPath || trayStep !== "account";
 
   // ── Title ──
-  const title = isResultStep
-    ? (trayStep === "contact" ? (sf.trayContactTitle || "Contact a B&H B2B Specialist")
-       : trayStep === "finish"  ? (sf.trayFinishTitle   || "Verify Your Account")
-       : (sf.trayUnverifiedTitle || "Unable to Verify"))
-    : trayStep !== "account" || signupPath === "create"  ? (sf.trayCreateLabel || "Create a New B&H B2B Account")
-    : signupPath === "convert" ? (sf.trayConvertLabel || "Convert an Existing B&H Account")
-    : (sf.trayTitle || "Sign Up for a Free B&H B2B Account");
+  const title = trayStep !== "account" || signupPath === "create"  ? "Create a New B&H B2B Account"
+              : signupPath === "convert" ? "Convert an Existing B&H Account"
+              : "Sign Up for a Free B&H B2B Account";
 
   return (
     <div style={{ position: "fixed", inset: 0, zIndex: 1000, display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -913,8 +880,7 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
           <button onClick={onClose} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 22, color: T.gray5, padding: 0, lineHeight: 1 }}>×</button>
         </div>
 
-        {/* Step indicators — hidden on completion states */}
-        {!isResultStep && (
+        {/* Step indicators */}
         <div style={{ display: "flex", margin: "14px 20px 0", borderBottom: `1px solid ${T.gray2}` }}>
           {STEPS.map((s, i) => {
             const isActive    = i === stepIndex;
@@ -931,7 +897,6 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
             );
           })}
         </div>
-        )}
 
         {/* ══ ACCOUNT STEP ══ */}
         {trayStep === "account" && (
@@ -942,18 +907,18 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
                 <div style={{ border: `1.5px dashed ${T.gray3}`, borderRadius: 10, padding: "20px 20px" }}>
                   <div style={{ marginBottom: 20 }}>
                     <button onClick={() => setSignupPath("create")} style={{ width: "100%", background: T.green, color: T.white, border: "none", padding: "14px 20px", borderRadius: 7, fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>
-                      {sf.trayCreateLabel || "Create a New B&H B2B Account"}
+                      Create a New B&H B2B Account
                     </button>
                     <p style={{ fontSize: 13, color: T.gray5, textAlign: "center", margin: "10px 0 0", lineHeight: 1.55 }}>
-                      {sf.trayCreateHint || "Use an email address issued by private email client—webmail addresses (gmail, yahoo, etc.) do not qualify."}
+                      Use an email address issued by private email client—webmail addresses (gmail, yahoo, etc.) do not qualify.
                     </p>
                   </div>
                   <div>
                     <button onClick={() => setSignupPath("convert")} style={{ width: "100%", background: T.green, color: T.white, border: "none", padding: "14px 20px", borderRadius: 7, fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>
-                      {sf.trayConvertLabel || "Convert an Existing B&H Account"}
+                      Convert an Existing B&H Account
                     </button>
                     <p style={{ fontSize: 13, color: T.gray5, textAlign: "center", margin: "10px 0 0", lineHeight: 1.55 }}>
-                      {sf.trayConvertHint || "Your consumer account and accompanying details (shipping/billing address, etc.) will be converted to a new B&H B2B Account."}
+                      Your consumer account and accompanying details (shipping/billing address, etc.) will be converted to a new B&H B2B for Non-Profit Account.
                     </p>
                   </div>
                 </div>
@@ -977,9 +942,9 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
                     </button>
                   </div>
                 </div>
-                <div style={{ marginTop: 16 }}><NewsletterCheckbox checked={newsletter} onChange={setNewsletter} text={sf.trayNewsletterText} /></div>
+                <div style={{ marginTop: 16 }}><NewsletterCheckbox checked={newsletter} onChange={setNewsletter} /></div>
                 <button onClick={() => setTrayStep("orgInfo")} style={{ width: "100%", background: T.green, color: T.white, border: "none", padding: 15, borderRadius: 7, fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif", marginTop: 20 }}>
-                  {sf.trayProceedCta || "Proceed to Next Step"}
+                  Proceed to Next Step
                 </button>
               </div>
             )}
@@ -987,9 +952,9 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
             {/* Convert Account form */}
             {signupPath === "convert" && (
               <div style={{ padding: 24 }}>
-                <h3 style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 17, color: T.gray6, margin: "0 0 6px" }}>{sf.trayConvertFormTitle || "Log In to an Existing B&H Consumer Account"}</h3>
+                <h3 style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 17, color: T.gray6, margin: "0 0 6px" }}>Log In to an Existing B&H Consumer Account</h3>
                 <p style={{ fontSize: 13, color: T.gray5, marginBottom: 18, lineHeight: 1.55 }}>
-                  {sf.trayConvertHint || "Your consumer account and accompanying details (shipping/billing address, etc.) will be converted to a new B&H B2B Account."}
+                  Your consumer account and accompanying details (shipping/billing address, etc.) will be converted to a new B&H B2B for Non-Profit Account.
                 </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                   <TrayInput placeholder="Email" value={convertEmail} onChange={e => setConvertEmail(e.target.value)} type="email" />
@@ -1000,9 +965,9 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
                     </button>
                   </div>
                 </div>
-                <div style={{ marginTop: 16 }}><NewsletterCheckbox checked={newsletter} onChange={setNewsletter} text={sf.trayNewsletterText} /></div>
+                <div style={{ marginTop: 16 }}><NewsletterCheckbox checked={newsletter} onChange={setNewsletter} /></div>
                 <button onClick={() => setTrayStep("orgInfo")} style={{ width: "100%", background: T.green, color: T.white, border: "none", padding: 15, borderRadius: 7, fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif", marginTop: 20 }}>
-                  {sf.trayLoginProceedCta || "Log In & Proceed to Next Step"}
+                  Log In &amp; Proceed to Next Step
                 </button>
                 <div style={{ textAlign: "center", marginTop: 14 }}>
                   <a href="#" style={{ color: T.bond, fontSize: 14, fontWeight: 600, textDecoration: "none" }}>Forgot Password</a>
@@ -1015,15 +980,15 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
         {/* ══ ORG INFO STEP ══ */}
         {trayStep === "orgInfo" && (
           <div style={{ padding: 24 }}>
-            <h3 style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 18, color: T.gray6, marginBottom: 18 }}>{sf.trayOrgInfoTitle || "Organization Information"}</h3>
+            <h3 style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 18, color: T.gray6, marginBottom: 18 }}>Organization Information</h3>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
 
               {/* Organization Type — always shown */}
               <FloatSelect
-                label={sf.trayLabelOrgType || "Organization Type"}
+                label="Organization Type"
                 value={orgType}
                 onChange={e => { setOrgType(e.target.value); setOrgState(""); setNumEmployees(""); setTaxId(""); }}
-                options={[{ value: "", label: sf.trayLabelOrgTypePlaceholder || "Select a Type" }, ...(config?.signupForm?.orgTypes || ORG_TYPES).map(o => ({ value: o.id || o.id, label: o.label }))]}
+                options={[{ value: "", label: "Select a Type" }, ...ORG_TYPES.map(o => ({ value: o.id, label: o.label }))]}
               />
 
               {/* State — shown for government/education org types */}
@@ -1047,7 +1012,7 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
               )}
 
               {/* Organization Name — always shown */}
-              <FloatInput label={sf.trayLabelOrgName || "Organization Name"} value={orgName} onChange={e => setOrgName(e.target.value)} />
+              <FloatInput label="Organization Name" value={orgName} onChange={e => setOrgName(e.target.value)} />
 
               {/* Number of Employees — shown for SMB / Corporate */}
               {extraField === "employees" && (
@@ -1065,7 +1030,7 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
               )}
 
               {/* Department — always shown */}
-              <FloatInput label={sf.trayLabelDept || "Department"} value={department} onChange={e => setDepartment(e.target.value)} />
+              <FloatInput label="Department" value={department} onChange={e => setDepartment(e.target.value)} />
 
               {/* Your Role — always shown */}
               <FloatSelect
@@ -1091,7 +1056,7 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
 
             {/* Purchasing Needs */}
             <div style={{ marginTop: 22 }}>
-              <h4 style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 15, color: T.gray6, marginBottom: 12 }}>{sf.trayPurchasingNeedsTitle || "Purchasing Needs"}</h4>
+              <h4 style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 15, color: T.gray6, marginBottom: 12 }}>Purchasing Needs</h4>
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 {(config?.signupForm?.purchasingNeeds ?? PURCHASING_NEEDS).map(need => (
                   <label key={need} onClick={() => toggleNeed(need)} style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}>
@@ -1105,7 +1070,7 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
             </div>
 
             <button onClick={() => setTrayStep("billing")} style={{ width: "100%", background: T.green, color: T.white, border: "none", padding: 15, borderRadius: 7, fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif", marginTop: 24 }}>
-              {sf.trayProceedCta || "Proceed to Next Step"}
+              Proceed to Next Step
             </button>
           </div>
         )}
@@ -1113,7 +1078,7 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
         {/* ══ BILLING STEP ══ */}
         {trayStep === "billing" && (
           <div style={{ padding: 24 }}>
-            <h3 style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 18, color: T.gray6, marginBottom: 20 }}>{sf.trayBillingTitle || "Billing Address"}</h3>
+            <h3 style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 18, color: T.gray6, marginBottom: 20 }}>Billing Address</h3>
 
             {/* Street Address */}
             <div style={{ marginBottom: 4 }}>
@@ -1195,114 +1160,8 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
               </label>
             )}
 
-            {/* Demo result picker — prototype only */}
-            <div style={{ marginBottom: 16, padding: "10px 14px", background: "#fff8e1", borderRadius: 7, border: "1px solid #ffc107" }}>
-              <div style={{ fontSize: 11, fontWeight: 700, color: "#856404", marginBottom: 6, textTransform: "uppercase", letterSpacing: .3 }}>🎭 Prototype — Select result state to demo</div>
-              <select value={demoResult} onChange={e => setDemoResult(e.target.value)} style={{ width: "100%", padding: "6px 10px", borderRadius: 5, border: "1px solid #ffc107", fontSize: 13, background: T.white }}>
-                <option value="finish">✓ Success — Verify Your Account</option>
-                <option value="denied">✗ Denied — Application Denied</option>
-                <option value="denied1">⚠ Denied + 1 option — Unable to Verify</option>
-                <option value="denied2">⚠ Denied + 2 options — Unable to Verify</option>
-              </select>
-            </div>
-
-            <button onClick={() => setTrayStep(demoResult)} style={{ width: "100%", background: T.green, color: T.white, border: "none", padding: 15, borderRadius: 7, fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>
-              {sf.trayCompleteCta || "Complete Registration"}
-            </button>
-          </div>
-        )}
-
-        {/* ══ FINISH — SUCCESS ══ */}
-        {trayStep === "finish" && (
-          <div style={{ padding: 28 }}>
-            <div style={{ width: 48, height: 48, background: T.greenLight, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
-              <span style={{ color: T.green, fontSize: 24 }}>✓</span>
-            </div>
-            <h3 style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 18, color: T.gray6, marginBottom: 16 }}>{sf.trayFinishTitle || "Verify Your Account"}</h3>
-            {fill(sf.trayFinishBody || "Thank you, {User}.\n\nWe've sent a verification email to {email}.\n\nOnce verified, you'll be shopping at B&H B2B for {Segment} whenever you log in at bhphoto.com.", { User: userName, email: userEmail, Segment: orgLabel }).split("\n\n").map((p, i) => (
-              <p key={i} style={{ fontSize: 14, color: T.gray6, lineHeight: 1.7, marginBottom: 12 }}>{p}</p>
-            ))}
-          </div>
-        )}
-
-        {/* ══ FINISH — DENIED ══ */}
-        {trayStep === "denied" && (
-          <div style={{ padding: 28 }}>
-            <h3 style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 18, color: T.gray6, marginBottom: 16 }}>{sf.trayDeniedTitle || "Application Denied"}</h3>
-            {fill(sf.trayDeniedBody || "Thank you, {User}.\n\nUnfortunately, your application for a B&H B2B account was not approved. We have created a B2C (consumer) account so you can enjoy our award-winning shopping experience anytime.\n\nIf you have questions about your account status or any other concerns, please contact a B&H B2B Specialist.", { User: userName, email: userEmail }).split("\n\n").map((p, i) => (
-              <p key={i} style={{ fontSize: 14, color: T.gray6, lineHeight: 1.7, marginBottom: 12 }}>{p.includes("contact a B&H B2B Specialist") ? (<>{p.replace("contact a B&H B2B Specialist", "")}<button onClick={() => setTrayStep("contact")} style={{ background: "none", border: "none", color: T.bond, fontWeight: 600, cursor: "pointer", fontSize: 14, padding: 0, textDecoration: "underline" }}>contact a B&H B2B Specialist</button></>) : p}</p>
-            ))}
-            <button style={{ width: "100%", background: T.scarlet, color: T.white, border: "none", padding: 13, borderRadius: 7, fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "Montserrat,sans-serif", marginTop: 8 }}>
-              {sf.trayShopB2cCta || "Shop B&H B2C"}
-            </button>
-          </div>
-        )}
-
-        {/* ══ FINISH — DENIED + 1 OPTION ══ */}
-        {trayStep === "denied1" && (
-          <div style={{ padding: 28 }}>
-            <h3 style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 18, color: T.gray6, marginBottom: 16 }}>{sf.trayUnverifiedTitle || "Unable to Verify"}</h3>
-            {fill(sf.trayUnverifiedBody1 || "Thank you, {User}.\n\nWe were unable to verify your company's industry. However, you do qualify for B&H B2B for {Vertical}—feel free to join and enjoy enterprise-level discounts, service and more.", { User: userName, Vertical: orgLabel }).split("\n\n").map((p, i) => (
-              <p key={i} style={{ fontSize: 14, color: T.gray6, lineHeight: 1.7, marginBottom: 12 }}>{p}</p>
-            ))}
-            <button style={{ width: "100%", background: T.green, color: T.white, border: "none", padding: 13, borderRadius: 7, fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "Montserrat,sans-serif", marginBottom: 12, marginTop: 4 }}>
-              {fill(sf.trayJoinCta || "Join B&H B2B for {Vertical}", { Vertical: orgLabel })}
-            </button>
-            {fill(sf.trayUnverifiedFooter1 || "If you don't feel {Vertical} is a good fit for you or if you have any other questions, please contact a B&H B2B Specialist.\n\nMeanwhile, we have created a B2C (consumer) account so you can enjoy our award-winning shopping experience anytime.", { Vertical: orgLabel }).split("\n\n").map((p, i) => (
-              <p key={i} style={{ fontSize: 13, color: T.gray5, lineHeight: 1.65, marginBottom: 10 }}>{p.includes("contact a B&H B2B Specialist") ? (<>{p.replace("contact a B&H B2B Specialist", "")}<button onClick={() => setTrayStep("contact")} style={{ background: "none", border: "none", color: T.bond, fontWeight: 600, cursor: "pointer", fontSize: 13, padding: 0, textDecoration: "underline" }}>contact a B&H B2B Specialist</button></>) : p}</p>
-            ))}
-            <button style={{ width: "100%", background: T.white, color: T.gray6, border: `1.5px solid ${T.gray3}`, padding: 12, borderRadius: 7, fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "Montserrat,sans-serif", marginTop: 4 }}>
-              {sf.trayShopB2cCta || "Shop B&H B2C"}
-            </button>
-          </div>
-        )}
-
-        {/* ══ FINISH — DENIED + 2 OPTIONS ══ */}
-        {trayStep === "denied2" && (
-          <div style={{ padding: 28 }}>
-            <h3 style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 18, color: T.gray6, marginBottom: 16 }}>{sf.trayUnverifiedTitle || "Unable to Verify"}</h3>
-            {fill(sf.trayUnverifiedBody2 || "Thank you, {User}.\n\nWe were unable to verify your company's industry. However, you do qualify for B&H B2B for {Vertical} or B&H B2B for {Vertical2}—feel free to join either and enjoy enterprise-level discounts, service and more.", { User: userName, Vertical: orgLabel, Vertical2: vertical2 }).split("\n\n").map((p, i) => (
-              <p key={i} style={{ fontSize: 14, color: T.gray6, lineHeight: 1.7, marginBottom: 12 }}>{p}</p>
-            ))}
-            <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 4, marginBottom: 12 }}>
-              <button style={{ width: "100%", background: T.green, color: T.white, border: "none", padding: 13, borderRadius: 7, fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>
-                {fill(sf.trayJoinCta || "Join B&H B2B for {Vertical}", { Vertical: orgLabel })}
-              </button>
-              <button style={{ width: "100%", background: T.green, color: T.white, border: "none", padding: 13, borderRadius: 7, fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>
-                {fill(sf.trayJoinCta || "Join B&H B2B for {Vertical}", { Vertical: vertical2 })}
-              </button>
-            </div>
-            {fill(sf.trayUnverifiedFooter2 || "If you don't feel {Vertical} or {Vertical2} is a good fit for you, or if you have any other questions, please contact a B&H B2B Specialist.\n\nMeanwhile, we have created a B2C (consumer) account so you can enjoy our award-winning shopping experience anytime.", { Vertical: orgLabel, Vertical2: vertical2 }).split("\n\n").map((p, i) => (
-              <p key={i} style={{ fontSize: 13, color: T.gray5, lineHeight: 1.65, marginBottom: 10 }}>{p.includes("contact a B&H B2B Specialist") ? (<>{p.replace("contact a B&H B2B Specialist", "")}<button onClick={() => setTrayStep("contact")} style={{ background: "none", border: "none", color: T.bond, fontWeight: 600, cursor: "pointer", fontSize: 13, padding: 0, textDecoration: "underline" }}>contact a B&H B2B Specialist</button></>) : p}</p>
-            ))}
-            <button style={{ width: "100%", background: T.white, color: T.gray6, border: `1.5px solid ${T.gray3}`, padding: 12, borderRadius: 7, fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "Montserrat,sans-serif", marginTop: 4 }}>
-              {sf.trayShopB2cCta || "Shop B&H B2C"}
-            </button>
-          </div>
-        )}
-
-        {/* ══ CONTACT DRAWER ══ */}
-        {trayStep === "contact" && (
-          <div style={{ padding: 28 }}>
-            <h3 style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 18, color: T.gray6, marginBottom: 20 }}>{sf.trayContactTitle || "Contact a B&H B2B Specialist"}</h3>
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              <TrayInput placeholder="Email Address" value={contactEmail2} onChange={e => setContactEmail2(e.target.value)} type="email" />
-              <TrayInput placeholder="Name"          value={contactName}   onChange={e => setContactName(e.target.value)} />
-              <TrayInput placeholder="Phone Number"  value={contactPhone}  onChange={e => setContactPhone(e.target.value)} type="tel" />
-              <textarea
-                placeholder="Message"
-                value={contactMessage}
-                onChange={e => setContactMessage(e.target.value)}
-                rows={4}
-                style={{ width: "100%", padding: "12px 14px", border: `1.5px solid ${T.gray3}`, borderRadius: 7, fontSize: 14, color: T.gray6, outline: "none", resize: "vertical", fontFamily: "'Open Sans',sans-serif", boxSizing: "border-box" }}
-              />
-            </div>
-            <div style={{ marginTop: 10, marginBottom: 16, display: "flex", alignItems: "flex-start", gap: 6 }}>
-              <span style={{ fontSize: 16, color: T.gray4, marginTop: 1 }}>ⓘ</span>
-              <span style={{ fontSize: 12, color: T.gray4, lineHeight: 1.5 }}>{sf.trayContactDisclaimer || "Please don't disclose private data (e.g. credit card details, etc.) on this form."}</span>
-            </div>
-            <button style={{ width: "100%", background: T.green, color: T.white, border: "none", padding: 14, borderRadius: 7, fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>
-              {sf.trayContactSubmitCta || "Submit"}
+            <button style={{ width: "100%", background: T.green, color: T.white, border: "none", padding: 15, borderRadius: 7, fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>
+              Complete Registration
             </button>
           </div>
         )}
@@ -1313,7 +1172,12 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-function HubView({ config: c, hubStep, setHubStep, showSignupTray, setShowSignupTray, signupPath, setSignupPath, onGoSegment, onGoContract, onGoStatic }) {
+function HubView({ config: c, hubStep, setHubStep, signupData, setSignupData, deducedSegment, setDeducedSegment, deduceSegment, onGoSegment, onGoContract, onGoStatic }) {
+  const seg = deducedSegment ? c.segments[deducedSegment] : null;
+  const relContracts = deducedSegment ? c.contracts.filter(ct => ct.active && ct.segments.includes(deducedSegment)) : [];
+  const resetHub = () => { setHubStep("entry"); setSignupData({ orgType: null, state: "", firstName: "", lastName: "", email: "", orgName: "", phone: "", purchaseVolume: "", primaryNeed: "", hasB2CAccount: null, b2cEmail: "" }); setDeducedSegment(null); };
+  const [showSignupTray, setShowSignupTray] = useState(false);
+  const [signupPath,     setSignupPath]     = useState(null); // null | "create" | "convert"
   const [selectedChannel,setSelectedChannel]= useState(null); // numeric index into CHANNEL_DATA
   const [channelState,   setChannelState]   = useState("");
   return (
@@ -1343,7 +1207,8 @@ function HubView({ config: c, hubStep, setHubStep, showSignupTray, setShowSignup
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }}>
               {[
                 {
-                                body: "Talk shop with a dedicated team who'll remember your name—not just your account number.",
+                  title: "Reps You Can Rely On",
+                  body: "Talk shop with a dedicated team who'll remember your name—not just your account number.",
                   svg: (
                     <svg viewBox="0 0 56 56" fill="none" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="44" height="44">
                       <circle cx="28" cy="18" r="7"/>
@@ -1354,7 +1219,8 @@ function HubView({ config: c, hubStep, setHubStep, showSignupTray, setShowSignup
                   ),
                 },
                 {
-                                body: "Request price reviews and get just-for-you discounts on qualified purchases.",
+                  title: "Competitive Pricing",
+                  body: "Request price reviews and get just-for-you discounts on qualified purchases.",
                   svg: (
                     <svg viewBox="0 0 56 56" fill="none" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="44" height="44">
                       <polygon points="28,10 44,20 44,36 28,46 12,36 12,20"/>
@@ -1364,7 +1230,8 @@ function HubView({ config: c, hubStep, setHubStep, showSignupTray, setShowSignup
                   ),
                 },
                 {
-                                body: "Qualifying buyer? Streamline your purchasing and save time!",
+                  title: "Tax Exempt Status",
+                  body: "Qualifying buyer? Streamline your purchasing and save time!",
                   svg: (
                     <svg viewBox="0 0 56 56" fill="none" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="44" height="44">
                       <path d="M28 10c-6 0-12 4-12 10 0 4 2 7 5 9l-3 13h20l-3-13c3-2 5-5 5-9 0-6-6-10-12-10z"/>
@@ -1376,7 +1243,8 @@ function HubView({ config: c, hubStep, setHubStep, showSignupTray, setShowSignup
                   ),
                 },
                 {
-                                body: "Track and approve orders faster.",
+                  title: "Pay with Purchase Orders",
+                  body: "Track and approve orders faster.",
                   svg: (
                     <svg viewBox="0 0 56 56" fill="none" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="44" height="44">
                       <circle cx="28" cy="32" r="14"/>
@@ -1389,7 +1257,8 @@ function HubView({ config: c, hubStep, setHubStep, showSignupTray, setShowSignup
                   ),
                 },
                 {
-                                body: "Zero hassles and zero financing fees.",
+                  title: "Net Payment Terms",
+                  body: "Zero hassles and zero financing fees.",
                   svg: (
                     <svg viewBox="0 0 56 56" fill="none" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="44" height="44">
                       <rect x="10" y="12" width="26" height="32" rx="2"/>
@@ -1400,7 +1269,8 @@ function HubView({ config: c, hubStep, setHubStep, showSignupTray, setShowSignup
                   ),
                 },
                 {
-                                body: "Save time with on-the-spot pricing for all your business technology needs.",
+                  title: "Instant Quotes",
+                  body: "Save time with on-the-spot pricing for all your business technology needs.",
                   svg: (
                     <svg viewBox="0 0 56 56" fill="none" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="44" height="44">
                       <rect x="8" y="20" width="32" height="20" rx="2"/>
@@ -1488,7 +1358,8 @@ function HubView({ config: c, hubStep, setHubStep, showSignupTray, setShowSignup
                   { segId:"diversity",  title:"B&H B2B for MWBE",
                     paras:["Last-minute presentations to first-time system updates. Minor supply shortfalls to major technology overhauls. B&H B2B is here to help you get started and grow, every step of the way.","B&H has always supported diversity, within and without—if you're a woman-, minority- or veteran-owned business, B&H B2B is the smart choice.","Sign up today to become eligible for specials discounts and promotions and streamlined purchasing, all backed by our signature service."],
                     benefitsLabel:"Join today to enjoy:", benefits:["Personalized service","Expert advice & support","Fast, easy quotes","Net 30 payment terms","Support from concept to completion"], cta:"Sign Up" },
-                  { segId:"smb",                        paras:["Are you a small business or studio (1-250 employees) looking to partner with enterprise technology experts? Whether you are upgrading an office or stockpiling supplies, B&H B2B offers competitive pricing that ensures you get the best deal on the gear you need.","Sign up today to become eligible for special discounts, promotions and streamlined purchasing, all backed by our signature service."],
+                  { segId:"smb",        title:"B&H B2B for Small Business",
+                    paras:["Are you a small business or studio (1-250 employees) looking to partner with enterprise technology experts? Whether you are upgrading an office or stockpiling supplies, B&H B2B offers competitive pricing that ensures you get the best deal on the gear you need.","Sign up today to become eligible for special discounts, promotions and streamlined purchasing, all backed by our signature service."],
                     benefitsLabel:"Join today to enjoy these benefits:", benefits:["Easy online account management","Net 30 payment terms","Electronic PO submission","Expert advice & support"], cta:"Sign Up" },
                   { segId:"corporate",  title:"B&H B2B Enterprise",
                     paras:["Sign up today to become eligible for specials discounts and promotions and streamlined purchasing, all backed by our signature service."],
@@ -1499,7 +1370,8 @@ function HubView({ config: c, hubStep, setHubStep, showSignupTray, setShowSignup
                   { segId:"creative",   title:"B&H B2B Creative, Production & Post",
                     paras:["From media companies and video game producers to FX and post houses, B&H B2B for CPP helps creative organizations like yours turn big ideas into grand realities.","Sign up today to become eligible for special discount and promotions and streamlined purchasing, all backed by our signature service."],
                     benefitsLabel:"Join today to enjoy these benefits:", benefits:["Special pricing for larger projects","Support from concept to completion","One-on-one service from a team of industry peers","Custom demos of the latest tech (by appointment only)","Fast, easy quotes"], cta:"Sign Up" },
-                  { segId:"si",                         paras:["Easily find everything you need at amazing low prices with fast, free shipping so you have all the essential gear you need to get every job done.","Whether you're hanging a projector, installing a NOC or integrating a SAN, B&H B2B offers a custom, full-service online shopping solution that's designed to resolve challenges and help you manage your bottom line."],
+                  { segId:"si",         title:"B&H B2B for Systems Integrators",
+                    paras:["Easily find everything you need at amazing low prices with fast, free shipping so you have all the essential gear you need to get every job done.","Whether you're hanging a projector, installing a NOC or integrating a SAN, B&H B2B offers a custom, full-service online shopping solution that's designed to resolve challenges and help you manage your bottom line."],
                     benefitsLabel:"Join today to enjoy these benefits:", benefits:["Fast, easy quotes","Pay with POs","Price breaks for larger quantities","Project-based delivery dates"], cta:"Sign Up" },
                   { segId:"healthcare", title:"B&H B2B for Healthcare",
                     paras:["From clinics and private practice to hospitals and pharmaceutical, B&H B2B for Healthcare helps professionals like you focus on what you do best.","Whether you're updating a network, renovating a station or improving security, B&H B2B for Healthcare's custom, full-service online shopping solution can help you resolve challenges while maintaining a vital, balanced budget."],
@@ -1507,7 +1379,8 @@ function HubView({ config: c, hubStep, setHubStep, showSignupTray, setShowSignup
                   { segId:"nonprofit",  title:"B&H B2B for Non-Profit",
                     paras:["From starting a movement on a shoestring to managing a pledge cycle out of petty cash, B&H B2B's customized, full-service online shopping solution can help you stretch your dollars to the limit.","Sign up today to become eligible for special discounts and promotions and streamlined purchasing, backed by our signature service."],
                     benefitsLabel:"Join today to enjoy these benefits:", benefits:["Easy online quotes","Net terms (for qualified clients; subject to approval)","Tax exemption (for qualified clients; subject to approval)","Custom pricing for larger orders"], cta:"Sign Up" },
-                  { segId:"federal",                    paras:["B&H offers a variety of competitively-bid and publicly awarded contracts, so you can ensure compliance, discretion and the absolute best value. For larger entities, we offer direct pricing agreements."],
+                  { segId:"federal",    title:"B&H Federal Marketplace",
+                    paras:["B&H offers a variety of competitively-bid and publicly awarded contracts, so you can ensure compliance, discretion and the absolute best value. For larger entities, we offer direct pricing agreements."],
                     benefitsLabel:"Login with a valid government email address today to enjoy:", benefits:["Special enterprise discounts & promotions","Streamlined purchasing","Easy online account management","Net 30 payment terms","Electronic PO submission","Expert advice & support"], cta:"Federal Marketplace" },
                 ];
                 const ch      = CHANNEL_DATA[selectedChannel] ?? CHANNEL_DATA[0];
@@ -1796,6 +1669,159 @@ function HubView({ config: c, hubStep, setHubStep, showSignupTray, setShowSignup
         </div>
       )}
 
+      {hubStep === "step1" && (
+        <div style={{ animation: "fadeUp .3s ease", maxWidth: 720, margin: "0 auto" }}>
+          <StepHeader step={1} total={3} title={c.signupForm.title} subtitle={c.signupForm.subtitle} onBack={resetHub} />
+          <div style={{ background: T.white, borderRadius: 12, border: `1px solid ${T.gray2}`, padding: 32 }}>
+            <label style={{ fontSize: 13, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .5, display: "block", marginBottom: 16 }}>What type of organization are you with?</label>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
+              {c.signupForm.orgTypes.map(ot => (
+                <button key={ot.id} onClick={() => setSignupData(p => ({ ...p, orgType: ot }))} style={{ background: signupData.orgType?.id === ot.id ? T.scarletLight : "#fafafa", border: `2px solid ${signupData.orgType?.id === ot.id ? T.scarlet : T.gray2}`, borderRadius: 8, padding: "14px 10px", cursor: "pointer", textAlign: "center", fontSize: 12, color: T.gray6, fontWeight: 600 }}>
+                  <div style={{ fontSize: 24, marginBottom: 6 }}>{ot.icon}</div>{ot.label}
+                </button>
+              ))}
+            </div>
+            <div style={{ marginTop: 24, display: "flex", justifyContent: "flex-end" }}>
+              <button onClick={() => signupData.orgType && setHubStep("step2")} style={{ background: signupData.orgType ? T.scarlet : T.gray3, color: T.white, border: "none", padding: "14px 32px", borderRadius: 8, fontWeight: 700, fontSize: 15, cursor: signupData.orgType ? "pointer" : "not-allowed", fontFamily: "Montserrat,sans-serif" }}>Continue →</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {hubStep === "step2" && (
+        <div style={{ animation: "fadeUp .3s ease", maxWidth: 720, margin: "0 auto" }}>
+          <StepHeader step={2} total={3} title={c.signupForm.step2Title || "Tell us about yourself"} subtitle={`Getting set up for ${signupData.orgType?.label || "your organization"}`} onBack={() => setHubStep("step1")} />
+          <div style={{ background: T.white, borderRadius: 12, border: `1px solid ${T.gray2}`, padding: 32 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+              <FormField label={c.signupForm.labelFirstName || "First Name"} value={signupData.firstName} onChange={v => setSignupData(p => ({ ...p, firstName: v }))} placeholder="Jane" />
+              <FormField label={c.signupForm.labelLastName  || "Last Name"}  value={signupData.lastName}  onChange={v => setSignupData(p => ({ ...p, lastName: v }))}  placeholder="Smith" />
+            </div>
+            <div style={{ marginBottom: 16 }}><FormField label={c.signupForm.labelBusinessEmail || "Business Email"} value={signupData.email} onChange={v => setSignupData(p => ({ ...p, email: v }))} placeholder="jane@university.edu" type="email" /></div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+              <FormField label={c.signupForm.labelOrgName || "Organization Name"} value={signupData.orgName} onChange={v => setSignupData(p => ({ ...p, orgName: v }))} placeholder="State University" />
+              <FormField label={c.signupForm.labelPhone   || "Business Phone"}    value={signupData.phone}   onChange={v => setSignupData(p => ({ ...p, phone: v }))}   placeholder="(212) 555-0100" type="tel" />
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+              <div>
+                <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 6 }}>{c.signupForm.labelState || "State"}</label>
+                <select value={signupData.state} onChange={e => setSignupData(p => ({ ...p, state: e.target.value }))} style={{ width: "100%", padding: "11px 12px", border: `1.5px solid ${T.gray3}`, borderRadius: 7, fontSize: 14, background: T.white }}>
+                  <option value="">Select state…</option>{STATES.map(s => <option key={s} value={s}>{s}</option>)}
+                </select>
+              </div>
+              <div>
+                <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 6 }}>{c.signupForm.labelPurchaseVolume || "Annual Purchase Volume"}</label>
+                <select value={signupData.purchaseVolume} onChange={e => setSignupData(p => ({ ...p, purchaseVolume: e.target.value }))} style={{ width: "100%", padding: "11px 12px", border: `1.5px solid ${T.gray3}`, borderRadius: 7, fontSize: 14, background: T.white }}>
+                  <option value="">Estimate…</option>{(c.segmentPages?.[signupData.orgType?.segment]?.purchaseVolumeOptions ?? PURCHASE_VOLS).map(v => <option key={v}>{v}</option>)}
+                </select>
+              </div>
+            </div>
+
+            {/* ── Existing B&H account ── */}
+            <div style={{ marginTop: 20 }}>
+              <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 10 }}>{c.signupForm.labelHasB2CAccount || "Do you already have a B&H.com account?"}</label>
+              <div style={{ display: "flex", gap: 12 }}>
+                {[["yes", "Yes"], ["no", "No"]].map(([val, lab]) => (
+                  <button
+                    key={val}
+                    onClick={() => {
+                      const isYes = val === "yes";
+                      setSignupData(p => ({ ...p, hasB2CAccount: isYes, b2cEmail: isYes ? p.b2cEmail : "" }));
+                    }}
+                    style={{
+                      flex: 1, padding: "11px 0", borderRadius: 7, cursor: "pointer",
+                      border: `2px solid ${signupData.hasB2CAccount === (val === "yes") ? T.bond : T.gray3}`,
+                      background: signupData.hasB2CAccount === (val === "yes") ? T.bondLight : T.white,
+                      fontSize: 14, fontWeight: 600,
+                      color: signupData.hasB2CAccount === (val === "yes") ? T.bond : T.gray5,
+                      transition: "all 0.15s",
+                    }}
+                  >{lab}</button>
+                ))}
+              </div>
+              {signupData.hasB2CAccount === true && (
+                <div style={{ marginTop: 14 }}>
+                  <FormField
+                    label={c.signupForm.labelB2CEmail || "Your B&H.com account email"}
+                    value={signupData.b2cEmail}
+                    onChange={v => setSignupData(p => ({ ...p, b2cEmail: v }))}
+                    placeholder="you@email.com"
+                    type="email"
+                  />
+                  <div style={{ fontSize: 11, color: T.gray4, marginTop: 4 }}>{c.signupForm.hintB2CEmail || "We'll link your consumer account to your new B2B account."}</div>
+                </div>
+              )}
+            </div>
+
+            <div style={{ marginTop: 24, display: "flex", justifyContent: "space-between" }}>
+              <button onClick={() => setHubStep("step1")} style={{ background: "none", border: "none", color: T.gray5, cursor: "pointer", fontSize: 14 }}>← Back</button>
+              <button onClick={() => setHubStep("step3")} style={{ background: T.scarlet, color: T.white, border: "none", padding: "14px 32px", borderRadius: 8, fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>Continue →</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {hubStep === "step3" && (
+        <div style={{ animation: "fadeUp .3s ease", maxWidth: 720, margin: "0 auto" }}>
+          <StepHeader step={3} total={3} title={c.signupForm.step3Title || "One last thing"} subtitle={c.signupForm.step3Subtitle || "This helps us find the right contracts and portal for you."} onBack={() => setHubStep("step2")} />
+          <div style={{ background: T.white, borderRadius: 12, border: `1px solid ${T.gray2}`, padding: 32 }}>
+            <label style={{ fontSize: 13, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .5, display: "block", marginBottom: 16 }}>What's your primary purchasing need?</label>
+            {(c.signupForm.step3Options || []).map(opt => (
+              <button key={opt} onClick={() => setSignupData(p => ({ ...p, primaryNeed: opt }))} style={{ display: "block", width: "100%", marginBottom: 10, background: signupData.primaryNeed === opt ? T.scarletLight : "#fafafa", border: `2px solid ${signupData.primaryNeed === opt ? T.scarlet : T.gray2}`, borderRadius: 8, padding: "14px 20px", cursor: "pointer", textAlign: "left", fontSize: 14, fontWeight: signupData.primaryNeed === opt ? 700 : 500 }}>{opt}</button>
+            ))}
+            <div style={{ background: T.gray1, borderRadius: 8, padding: 16, marginTop: 20, fontSize: 13, color: T.gray5 }}>
+              <strong style={{ color: T.gray6 }}>Your profile:</strong> {signupData.orgType?.label}{signupData.state ? ` · ${signupData.state}` : ""}{signupData.orgName ? ` · ${signupData.orgName}` : ""}
+            </div>
+            <div style={{ marginTop: 24, display: "flex", justifyContent: "space-between" }}>
+              <button onClick={() => setHubStep("step2")} style={{ background: "none", border: "none", color: T.gray5, cursor: "pointer", fontSize: 14 }}>← Back</button>
+              <button onClick={deduceSegment} style={{ background: T.scarlet, color: T.white, border: "none", padding: "16px 36px", borderRadius: 8, fontWeight: 800, fontSize: 16, cursor: "pointer", fontFamily: "Montserrat,sans-serif", boxShadow: `0 4px 16px rgba(153,0,0,.3)` }}>{c.signupForm.step3Cta || "Find My Portal"} →</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {hubStep === "result" && seg && (
+        <div style={{ animation: "fadeUp .3s ease", maxWidth: 780, margin: "0 auto" }}>
+          <div style={{ background: seg.color, borderRadius: 12, padding: "32px 36px", marginBottom: 24 }}>
+            <div style={{ fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,.7)", letterSpacing: 1, textTransform: "uppercase", marginBottom: 8 }}>Your matched segment</div>
+            <h2 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 30, fontWeight: 800, color: T.white, marginBottom: 10 }}>{seg.name}</h2>
+            <p style={{ color: "rgba(255,255,255,.85)", fontSize: 15, lineHeight: 1.6, marginBottom: 20 }}>{seg.description}</p>
+            <button onClick={() => onGoSegment(deducedSegment)} style={{ background: T.white, color: seg.color, border: "none", padding: "12px 24px", borderRadius: 8, fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>View {seg.name} Hub Page →</button>
+          </div>
+          {relContracts.length > 0 && (
+            <div style={{ background: T.white, borderRadius: 12, border: `1px solid ${T.gray2}`, padding: 28, marginBottom: 20 }}>
+              <h3 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 16, fontWeight: 700, marginBottom: 18, color: T.gray6 }}>Available contracts for your organization</h3>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 14 }}>
+                {relContracts.map(ct => {
+                  const resolved = resolvePortalMapping(ct, signupData.state, deducedSegment);
+                  return (
+                    <button key={ct.id} onClick={() => onGoContract(ct.id)} style={{ border: `1.5px solid ${T.gray2}`, borderRadius: 8, padding: "16px 18px", cursor: "pointer", textAlign: "left", background: T.white }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+                        <span style={{ background: T.gray1, fontWeight: 800, fontSize: 12, padding: "4px 10px", borderRadius: 4 }}>{ct.logoLabel}</span>
+                        <span style={{ fontSize: 11, color: T.gray4 }}>#{ct.contractNumber}</span>
+                      </div>
+                      <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 4, color: T.gray6 }}>{ct.name}</div>
+                      <div style={{ fontSize: 12, color: T.gray5, marginBottom: resolved ? 8 : 0 }}>{ct.description}</div>
+                      {resolved && (
+                        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: T.bondLight, borderRadius: 4, padding: "3px 8px", fontSize: 11, fontWeight: 700, color: T.bond }}>
+                          🔗 Portal [{resolved.portalId}] — {resolved.label}
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+          <div style={{ background: T.white, borderRadius: 12, border: `1px solid ${T.gray2}`, padding: 24 }}>
+            <h3 style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 700, fontSize: 15, marginBottom: 16 }}>Ready to create your account?</h3>
+            <div style={{ display: "flex", gap: 12 }}>
+              <button onClick={() => { setHubStep("step1"); window.scrollTo(0, 0); }} style={{ flex: 1, background: T.scarlet, color: T.white, border: "none", padding: 14, borderRadius: 8, fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>Create My Account →</button>
+              <button onClick={resetHub} style={{ background: T.gray1, color: T.gray5, border: "none", padding: "14px 20px", borderRadius: 8, fontWeight: 600, fontSize: 14, cursor: "pointer" }}>Start Over</button>
+            </div>
+            <div style={{ fontSize: 12, color: T.gray4, marginTop: 10 }}>📧 {c.footer.contactEmail} · 📞 {c.footer.repPhone}</div>
+          </div>
+        </div>
+      )}
       {showSignupTray && (
         <SignupTray
           signupPath={signupPath}
@@ -2484,21 +2510,13 @@ function PortalMappingsEditor({ contractIndex, contract, segments, onChange }) {
 
 // ─── Segment Portal Routing Editor ───────────────────────────────────────────
 function SegmentPortalRoutingEditor({ segId, config, onChange }) {
-  const sp = config.segmentPages?.[segId] || {};
-  // Union of featured + other contract IDs — same list that drives the segment page display
-  const pageContractIds = [
-    ...(sp.featuredContractId ? [sp.featuredContractId] : []),
-    ...(sp.otherContractIds || []),
-  ].filter((id, idx, arr) => arr.indexOf(id) === idx); // dedupe
-
-  const relContracts = pageContractIds
-    .map(id => { const idx = config.contracts.findIndex(c => c.id === id); return idx >= 0 ? { ct: config.contracts[idx], i: idx } : null; })
-    .filter(Boolean)
-    .filter(({ ct }) => ct.active);
+  const relContracts = config.contracts
+    .map((ct, i) => ({ ct, i }))
+    .filter(({ ct }) => ct.active && ct.segments && ct.segments.includes(segId));
 
   if (relContracts.length === 0) return (
     <div style={{ fontSize: 12, color: T.gray4, fontStyle: "italic", padding: "10px 14px", background: T.gray1, borderRadius: 6 }}>
-      No contracts are listed for this segment yet. Add contract IDs to the Featured Contract or Other Contract IDs fields above.
+      No active contracts are assigned to this segment yet. Add contract IDs in the fields above.
     </div>
   );
 
@@ -2668,123 +2686,83 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
   if (section === "signup") return (
     <div>
       <SectionTitle>Sign-Up Form</SectionTitle>
-
-      {/* ── TRAY: Step 1 — Account ── */}
-      <div style={{ marginBottom: 4, padding: "10px 14px", background: T.green, borderRadius: "8px 8px 0 0" }}>
-        <div style={{ fontSize: 12, fontWeight: 800, color: T.white, letterSpacing: .5, textTransform: "uppercase" }}>① Account Registration Tray — Step 1: Create or Convert Account</div>
-        <div style={{ fontSize: 11, color: "rgba(255,255,255,.7)", marginTop: 2 }}>The slide-in modal customers see when they click "Sign Up"</div>
-      </div>
-      <div style={{ border: `1.5px solid ${T.green}`, borderTop: "none", borderRadius: "0 0 8px 8px", padding: "20px 16px", marginBottom: 24 }}>
-        <EditField label="Tray Title" value={config.signupForm.trayTitle || ""} onChange={v => onChange(d => { d.signupForm.trayTitle = v; })} hint='Shown in the header when neither path is selected yet. e.g. "Sign Up for a Free B&H B2B Account"' />
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-          <EditField label="Step Tab 1 Label" value={(config.signupForm.trayStepLabels || [])[0] || "Create Account"} onChange={v => onChange(d => { if (!d.signupForm.trayStepLabels) d.signupForm.trayStepLabels = ["Create Account","Org Info","Billing"]; d.signupForm.trayStepLabels[0] = v; })} />
-          <EditField label="Step Tab 2 Label" value={(config.signupForm.trayStepLabels || [])[1] || "Org Info"}       onChange={v => onChange(d => { if (!d.signupForm.trayStepLabels) d.signupForm.trayStepLabels = ["Create Account","Org Info","Billing"]; d.signupForm.trayStepLabels[1] = v; })} />
-          <EditField label="Step Tab 3 Label" value={(config.signupForm.trayStepLabels || [])[2] || "Billing"}        onChange={v => onChange(d => { if (!d.signupForm.trayStepLabels) d.signupForm.trayStepLabels = ["Create Account","Org Info","Billing"]; d.signupForm.trayStepLabels[2] = v; })} />
-        </div>
-        <div style={{ marginTop: 16, padding: "12px 14px", background: T.gray1, borderRadius: 8, border: `1px solid ${T.gray2}` }}>
-          <div style={{ fontSize: 11, fontWeight: 700, color: T.gray4, letterSpacing: .5, textTransform: "uppercase", marginBottom: 10 }}>Create New Account path</div>
-          <EditField label="Button Label"  value={config.signupForm.trayCreateLabel || ""} onChange={v => onChange(d => { d.signupForm.trayCreateLabel = v; })} />
-          <EditField label="Helper Text"   value={config.signupForm.trayCreateHint  || ""} onChange={v => onChange(d => { d.signupForm.trayCreateHint = v; })}  multiline hint="Shown below the Create button" />
-          <EditField label="Proceed CTA"   value={config.signupForm.trayProceedCta  || ""} onChange={v => onChange(d => { d.signupForm.trayProceedCta = v; })} />
-        </div>
-        <div style={{ marginTop: 12, padding: "12px 14px", background: T.gray1, borderRadius: 8, border: `1px solid ${T.gray2}` }}>
-          <div style={{ fontSize: 11, fontWeight: 700, color: T.gray4, letterSpacing: .5, textTransform: "uppercase", marginBottom: 10 }}>Convert Existing Account path</div>
-          <EditField label="Button Label"       value={config.signupForm.trayConvertLabel     || ""} onChange={v => onChange(d => { d.signupForm.trayConvertLabel = v; })} />
-          <EditField label="Helper Text"        value={config.signupForm.trayConvertHint      || ""} onChange={v => onChange(d => { d.signupForm.trayConvertHint = v; })}  multiline hint="Shown below the Convert button and again inside the convert form" />
-          <EditField label="Form Heading"       value={config.signupForm.trayConvertFormTitle || ""} onChange={v => onChange(d => { d.signupForm.trayConvertFormTitle = v; })} />
-          <EditField label="Log In & Proceed CTA" value={config.signupForm.trayLoginProceedCta || ""} onChange={v => onChange(d => { d.signupForm.trayLoginProceedCta = v; })} />
-        </div>
-        <div style={{ marginTop: 12 }}>
-          <EditField label="Newsletter Checkbox Text" value={config.signupForm.trayNewsletterText || ""} onChange={v => onChange(d => { d.signupForm.trayNewsletterText = v; })} multiline hint="Shown on both create and convert account forms" />
-        </div>
+      <EditField label="Form Title"    value={config.signupForm.title}    onChange={v => onChange(d => { d.signupForm.title = v; })} />
+      <EditField label="Form Subtitle" value={config.signupForm.subtitle} onChange={v => onChange(d => { d.signupForm.subtitle = v; })} multiline />
+      <div style={{ marginTop: 20 }}>
+        <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 12 }}>Organization Types</label>
+        {config.signupForm.orgTypes.map((ot, i) => (
+          <div key={ot.id} style={{ display: "flex", gap: 10, alignItems: "center", marginBottom: 8, padding: "10px 12px", background: T.gray1, borderRadius: 7, border: `1px solid ${T.gray2}` }}>
+            <span style={{ fontSize: 18 }}>{ot.icon}</span>
+            <input value={ot.label} onChange={e => onChange(d => { d.signupForm.orgTypes[i].label = e.target.value; })} style={{ flex: 1, border: `1px solid ${T.gray3}`, borderRadius: 5, padding: "7px 10px", fontSize: 13 }} />
+            <span style={{ fontSize: 11, color: T.gray4, background: T.bondLight, padding: "3px 8px", borderRadius: 4 }}>→ {ot.segment}</span>
+          </div>
+        ))}
       </div>
 
-      {/* ── TRAY: Step 2 — Org Info ── */}
-      <div style={{ marginBottom: 4, padding: "10px 14px", background: T.green, borderRadius: "8px 8px 0 0" }}>
-        <div style={{ fontSize: 12, fontWeight: 800, color: T.white, letterSpacing: .5, textTransform: "uppercase" }}>② Account Registration Tray — Step 2: Organization Info</div>
-      </div>
-      <div style={{ border: `1.5px solid ${T.green}`, borderTop: "none", borderRadius: "0 0 8px 8px", padding: "20px 16px", marginBottom: 24 }}>
-        <EditField label="Section Heading"           value={config.signupForm.trayOrgInfoTitle         || ""} onChange={v => onChange(d => { d.signupForm.trayOrgInfoTitle = v; })} hint='"Organization Information"' />
-        <EditField label="Purchasing Needs Heading"  value={config.signupForm.trayPurchasingNeedsTitle || ""} onChange={v => onChange(d => { d.signupForm.trayPurchasingNeedsTitle = v; })} hint='"Purchasing Needs"' />
+      {/* ── Step 2 ── */}
+      <div style={{ marginTop: 32, paddingTop: 24, borderTop: `2px solid ${T.gray2}` }}>
+        <div style={{ fontSize: 13, fontWeight: 800, color: T.gray6, fontFamily: "Montserrat,sans-serif", marginBottom: 18 }}>Step 2 — Tell Us About Yourself</div>
+        <EditField label="Step 2 Title"             value={config.signupForm.step2Title}          onChange={v => onChange(d => { d.signupForm.step2Title = v; })} />
+        <EditField label="Continue Button Label"    value={config.signupForm.step2ContinueCta}    onChange={v => onChange(d => { d.signupForm.step2ContinueCta = v; })} />
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-          <EditField label="Org Type Label"         value={config.signupForm.trayLabelOrgType            || ""} onChange={v => onChange(d => { d.signupForm.trayLabelOrgType = v; })} />
-          <EditField label="Org Type Placeholder"   value={config.signupForm.trayLabelOrgTypePlaceholder || ""} onChange={v => onChange(d => { d.signupForm.trayLabelOrgTypePlaceholder = v; })} />
-          <EditField label="Organization Name Label" value={config.signupForm.trayLabelOrgName           || ""} onChange={v => onChange(d => { d.signupForm.trayLabelOrgName = v; })} />
-          <EditField label="Department Label"        value={config.signupForm.trayLabelDept              || ""} onChange={v => onChange(d => { d.signupForm.trayLabelDept = v; })} />
+          <EditField label="First Name Label"       value={config.signupForm.labelFirstName}      onChange={v => onChange(d => { d.signupForm.labelFirstName = v; })} />
+          <EditField label="Last Name Label"        value={config.signupForm.labelLastName}       onChange={v => onChange(d => { d.signupForm.labelLastName = v; })} />
+          <EditField label="Business Email Label"   value={config.signupForm.labelBusinessEmail}  onChange={v => onChange(d => { d.signupForm.labelBusinessEmail = v; })} />
+          <EditField label="Org Name Label"         value={config.signupForm.labelOrgName}        onChange={v => onChange(d => { d.signupForm.labelOrgName = v; })} />
+          <EditField label="Phone Label"            value={config.signupForm.labelPhone}          onChange={v => onChange(d => { d.signupForm.labelPhone = v; })} />
+          <EditField label="State Label"            value={config.signupForm.labelState}          onChange={v => onChange(d => { d.signupForm.labelState = v; })} />
+          <EditField label="Purchase Volume Label"  value={config.signupForm.labelPurchaseVolume} onChange={v => onChange(d => { d.signupForm.labelPurchaseVolume = v; })} />
         </div>
-        <div style={{ marginTop: 8, marginBottom: 18 }}>
-          <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 10 }}>Organization Type Options</label>
-          <div style={{ fontSize: 11, color: T.gray4, marginBottom: 8 }}>Edit the label shown for each org type in the dropdown. The segment mapping (→ arrow) cannot be changed here.</div>
-          {(config.signupForm.orgTypes || []).map((ot, i) => (
-            <div key={ot.id} style={{ display: "flex", gap: 10, alignItems: "center", marginBottom: 8, padding: "9px 12px", background: T.gray1, borderRadius: 7, border: `1px solid ${T.gray2}` }}>
-              <span style={{ fontSize: 16 }}>{ot.icon}</span>
-              <input value={ot.label} onChange={e => onChange(d => { d.signupForm.orgTypes[i].label = e.target.value; })} style={{ flex: 1, border: `1px solid ${T.gray3}`, borderRadius: 5, padding: "6px 10px", fontSize: 13 }} />
-              <span style={{ fontSize: 11, color: T.gray4, background: T.bondLight, padding: "2px 8px", borderRadius: 4, whiteSpace: "nowrap" }}>→ {ot.segment}</span>
-            </div>
-          ))}
+        <div style={{ marginTop: 4 }}>
+          <EditField label="Existing B&H Account Question" value={config.signupForm.labelHasB2CAccount} onChange={v => onChange(d => { d.signupForm.labelHasB2CAccount = v; })} hint="Yes/No toggle label shown to ask if they have a consumer account" />
+          <EditField label="B&H Account Email Label"       value={config.signupForm.labelB2CEmail}      onChange={v => onChange(d => { d.signupForm.labelB2CEmail = v; })} />
+          <EditField label="B&H Account Email Helper Text" value={config.signupForm.hintB2CEmail}       onChange={v => onChange(d => { d.signupForm.hintB2CEmail = v; })} hint="Shown below the email field when user selects Yes" />
+        </div>
+      </div>
+
+      {/* ── Step 3 ── */}
+      <div style={{ marginTop: 32, paddingTop: 24, borderTop: `2px solid ${T.gray2}` }}>
+        <div style={{ fontSize: 13, fontWeight: 800, color: T.gray6, fontFamily: "Montserrat,sans-serif", marginBottom: 18 }}>Step 3 — One Last Thing</div>
+        <EditField label="Step 3 Title"    value={config.signupForm.step3Title}    onChange={v => onChange(d => { d.signupForm.step3Title = v; })} />
+        <EditField label="Step 3 Subtitle" value={config.signupForm.step3Subtitle} onChange={v => onChange(d => { d.signupForm.step3Subtitle = v; })} />
+        <EditField label="Submit CTA Label" value={config.signupForm.step3Cta}     onChange={v => onChange(d => { d.signupForm.step3Cta = v; })} hint="Button text — '→' is appended automatically" />
+        <div style={{ marginBottom: 18 }}>
+          <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 6 }}>Purchasing Need Options (one per line)</label>
+          <div style={{ fontSize: 11, color: T.gray4, marginBottom: 6 }}>Each line becomes a selectable option on Step 3. Order is preserved.</div>
+          <textarea
+            value={(config.signupForm.step3Options || []).join("\n")}
+            onChange={e => onChange(d => { d.signupForm.step3Options = e.target.value.split("\n").filter(Boolean); })}
+            rows={8}
+            style={{ width: "100%", border: `1.5px solid ${T.gray3}`, borderRadius: 7, padding: "10px 12px", fontSize: 13, resize: "vertical", fontFamily: "Open Sans,sans-serif" }}
+          />
+        </div>
+      </div>
+
+      {/* ── Tray Org Info Options ── */}
+      <div style={{ marginTop: 32, paddingTop: 24, borderTop: `2px solid ${T.gray2}` }}>
+        <div style={{ fontSize: 13, fontWeight: 800, color: T.gray6, fontFamily: "Montserrat,sans-serif", marginBottom: 6 }}>Sign-Up Tray — Org Info Options</div>
+        <div style={{ fontSize: 12, color: T.gray4, marginBottom: 18 }}>These options appear in the slide-in sign-up drawer. Changes apply globally across all segments.</div>
+        <div style={{ marginBottom: 18 }}>
+          <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 6 }}>Role Options (one per line)</label>
+          <div style={{ fontSize: 11, color: T.gray4, marginBottom: 6 }}>Each line becomes a selectable option in the "Your Role" dropdown. "Select a Role" placeholder is added automatically.</div>
+          <textarea
+            value={(config.signupForm.roleOptions || []).join("\n")}
+            onChange={e => onChange(d => { d.signupForm.roleOptions = e.target.value.split("\n").filter(Boolean); })}
+            rows={8}
+            style={{ width: "100%", border: `1.5px solid ${T.gray3}`, borderRadius: 7, padding: "10px 12px", fontSize: 13, resize: "vertical", fontFamily: "Open Sans,sans-serif" }}
+          />
         </div>
         <div style={{ marginBottom: 18 }}>
-          <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 6 }}>Role Dropdown Options (one per line)</label>
-          <div style={{ fontSize: 11, color: T.gray4, marginBottom: 6 }}>"Select a Role" placeholder is added automatically.</div>
-          <textarea value={(config.signupForm.roleOptions || []).join("\n")} onChange={e => onChange(d => { d.signupForm.roleOptions = e.target.value.split("\n").filter(Boolean); })} rows={8} style={{ width: "100%", border: `1.5px solid ${T.gray3}`, borderRadius: 7, padding: "10px 12px", fontSize: 13, resize: "vertical", fontFamily: "Open Sans,sans-serif" }} />
+          <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 6 }}>Purchasing Needs Options (one per line)</label>
+          <div style={{ fontSize: 11, color: T.gray4, marginBottom: 6 }}>Each line becomes a selectable checkbox in the "Purchasing Needs" section of the tray. Order is preserved.</div>
+          <textarea
+            value={(config.signupForm.purchasingNeeds || []).join("\n")}
+            onChange={e => onChange(d => { d.signupForm.purchasingNeeds = e.target.value.split("\n").filter(Boolean); })}
+            rows={8}
+            style={{ width: "100%", border: `1.5px solid ${T.gray3}`, borderRadius: 7, padding: "10px 12px", fontSize: 13, resize: "vertical", fontFamily: "Open Sans,sans-serif" }}
+          />
         </div>
-        <div style={{ marginBottom: 18 }}>
-          <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 6 }}>Purchasing Needs Checkboxes (one per line)</label>
-          <textarea value={(config.signupForm.purchasingNeeds || []).join("\n")} onChange={e => onChange(d => { d.signupForm.purchasingNeeds = e.target.value.split("\n").filter(Boolean); })} rows={8} style={{ width: "100%", border: `1.5px solid ${T.gray3}`, borderRadius: 7, padding: "10px 12px", fontSize: 13, resize: "vertical", fontFamily: "Open Sans,sans-serif" }} />
-        </div>
-        <div style={{ fontSize: 11, color: T.gray4, fontStyle: "italic" }}>Annual Purchase Volume options are managed per-segment in each Segment Page.</div>
       </div>
-
-      {/* ── TRAY: Step 3 — Billing ── */}
-      <div style={{ marginBottom: 4, padding: "10px 14px", background: T.green, borderRadius: "8px 8px 0 0" }}>
-        <div style={{ fontSize: 12, fontWeight: 800, color: T.white, letterSpacing: .5, textTransform: "uppercase" }}>③ Account Registration Tray — Step 3: Billing</div>
-      </div>
-      <div style={{ border: `1.5px solid ${T.green}`, borderTop: "none", borderRadius: "0 0 8px 8px", padding: "20px 16px", marginBottom: 32 }}>
-        <EditField label="Section Heading" value={config.signupForm.trayBillingTitle || ""} onChange={v => onChange(d => { d.signupForm.trayBillingTitle = v; })} hint='"Billing Address"' />
-        <EditField label="Complete Registration CTA" value={config.signupForm.trayCompleteCta || ""} onChange={v => onChange(d => { d.signupForm.trayCompleteCta = v; })} />
-      </div>
-
-      {/* ── TRAY: Completion States ── */}
-      <div style={{ marginBottom: 4, padding: "10px 14px", background: T.green, borderRadius: "8px 8px 0 0" }}>
-        <div style={{ fontSize: 12, fontWeight: 800, color: T.white, letterSpacing: .5, textTransform: "uppercase" }}>④ Account Registration Tray — Completion States</div>
-        <div style={{ fontSize: 11, color: "rgba(255,255,255,.7)", marginTop: 2 }}>Screens shown after "Complete Registration" is clicked. Use {"{User}"}, {"{email}"}, {"{Segment}"}, {"{Vertical}"}, {"{Vertical2}"} as tokens.</div>
-      </div>
-      <div style={{ border: `1.5px solid ${T.green}`, borderTop: "none", borderRadius: "0 0 8px 8px", padding: "20px 16px", marginBottom: 24 }}>
-        <div style={{ padding: "10px 12px", background: T.greenLight, borderRadius: 6, marginBottom: 16, fontSize: 12, color: T.green, fontWeight: 600 }}>
-          ✓ Success
-        </div>
-        <EditField label="Heading"   value={config.signupForm.trayFinishTitle || ""} onChange={v => onChange(d => { d.signupForm.trayFinishTitle = v; })} />
-        <EditField label="Body"      value={config.signupForm.trayFinishBody  || ""} onChange={v => onChange(d => { d.signupForm.trayFinishBody = v; })}  multiline hint="Use {User}, {email}, {Segment}" />
-
-        <div style={{ padding: "10px 12px", background: T.scarletLight, borderRadius: 6, margin: "20px 0 16px", fontSize: 12, color: T.scarlet, fontWeight: 600 }}>
-          ✗ Denied
-        </div>
-        <EditField label="Heading"       value={config.signupForm.trayDeniedTitle  || ""} onChange={v => onChange(d => { d.signupForm.trayDeniedTitle = v; })} />
-        <EditField label="Body"          value={config.signupForm.trayDeniedBody   || ""} onChange={v => onChange(d => { d.signupForm.trayDeniedBody = v; })}  multiline hint='Use {User}. Include "contact a B&H B2B Specialist" to auto-link.' />
-        <EditField label="Shop B2C CTA"  value={config.signupForm.trayShopB2cCta  || ""} onChange={v => onChange(d => { d.signupForm.trayShopB2cCta = v; })} />
-
-        <div style={{ padding: "10px 12px", background: "#fff8e1", borderRadius: 6, margin: "20px 0 16px", fontSize: 12, color: "#856404", fontWeight: 600 }}>
-          ⚠ Unable to Verify — 1 Option Offered
-        </div>
-        <EditField label="Heading"      value={config.signupForm.trayUnverifiedTitle   || ""} onChange={v => onChange(d => { d.signupForm.trayUnverifiedTitle = v; })} />
-        <EditField label="Body"         value={config.signupForm.trayUnverifiedBody1   || ""} onChange={v => onChange(d => { d.signupForm.trayUnverifiedBody1 = v; })}  multiline hint="Use {User}, {Vertical}" />
-        <EditField label="Footer"       value={config.signupForm.trayUnverifiedFooter1 || ""} onChange={v => onChange(d => { d.signupForm.trayUnverifiedFooter1 = v; })} multiline hint='Include "contact a B&H B2B Specialist" to auto-link.' />
-        <EditField label="Join CTA"     value={config.signupForm.trayJoinCta           || ""} onChange={v => onChange(d => { d.signupForm.trayJoinCta = v; })}           hint="Use {Vertical} token" />
-
-        <div style={{ padding: "10px 12px", background: "#fff8e1", borderRadius: 6, margin: "20px 0 16px", fontSize: 12, color: "#856404", fontWeight: 600 }}>
-          ⚠ Unable to Verify — 2 Options Offered
-        </div>
-        <EditField label="Body"         value={config.signupForm.trayUnverifiedBody2   || ""} onChange={v => onChange(d => { d.signupForm.trayUnverifiedBody2 = v; })}   multiline hint="Use {User}, {Vertical}, {Vertical2}" />
-        <EditField label="Footer"       value={config.signupForm.trayUnverifiedFooter2 || ""} onChange={v => onChange(d => { d.signupForm.trayUnverifiedFooter2 = v; })}  multiline />
-
-        <div style={{ padding: "10px 12px", background: T.bondLight, borderRadius: 6, margin: "20px 0 16px", fontSize: 12, color: T.bond, fontWeight: 600 }}>
-          📞 Contact Drawer
-        </div>
-        <EditField label="Heading"          value={config.signupForm.trayContactTitle       || ""} onChange={v => onChange(d => { d.signupForm.trayContactTitle = v; })} />
-        <EditField label="Privacy Disclaimer" value={config.signupForm.trayContactDisclaimer || ""} onChange={v => onChange(d => { d.signupForm.trayContactDisclaimer = v; })} multiline />
-        <EditField label="Submit CTA"       value={config.signupForm.trayContactSubmitCta   || ""} onChange={v => onChange(d => { d.signupForm.trayContactSubmitCta = v; })} />
-      </div>
-
     </div>
   );
 
@@ -2969,7 +2947,7 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
         </div>
         <EditField label="Other Contracts Sidebar Title" value={sp.otherContractsTitle} onChange={v => onChange(d => { d.segmentPages[segId].otherContractsTitle = v; })} />
         <div style={{ marginBottom: 18 }}>
-          <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 6 }}>Order of Other Contract IDs (comma-separated)</label>
+          <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 6 }}>Other Contract IDs (comma-separated)</label>
           <input value={(sp.otherContractIds || []).join(",")} onChange={e => onChange(d => { d.segmentPages[segId].otherContractIds = e.target.value.split(",").map(s => s.trim()).filter(Boolean); })} style={{ width: "100%", padding: "10px 12px", border: `1.5px solid ${T.gray3}`, borderRadius: 7, fontSize: 13, fontFamily: "monospace" }} placeholder="equalis,ei,omnia" />
           <div style={{ fontSize: 11, color: T.gray4, marginTop: 4 }}>IDs: {config.contracts.map(c => c.id).join(", ")}</div>
         </div>

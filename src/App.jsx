@@ -193,8 +193,6 @@ const INITIAL_CONFIG = {
         { id:"buyboard_national", state:"", segment:"", portalId:"", label:"BuyBoard National Portal" },
       ],
     },
-      ],
-    },
     {
       id:"mhec", name:"MHEC", logoLabel:"MHEC", logoUrl:"", contractNumber:"2021-14", active:true,
       segments:["higher_ed"],

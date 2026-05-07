@@ -127,13 +127,6 @@ const INITIAL_CONFIG = {
     trayContactTitle:       "Contact a B&H B2B Specialist",
     trayContactDisclaimer:  "Please don't disclose private data (e.g. credit card details, etc.) on this form.",
     trayContactSubmitCta:   "Submit",
-    // ── Domain whitelist ─────────────────────────────────────────────────────
-    // When a matching domain is detected in the email field, registration skips
-    // directly to the Verify Your Account screen.
-    domainWhitelist: [
-      { domain: "disney.com",     portalName: "Disney",           portalId: "" },
-      { domain: "bhphotovideo.com", portalName: "B&H Internal",   portalId: "" },
-    ],
   },
 
   // ── Segments (12) ─────────────────────────────────────────────────────────
@@ -1016,11 +1009,7 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
 
   // Derive token values from collected form data
   const userName    = createFirstName || "User";
-  const userEmail   = createEmail || convertEmail || "";
-  const emailDomain = userEmail.includes("@") ? userEmail.split("@")[1].toLowerCase().trim() : "";
-  const detectedPortal = emailDomain
-    ? (config?.signupForm?.domainWhitelist || []).find(e => e.domain.toLowerCase() === emailDomain) || null
-    : null;
+  const userEmail   = createEmail || "";
   const orgLabel    = (config?.signupForm?.orgTypes || ORG_TYPES).find(o => o.id === orgType)?.label || orgType || "your organization";
   const vertical2   = "Small Business";
 
@@ -1130,12 +1119,6 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
               <div style={{ padding: 24 }}>
                 <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                   <TrayInput placeholder="Email"         value={createEmail}        onChange={e => setCreateEmail(e.target.value)}        type="email" />
-                  {detectedPortal && createEmail.includes("@") && (
-                    <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 12px", background: T.greenLight, borderRadius: 6, border: `1px solid ${T.green}` }}>
-                      <span style={{ color: T.green, fontSize: 15 }}>✓</span>
-                      <span style={{ fontSize: 12, color: T.green, fontWeight: 700 }}>{detectedPortal.portalName} account detected</span>
-                    </div>
-                  )}
                   <TrayInput placeholder="Confirm Email" value={createConfirmEmail} onChange={e => setCreateConfirmEmail(e.target.value)} type="email" />
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                     <TrayInput placeholder="First Name" value={createFirstName} onChange={e => setCreateFirstName(e.target.value)} />
@@ -1149,7 +1132,7 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
                   </div>
                 </div>
                 <div style={{ marginTop: 16 }}><NewsletterCheckbox checked={newsletter} onChange={setNewsletter} text={sf.trayNewsletterText} /></div>
-                <button onClick={() => setTrayStep(detectedPortal ? "finish" : "orgInfo")} style={{ width: "100%", background: T.green, color: T.white, border: "none", padding: 15, borderRadius: 7, fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif", marginTop: 20 }}>
+                <button onClick={() => setTrayStep("orgInfo")} style={{ width: "100%", background: T.green, color: T.white, border: "none", padding: 15, borderRadius: 7, fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif", marginTop: 20 }}>
                   {sf.trayProceedCta || "Proceed to Next Step"}
                 </button>
               </div>
@@ -1164,12 +1147,6 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
                 </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                   <TrayInput placeholder="Email" value={convertEmail} onChange={e => setConvertEmail(e.target.value)} type="email" />
-                  {detectedPortal && convertEmail.includes("@") && (
-                    <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 12px", background: T.greenLight, borderRadius: 6, border: `1px solid ${T.green}` }}>
-                      <span style={{ color: T.green, fontSize: 15 }}>✓</span>
-                      <span style={{ fontSize: 12, color: T.green, fontWeight: 700 }}>{detectedPortal.portalName} account detected</span>
-                    </div>
-                  )}
                   <div style={{ position: "relative" }}>
                     <TrayInput placeholder="Password" value={convertPassword} onChange={e => setConvertPassword(e.target.value)} type={showConvertPwd ? "text" : "password"} />
                     <button onClick={() => setShowConvertPwd(p => !p)} style={{ position: "absolute", right: 14, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", color: T.gray5, cursor: "pointer", fontSize: 13, fontWeight: 600 }}>
@@ -1178,7 +1155,7 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
                   </div>
                 </div>
                 <div style={{ marginTop: 16 }}><NewsletterCheckbox checked={newsletter} onChange={setNewsletter} text={sf.trayNewsletterText} /></div>
-                <button onClick={() => setTrayStep(detectedPortal ? "finish" : "orgInfo")} style={{ width: "100%", background: T.green, color: T.white, border: "none", padding: 15, borderRadius: 7, fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif", marginTop: 20 }}>
+                <button onClick={() => setTrayStep("orgInfo")} style={{ width: "100%", background: T.green, color: T.white, border: "none", padding: 15, borderRadius: 7, fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif", marginTop: 20 }}>
                   {sf.trayLoginProceedCta || "Log In & Proceed to Next Step"}
                 </button>
                 <div style={{ textAlign: "center", marginTop: 14 }}>
@@ -1396,17 +1373,9 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
               <span style={{ color: T.green, fontSize: 24 }}>✓</span>
             </div>
             <h3 style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 18, color: T.gray6, marginBottom: 16 }}>{sf.trayFinishTitle || "Verify Your Account"}</h3>
-            {detectedPortal ? (
-              <>
-                <p style={{ fontSize: 14, color: T.gray6, lineHeight: 1.7, marginBottom: 12 }}>Thank you, {userName}.</p>
-                <p style={{ fontSize: 14, color: T.gray6, lineHeight: 1.7, marginBottom: 12 }}>You are approved to shop the {detectedPortal.portalName} Portal! We've sent a verification email to {userEmail}.</p>
-                <p style={{ fontSize: 14, color: T.gray6, lineHeight: 1.7 }}>Once verified, you'll be shopping at B&H B2B for {detectedPortal.portalName} whenever you log in at bhphoto.com.</p>
-              </>
-            ) : (
-              fill(sf.trayFinishBody || "Thank you, {User}.\n\nWe've sent a verification email to {email}.\n\nOnce verified, you'll be shopping at B&H B2B for {Segment} whenever you log in at bhphoto.com.", { User: userName, email: userEmail, Segment: orgLabel }).split("\n\n").map((p, i) => (
-                <p key={i} style={{ fontSize: 14, color: T.gray6, lineHeight: 1.7, marginBottom: 12 }}>{p}</p>
-              ))
-            )}
+            {fill(sf.trayFinishBody || "Thank you, {User}.\n\nWe've sent a verification email to {email}.\n\nOnce verified, you'll be shopping at B&H B2B for {Segment} whenever you log in at bhphoto.com.", { User: userName, email: userEmail, Segment: orgLabel }).split("\n\n").map((p, i) => (
+              <p key={i} style={{ fontSize: 14, color: T.gray6, lineHeight: 1.7, marginBottom: 12 }}>{p}</p>
+            ))}
           </div>
         )}
 
@@ -3238,39 +3207,7 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
         <EditField label="Complete Registration CTA" value={config.signupForm.trayCompleteCta || ""} onChange={v => onChange(d => { d.signupForm.trayCompleteCta = v; })} />
       </div>
 
-      {/* ── Domain Whitelist ── */}
-      <div style={{ marginBottom: 4, padding: "10px 14px", background: T.scarlet, borderRadius: "8px 8px 0 0" }}>
-        <div style={{ fontSize: 12, fontWeight: 800, color: T.white, letterSpacing: .5, textTransform: "uppercase" }}>Domain Whitelist — Auto-Verify Accounts</div>
-        <div style={{ fontSize: 11, color: "rgba(255,255,255,.7)", marginTop: 2 }}>When a customer's email domain matches an entry here, they skip Org Info and Billing and go straight to Verify Your Account.</div>
-      </div>
-      <div style={{ border: `1.5px solid ${T.scarlet}`, borderTop: "none", borderRadius: "0 0 8px 8px", padding: "20px 16px", marginBottom: 24 }}>
-        {(config.signupForm.domainWhitelist || []).map((entry, i) => (
-          <div key={i} style={{ display: "flex", gap: 10, alignItems: "center", marginBottom: 10, padding: "10px 12px", background: T.gray1, borderRadius: 7, border: `1px solid ${T.gray2}` }}>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: 11, fontWeight: 700, color: T.gray4, textTransform: "uppercase", letterSpacing: .3, marginBottom: 4 }}>Domain</div>
-              <input
-                value={entry.domain}
-                onChange={e => onChange(d => { d.signupForm.domainWhitelist[i].domain = e.target.value; })}
-                placeholder="e.g. disney.com"
-                style={{ width: "100%", border: `1px solid ${T.gray3}`, borderRadius: 5, padding: "6px 10px", fontSize: 13, fontFamily: "monospace" }}
-              />
-            </div>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: 11, fontWeight: 700, color: T.gray4, textTransform: "uppercase", letterSpacing: .3, marginBottom: 4 }}>Portal / Company Name</div>
-              <input
-                value={entry.portalName}
-                onChange={e => onChange(d => { d.signupForm.domainWhitelist[i].portalName = e.target.value; })}
-                placeholder="e.g. Disney"
-                style={{ width: "100%", border: `1px solid ${T.gray3}`, borderRadius: 5, padding: "6px 10px", fontSize: 13 }}
-              />
-            </div>
-            <button onClick={() => onChange(d => { d.signupForm.domainWhitelist.splice(i, 1); })} style={{ background: "none", border: "none", color: T.scarlet, fontSize: 20, cursor: "pointer", padding: "0 4px", marginTop: 16, flexShrink: 0 }}>×</button>
-          </div>
-        ))}
-        <button onClick={() => onChange(d => { if (!d.signupForm.domainWhitelist) d.signupForm.domainWhitelist = []; d.signupForm.domainWhitelist.push({ domain: "", portalName: "", portalId: "" }); })} style={{ background: "none", border: `1.5px dashed ${T.scarlet}`, color: T.scarlet, padding: "9px 18px", borderRadius: 6, fontWeight: 700, fontSize: 13, cursor: "pointer", width: "100%" }}>
-          + Add Domain
-        </button>
-      </div>
+      {/* ── TRAY: Completion States ── */}
       <div style={{ marginBottom: 4, padding: "10px 14px", background: T.green, borderRadius: "8px 8px 0 0" }}>
         <div style={{ fontSize: 12, fontWeight: 800, color: T.white, letterSpacing: .5, textTransform: "uppercase" }}>④ Account Registration Tray — Completion States</div>
         <div style={{ fontSize: 11, color: "rgba(255,255,255,.7)", marginTop: 2 }}>Screens shown after "Complete Registration" is clicked. Use {"{User}"}, {"{email}"}, {"{Segment}"}, {"{Vertical}"}, {"{Vertical2}"} as tokens.</div>

@@ -246,73 +246,31 @@ const INITIAL_CONFIG = {
   // ── Core Pages ─────────────────────────────────────────────────────────────
   corePages: {
     contracts: {
-      headline:      "Contracts",
-      intro:         "B&H B2B understands that today's procurement demands competitively bid, publicly awarded, and compliant contracts. Our dedicated contracts team will work directly with your procurement or compliance offices to ensure that when you buy from B&H, all of your requirements are satisfied.",
-      body:          "With dozens of competitively bid cooperative contracts in play, it's very likely that your organization can do business with us immediately. Visit our B2B Homepage, then select your organization type and state to view the vast array of cooperatives with whom we work.\n\nIf you represent a large company in the corporate sector, a direct pricing agreement with B&H B2B as your dedicated supplier for AV, electronics, and more may be possible.",
-      contactCta:    "Contact Us",
+      headline:      "Cooperative Contracts",
+      intro:         "B&H understands that in order to thrive and grow, your business purchasing needs to be easy, seamless and customized for you.",
+      body:          "That's why we offer many contract and electronic purchasing options. Our experienced team will quickly turn around custom punch out, checkout portals and more.\n\nFor State and Local Government and educational institutions, we offer a variety of publicly-awarded and competitively-bid contracts so you can ensure compliance and best value.\n\nFor large corporate customers, we offer direct pricing agreements.",
       contractEmail: "b2bcontracts@bhphoto.com",
-      card1Heading:  "Small or medium-sized business?",
-      card1Body:     "Sign up for B&H B2B for Small Business and start purchasing today.",
-      card1Cta:      "Learn More About Small Business",
-      card1Segment:  "smb",
-      card2Heading:  "Over 500 employees & no contract needed?",
-      card2Body:     "Check out B&H Corporate, our instant sign-up, self service purchasing solution.",
-      card2Cta:      "Learn More About Corporate",
-      card2Segment:  "corporate",
     },
     eprocurement: {
-      headline:         "eProcurement",
-      intro:            "B&H B2B can integrate with your internal financial system or ERP to streamline your purchasing process. Together with our team of dedicated Integration specialists and support staff, you can ensure that purchasing from B&H meets each of your requisition and approval workflow requirements through our punchout process. Orders are sent from your system to ours in seconds via cXML or EDI and processed automatically, ensuring that your buyers receive their equipment as quickly as possible.",
-      body:             "With several hundred integrations on the books, we work with all major platforms, including (but not limited to) Ariba, Coupa, Jaggaer, Unimarket, Oracle, Workday, ESM, and more.\n\nA dedicated checkout portal, hosted by B&H, that provides a seamless, easy way for your buyers to place orders, request quotes, and more may be available.",
-      contactCta:       "Contact Us",
-      benefitsTitle:    "Benefits of eProcurement",
-      benefits:         ["Lower Costs", "Transparent Spending", "Less Paperwork", "Fewer Errors", "Faster Transactions"],
-      platformsTitle:   "We Support All Major Platforms",
-      platformsFooter:  "Don't see the platform your organization uses?",
-      platformsCta:     "Send Us a Message",
+      headline: "eProcurement at B&H",
+      intro:    "B&H integrates with all major eProcurement platforms so you can leverage your existing purchasing workflow while accessing our full catalog with contract pricing.",
+      body:     "Our team can quickly configure a custom punch-out catalog, checkout portal, or EDI integration to fit your organization's purchasing process.",
     },
     studio: {
-      headline:     "The Studio B&H",
-      tagline:      "Tech Solutions for Media Professionals",
-      intro:        "The Studio specializes in completely customized applications and installations. This is where form meets function, for real. No matter how complex your project or requirements, our experts will work with you to determine the most appropriate equipment and solutions.",
-      connectCta:   "Connect with The Studio B&H",
-      solutionsTitle: "The Studio offers solutions for:",
-      solutions:    ["Digital Production","Broadcast Systems","Post Production","Technical Services","Leasing Solutions","Virtual Production"],
-      stcHeadline:  "The Studio Technology Center (STC)",
-      stcBody:      "The Studio Technology Center is a fully operational studio with an extensive array of high-end products and digital workflows. The space offers special opportunities to experiment with emerging technology, find ways to innovate, test real world system configurations or simply gain knowledge through hands-on experience.",
-      servicesTitle: "What The Studio Can Do For You",
-      brandsTitle:  "3000+ Brands",
-      brandsSubtitle: "Choose from nearly half a million items, in stock every day!",
-      whoTitle:     "Who Needs The Studio B&H?",
-      whoBody:      "You have a big idea—and the professional cred to back it up. Whether you're a crew of ten or ten thousand, our Studio experts can provide the guidance and in-depth counseling you need to build a better \"blue sky\" scenario.",
-      whoAudience:  ["TV Networks","Production Companies","Equipment Rental Companies","Corporations","Media Publishers","Film & TV Professionals","News Organizations","Faith"],
-      socialTitle:  "Stay in the Know",
-      socialBody:   "Connect with our community and tap into the latest news on enterprise technology for media professionals.",
+      headline: "The Studio at B&H",
+      tagline:  "Tech Solutions for Media Professionals",
+      intro:    "The Studio specializes in completely customized installations and solutions for media professionals and organizations.",
+      body:     "Our experts work with you to find the right equipment — no matter how complex the project. From digital camera production to virtual production environments, we handle it all.",
     },
     it_services: {
-      headline:     "B2B IT Services",
-      intro:        "B&H B2B offers a full suite of extended support and integration services for your business. From automated updates to custom installations, equipment tagging and more, our team of trained professionals go above and beyond to help you succeed.",
-      contactCta:   "Contact Us",
-      appleHeadline:  "Enroll with Apple Enterprise Support Solutions",
-      appleResellerId:"Apple School Manager & Apple Business Manager Reseller ID: 101C20E0",
-      appleBody:    "B&H B2B is an Authorized Apple Reseller, but we offer services that go way beyond just products. Our internal team of industry experts can help you streamline inventory and supply for enterprise, as well as the technology to customize devices that your organization owns, while integrating Apple's free suite of tools for hands-free deployment of your technology. B&H B2B IT Services is an expansion of the customer service you have known for years. Now, the family has grown a little bigger by partnering with Apple—for your benefit.",
-      appleLearnMoreCta: "Learn More",
-      appleFormTitle: "Request Enrollment:",
-      appleSubmitCta: "Submit Request",
+      headline: "B2B IT Services",
+      intro:    "B&H B2B IT Services delivers end-to-end technology solutions for organizations of all sizes.",
+      body:     "From workstations and networking to displays and server infrastructure, our team of experts helps you source and deploy the right technology for your environment.",
     },
     contact: {
       headline: "Contact",
       intro:    "At B&H B2B we still believe in the personal touch. Each B2B customer gets assigned a personal Account Team, ensuring that a \"live\" agent will be available to assist you with your RFQs, purchasing and customer service needs from A to Z.",
       body:     "We stock the widest selection of security, IT, multimedia, optics and A/V presentation gear anywhere… which makes us a true one-stop shop for your organization.",
-      // ── Contact Tray ──────────────────────────────────────────────────────
-      trayTitle:       "Contact Us",
-      traySubtitle:    "Tell us about your organization so we can direct you to the right team.",
-      trayTabBusiness: "Business",
-      trayTabGovEdu:   "Gov/EDU",
-      trayDisclaimer:  "Please don't include credit card information in this form.",
-      trayUploadLabel: "Upload P.O.",
-      trayUploadHint:  "Supported file formats: jpg, png, pdf, doc or docx up to 5MB",
-      traySubmitCta:   "Submit",
     },
   },
 
@@ -326,7 +284,7 @@ const INITIAL_CONFIG = {
       featuredBody:"B&H B2B is integrated with E&I-approved cooperative contract purchasing—so you can bypass the bidding process and leverage the collective buying power of over 10,000 member organizations.",
       featuredBenefits:["Fast, easy quotes","One-stop shopping for our entire catalog of products","Hassle-free price comparisons","Expert advice from reps with real product know-how"],
       featuredSignupCta:"Sign Up", featuredLearnMoreCta:"Learn More",
-      otherContractIds:["ei","equalis","omnia","tips","buyboard"], otherContractsTitle:"Other Contracts", phoneNumber:"212.239.7503",
+      otherContractIds:["equalis","ei","omnia","tips","buyboard"], otherContractsTitle:"Other Contracts", phoneNumber:"212.239.7503",
       purchaseVolumeOptions:["Under $10,000","$10,000\u2013$50,000","$50,000\u2013$250,000","$250,000\u2013$1M","Over $1M"],
       heroImageUrl:"", signupUrl:"https://www.bhphotovideo.com/find/shared/b2bHub/signup.jsp",
     },
@@ -630,7 +588,6 @@ export default function App() {
   const [hubStep,        setHubStep]        = useState("entry");
   const [showSignupTray, setShowSignupTray]  = useState(false);
   const [signupPath,     setSignupPath]      = useState(null); // null | "create" | "convert"
-  const [showContactTray,setShowContactTray] = useState(false);
   const [adminTab,     setAdminTab]     = useState("form");
   const [activeSection, setActiveSection] = useState("hero");
   const [jsonText,     setJsonText]     = useState(JSON.stringify(INITIAL_CONFIG, null, 2));
@@ -718,7 +675,7 @@ export default function App() {
           { label: "eProcurement",    action: () => goStatic("eprocurement") },
           { label: "The Studio",      action: () => goStatic("studio") },
           { label: "B2B IT Services", action: () => goStatic("it_services") },
-          { label: "Contact Us",      action: () => setShowContactTray(true) },
+          { label: "Contact Us",      action: () => goStatic("contact") },
         ].map(lk => (
           <button key={lk.label} onClick={lk.action} style={{ background: "none", border: "none", cursor: "pointer", padding: "18px 14px", fontSize: 14, fontWeight: 600, color: T.gray6, fontFamily: "Open Sans,sans-serif", whiteSpace: "nowrap" }}>
             {lk.label}
@@ -743,8 +700,7 @@ export default function App() {
 
       {/* Pages */}
       {mainTab === "hub" && route.view === "hub" && <HubView config={c} hubStep={hubStep} setHubStep={setHubStep} showSignupTray={showSignupTray} setShowSignupTray={setShowSignupTray} signupPath={signupPath} setSignupPath={setSignupPath} onGoSegment={goSegment} onGoContract={goContract} onGoStatic={goStatic} />}
-      {mainTab === "hub" && route.view === "static" && route.id && <StaticPageView pageId={route.id} config={c} onGoHub={goHub} onGoSegment={goSegment} onGoContract={goContract} onGoStatic={goStatic} onSignUp={handleSignUp} onOpenContact={() => setShowContactTray(true)} />}
-      {showContactTray && <ContactTray config={c} onClose={() => setShowContactTray(false)} />}
+      {mainTab === "hub" && route.view === "static" && route.id && <StaticPageView pageId={route.id} config={c} onGoHub={goHub} onGoSegment={goSegment} onGoContract={goContract} onSignUp={handleSignUp} />}
       {mainTab === "hub" && route.view === "segment" && route.id && <SegmentPageView segmentId={route.id} config={c} onGoHub={goHub} onGoSegment={goSegment} onGoContract={goContract} onSignUp={handleSignUp} />}
       {mainTab === "hub" && route.view === "contract" && route.id && <ContractPageView contractId={route.id} config={c} onGoHub={goHub} onGoContract={goContract} onSignUp={handleSignUp} />}
       {mainTab === "admin" && <AdminView config={draftConfig} liveConfig={liveConfig} onChange={updateDraft} adminTab={adminTab} setAdminTab={setAdminTab} jsonText={jsonText} jsonError={jsonError} onJsonChange={handleJsonChange} currentUser={currentUser} onPublishOrSubmit={handlePublishOrSubmit} hasUnsaved={hasUnsaved} activeSection={activeSection} setActiveSection={setActiveSection} onGoSegment={goSegment} onGoContract={goContract} />}
@@ -851,116 +807,6 @@ const ORG_TYPE_TO_SEGMENT = {
 };
 
 // ─── Sign-Up Tray ─────────────────────────────────────────────────────────────
-// ─── Contact Tray ─────────────────────────────────────────────────────────────
-function ContactTray({ config, onClose }) {
-  const cc  = config?.corePages?.contact || {};
-  const sf  = config?.signupForm || {};
-  const [tab,          setTab]          = useState("business"); // "business" | "govedu"
-  const [industry,     setIndustry]     = useState("");
-  const [contactState, setContactState] = useState("");
-  const [email,        setEmail]        = useState("");
-  const [firstName,    setFirstName]    = useState("");
-  const [lastName,     setLastName]     = useState("");
-  const [phone,        setPhone]        = useState("");
-  const [orderQuote,   setOrderQuote]   = useState("");
-  const [message,      setMessage]      = useState("");
-  const [fileName,     setFileName]     = useState("");
-
-  const INDUSTRIES = (sf.orgTypes || []).map(o => o.label);
-  const showForm = tab === "business" ? !!industry : !!contactState;
-
-  return (
-    <div style={{ position: "fixed", inset: 0, zIndex: 3000, display: "flex", justifyContent: "flex-end" }} onClick={e => { if (e.target === e.currentTarget) onClose(); }}>
-      <div style={{ width: "100%", maxWidth: 480, background: T.white, boxShadow: "-4px 0 32px rgba(0,0,0,.18)", display: "flex", flexDirection: "column", animation: "slideInRight .28s ease", overflowY: "auto" }}>
-        {/* Header */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 24px 16px", borderBottom: `1px solid ${T.gray2}` }}>
-          <h2 style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 20, color: T.gray6 }}>{cc.trayTitle || "Contact Us"}</h2>
-          <button onClick={onClose} style={{ background: "none", border: "none", fontSize: 22, cursor: "pointer", color: T.gray5, lineHeight: 1 }}>×</button>
-        </div>
-
-        <div style={{ padding: "20px 24px", flex: 1 }}>
-          {/* Subtitle */}
-          <p style={{ fontSize: 14, color: T.gray6, marginBottom: 20, lineHeight: 1.6 }}>{cc.traySubtitle || "Tell us about your organization so we can direct you to the right team."}</p>
-
-          {/* Business / Gov/EDU tabs */}
-          <div style={{ display: "flex", border: `1px solid ${T.gray3}`, borderRadius: 4, marginBottom: 20, overflow: "hidden" }}>
-            {[
-              { id: "business", label: cc.trayTabBusiness || "Business",  icon: <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width="16" height="16"><rect x="2" y="7" width="16" height="11" rx="1"/><path d="M6 7V5a4 4 0 018 0v2"/></svg> },
-              { id: "govedu",   label: cc.trayTabGovEdu   || "Gov/EDU",   icon: <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width="16" height="16"><path d="M3 18V9l7-5 7 5v9"/><rect x="7" y="13" width="6" height="5"/></svg> },
-            ].map(t => (
-              <button key={t.id} onClick={() => { setTab(t.id); setIndustry(""); setContactState(""); }} style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "10px 14px", background: tab === t.id ? T.greenLight : T.white, border: "none", borderRight: t.id === "business" ? `1px solid ${T.gray3}` : "none", cursor: "pointer", fontWeight: tab === t.id ? 700 : 400, fontSize: 14, color: tab === t.id ? T.green : T.gray5, fontFamily: "Open Sans,sans-serif" }}>
-                {t.icon} {t.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Step 1: Business → Industry Type dropdown */}
-          {tab === "business" && (
-            <div style={{ position: "relative", marginBottom: 20 }}>
-              <select value={industry} onChange={e => setIndustry(e.target.value)} style={{ width: "100%", padding: "11px 36px 11px 14px", border: `1px solid ${T.gray3}`, borderRadius: 4, fontSize: 14, color: industry ? T.gray6 : T.gray4, appearance: "none", background: T.white, fontFamily: "Open Sans,sans-serif", cursor: "pointer" }}>
-                <option value="">Select Industry Type</option>
-                {INDUSTRIES.map(ind => <option key={ind} value={ind}>{ind}</option>)}
-              </select>
-              <div style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: T.gray5 }}>▾</div>
-            </div>
-          )}
-
-          {/* Step 1: Gov/EDU → State dropdown */}
-          {tab === "govedu" && (
-            <div style={{ position: "relative", marginBottom: 20 }}>
-              <select value={contactState} onChange={e => setContactState(e.target.value)} style={{ width: "100%", padding: "11px 36px 11px 14px", border: `1px solid ${T.gray3}`, borderRadius: 4, fontSize: 14, color: contactState ? T.gray6 : T.gray4, appearance: "none", background: T.white, fontFamily: "Open Sans,sans-serif", cursor: "pointer" }}>
-                <option value="">Select Your State</option>
-                {STATES.map(s => <option key={s} value={s}>{s}</option>)}
-              </select>
-              <div style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: T.gray5 }}>▾</div>
-            </div>
-          )}
-
-          {/* Step 2: Full form — shown after industry/state selected */}
-          {showForm && (
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              <TrayInput placeholder="Email Address"  value={email}      onChange={e => setEmail(e.target.value)}      type="email" />
-              <TrayInput placeholder="First Name"     value={firstName}  onChange={e => setFirstName(e.target.value)} />
-              <TrayInput placeholder="Last Name"      value={lastName}   onChange={e => setLastName(e.target.value)} />
-              <TrayInput placeholder="Phone Number"   value={phone}      onChange={e => setPhone(e.target.value)}      type="tel" />
-              <TrayInput placeholder="Order/Quote #"  value={orderQuote} onChange={e => setOrderQuote(e.target.value)} />
-              <div style={{ position: "relative" }}>
-                <textarea
-                  placeholder="Message"
-                  value={message}
-                  onChange={e => { if (e.target.value.length <= 2000) setMessage(e.target.value); }}
-                  rows={5}
-                  style={{ width: "100%", padding: "12px 14px", border: `1px solid ${T.gray3}`, borderRadius: 4, fontSize: 14, color: T.gray6, outline: "none", resize: "vertical", fontFamily: "'Open Sans',sans-serif", boxSizing: "border-box" }}
-                />
-                <div style={{ textAlign: "right", fontSize: 11, color: T.gray4, marginTop: 2 }}>{message.length}/2000</div>
-              </div>
-
-              {/* Disclaimer */}
-              <div style={{ display: "flex", alignItems: "flex-start", gap: 6, marginTop: 4 }}>
-                <span style={{ fontSize: 15, color: T.gray4, marginTop: 1 }}>ⓘ</span>
-                <span style={{ fontSize: 12, color: T.gray5, lineHeight: 1.5 }}>{cc.trayDisclaimer || "Please don't include credit card information in this form."}</span>
-              </div>
-
-              {/* Upload P.O. */}
-              <label style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, border: `1.5px dashed ${T.gray3}`, borderRadius: 4, padding: "13px 16px", cursor: "pointer", fontSize: 14, fontWeight: 600, color: T.bond }}>
-                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width="18" height="18"><path d="M10 13V4M6 7l4-4 4 4"/><path d="M3 16h14"/></svg>
-                {fileName || (cc.trayUploadLabel || "Upload P.O.")}
-                <input type="file" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx" style={{ display: "none" }} onChange={e => setFileName(e.target.files[0]?.name || "")} />
-              </label>
-              <div style={{ fontSize: 11, color: T.gray4, marginTop: -4 }}>{cc.trayUploadHint || "Supported file formats: jpg, png, pdf, doc or docx up to 5MB"}</div>
-
-              {/* Submit */}
-              <button style={{ width: "100%", background: T.green, color: T.white, border: "none", padding: 14, borderRadius: 4, fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif", marginTop: 8 }}>
-                {cc.traySubmitCta || "Submit"}
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function SignupTray({ signupPath, setSignupPath, onClose, config }) {
   // ── Account step state ──
   const [trayStep,          setTrayStep]          = useState("account"); // "account" | "orgInfo" | "billing"
@@ -2204,134 +2050,13 @@ const EPROCUREMENT_PLATFORMS = [
   { name: "EqualLevel",color: "#5B2D8E" }, { name: "Oracle",     color: "#C74634" },
 ];
 
-// ─── Studio Page Content ──────────────────────────────────────────────────────
-function StudioPageContent({ cp, headline, onOpenContact }) {
-  const STUDIO_SERVICES = [
-    { title: "Consultation\n& System Design",    body: "Unsure which kind of technology and equipment you need for your company or project? You've come to the right place.", svg: <svg viewBox="0 0 48 48" fill="none" stroke="#555" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="44" height="44"><rect x="6" y="6" width="22" height="16" rx="2"/><path d="M6 30h20M6 36h14"/><circle cx="36" cy="32" r="8"/><path d="M36 28v4l3 2"/></svg> },
-    { title: "Installation, System Integration", body: "The Studio offers a wide range of integration services to all market verticals of the media industry, from independent content creators to major broadcasters.", svg: <svg viewBox="0 0 48 48" fill="none" stroke="#555" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="44" height="44"><circle cx="12" cy="12" r="5"/><circle cx="36" cy="12" r="5"/><circle cx="24" cy="36" r="5"/><path d="M17 12h14M14.5 16.5l8 16M33.5 16.5l-8 16"/></svg> },
-    { title: "Technology Training",              body: "From a quick brush-up to crash intensives, Studio experts can bring your team up to speed on the latest innovations, fast.", svg: <svg viewBox="0 0 48 48" fill="none" stroke="#555" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="44" height="44"><rect x="6" y="8" width="36" height="26" rx="2"/><path d="M18 42h12M24 34v8M14 18l6 5-6 5M28 28h6"/></svg> },
-    { title: "Workshops and Seminars",           body: "Workshops and seminars are hosted in The Studio's staging area & B&H Event Space on an ongoing basis.", svg: <svg viewBox="0 0 48 48" fill="none" stroke="#555" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="44" height="44"><circle cx="16" cy="14" r="5"/><circle cx="32" cy="14" r="5"/><path d="M6 38c0-8 6-12 10-12h16c4 0 10 4 10 12M22 26v12"/></svg> },
-    { title: "Technology Demonstrations",        body: "Access a state-of-the-art testing ground for the latest technology to support digital cinema, live broadcast production, post-production, and emerging digital workflows.", svg: <svg viewBox="0 0 48 48" fill="none" stroke="#555" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="44" height="44"><rect x="8" y="12" width="32" height="20" rx="2"/><path d="M16 40h16M24 32v8"/><circle cx="36" cy="18" r="3" fill="#ddd"/></svg> },
-    { title: "Basic Testing and Experimentation",body: "The Studio team can boost your operation's efficiency by troubleshooting everything from components to entire systems.", svg: <svg viewBox="0 0 48 48" fill="none" stroke="#555" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="44" height="44"><path d="M18 6v16l-8 18h28L30 22V6"/><line x1="16" y1="14" x2="32" y2="14"/><circle cx="28" cy="34" r="2" fill="#ddd"/></svg> },
-  ];
-  const SOLUTION_ICONS = [
-    <svg key="0" viewBox="0 0 48 48" fill="none" stroke="#555" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="40" height="40"><rect x="6" y="10" width="36" height="24" rx="2"/><circle cx="24" cy="22" r="6"/><path d="M20 22l3 3 5-6"/></svg>,
-    <svg key="1" viewBox="0 0 48 48" fill="none" stroke="#555" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="40" height="40"><rect x="4" y="14" width="28" height="20" rx="2"/><path d="M32 20l10-4v16l-10-4"/><circle cx="18" cy="24" r="4"/></svg>,
-    <svg key="2" viewBox="0 0 48 48" fill="none" stroke="#555" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="40" height="40"><rect x="6" y="8" width="36" height="28" rx="2"/><path d="M14 20h20M14 28h12"/><circle cx="34" cy="28" r="5"/><path d="M32 26l2 2 4-3"/></svg>,
-    <svg key="3" viewBox="0 0 48 48" fill="none" stroke="#555" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="40" height="40"><path d="M24 8l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6zM10 34h28M16 40h16"/></svg>,
-    <svg key="4" viewBox="0 0 48 48" fill="none" stroke="#555" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="40" height="40"><rect x="8" y="16" width="32" height="20" rx="2"/><path d="M16 16v-4a8 8 0 0116 0v4M20 28h8M24 24v8"/></svg>,
-    <svg key="5" viewBox="0 0 48 48" fill="none" stroke="#555" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="40" height="40"><circle cx="24" cy="24" r="16"/><path d="M24 8v4M24 36v4M8 24h4M36 24h4"/><circle cx="24" cy="24" r="6"/></svg>,
-  ];
-  const BRANDS = ["Adobe","AJA","Angenieux","Anton Bauer","Apple","ARRI","Atomos","Autocue","Autoscript","Blackmagic","Canon","Cineo","Cooke","DJI","Evertz","Forecast","Fujinon","G-Technology","Hitachi","HP","HTC","Invaytiv","GaN Systems","LivePanels","LiveU","Miller","NewTek","NVIDIA","OConnor","Panasonic","PNY","RED","ROSS","Samsung","Schneider","Sennheiser","SilverCraft","SONY","Steadicam","SRS","Tektronix","Teradek","TVLogic","Vinten","ZEISS","Zotight"];
-
-  return (
-    <div>
-      {/* ── Two-column intro ── */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 48, marginBottom: 52, alignItems: "flex-start" }}>
-        <div style={{ borderRadius: 10, overflow: "hidden", minHeight: 300, background: "linear-gradient(135deg,#1a1a1a,#0d0d0d)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          {cp.heroImageUrl ? <img src={cp.heroImageUrl} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : <span style={{ fontSize: 64, opacity: .4 }}>📷</span>}
-        </div>
-        <div style={{ paddingTop: 8 }}>
-          <h1 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 28, fontWeight: 800, color: T.gray6, marginBottom: 20 }}>{headline}</h1>
-          <p style={{ fontSize: 15, color: T.gray6, lineHeight: 1.75, marginBottom: 24 }}>{cp.intro || ""}</p>
-          <button onClick={() => onOpenContact?.()} style={{ background: T.green, color: T.white, border: "none", padding: "12px 28px", borderRadius: 4, fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>
-            {cp.connectCta || "Connect with The Studio B&H"}
-          </button>
-        </div>
-      </div>
-
-      {/* ── Solutions for ── */}
-      <div style={{ textAlign: "center", marginBottom: 44 }}>
-        <h2 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 20, fontWeight: 800, color: T.gray6, marginBottom: 32 }}>{cp.solutionsTitle || "The Studio offers solutions for:"}</h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 16 }}>
-          {(cp.solutions || ["Digital Production","Broadcast Systems","Post Production","Technical Services","Leasing Solutions","Virtual Production"]).map((sol, i) => (
-            <div key={sol} style={{ textAlign: "center", padding: "16px 8px" }}>
-              <div style={{ display: "flex", justifyContent: "center", marginBottom: 12 }}>{SOLUTION_ICONS[i] || SOLUTION_ICONS[0]}</div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: T.gray6, lineHeight: 1.4 }}>{sol}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ── STC Section ── */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 48, marginBottom: 56, alignItems: "flex-start" }}>
-        <div style={{ borderRadius: 10, overflow: "hidden", minHeight: 300, background: "linear-gradient(135deg,#1a1a2e,#16213e)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          {cp.stcImageUrl ? <img src={cp.stcImageUrl} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : <span style={{ fontSize: 56, opacity: .5 }}>🎚</span>}
-        </div>
-        <div style={{ paddingTop: 8 }}>
-          <h2 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 24, fontWeight: 800, color: T.gray6, marginBottom: 16 }}>{cp.stcHeadline || "The Studio Technology Center (STC)"}</h2>
-          <p style={{ fontSize: 15, color: T.gray6, lineHeight: 1.75 }}>{cp.stcBody || ""}</p>
-        </div>
-      </div>
-
-      {/* ── What The Studio Can Do ── */}
-      <div style={{ marginBottom: 56 }}>
-        <h2 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 22, fontWeight: 800, color: T.gray6, textAlign: "center", marginBottom: 32 }}>{cp.servicesTitle || "What The Studio Can Do For You"}</h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 2, background: T.gray2 }}>
-          {STUDIO_SERVICES.map(svc => (
-            <div key={svc.title} style={{ background: T.white, padding: "28px 24px" }}>
-              <div style={{ display: "flex", justifyContent: "center", marginBottom: 14 }}>{svc.svg}</div>
-              <div style={{ fontWeight: 700, fontSize: 14, color: T.gray6, marginBottom: 10, textAlign: "center", whiteSpace: "pre-line", lineHeight: 1.4 }}>{svc.title}</div>
-              <div style={{ fontSize: 13, color: T.gray5, lineHeight: 1.65, textAlign: "center" }}>{svc.body}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ── 3000+ Brands ── */}
-      <div style={{ padding: "48px 40px", margin: "0 -40px 56px" }}>
-        <h2 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 22, fontWeight: 800, color: T.gray6, textAlign: "center", marginBottom: 8 }}>{cp.brandsTitle || "3000+ Brands"}</h2>
-        <p style={{ fontSize: 14, color: T.gray5, textAlign: "center", marginBottom: 36 }}>{cp.brandsSubtitle || "Choose from nearly half a million items, in stock every day!"}</p>
-        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "12px 28px" }}>
-          {BRANDS.map(b => <span key={b} style={{ fontSize: 13, fontWeight: 700, color: T.gray5, fontFamily: "Montserrat,sans-serif" }}>{b}</span>)}
-        </div>
-      </div>
-
-      {/* ── Who Needs The Studio ── */}
-      <div style={{ background: T.gray1, padding: "52px 40px", margin: "0 -40px 0" }}>
-        <h2 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 22, fontWeight: 800, color: T.gray6, textAlign: "center", marginBottom: 16 }}>{cp.whoTitle || "Who Needs The Studio B&H?"}</h2>
-        <p style={{ fontSize: 15, color: T.gray6, lineHeight: 1.75, textAlign: "center", maxWidth: 780, margin: "0 auto 32px" }}>{cp.whoBody || ""}</p>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "12px 24px", maxWidth: 780, margin: "0 auto 48px" }}>
-          {(cp.whoAudience || ["TV Networks","Production Companies","Equipment Rental Companies","Corporations","Media Publishers","Film & TV Professionals","News Organizations","Faith"]).map(a => (
-            <div key={a} style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <svg viewBox="0 0 20 20" fill="none" stroke={T.green} strokeWidth="2" width="18" height="18"><circle cx="10" cy="10" r="8"/><polyline points="7 10 9 12 14 8"/></svg>
-              <span style={{ fontSize: 14, fontWeight: 600, color: T.gray6 }}>{a}</span>
-            </div>
-          ))}
-        </div>
-        {/* ── Stay in the Know ── */}
-        <div style={{ textAlign: "center", borderTop: `1px solid ${T.gray2}`, paddingTop: 48 }}>
-          <h2 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 22, fontWeight: 800, color: T.gray6, marginBottom: 12 }}>{cp.socialTitle || "Stay in the Know"}</h2>
-          <p style={{ fontSize: 14, color: T.gray5, lineHeight: 1.6, maxWidth: 500, margin: "0 auto 28px" }}>{cp.socialBody || "Connect with our community and tap into the latest news on enterprise technology for media professionals."}</p>
-          <div style={{ display: "flex", justifyContent: "center", gap: 32 }}>
-            {[
-              <svg key="ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="28" height="28"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>,
-              <svg key="fb" viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>,
-              <svg key="x"  viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.261 5.631 5.903-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>,
-              <svg key="li" viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>,
-            ].map((icon, i) => <span key={i} style={{ color: T.gray5, cursor: "pointer" }}>{icon}</span>)}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function StaticPageView({ pageId, config: c, onGoHub, onGoSegment, onGoContract, onGoStatic, onSignUp, onOpenContact }) {
+function StaticPageView({ pageId, config: c, onGoHub, onGoSegment, onGoContract, onSignUp }) {
   const pg = STATIC_PAGES[pageId];
   const cp = c.corePages?.[pageId] || {};
   if (!pg) return <div style={{ padding: 40, textAlign: "center" }}>Page not found.</div>;
   const headline = cp.headline || pg.headline;
   return (
     <div>
-      {pageId === "contracts" || pageId === "eprocurement" || pageId === "studio" || pageId === "it_services" ? (
-        <div style={{ background: T.white, borderBottom: `1px solid ${T.gray2}`, padding: "10px 24px", display: "flex", gap: 6, fontSize: 12, alignItems: "center" }}>
-          <button onClick={onGoHub} style={{ background: "none", border: "none", cursor: "pointer", color: T.bond, fontWeight: 600 }}>Home</button>
-          <span style={{ color: T.gray4 }}>›</span>
-          <span style={{ color: T.gray5 }}>{headline}</span>
-        </div>
-      ) : (
-      <>
       <div style={{ background: T.white, borderBottom: `1px solid ${T.gray2}`, padding: "8px 24px", display: "flex", gap: 6, fontSize: 12, alignItems: "center" }}>
         <button onClick={onGoHub} style={{ background: "none", border: "none", cursor: "pointer", color: T.bond, fontWeight: 600 }}>Home</button>
         <span style={{ color: T.gray4 }}>›</span>
@@ -2356,65 +2081,45 @@ function StaticPageView({ pageId, config: c, onGoHub, onGoSegment, onGoContract,
           </div>
         </div>
       </HeroBanner>
-      </>
-      )}
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: (pageId === "contracts" || pageId === "eprocurement" || pageId === "studio" || pageId === "it_services") ? "52px 40px 0" : "40px 24px" }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "40px 24px" }}>
         {(pageId === "contracts" || pageId === "contracts_eprocurement") && (
           <div>
-            {/* ── Two-column intro: image left, copy right ── */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 48, marginBottom: 56, alignItems: "flex-start" }}>
-              {/* Left: photo placeholder */}
-              <div style={{ borderRadius: 10, overflow: "hidden", background: T.gray2, minHeight: 320, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                {cp.heroImageUrl
-                  ? <img src={cp.heroImageUrl} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                  : <div style={{ width: "100%", minHeight: 320, background: "linear-gradient(135deg, #e8e4e0 0%, #d4cfc9 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <span style={{ fontSize: 48, opacity: .35 }}>🖼</span>
-                    </div>
-                }
-              </div>
-              {/* Right: heading + body + CTA */}
-              <div style={{ paddingTop: 8 }}>
-                <h1 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 28, fontWeight: 800, color: T.gray6, marginBottom: 20 }}>{headline}</h1>
-                <p style={{ fontSize: 15, color: T.gray6, lineHeight: 1.75, marginBottom: 16 }}>{cp.intro || "B&H B2B understands that today's procurement demands competitively bid, publicly awarded, and compliant contracts."}</p>
-                {(cp.body || "").split("\n\n").filter(Boolean).map((para, i) => (
-                  <p key={i} style={{ fontSize: 15, color: T.gray6, lineHeight: 1.75, marginBottom: 16 }}>{para}</p>
+            <div style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: 28, marginBottom: 48, alignItems: "flex-start" }}>
+              <div style={{ width: 100, height: 100, background: T.green, borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 44 }}>📋</div>
+              <div>
+                <h2 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 18, fontWeight: 700, color: T.green, marginBottom: 12 }}>Direct Contracts</h2>
+                <p style={{ fontSize: 14, color: T.gray6, lineHeight: 1.7, marginBottom: 8 }}>{cp.intro || "B&H understands that in order to thrive and grow, your business purchasing needs to be easy, seamless and customized for you."}</p>
+                {(cp.body || "That's why we offer many contract and electronic purchasing options. Our experienced team will quickly turn around custom punch out, checkout portals and more.\n\nFor State and Local Government and educational institutions, we offer a variety of publicly-awarded and competitively-bid contracts so you can ensure compliance and best value.\n\nFor large corporate customers, we offer direct pricing agreements.").split("\n\n").map((para, i) => (
+                  <p key={i} style={{ fontSize: 14, color: T.gray6, lineHeight: 1.7, marginBottom: 8 }}>{para}</p>
                 ))}
-                <button onClick={() => onOpenContact?.()} style={{ marginTop: 8, background: T.white, border: `1.5px solid ${T.green}`, color: T.green, padding: "10px 24px", borderRadius: 4, fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>
-                  {cp.contactCta || "Contact Us"}
-                </button>
+                <p style={{ fontSize: 14, color: T.gray6, lineHeight: 1.7, marginBottom: 20 }}>Please contact our contract team at <span style={{ color: T.bond, fontWeight: 600 }}>{cp.contractEmail || "b2bcontracts@bhphoto.com"}</span></p>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 24 }}>
+                  <div style={{ border: `1px solid ${T.gray2}`, borderRadius: 8, padding: 20 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
+                      <div style={{ width: 36, height: 36, background: T.bond, borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>💡</div>
+                      <div style={{ fontWeight: 700, fontSize: 14, color: T.gray6 }}>Small or medium-sized business?</div>
+                    </div>
+                    <p style={{ fontSize: 13, color: T.gray5, marginBottom: 14 }}>Sign up for B&H B2B for Small Business and start purchasing today.</p>
+                    <button onClick={() => onGoSegment("smb")} style={{ background: T.white, border: `1.5px solid ${T.green}`, color: T.green, padding: "8px 20px", borderRadius: 4, fontWeight: 700, fontSize: 13, cursor: "pointer" }}>Learn More</button>
+                  </div>
+                  <div style={{ border: `1px solid ${T.gray2}`, borderRadius: 8, padding: 20 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
+                      <div style={{ width: 36, height: 36, background: T.bond, borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>🏢</div>
+                      <div style={{ fontWeight: 700, fontSize: 14, color: T.gray6 }}>Over 500 employees? Don't need a contract?</div>
+                    </div>
+                    <p style={{ fontSize: 13, color: T.gray5, marginBottom: 14 }}>Check out B&H Corporate, our instant sign-up, self service purchasing solution.</p>
+                    <button onClick={() => onGoSegment("corporate")} style={{ background: T.white, border: `1.5px solid ${T.green}`, color: T.green, padding: "8px 20px", borderRadius: 4, fontWeight: 700, fontSize: 13, cursor: "pointer" }}>Learn More</button>
+                  </div>
+                </div>
               </div>
             </div>
-
-            {/* ── Segment cards ── */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0, marginBottom: 0, borderTop: `1px solid ${T.gray2}`, borderLeft: `1px solid ${T.gray2}` }}>
-              {[
-                { heading: cp.card1Heading || "Small or medium-sized business?", body: cp.card1Body || "Sign up for B&H B2B for Small Business and start purchasing today.", cta: cp.card1Cta || "Learn More About Small Business", seg: cp.card1Segment || "smb" },
-                { heading: cp.card2Heading || "Over 500 employees & no contract needed?", body: cp.card2Body || "Check out B&H Corporate, our instant sign-up, self service purchasing solution.", cta: cp.card2Cta || "Learn More About Corporate", seg: cp.card2Segment || "corporate" },
-              ].map((card, i) => (
-                <div key={i} style={{ padding: "36px 40px", borderRight: `1px solid ${T.gray2}`, borderBottom: `1px solid ${T.gray2}` }}>
-                  <h3 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 16, fontWeight: 800, color: T.gray6, marginBottom: 10 }}>{card.heading}</h3>
-                  <p style={{ fontSize: 14, color: T.gray5, lineHeight: 1.65, marginBottom: 20 }}>{card.body}</p>
-                  <button onClick={() => onGoSegment(card.seg)} style={{ background: T.white, border: `1.5px solid ${T.green}`, color: T.green, padding: "9px 20px", borderRadius: 4, fontWeight: 700, fontSize: 13, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>
-                    {card.cta}
+            <div style={{ background: T.gray1, borderRadius: 10, padding: 24 }}>
+              <h3 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 15, fontWeight: 700, color: T.gray6, marginBottom: 16 }}>Browse Cooperative Contracts by Segment</h3>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+                {c.signupForm.orgTypes.slice(0, 8).map(ot => (
+                  <button key={ot.id} onClick={() => onGoSegment(ot.segment)} style={{ background: T.white, border: `1px solid ${T.gray3}`, borderRadius: 6, padding: "8px 16px", fontSize: 12, fontWeight: 600, color: T.bond, cursor: "pointer" }}>
+                    {ot.icon} {ot.label}
                   </button>
-                </div>
-              ))}
-            </div>
-
-            {/* ── Why We're the Professional's Source ── */}
-            <div style={{ background: T.bondLight, borderRadius: 0, padding: "52px 40px", marginTop: 0 }}>
-              <h2 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 22, fontWeight: 800, color: T.gray6, textAlign: "center", marginBottom: 40 }}>Why We're the Professional's Source</h2>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 24 }}>
-                {[
-                  { label: "Next-Gen Technology:\nIn Stock, Always", svg: <svg viewBox="0 0 56 56" fill="none" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="44" height="44"><rect x="6" y="10" width="44" height="30" rx="2"/><rect x="18" y="40" width="20" height="4"/><line x1="13" y1="44" x2="43" y2="44"/><rect x="10" y="14" width="8" height="6" rx="1"/><rect x="10" y="24" width="8" height="6" rx="1"/></svg> },
-                  { label: "Fast, Free Shipping",           svg: <svg viewBox="0 0 56 56" fill="none" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="44" height="44"><rect x="4" y="18" width="30" height="20" rx="2"/><path d="M34 26h10l6 8v8h-16V26z"/><circle cx="14" cy="42" r="4"/><circle cx="42" cy="42" r="4"/></svg> },
-                  { label: "Amazing Prices",                svg: <svg viewBox="0 0 56 56" fill="none" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="44" height="44"><circle cx="28" cy="28" r="22"/><path d="M28 14v4M28 38v4M18 22h12a4 4 0 010 8H22a4 4 0 000 8h14"/></svg> },
-                  { label: "Expert Advise with\na Personal Touch", svg: <svg viewBox="0 0 56 56" fill="none" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="44" height="44"><path d="M20 34c0-6 16-6 16 0"/><circle cx="28" cy="22" r="7"/><path d="M10 48s2-8 10-10M46 48s-2-8-10-10"/></svg> },
-                ].map(f => (
-                  <div key={f.label} style={{ textAlign: "center", padding: "8px 12px" }}>
-                    <div style={{ display: "flex", justifyContent: "center", marginBottom: 16 }}>{f.svg}</div>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: T.gray6, whiteSpace: "pre-line", lineHeight: 1.5 }}>{f.label}</div>
-                  </div>
                 ))}
               </div>
             </div>
@@ -2422,150 +2127,107 @@ function StaticPageView({ pageId, config: c, onGoHub, onGoSegment, onGoContract,
         )}
         {(pageId === "eprocurement") && (
           <div>
-            {/* ── Two-column intro: image left, copy right ── */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 48, marginBottom: 56, alignItems: "flex-start" }}>
-              <div style={{ borderRadius: 10, overflow: "hidden", minHeight: 320, background: T.gray2, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                {cp.heroImageUrl
-                  ? <img src={cp.heroImageUrl} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                  : <div style={{ width: "100%", minHeight: 320, background: "linear-gradient(135deg,#e8e4e0,#d4cfc9)", display: "flex", alignItems: "center", justifyContent: "center" }}><span style={{ fontSize: 48, opacity: .35 }}>🖼</span></div>
-                }
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, marginBottom: 40 }}>
+              <div>
+                <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 20 }}>
+                  <div style={{ width: 64, height: 64, background: T.bond, borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 32 }}>🔗</div>
+                  <h2 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 20, fontWeight: 700, color: T.bond }}>eProcurement</h2>
+                </div>
+                <p style={{ fontSize: 14, color: T.gray6, lineHeight: 1.7, marginBottom: 10 }}>B&H currently integrates with over 40 different eProcurement platforms such as Ariba, SAP, Jaggaer, ESM, Unimarket, Coupa, Oracle and more across hundreds of satisfied clients.</p>
+                <p style={{ fontSize: 14, color: T.gray6, lineHeight: 1.7, marginBottom: 10 }}>We can integrate with any and all eProcurement solutions. Plus, we offer cXML and EDI for POs and invoicing.</p>
+                <p style={{ fontSize: 14, color: T.gray6, lineHeight: 1.7, marginBottom: 10 }}>Unsure where to start? Not to worry: eProcurement at B&H is fast and free! Our team will be here to guide you every step of the way.</p>
+                <p style={{ fontSize: 14, color: T.gray6, lineHeight: 1.7, marginBottom: 24 }}>Contact our eProcurement team at <span style={{ color: T.bond, fontWeight: 600 }}>eprocurement@bhphoto.com</span></p>
+                <button onClick={onSignUp} style={{ background: T.green, color: T.white, border: "none", padding: "12px 24px", borderRadius: 6, fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>Get Started with eProcurement →</button>
               </div>
-              <div style={{ paddingTop: 8 }}>
-                <h1 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 28, fontWeight: 800, color: T.gray6, marginBottom: 20 }}>{headline}</h1>
-                <p style={{ fontSize: 15, color: T.gray6, lineHeight: 1.75, marginBottom: 16 }}>{cp.intro || ""}</p>
-                {(cp.body || "").split("\n\n").filter(Boolean).map((para, i) => (
-                  <p key={i} style={{ fontSize: 15, color: T.gray6, lineHeight: 1.75, marginBottom: 16 }}>{para}</p>
-                ))}
-                <button onClick={() => onOpenContact?.()} style={{ marginTop: 8, background: T.white, border: `1.5px solid ${T.green}`, color: T.green, padding: "10px 24px", borderRadius: 4, fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>
-                  {cp.contactCta || "Contact Us"}
-                </button>
-              </div>
-            </div>
-
-            {/* ── Benefits ── */}
-            <div style={{ background: T.greenLight, padding: "52px 40px", margin: "0 -40px" }}>
-              <h2 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 22, fontWeight: 800, color: T.gray6, textAlign: "center", marginBottom: 44 }}>{cp.benefitsTitle || "Benefits of eProcurement"}</h2>
-              <div style={{ display: "flex", justifyContent: "center", gap: 40, flexWrap: "wrap" }}>
-                {(cp.benefits || ["Lower Costs","Transparent Spending","Less Paperwork","Fewer Errors","Faster Transactions"]).map(b => (
-                  <div key={b} style={{ textAlign: "center", minWidth: 100 }}>
-                    <div style={{ width: 52, height: 52, borderRadius: "50%", border: `2px solid ${T.green}`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 14px" }}>
-                      <svg viewBox="0 0 24 24" fill="none" stroke={T.green} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="22" height="22"><polyline points="20 6 9 17 4 12"/></svg>
+              <div>
+                <h3 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 16, fontWeight: 700, color: T.gray6, marginBottom: 16 }}>We Support All Major Platforms</h3>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                  {EPROCUREMENT_PLATFORMS.map(p => (
+                    <div key={p.name} style={{ background: T.white, border: `1px solid ${T.gray2}`, borderRadius: 6, padding: "16px 12px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <span style={{ fontWeight: 800, fontSize: 14, color: p.color, fontFamily: "Montserrat,sans-serif" }}>{p.name}</span>
                     </div>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: T.gray6, lineHeight: 1.4, whiteSpace: "pre-line" }}>{b}</div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
-
-            {/* ── Platforms ── */}
-            <div style={{ padding: "56px 40px 48px", margin: "0 -40px", background: T.white }}>
-              <h2 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 22, fontWeight: 800, color: T.gray6, textAlign: "center", marginBottom: 44 }}>{cp.platformsTitle || "We Support All Major Platforms"}</h2>
-              <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "center", gap: "24px 48px", marginBottom: 48 }}>
-                {EPROCUREMENT_PLATFORMS.map(p => (
-                  <div key={p.name} style={{ display: "flex", alignItems: "center", justifyContent: "center", minWidth: 100 }}>
-                    <span style={{ fontWeight: 900, fontSize: 18, color: p.color, fontFamily: "Montserrat,sans-serif", letterSpacing: p.name === "JAGGAER" ? 1 : 0 }}>{p.name}</span>
-                  </div>
-                ))}
-              </div>
-              <div style={{ textAlign: "center" }}>
-                <p style={{ fontSize: 14, color: T.gray5, marginBottom: 16 }}>{cp.platformsFooter || "Don't see the platform your organization uses?"}</p>
-                <button onClick={() => onOpenContact?.()} style={{ background: T.white, border: `1.5px solid ${T.green}`, color: T.green, padding: "10px 24px", borderRadius: 4, fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>
-                  {cp.platformsCta || "Send Us a Message"}
-                </button>
-              </div>
-            </div>
-
-            {/* ── Why We're the Professional's Source ── */}
-            <div style={{ background: T.bondLight, padding: "52px 40px", margin: "0 -40px" }}>
-              <h2 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 22, fontWeight: 800, color: T.gray6, textAlign: "center", marginBottom: 40 }}>Why We're the Professional's Source</h2>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 24 }}>
-                {[
-                  { label: "Next-Gen Technology:\nIn Stock, Always", svg: <svg viewBox="0 0 56 56" fill="none" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="44" height="44"><rect x="6" y="10" width="44" height="30" rx="2"/><rect x="18" y="40" width="20" height="4"/><line x1="13" y1="44" x2="43" y2="44"/><rect x="10" y="14" width="8" height="6" rx="1"/><rect x="10" y="24" width="8" height="6" rx="1"/></svg> },
-                  { label: "Fast, Free Shipping", svg: <svg viewBox="0 0 56 56" fill="none" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="44" height="44"><rect x="4" y="18" width="30" height="20" rx="2"/><path d="M34 26h10l6 8v8h-16V26z"/><circle cx="14" cy="42" r="4"/><circle cx="42" cy="42" r="4"/></svg> },
-                  { label: "Amazing Prices", svg: <svg viewBox="0 0 56 56" fill="none" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="44" height="44"><circle cx="28" cy="28" r="22"/><path d="M28 14v4M28 38v4M18 22h12a4 4 0 010 8H22a4 4 0 000 8h14"/></svg> },
-                  { label: "Expert Advise with\na Personal Touch", svg: <svg viewBox="0 0 56 56" fill="none" stroke="#333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="44" height="44"><path d="M20 34c0-6 16-6 16 0"/><circle cx="28" cy="22" r="7"/><path d="M10 48s2-8 10-10M46 48s-2-8-10-10"/></svg> },
-                ].map(f => (
-                  <div key={f.label} style={{ textAlign: "center", padding: "8px 12px" }}>
-                    <div style={{ display: "flex", justifyContent: "center", marginBottom: 16 }}>{f.svg}</div>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: T.gray6, whiteSpace: "pre-line", lineHeight: 1.5 }}>{f.label}</div>
-                  </div>
-                ))}
-              </div>
+            <div style={{ background: T.bondLight, border: `1px solid ${T.bond}`, borderRadius: 10, padding: "20px 24px" }}>
+              <div style={{ fontWeight: 700, fontSize: 14, color: T.bond, marginBottom: 8 }}>Fast. Free. Fully Supported.</div>
+              <p style={{ fontSize: 13, color: T.gray6, lineHeight: 1.7 }}>Setting up eProcurement with B&H is fast and free. Our dedicated team will guide you through every step of the integration — from initial setup to go-live — at no cost to your organization.</p>
             </div>
           </div>
         )}
-        {pageId === "studio" && <StudioPageContent cp={cp} headline={headline} onOpenContact={onOpenContact} />}
-        {pageId === "it_services" && (
+        {pageId === "studio" && (
           <div>
-            {/* ── Two-column intro ── */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 48, marginBottom: 56, alignItems: "flex-start" }}>
-              <div style={{ borderRadius: 10, overflow: "hidden", minHeight: 300, background: "linear-gradient(135deg,#1a2a1a,#0a1a2a)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                {cp.heroImageUrl
-                  ? <img src={cp.heroImageUrl} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                  : <span style={{ fontSize: 64, opacity: .4 }}>🖥</span>
-                }
+            <p style={{ fontSize: 16, color: T.gray6, lineHeight: 1.7, marginBottom: 32, maxWidth: 800 }}>The Studio specializes in completely customized applications and installations. This is where form meets function, for real. No matter how complex your project or requirements, our experts will work with you to determine the most appropriate equipment and solutions.</p>
+            <h3 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 16, fontWeight: 700, color: T.gray6, marginBottom: 16 }}>The Studio Offers Solutions For:</h3>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 16, marginBottom: 40 }}>
+              {["Digital Camera Production", "Broadcasting & Streaming", "Studio & ENG", "Editing, Color Grading & Post-Production", "System Design & Implementation", "Virtual Production"].map(s => (
+                <div key={s} style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 18px", background: T.white, border: `1px solid ${T.gray2}`, borderRadius: 8, fontSize: 13, fontWeight: 600, color: T.gray6 }}>🎬 {s}</div>
+              ))}
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, marginBottom: 40 }}>
+              <div>
+                <h3 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 18, fontWeight: 700, color: T.gray6, marginBottom: 12 }}>The Studio Technology Center (STC)</h3>
+                <p style={{ fontSize: 14, color: T.gray6, lineHeight: 1.7, marginBottom: 10 }}>Building on B&H's long history of superior service, The Studio Technology Center is a unique solution-based environment dedicated to all professional media markets.</p>
+                <p style={{ fontSize: 14, color: T.gray6, lineHeight: 1.7, marginBottom: 10 }}>The STC is a fully operational studio with an extensive array of high-end products and digital workflows — available to anyone. Reach out to schedule an appointment.</p>
+                <p style={{ fontSize: 14, color: T.gray5 }}>📞 212.465.0106 · <span style={{ color: T.bond, cursor: "pointer" }}>contact us online</span></p>
               </div>
-              <div style={{ paddingTop: 8 }}>
-                <h1 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 28, fontWeight: 800, color: T.gray6, marginBottom: 20 }}>{headline}</h1>
-                <p style={{ fontSize: 15, color: T.gray6, lineHeight: 1.75, marginBottom: 28 }}>{cp.intro || ""}</p>
-                <button onClick={() => onOpenContact?.()} style={{ background: T.green, color: T.white, border: "none", padding: "12px 28px", borderRadius: 4, fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>
-                  {cp.contactCta || "Contact Us"}
-                </button>
+              <div style={{ background: "linear-gradient(135deg,#1a1a1a,#2a1a1a)", borderRadius: 10, minHeight: 200, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <span style={{ fontSize: 48 }}>🎚</span>
               </div>
             </div>
-
-            {/* ── 3×2 Service cards ── */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20, marginBottom: 0 }}>
+            <h3 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 16, fontWeight: 700, color: T.gray6, marginBottom: 16 }}>What The Studio Can Do for You</h3>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
               {[
-                { title: "IT Integration Services\n(NYC Metro Area only)", body: "Outsource your next IT project to B&H and free up valuable resources for business-critical and daily operations. We offer end point installation as well as deployment services so you can integrate new technology acquisitions without disruption.", svg: <svg viewBox="0 0 56 56" fill="none" stroke="#555" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="44" height="44"><circle cx="14" cy="28" r="6"/><circle cx="42" cy="14" r="6"/><circle cx="42" cy="42" r="6"/><path d="M20 28h10M36 17l-10 9M36 39l-10-9"/></svg> },
-                { title: "Auto Enrollment",                              body: "Streamline your network with company-wide updates and device enrollments that are auto-synced to your management systems.", svg: <svg viewBox="0 0 56 56" fill="none" stroke="#555" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="44" height="44"><circle cx="28" cy="28" r="18"/><path d="M28 10v18l10 6"/><circle cx="28" cy="28" r="4" fill="#eee"/></svg> },
-                { title: "Asset Tagging",                                body: "Get your equipment pre-tagged or labeled with your company information (such as phone, serial and department numbers), including custom barcode labels.", svg: <svg viewBox="0 0 56 56" fill="none" stroke="#555" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="44" height="44"><rect x="10" y="8" width="28" height="40" rx="2"/><path d="M18 20h12M18 28h12M18 36h8"/><rect x="32" y="30" width="14" height="14" rx="2"/><path d="M36 34v6M32 37h8"/></svg> },
-                { title: "Hardware & Mobile Device\nConfiguration",      body: "Get your gear delivered with extra memory, NICs and video cards already installed, hard drives pre-formatted, and more.", svg: <svg viewBox="0 0 56 56" fill="none" stroke="#555" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="44" height="44"><rect x="6" y="12" width="34" height="22" rx="2"/><path d="M14 42h20M24 34v8"/><rect x="38" y="24" width="12" height="18" rx="2"/><path d="M41 28h6M41 32h4"/></svg> },
-                { title: "Equipment Engraving & Etching",                body: "Add prestige and brand awareness to your office equipment with custom logos, company names and titles, etc.", svg: <svg viewBox="0 0 56 56" fill="none" stroke="#555" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="44" height="44"><path d="M14 42l4-4 20-20-4-4L14 34z"/><path d="M34 14l8 8"/><path d="M38 10l4 4-2 2-4-4z"/><path d="M12 44l2-4 2 2z"/></svg> },
-                { title: "Kitting & Accessory Management",               body: "Have end-to-end solutions, hardware and essential accessories delivered to your company's branch locations, remote offices and individuals.", svg: <svg viewBox="0 0 56 56" fill="none" stroke="#555" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" width="44" height="44"><rect x="8" y="20" width="40" height="28" rx="2"/><path d="M20 20v-6a8 8 0 0116 0v6"/><path d="M8 32h40"/><circle cx="28" cy="38" r="3"/></svg> },
-              ].map(svc => (
-                <div key={svc.title} style={{ background: T.greenLight, borderRadius: 10, padding: "28px 24px", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
-                  <div style={{ width: 72, height: 72, borderRadius: "50%", background: T.white, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 18 }}>
-                    {svc.svg}
-                  </div>
-                  <div style={{ fontWeight: 700, fontSize: 14, color: T.gray6, marginBottom: 12, whiteSpace: "pre-line", lineHeight: 1.4 }}>{svc.title}</div>
-                  <div style={{ fontSize: 13, color: T.gray5, lineHeight: 1.65 }}>{svc.body}</div>
+                { icon: "💡", title: "Consultation & System Design", body: "Unsure which kind of technology and equipment you need for your project? You've come to the right place." },
+                { icon: "🔧", title: "Installation, System Integration", body: "The Studio offers a range of integration services to all market verticals of the media industry." },
+                { icon: "📚", title: "Technology Training", body: "From a quick brush-up to crash intensives, Studio experts can bring your team up to speed on the latest innovations." },
+              ].map(item => (
+                <div key={item.title} style={{ background: T.white, border: `1px solid ${T.gray2}`, borderRadius: 8, padding: 20 }}>
+                  <div style={{ fontSize: 28, marginBottom: 10 }}>{item.icon}</div>
+                  <div style={{ fontWeight: 700, fontSize: 14, color: T.gray6, marginBottom: 8 }}>{item.title}</div>
+                  <div style={{ fontSize: 13, color: T.gray5, lineHeight: 1.6 }}>{item.body}</div>
                 </div>
               ))}
             </div>
-
-            {/* ── Apple section ── */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0, marginTop: 56, background: T.white, border: `1px solid ${T.gray2}`, borderRadius: 10, overflow: "hidden" }}>
-              {/* Left: image + text */}
-              <div style={{ padding: "40px 36px" }}>
-                <div style={{ borderRadius: 8, overflow: "hidden", marginBottom: 28, background: "#1a1a1a", minHeight: 180, display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
-                  {cp.appleImageUrl
-                    ? <img src={cp.appleImageUrl} alt="" style={{ width: "100%", objectFit: "cover" }} />
-                    : <span style={{ fontSize: 56, opacity: .5 }}>🍎</span>
-                  }
-                  <div style={{ position: "absolute", top: 14, left: 14, background: T.white, borderRadius: 6, padding: "5px 12px", display: "flex", alignItems: "center", gap: 6 }}>
-                    <span style={{ fontSize: 14 }}>🍎</span>
-                    <span style={{ fontSize: 11, fontWeight: 700, color: T.gray6 }}>Authorized<br/>Reseller</span>
-                  </div>
+          </div>
+        )}
+        {pageId === "it_services" && (
+          <div>
+            <p style={{ fontSize: 16, color: T.gray6, lineHeight: 1.7, marginBottom: 36, maxWidth: 800 }}>B&H B2B offers a full suite of extended support and integration services for your business. From automated updates to custom installations, equipment tagging and more, our team of trained professionals go above and beyond to help you succeed.</p>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24, marginBottom: 40 }}>
+              {[
+                { icon: "🔗", title: "IT Integration Services", sub: "(NYC Metro Area Only)", body: "Outsource your next IT project to B&H and free up valuable resources for business-critical daily operations." },
+                { icon: "⚙️", title: "Auto Enrollment", body: "Streamline your network with company-wide updates and device enrollments that are auto-synced to your management systems." },
+                { icon: "🏷", title: "Asset Tagging", body: "Get your equipment pre-tagged with your company information including phone, serial and department number labels." },
+                { icon: "💻", title: "Hardware & Mobile Device Configuration", body: "Get your gear delivered with extra memory, NICs and video cards installed, hard drives pre-formatted, and more." },
+                { icon: "✏️", title: "Equipment Engraving & Etching", body: "Add prestige and brand awareness to your office equipment with custom logos, company names and titles." },
+                { icon: "📦", title: "Kitting & Accessory Management", body: "End-to-end solutions, hardware and accessories delivered to your company's branch locations, remote offices and individuals." },
+              ].map(item => (
+                <div key={item.title} style={{ background: T.white, border: `1px solid ${T.gray2}`, borderRadius: 8, padding: 20 }}>
+                  <div style={{ fontSize: 28, marginBottom: 8 }}>{item.icon}</div>
+                  <div style={{ fontWeight: 700, fontSize: 14, color: T.gray6, marginBottom: item.sub ? 2 : 8 }}>{item.title}</div>
+                  {item.sub && <div style={{ fontSize: 11, fontWeight: 700, color: T.scarlet, marginBottom: 8 }}>{item.sub}</div>}
+                  <div style={{ fontSize: 13, color: T.gray5, lineHeight: 1.6 }}>{item.body}</div>
                 </div>
-                <h2 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 22, fontWeight: 800, color: T.gray6, marginBottom: 10 }}>{cp.appleHeadline || "Enroll with Apple Enterprise Support Solutions"}</h2>
-                <div style={{ fontSize: 12, fontWeight: 700, color: T.gray5, marginBottom: 16 }}>{cp.appleResellerId || "Apple School Manager & Apple Business Manager Reseller ID: 101C20E0"}</div>
-                <p style={{ fontSize: 14, color: T.gray6, lineHeight: 1.75, marginBottom: 24 }}>{cp.appleBody || ""}</p>
-                <button style={{ background: T.white, border: `1.5px solid ${T.gray4}`, color: T.gray6, padding: "10px 24px", borderRadius: 4, fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>
-                  {cp.appleLearnMoreCta || "Learn More"}
-                </button>
+              ))}
+            </div>
+            <div style={{ fontSize: 14, color: T.gray5, marginBottom: 40 }}>For more details, please tell us about your project via email <span style={{ color: T.bond, fontWeight: 600 }}>b2bitservices@BandH.com</span></div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 340px", gap: 32, background: T.white, border: `1px solid ${T.gray2}`, borderRadius: 10, overflow: "hidden" }}>
+              <div style={{ padding: 28 }}>
+                <h3 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 18, fontWeight: 700, color: T.gray6, marginBottom: 8 }}>Enroll with Apple Enterprise Support Solutions</h3>
+                <div style={{ fontSize: 12, fontWeight: 700, color: T.gray5, marginBottom: 12 }}>Apple School Manager & Apple Business Manager Reseller ID: 101C20E0</div>
+                <p style={{ fontSize: 13, color: T.gray5, lineHeight: 1.6, marginBottom: 16 }}>B&H B2B is an Authorized Apple Reseller. Our internal team of industry experts can help you streamline inventory and supply for enterprise, as well as customize devices that your organization owns, while integrating Apple's free suite of tools.</p>
+                <button style={{ background: T.white, border: `1.5px solid ${T.green}`, color: T.green, padding: "8px 20px", borderRadius: 4, fontWeight: 700, fontSize: 13, cursor: "pointer" }}>Learn More</button>
               </div>
-              {/* Right: enrollment form */}
-              <div style={{ background: T.gray1, borderLeft: `1px solid ${T.gray2}`, padding: "40px 32px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                <h3 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 18, fontWeight: 700, color: T.gray6, marginBottom: 24 }}>{cp.appleFormTitle || "Request Enrollment:"}</h3>
-                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                  {["Email Address","Organization Name","Organization Address","Apple Organization ID"].map(f => (
-                    <input key={f} placeholder={f} style={{ width: "100%", padding: "13px 16px", border: `1px solid ${T.gray3}`, borderRadius: 4, fontSize: 14, background: T.white, fontFamily: "Open Sans,sans-serif", boxSizing: "border-box", color: T.gray6 }} />
-                  ))}
-                  <button style={{ width: "100%", background: T.green, color: T.white, border: "none", padding: 15, borderRadius: 4, fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif", marginTop: 4 }}>
-                    {cp.appleSubmitCta || "Submit Request"}
-                  </button>
-                </div>
+              <div style={{ background: "#1a1a1a", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 24, gap: 12 }}>
+                <div style={{ background: "#555", borderRadius: 8, padding: "8px 16px", fontSize: 11, fontWeight: 700, color: "#fff", letterSpacing: 1 }}>Authorized Reseller</div>
+                <span style={{ fontSize: 48 }}>🍎</span>
+                <div style={{ color: "#ccc", fontSize: 12, textAlign: "center" }}>Request Enrollment</div>
+                {["Email Address", "Organization Name", "Organization Address", "Apple Organization ID"].map(f => (
+                  <input key={f} placeholder={f} style={{ width: "100%", padding: "8px 10px", borderRadius: 4, border: `1px solid ${T.gray3}`, fontSize: 12, background: "#fff" }} />
+                ))}
+                <button style={{ width: "100%", background: T.green, color: T.white, border: "none", padding: 10, borderRadius: 4, fontWeight: 700, fontSize: 13, cursor: "pointer" }}>Submit Request</button>
               </div>
             </div>
           </div>
@@ -2636,143 +2298,18 @@ function StaticPageView({ pageId, config: c, onGoHub, onGoSegment, onGoContract,
 
 // ─── Shared ───────────────────────────────────────────────────────────────────
 function HubFooter({ config: c }) {
-  const [newsletterEmail, setNewsletterEmail] = React.useState("");
-  const FOOTER_COLS = [
-    {
-      heading: "Customer Service & Help",
-      links: ["Return Policy","Track/Request a Return","Manage Catalog Subscription","Payments","International","Store Pick Up","B&H Gift Cards","Free Expedited Shipping"],
-      bold: "All Help Topics",
-    },
-    {
-      heading: "Company Information",
-      links: ["About B&H","Our NYC SuperStore","Hours of Operation","Payboo Credit Card","Manufacturers Directory","Shop By Brand","Career Opportunities","Site Directory"],
-      bold: "Trade in Your Gear",
-    },
-    {
-      heading: "Other B&H Sites",
-      links: ["Explora- News & Reviews","Federal Marketplace","Student Advantage","B2B Corp. Govt. & Edu.","B&H Photography Podcast","Affiliate Program","Event Space","Mobile Apps"],
-    },
-    {
-      heading: "Contact Us",
-      contact: [
-        { label: "Sales & Expert Advice", value: "800-606-6969" },
-        { label: "Customer Service",      value: "800-221-5743" },
-      ],
-      actions: ["Live Chat","Contact Us","Request Callback"],
-    },
-  ];
-  const SOCIAL = [
-    { name: "TikTok",    svg: <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.97a8.2 8.2 0 004.79 1.53V7.07a4.84 4.84 0 01-1.02-.38z"/></svg> },
-    { name: "Facebook",  svg: <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg> },
-    { name: "X",         svg: <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.261 5.631 5.903-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> },
-    { name: "Instagram", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg> },
-    { name: "YouTube",   svg: <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg> },
-    { name: "SoundCloud",svg: <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M11.56 8.87V17h8.76c1.5 0 1.68-2.02.36-2.5.32-1.98-1.33-3.36-3.04-2.84-.28-1.96-2.02-3.32-3.94-2.9-.44-1.04-1.52-1.68-2.14-.89zm-1.5.87c-.06 0-.13.01-.19.02C9.78 9.14 9.75 8.5 9.75 8c0-2.26-1.84-4-4.1-4-2.16 0-3.94 1.66-4.1 3.78-.01.14-.05.27-.05.42a4.1 4.1 0 100 8.2h3.56V9.74z"/></svg> },
-  ];
-  const LEGAL_LINKS = ["Your Privacy Choices","Privacy","Terms of Use","Export Policy","Accessibility Statement"];
-
   return (
-    <footer style={{ background: "#2d2d2d", marginTop: 0 }}>
-      {/* ── Main columns ── */}
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 40px 40px", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 32 }}>
-        {FOOTER_COLS.map(col => (
-          <div key={col.heading}>
-            <div style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 14, color: T.white, marginBottom: 18 }}>{col.heading}</div>
-            {col.links && col.links.map(l => (
-              <div key={l} style={{ fontSize: 13, color: "#b8b8b8", marginBottom: 10, cursor: "pointer" }}>{l}</div>
-            ))}
-            {col.bold && (
-              <div style={{ fontSize: 13, color: T.white, fontWeight: 700, marginTop: 4, cursor: "pointer" }}>{col.bold}</div>
-            )}
-            {col.contact && col.contact.map(item => (
-              <div key={item.label} style={{ marginBottom: 16 }}>
-                <div style={{ fontSize: 13, color: T.white, fontWeight: 700 }}>{item.label}</div>
-                <div style={{ fontSize: 13, color: T.white, fontWeight: 700 }}>{item.value}</div>
-              </div>
-            ))}
-            {col.actions && col.actions.map(a => (
-              <div key={a} style={{ fontSize: 13, color: "#b8b8b8", marginBottom: 10, cursor: "pointer" }}>{a}</div>
-            ))}
-            {col.heading === "Contact Us" && (
-              <div style={{ marginTop: 20 }}>
-                <button style={{ display: "flex", alignItems: "center", gap: 8, background: "transparent", border: `1px solid #666`, borderRadius: 4, padding: "8px 14px", cursor: "pointer", color: T.white, fontSize: 13 }}>
-                  🇺🇸 US Dollar
-                </button>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-
-      {/* ── Divider ── */}
-      <div style={{ borderTop: "1px solid #444", margin: "0 40px" }} />
-
-      {/* ── Newsletter + Social ── */}
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "32px 40px", display: "flex", alignItems: "flex-start", gap: 40, flexWrap: "wrap" }}>
-        <div style={{ flex: "0 0 auto" }}>
-          <div style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 15, color: T.white, marginBottom: 14 }}>B&H News & Special Offers</div>
-          <div style={{ display: "flex", gap: 12, marginBottom: 10 }}>
-            <input
-              value={newsletterEmail}
-              onChange={e => setNewsletterEmail(e.target.value)}
-              placeholder="Email"
-              style={{ width: 260, padding: "11px 14px", background: "transparent", border: "1px solid #666", borderRadius: 2, fontSize: 14, color: T.white, outline: "none", fontFamily: "Open Sans,sans-serif" }}
-            />
-            <button style={{ padding: "11px 28px", background: "transparent", border: "1px solid #888", borderRadius: 2, color: T.white, fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: "Open Sans,sans-serif" }}>Sign Up</button>
-          </div>
-          <div style={{ fontSize: 12, color: T.bond, cursor: "pointer", textDecoration: "underline" }}>Manage Existing Email Subscriptions</div>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 24, paddingTop: 38 }}>
-          {SOCIAL.map(s => (
-            <span key={s.name} style={{ color: "#b8b8b8", cursor: "pointer", display: "flex" }}>{s.svg}</span>
-          ))}
-        </div>
-      </div>
-
-      {/* ── Divider ── */}
-      <div style={{ borderTop: "1px solid #444", margin: "0 40px" }} />
-
-      {/* ── B&H brand + store illustration ── */}
-      <div style={{ textAlign: "center", padding: "32px 40px 0" }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 14, marginBottom: 24 }}>
-          <div style={{ background: "#990000", padding: "4px 8px", borderRadius: 2, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <span style={{ color: "#FFD700", fontWeight: 900, fontSize: 16, fontFamily: "Montserrat,sans-serif", letterSpacing: 1 }}>B&H</span>
-          </div>
-          <span style={{ color: T.white, fontSize: 16, fontWeight: 600, fontFamily: "Open Sans,sans-serif" }}>Your Creative Partner Since 1973</span>
-        </div>
-        {/* Store illustration placeholder */}
-        <div style={{ maxWidth: 400, margin: "0 auto", height: 120, background: "linear-gradient(to bottom, #3a3a3a, #2d2d2d)", borderRadius: "8px 8px 0 0", display: "flex", alignItems: "flex-end", justifyContent: "center", overflow: "hidden", paddingBottom: 0 }}>
-          <div style={{ display: "flex", alignItems: "flex-end", gap: 4, paddingBottom: 0 }}>
-            {[40,55,70,90,70,55,40].map((h,i) => (
-              <div key={i} style={{ width: 28, height: h, background: i === 3 ? "#4a7a6a" : "#3d5a52", borderRadius: "3px 3px 0 0", display: "flex", alignItems: "flex-start", justifyContent: "center", paddingTop: 4 }}>
-                {i === 3 && <span style={{ fontSize: 8, color: "#FFD700", fontWeight: 900, fontFamily: "Montserrat" }}>B&H</span>}
-              </div>
-            ))}
+    <footer style={{ background: T.white, borderTop: `1px solid ${T.gray2}`, padding: "28px 24px", marginTop: 40 }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
+        <div style={{ fontSize: 12, color: T.gray5, lineHeight: 2 }}>
+          <div>© 2000-2026 B & H Foto & Electronics Corp. 420 9th Ave, New York, NY 10001</div>
+          <div style={{ display: "flex", gap: 14, marginTop: 4 }}>
+            {["Privacy & Security", "User Agreement & Disclaimer", "Export Policy", "Site Map"].map(l => <span key={l} style={{ color: T.bond, cursor: "pointer" }}>{l}</span>)}
           </div>
         </div>
-      </div>
-
-      {/* ── Legal bar ── */}
-      <div style={{ borderTop: "1px solid #444", padding: "20px 40px", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <span style={{ fontSize: 18 }}>🏳️</span>
-            {LEGAL_LINKS.map((l, i) => (
-              <span key={l} style={{ fontSize: 12, color: "#b8b8b8", cursor: "pointer" }}>
-                {i > 0 && <span style={{ color: "#555", marginRight: 10 }}>|</span>}
-                {l}
-              </span>
-            ))}
-          </div>
-        </div>
-        <div style={{ fontSize: 12, color: "#888" }}>© 2000-2024 B & H Foto & Electronics Corp. 420 9th Ave, New York, NY 10001</div>
-        {/* Trust badges */}
-        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-          {["BBB\nAccredited", "Best of\nthe Best\n2025", "Most Trusted\nBrands", "Most Loved\nBrands"].map(b => (
-            <div key={b} style={{ width: 52, height: 52, border: "1px solid #555", borderRadius: 4, display: "flex", alignItems: "center", justifyContent: "center", padding: 4 }}>
-              <span style={{ fontSize: 8, color: "#888", textAlign: "center", whiteSpace: "pre-line", lineHeight: 1.3 }}>{b}</span>
-            </div>
-          ))}
+        <div style={{ fontSize: 12, color: T.gray5, textAlign: "right" }}>
+          <div>We close every Friday afternoon to Saturday evening for Shabbat.</div>
+          <div style={{ color: T.bond, cursor: "pointer", marginTop: 4 }}>Weekend Hours</div>
         </div>
       </div>
     </footer>
@@ -3365,13 +2902,11 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
     const pageKey = section.replace("cp_", "");
     const pageLabelMap = { contracts:"Contracts", eprocurement:"eProcurement", studio:"The Studio at B&H", it_services:"B2B IT Services", contact:"Contact Us" };
     const cp = config.corePages?.[pageKey] || {};
-    const cc = pageKey === "contact" ? cp : {};
     const upd = (field, v) => onChange(d => {
       if (!d.corePages) d.corePages = {};
       if (!d.corePages[pageKey]) d.corePages[pageKey] = {};
       d.corePages[pageKey][field] = v;
     });
-    const updContact = (field, v) => upd(field, v);
     return (
       <div>
         <SectionTitle>{pageLabelMap[pageKey] || pageKey} — Core Page</SectionTitle>
@@ -3381,84 +2916,8 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
         )}
         <EditField label="Intro" value={cp.intro || ""} onChange={v => upd("intro", v)} multiline hint="First paragraph / lead copy shown at the top of the page." />
         <EditField label="Body Copy" value={cp.body || ""} onChange={v => upd("body", v)} multiline hint="Main body text. Separate paragraphs with a blank line." />
-        {pageKey === "it_services" && (
-          <div style={{ marginTop: 20, paddingTop: 16, borderTop: `1px solid ${T.gray2}` }}>
-            <EditField label="Contact CTA Label"     value={cp.contactCta        || ""} onChange={v => upd("contactCta", v)} />
-            <div style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, margin: "20px 0 14px", paddingTop: 16, borderTop: `1px solid ${T.gray2}` }}>Apple Section</div>
-            <EditField label="Heading"               value={cp.appleHeadline     || ""} onChange={v => upd("appleHeadline", v)} />
-            <EditField label="Reseller ID Line"      value={cp.appleResellerId   || ""} onChange={v => upd("appleResellerId", v)} />
-            <EditField label="Body"                  value={cp.appleBody         || ""} onChange={v => upd("appleBody", v)} multiline />
-            <EditField label="Learn More CTA"        value={cp.appleLearnMoreCta || ""} onChange={v => upd("appleLearnMoreCta", v)} />
-            <EditField label="Form Title"            value={cp.appleFormTitle    || ""} onChange={v => upd("appleFormTitle", v)} />
-            <EditField label="Submit CTA"            value={cp.appleSubmitCta    || ""} onChange={v => upd("appleSubmitCta", v)} />
-          </div>
-        )}
-        {pageKey === "studio" && (
-          <div style={{ marginTop: 20, paddingTop: 16, borderTop: `1px solid ${T.gray2}` }}>
-            <EditField label="Connect CTA Label"    value={cp.connectCta     || ""} onChange={v => upd("connectCta", v)} />
-            <EditField label="Solutions Section Title" value={cp.solutionsTitle || ""} onChange={v => upd("solutionsTitle", v)} />
-            <div style={{ marginBottom: 18 }}>
-              <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 6 }}>Solutions (one per line)</label>
-              <textarea value={(cp.solutions || []).join("\n")} onChange={e => onChange(d => { if (!d.corePages) d.corePages = {}; if (!d.corePages[pageKey]) d.corePages[pageKey] = {}; d.corePages[pageKey].solutions = e.target.value.split("\n").filter(Boolean); })} rows={6} style={{ width: "100%", border: `1.5px solid ${T.gray3}`, borderRadius: 7, padding: "10px 12px", fontSize: 13, resize: "vertical", fontFamily: "Open Sans,sans-serif" }} />
-            </div>
-            <EditField label="STC Section Heading" value={cp.stcHeadline  || ""} onChange={v => upd("stcHeadline", v)} />
-            <EditField label="STC Body"            value={cp.stcBody      || ""} onChange={v => upd("stcBody", v)} multiline />
-            <EditField label="Services Section Title" value={cp.servicesTitle || ""} onChange={v => upd("servicesTitle", v)} />
-            <EditField label="Brands Title"        value={cp.brandsTitle    || ""} onChange={v => upd("brandsTitle", v)} />
-            <EditField label="Brands Subtitle"     value={cp.brandsSubtitle || ""} onChange={v => upd("brandsSubtitle", v)} />
-            <EditField label="Who Needs Title"     value={cp.whoTitle  || ""} onChange={v => upd("whoTitle", v)} />
-            <EditField label="Who Needs Body"      value={cp.whoBody   || ""} onChange={v => upd("whoBody", v)} multiline />
-            <div style={{ marginBottom: 18 }}>
-              <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 6 }}>Audience (one per line)</label>
-              <textarea value={(cp.whoAudience || []).join("\n")} onChange={e => onChange(d => { if (!d.corePages) d.corePages = {}; if (!d.corePages[pageKey]) d.corePages[pageKey] = {}; d.corePages[pageKey].whoAudience = e.target.value.split("\n").filter(Boolean); })} rows={5} style={{ width: "100%", border: `1.5px solid ${T.gray3}`, borderRadius: 7, padding: "10px 12px", fontSize: 13, resize: "vertical", fontFamily: "Open Sans,sans-serif" }} />
-            </div>
-            <EditField label="Stay in the Know Title" value={cp.socialTitle || ""} onChange={v => upd("socialTitle", v)} />
-            <EditField label="Stay in the Know Body"  value={cp.socialBody  || ""} onChange={v => upd("socialBody", v)} multiline />
-          </div>
-        )}
-        {pageKey === "eprocurement" && (
-          <div>
-            <EditField label="Contact CTA Label"   value={cp.contactCta     || ""} onChange={v => upd("contactCta", v)} />
-            <EditField label="Benefits Section Title" value={cp.benefitsTitle || ""} onChange={v => upd("benefitsTitle", v)} />
-            <div style={{ marginBottom: 18 }}>
-              <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 6 }}>Benefits (one per line)</label>
-              <textarea value={(cp.benefits || []).join("\n")} onChange={e => onChange(d => { if (!d.corePages) d.corePages = {}; if (!d.corePages[pageKey]) d.corePages[pageKey] = {}; d.corePages[pageKey].benefits = e.target.value.split("\n").filter(Boolean); })} rows={6} style={{ width: "100%", border: `1.5px solid ${T.gray3}`, borderRadius: 7, padding: "10px 12px", fontSize: 13, resize: "vertical", fontFamily: "Open Sans,sans-serif" }} />
-            </div>
-            <EditField label="Platforms Section Title" value={cp.platformsTitle  || ""} onChange={v => upd("platformsTitle", v)} />
-            <EditField label="Platforms Footer Text"   value={cp.platformsFooter || ""} onChange={v => upd("platformsFooter", v)} hint="e.g. Don't see the platform your organization uses?" />
-            <EditField label="Platforms CTA"           value={cp.platformsCta    || ""} onChange={v => upd("platformsCta", v)} />
-          </div>
-        )}
-        {pageKey === "contact" && (
-          <div style={{ marginTop: 20, paddingTop: 16, borderTop: `1px solid ${T.gray2}` }}>
-            <div style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, marginBottom: 14 }}>Contact Tray (slide-in drawer)</div>
-            <EditField label="Tray Title"            value={cc.trayTitle       || ""} onChange={v => updContact("trayTitle", v)} />
-            <EditField label="Subtitle"              value={cc.traySubtitle    || ""} onChange={v => updContact("traySubtitle", v)} multiline />
-            <EditField label="Business Tab Label"    value={cc.trayTabBusiness || ""} onChange={v => updContact("trayTabBusiness", v)} />
-            <EditField label="Gov/EDU Tab Label"     value={cc.trayTabGovEdu   || ""} onChange={v => updContact("trayTabGovEdu", v)} />
-            <EditField label="Privacy Disclaimer"    value={cc.trayDisclaimer  || ""} onChange={v => updContact("trayDisclaimer", v)} multiline />
-            <EditField label="Upload Button Label"   value={cc.trayUploadLabel || ""} onChange={v => updContact("trayUploadLabel", v)} />
-            <EditField label="Upload Hint Text"      value={cc.trayUploadHint  || ""} onChange={v => updContact("trayUploadHint", v)} />
-            <EditField label="Submit CTA"            value={cc.traySubmitCta   || ""} onChange={v => updContact("traySubmitCta", v)} />
-          </div>
-        )}
         {pageKey === "contracts" && (
-          <div>
-            <EditField label="Contact CTA Label" value={cp.contactCta || ""} onChange={v => upd("contactCta", v)} hint='"Contact Us"' />
-            <EditField label="Contract Inquiries Email" value={cp.contractEmail || ""} onChange={v => upd("contractEmail", v)} hint="e.g. b2bcontracts@bhphoto.com" />
-            <div style={{ marginTop: 20, paddingTop: 16, borderTop: `1px solid ${T.gray2}` }}>
-              <div style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, marginBottom: 14 }}>SMB Card</div>
-              <EditField label="Heading" value={cp.card1Heading || ""} onChange={v => upd("card1Heading", v)} />
-              <EditField label="Body"    value={cp.card1Body    || ""} onChange={v => upd("card1Body", v)} multiline />
-              <EditField label="CTA"     value={cp.card1Cta     || ""} onChange={v => upd("card1Cta", v)} />
-            </div>
-            <div style={{ marginTop: 20, paddingTop: 16, borderTop: `1px solid ${T.gray2}` }}>
-              <div style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, marginBottom: 14 }}>Corporate Card</div>
-              <EditField label="Heading" value={cp.card2Heading || ""} onChange={v => upd("card2Heading", v)} />
-              <EditField label="Body"    value={cp.card2Body    || ""} onChange={v => upd("card2Body", v)} multiline />
-              <EditField label="CTA"     value={cp.card2Cta     || ""} onChange={v => upd("card2Cta", v)} />
-            </div>
-          </div>
+          <EditField label="Contract Inquiries Email" value={cp.contractEmail || ""} onChange={v => upd("contractEmail", v)} hint="Clickable email shown at the bottom of the contracts intro. e.g. b2bcontracts@bhphoto.com" />
         )}
       </div>
     );
@@ -3512,7 +2971,7 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
         <div style={{ marginBottom: 18 }}>
           <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 6 }}>Order of Other Contract IDs (comma-separated)</label>
           <input value={(sp.otherContractIds || []).join(",")} onChange={e => onChange(d => { d.segmentPages[segId].otherContractIds = e.target.value.split(",").map(s => s.trim()).filter(Boolean); })} style={{ width: "100%", padding: "10px 12px", border: `1.5px solid ${T.gray3}`, borderRadius: 7, fontSize: 13, fontFamily: "monospace" }} placeholder="equalis,ei,omnia" />
-          <div style={{ fontSize: 11, color: T.gray4, marginTop: 4 }}>Order controls the display sequence in the "Other Contracts" panel. Available IDs: {config.contracts.map(c => c.id).join(", ")}</div>
+          <div style={{ fontSize: 11, color: T.gray4, marginTop: 4 }}>IDs: {config.contracts.map(c => c.id).join(", ")}</div>
         </div>
 
         {/* ── State × Contract Portal Routing ── */}

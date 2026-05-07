@@ -2667,7 +2667,7 @@ function StaticPageView({ pageId, config: c, onGoHub, onGoSegment, onGoContract,
 
 // ─── Shared ───────────────────────────────────────────────────────────────────
 function HubFooter({ config: c }) {
-  const [newsletterEmail, setNewsletterEmail] = React.useState("");
+  const [newsletterEmail, setNewsletterEmail] = useState("");
   const FOOTER_COLS = [
     {
       heading: "Customer Service & Help",

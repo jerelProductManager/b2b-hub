@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>B2B Hub — Test Cases</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    padding: 24px;
+    background: #f7f8fa;
+    color: #1a1a1a;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  h1 {
+    margin: 0 0 4px;
+    font-size: 22px;
+  }
+  .meta {
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 12px;
+  }
+  .table-wrap {
+    background: #fff;
+    border: 1px solid #e2e5ea;
+    border-radius: 8px;
+    overflow: auto;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1100px;
+  }
+  thead th {
+    position: sticky;
+    top: 0;
+    background: #1f2937;
+    color: #fff;
+    text-align: left;
+    padding: 10px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border-bottom: 2px solid #111827;
+  }
+  tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #eef0f3;
+    vertical-align: top;
+  }
+  tbody tr:hover { background: #fafbfc; }
+  .section-col { width: 16%; font-weight: 600; color: #111827; }
+  .platform-col { width: 8%; }
+  .given-col { width: 32%; }
+  .then-col { width: 32%; }
+  .notes-col { width: 12%; background: #fffdf5; }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .badge-cms { background: #e0e7ff; color: #3730a3; }
+  .badge-customer { background: #d1fae5; color: #065f46; }
+  .group-row td {
+    background: #eef2f7;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: #374151;
+    padding: 8px 12px;
+  }
+  code { font-family: "SF Mono", Consolas, monospace; font-size: 12px; background: #f1f5f9; padding: 1px 5px; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<h1>B2B Hub — Gherkin-Style Test Case Matrix</h1>
+<p class="meta">Generated from <code>App.jsx</code> &middot; covers CMS (admin) and Customer (public-facing) functionality.</p>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th class="section-col">Section Name</th>
+      <th class="platform-col">Platform</th>
+      <th class="given-col">(Given) / When (user)</th>
+      <th class="then-col">Then</th>
+      <th class="notes-col">Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <!-- ========== CMS SECTION ========== -->
+    <tr class="group-row"><td colspan="5">CMS &mdash; Admin / Back-Office</td></tr>
+
+    <!-- User Impersonation Picker -->
+    <tr>
+      <td class="section-col">User Impersonation Picker</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the admin shell is open<br>When the user selects "Ariel Goldman" from the user dropdown</td>
+      <td>Then the status pill changes to "🟢 Direct publish" and the save button reads "⬆ Publish Live"</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">User Impersonation Picker</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the admin shell is open<br>When the user selects "Jerel Smith" or "Josh Bernstein" from the user dropdown</td>
+      <td>Then the status pill changes to "📋 Submit for approval" and the save button reads "⬆ Submit for Approval"</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">User Impersonation Picker</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the Approvals view is open with a pending submission<br>When the user is impersonating a non-Ariel user</td>
+      <td>Then the Approve / Reject buttons are hidden and the title reads "Pending Submissions"</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- Admin Left Sidebar -->
+    <tr>
+      <td class="section-col">Admin Left Sidebar (Section Picker)</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the user is on the admin route<br>When the user clicks any section in the left sidebar</td>
+      <td>Then the right panel shows the form editor for that section and <code>activeSection</code> updates</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Admin Left Sidebar (Section Picker)</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the sidebar shows Core Pages<br>When the user drags a Core Page item up or down</td>
+      <td>Then <code>coreOrder</code> is reordered and the customer-facing top nav re-sequences immediately</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Admin Left Sidebar (Section Picker)</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the sidebar shows Segment Pages<br>When the user drags a Segment Page item up or down</td>
+      <td>Then <code>segmentOrder</code> is reordered and the home page channel tiles re-sequence</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Admin Left Sidebar (Section Picker)</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the sidebar is rendered<br>When the user views the "Live Config" metadata block</td>
+      <td>Then the panel shows the current version, last-updated-by user, and last-updated timestamp</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- AdminView Top Action Bar -->
+    <tr>
+      <td class="section-col">AdminView Top Action Bar</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given no unsaved changes exist<br>When the user views the publish bar</td>
+      <td>Then the publish button is disabled and visually gray</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">AdminView Top Action Bar</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the user has edited at least one field<br>When the action bar updates</td>
+      <td>Then a yellow "● Unsaved changes" badge appears next to the section title</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">AdminView Top Action Bar</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the user is impersonating Ariel and has unsaved changes<br>When the user clicks "Publish Live"</td>
+      <td>Then <code>liveConfig</code> is updated immediately, the meta version increments (e.g. 2.0.0 → 2.0.1), and the draft is re-cloned</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">AdminView Top Action Bar</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the user is impersonating a non-Ariel user with unsaved changes<br>When the user clicks "Submit for Approval"</td>
+      <td>Then a new entry is appended to <code>pendingChanges</code> with status "pending", a diff is calculated, and the Approvals badge increments</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">AdminView Top Action Bar</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the user is in the Full JSON Editor with invalid JSON<br>When the user attempts to publish</td>
+      <td>Then a "JSON Error" pill is shown and the publish action is blocked</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- Hero Section Editor -->
+    <tr>
+      <td class="section-col">Edit Hero</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the Hero editor is open<br>When the user uploads a hero image</td>
+      <td>Then a preview is shown and a "Remove" button appears next to the image</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Edit Hero</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given a hero image is set<br>When the user clicks "Remove"</td>
+      <td>Then the image is cleared and the hero falls back to the gradient background</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Edit Hero</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the Hero editor is open<br>When the user edits headline, subheadline, badge, CTA label, CTA subtext, or signup URL</td>
+      <td>Then the changes are reflected in the customer-facing Hub Home hero after publish</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- Sign-Up Form Editor -->
+    <tr>
+      <td class="section-col">Edit Sign-Up Form &mdash; Step 1 Account</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the Sign-Up Form editor is on Step 1<br>When the user edits tray title, step labels, Create/Convert button labels, helpers, CTAs, or newsletter text</td>
+      <td>Then the changes are reflected in the customer-facing Signup Tray's Account step</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Edit Sign-Up Form &mdash; Step 2 Org Info</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the Org Info subsection is open<br>When the user edits Organization Type labels, Role Options, Role label char-cap, or Purchasing Needs</td>
+      <td>Then the Signup Tray Org Info step reflects the updated labels and options; segment mapping remains read-only</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Edit Sign-Up Form &mdash; Step 3 Billing</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the Billing subsection is open<br>When the user edits section heading or "Complete Registration" CTA</td>
+      <td>Then the Signup Tray Billing step reflects the new heading and CTA label</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Edit Sign-Up Form &mdash; Completion States</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the Completion States subsection is open<br>When the user edits Success / Denied / Unable-to-Verify headings, bodies, footers, and CTAs using <code>{User}</code>, <code>{email}</code>, <code>{Segment}</code>, <code>{Vertical}</code>, <code>{Vertical2}</code> tokens</td>
+      <td>Then the corresponding completion state in the Signup Tray substitutes the tokens with live values</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Edit Sign-Up Form &mdash; Domain Whitelist</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the Domain Whitelist subsection is open<br>When the user adds a row with domain, portalName, and portalId</td>
+      <td>Then customers entering an email with that domain see a green "X account detected" pill and are routed via auto-verify</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Edit Sign-Up Form &mdash; Domain Whitelist</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given a whitelist row exists<br>When the user clicks the ✗ remove button on that row</td>
+      <td>Then the row is removed and emails on that domain no longer auto-verify</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- Segments Editor -->
+    <tr>
+      <td class="section-col">Edit Segments</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the Segments editor is open<br>When the user edits a segment's name, color, or description</td>
+      <td>Then the segment chip and border color update wherever the segment is displayed on customer pages</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- Contracts Editor -->
+    <tr>
+      <td class="section-col">Edit Cooperative Contracts</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the Contracts editor is open<br>When the user toggles a contract's ACTIVE state to INACTIVE</td>
+      <td>Then the contract is removed from the customer-facing "Active Cooperative Contracts" footer and hub list</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Edit Cooperative Contracts</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the Contracts editor is open<br>When the user uploads a logo for a contract</td>
+      <td>Then a preview appears and a "✕ Remove" button replaces the text fallback</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Edit Cooperative Contracts &mdash; Portal Mappings</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given a contract's Portal Mappings panel is expanded<br>When the user adds a mapping row with state, segment, Portal ID, Display Label, and child logo</td>
+      <td>Then the mappings count chip increments, and the summary chip strip at the bottom shows the new mapping (e.g. "All · Any → [123]")</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Edit Cooperative Contracts &mdash; Portal Mappings</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given a contract has multiple portal mappings<br>When a customer selects a state on the segment / hub view</td>
+      <td>Then the resolution follows priority: exact state+segment → state only → national segment → global fallback</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- Error States Editor -->
+    <tr>
+      <td class="section-col">Edit Error States</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the Error States editor is open<br>When the user edits a customer-facing error message or CTA label</td>
+      <td>Then the message is updated wherever that error key is referenced on customer-facing pages</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- Footer Editor -->
+    <tr>
+      <td class="section-col">Edit Footer &mdash; Account Rep</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the Footer editor is open<br>When the user fills in account rep phone, email, and tagline</td>
+      <td>Then the public footer "Your Account Rep" column shows the updated values</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Edit Footer &mdash; Account Rep</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the rep phone and email fields are empty<br>When the public footer is rendered</td>
+      <td>Then the placeholders <code>###-###-####</code> and <code>xxxxxx@bhphoto.com</code> are shown</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- Core Page Editor -->
+    <tr>
+      <td class="section-col">Edit Core Page &mdash; Contracts</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the Contracts core page editor is open<br>When the user edits hero image, headline, intro, body, Contact CTA label, Inquiries email, SMB Card, or Corporate Card</td>
+      <td>Then the public Contracts static page renders the updated blocks</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Edit Core Page &mdash; eProcurement</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the eProcurement core page editor is open<br>When the user edits Benefits text, Platforms list (name, color, logo), or Contact CTA</td>
+      <td>Then the public eProcurement page reflects the new content and platform tiles</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Edit Core Page &mdash; Studio</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the Studio core page editor is open<br>When the user edits hero, STC image, Solutions, STC heading/body, Services, Brands, Who Needs, or Stay-in-the-Know content</td>
+      <td>Then the Studio static page renders the updated sections</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Edit Core Page &mdash; IT Services</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the IT Services core page editor is open<br>When the user edits hero, body, Contact CTA, or the Apple section (heading, reseller ID, body, form title, submit CTA)</td>
+      <td>Then the IT Services page reflects the updated content and Apple enrollment form labels</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Edit Core Page &mdash; Contact Us</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the Contact core page editor is open<br>When the user edits tray title, subtitle, tab labels, disclaimer, upload labels, or submit CTA</td>
+      <td>Then the Contact Tray drawer reflects all configured copy</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Edit Core Page &mdash; Extra Form Fields</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given a Core Page editor is open<br>When the user appends an extra field (label, type: text/email/tel/textarea/select/checkbox, required, options)</td>
+      <td>Then the corresponding Contact Tray (for that page) renders the new field with the proper input type and required indicator</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- Segment Page Editor -->
+    <tr>
+      <td class="section-col">Edit Segment Page</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given a Segment Page editor is open<br>When the user edits hero image, signup URL, headline, intro, signup banner, featured section content, CTAs, phone number, annual purchase volumes, featured contract, other contracts, and state-portal routing</td>
+      <td>Then the matching customer segment page renders the updated content and state-based portal mappings</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Edit Segment Page</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given a Segment Page editor is open<br>When the user toggles "Show org type filter in hero" or "Show state filter in sidebar"</td>
+      <td>Then the corresponding filter is shown or hidden on the customer segment page</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Edit Segment Page</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the segment editor is open<br>When the user clicks "👁 Preview Page →"</td>
+      <td>Then the app navigates to the live customer-facing segment page</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- Contract Page Editor -->
+    <tr>
+      <td class="section-col">Edit Contract Page</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given a Contract Page editor is open<br>When the user edits hero image, signup URL, headline, blurb, benefits, signup CTA, contract info CTA, promo title, promo bullets, and extra contact fields</td>
+      <td>Then the matching customer contract page reflects the updated content</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- Full JSON Editor -->
+    <tr>
+      <td class="section-col">Full JSON Editor</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the Full JSON Editor is open<br>When the user types valid JSON</td>
+      <td>Then the JSON is silently parsed and merged into <code>draftConfig</code>; form editors stay in sync</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Full JSON Editor</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the Full JSON Editor is open<br>When the user types invalid JSON</td>
+      <td>Then a red "JSON Error: &lt;reason&gt;" pill appears in the header, the textarea border turns red, and publish is disabled</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- Approvals View -->
+    <tr>
+      <td class="section-col">Approvals Queue</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given there are no pending submissions<br>When the user opens the Approvals view</td>
+      <td>Then a green banner reads "✓ No pending approvals — hub is fully up to date."</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Approvals Queue</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given a pending submission exists and the current user is Ariel<br>When the user views the Approvals card</td>
+      <td>Then the Approve (✓) and Reject (✗) buttons are visible and clickable</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Approvals Queue</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given Ariel is viewing a pending submission<br>When the user clicks "Show diff ↓"</td>
+      <td>Then the card expands to show changed paths with red minus (before) and green plus (after) lines</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Approvals Queue</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given Ariel is viewing a pending submission<br>When the user clicks "✓ Approve"</td>
+      <td>Then the change is applied to <code>liveConfig</code>, the pill turns green "approved", and the card moves to Resolved</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Approvals Queue</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given Ariel is viewing a pending submission<br>When the user clicks "✗ Reject"</td>
+      <td>Then no change is applied, the pill turns red "rejected", and the card moves to Resolved</td>
+      <td class="notes-col"></td>
+    </tr>
+
+
+    <!-- ========== CUSTOMER SECTION ========== -->
+    <tr class="group-row"><td colspan="5">Customer &mdash; Public-Facing</td></tr>
+
+    <!-- Top Bar Log-In -->
+    <tr>
+      <td class="section-col">Top Utility Bar</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given any customer page is loaded<br>When the user views the top utility strip</td>
+      <td>Then "B2B, Gov, Students &amp; More ∨", "Already registered for B&amp;H B2B?" text, and a "Log In" button are visible</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Top Utility Bar</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the top utility bar is visible<br>When the user clicks "Log In"</td>
+      <td>Then the button registers a click (no behavior wired in the prototype)</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- Main Nav -->
+    <tr>
+      <td class="section-col">Main Nav</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the user is on any customer page<br>When the user clicks the B&amp;H / B2B logo</td>
+      <td>Then the user is returned to the Hub Home entry view</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Main Nav</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the main nav is visible<br>When the user clicks Contracts, eProcurement, The Studio, or B2B IT Services</td>
+      <td>Then the user is navigated to that static page</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Main Nav</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the main nav is visible<br>When the user clicks "Contact Us"</td>
+      <td>Then the Contact Tray slide-in drawer opens from the right</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- Sticky Sign-Up Bar -->
+    <tr>
+      <td class="section-col">Sticky Sign-Up Bar</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the user is on any hub view<br>When the user scrolls past 75% of the viewport height</td>
+      <td>Then the sticky sign-up bar slides in at the top with the "Sign Up For a Free Account" CTA</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Sticky Sign-Up Bar</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the sticky sign-up bar is visible<br>When the user clicks the CTA</td>
+      <td>Then the Signup Tray opens with no preselected path (path picker shown)</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Sticky Sign-Up Bar</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the sticky bar is visible<br>When the user scrolls back above 75vh</td>
+      <td>Then the sticky sign-up bar hides again</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- Hub Home -->
+    <tr>
+      <td class="section-col">Hub Home &mdash; Live Config Banner</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the customer loads the Hub Home<br>When the page renders</td>
+      <td>Then a yellow banner shows "📡 Live config v{version} — last updated by … at …"</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Hub Home &mdash; Hero Banner</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the hero has both imageUrl and bgColor set<br>When the hero renders</td>
+      <td>Then bgColor takes precedence over imageUrl</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Hub Home &mdash; Hero Banner</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given neither imageUrl nor bgColor is set<br>When the hero renders</td>
+      <td>Then the fallback gradient style is applied</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Hub Home &mdash; Hero CTA</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the hero is visible<br>When the user clicks the primary CTA</td>
+      <td>Then the Signup Tray opens</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Hub Home &mdash; Business Channels Grid</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the channels grid is shown<br>When the user clicks a channel tile</td>
+      <td>Then the info panel expands beneath the grid with that segment's content</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Hub Home &mdash; Business Channels Grid</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given a channel info panel is expanded<br>When the user clicks the same channel tile again</td>
+      <td>Then the info panel collapses</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Hub Home &mdash; Channel Info Panel</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the info panel shows contracts and a State dropdown<br>When the user selects a state</td>
+      <td>Then each contract row displays a portal-mapping badge "🔗 Portal [123] — Label"</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Hub Home &mdash; Channel Info Panel</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the panel shows a "Learn More" CTA<br>When the user clicks "Learn More"</td>
+      <td>Then the user is navigated to that segment page</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Hub Home &mdash; Explainer Video Card</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the explainer card is visible<br>When the user clicks "Learn More About B&amp;H →"</td>
+      <td>Then the user is navigated to the About static page</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Hub Home &mdash; Studio Featured Banner</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the Studio featured banner is visible<br>When the user clicks "Tell Us About Your Project →"</td>
+      <td>Then the user is navigated to the Studio static page</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Hub Home &mdash; Active Contracts Strip</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the Active Cooperative Contracts strip is visible<br>When the user clicks a contract logo</td>
+      <td>Then the user is navigated to that Contract Page</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Hub Home &mdash; Active Contracts Strip</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given no contracts are marked ACTIVE in CMS<br>When the Hub Home renders</td>
+      <td>Then the Active Cooperative Contracts strip is empty</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- Segments Browse Grid -->
+    <tr>
+      <td class="section-col">Segments Browse Grid</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given <code>hubStep === "segments_browse"</code><br>When the user hovers an org-type tile</td>
+      <td>Then the tile border highlights to scarlet</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Segments Browse Grid</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the browse grid is shown<br>When the user clicks an org-type tile</td>
+      <td>Then the user is navigated to that segment page</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Segments Browse Grid</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the active-contract chip strip is visible<br>When the user clicks a contract chip</td>
+      <td>Then the user is navigated to that contract page</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- Segment Page View -->
+    <tr>
+      <td class="section-col">Segment Page</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the user is on a segment page<br>When the user changes the org-type dropdown</td>
+      <td>Then the user is navigated to the selected segment's page</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Segment Page</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the State filter is enabled in the sidebar<br>When the user selects a state</td>
+      <td>Then state-specific contracts are filtered to matches; national-only contracts remain visible; portal-mapping badges appear on each contract row</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Segment Page</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the featured contract block is visible<br>When the user clicks "Sign Up"</td>
+      <td>Then the Signup Tray opens pre-populated with the contractId, auto-sets orgType and selectedContract, and jumps to the Org Info step</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Segment Page</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the featured contract block is visible<br>When the user clicks "Learn More"</td>
+      <td>Then the user is navigated to that contract's page</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Segment Page</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the other-contracts sidebar is visible<br>When the user clicks a contract row</td>
+      <td>Then the user is navigated to that contract's page</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Segment Page</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the route segmentId is invalid<br>When the segment page tries to render</td>
+      <td>Then a "Segment not found." message is displayed</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Segment Page (Corporate)</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the user is on the Corporate segment page<br>When the page renders</td>
+      <td>Then a "Looking for Contract or eProcurement Solutions?" callout is shown</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- Contract Page View -->
+    <tr>
+      <td class="section-col">Contract Page</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the user is on a contract page<br>When the user clicks "Sign Up"</td>
+      <td>Then the Signup Tray opens pre-populated with this contractId</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Contract Page</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the user is on a contract page<br>When the user clicks "Contract Info"</td>
+      <td>Then the button registers a click (no handler wired in the prototype)</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Contract Page</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the "Other Cooperative Contracts" pill row is visible<br>When the user clicks another contract chip</td>
+      <td>Then the user is navigated to that contract page</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Contract Page</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the route contractId is invalid<br>When the contract page tries to render</td>
+      <td>Then a "Contract page not found." message is displayed</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- Static Pages -->
+    <tr>
+      <td class="section-col">Static Page &mdash; Contracts</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the user is on the Contracts static page<br>When the user clicks the SMB or Corporate card "Learn More"</td>
+      <td>Then the user is navigated to that segment page</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Static Page &mdash; Contracts</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the Contracts page is loaded<br>When the user clicks the Contact CTA</td>
+      <td>Then the Contact Tray opens</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Static Page &mdash; eProcurement</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the eProcurement page is loaded<br>When the user clicks "Send Us a Message"</td>
+      <td>Then the Contact Tray opens with the eProcurement page-specific extra fields appended</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Static Page &mdash; Studio</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the Studio page is loaded<br>When the user clicks the Connect CTA</td>
+      <td>Then the Contact Tray opens with Studio-specific extra fields</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Static Page &mdash; IT Services</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the IT Services page is loaded<br>When the user fills the Apple enrollment form (Email, Org Name, Org Address, Apple Org ID) and clicks Submit Request</td>
+      <td>Then the button registers a click (visual only — no wiring)</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Static Page &mdash; IT Services</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the IT Services page is loaded<br>When the user clicks the page Contact CTA</td>
+      <td>Then the Contact Tray opens with IT Services-specific extra fields</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Static Page &mdash; About</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the user is on the About page<br>When the user clicks "Home" in the breadcrumb</td>
+      <td>Then the user is returned to the Hub Home entry view</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Static Page &mdash; Contact (full page)</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the full-page Contact variant is loaded<br>When the user fills the 6-field form and clicks Submit</td>
+      <td>Then the button registers a click (visual only — no wiring)</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- Contact Tray -->
+    <tr>
+      <td class="section-col">Contact Tray</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the Contact Tray is open<br>When the user clicks the backdrop or the × close button</td>
+      <td>Then the tray closes</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Contact Tray</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the Contact Tray is open<br>When the user switches between the Business and Gov/EDU tabs</td>
+      <td>Then the industry and state selections reset and the form is hidden until a selection is made</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Contact Tray</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the Business tab is active<br>When the user selects an Industry Type</td>
+      <td>Then the full contact form is revealed below</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Contact Tray</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the Gov/EDU tab is active<br>When the user selects a State</td>
+      <td>Then the full contact form is revealed below</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Contact Tray</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the message textarea is focused<br>When the user types into it</td>
+      <td>Then a live character counter "X/2000" updates and input is blocked beyond 2000 characters</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Contact Tray</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the Upload P.O. drop-zone is visible<br>When the user uploads a valid file (.jpg/.jpeg/.png/.pdf/.doc/.docx ≤ 5MB)</td>
+      <td>Then the selected filename replaces the upload label</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Contact Tray</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the current page has page-specific extra fields configured<br>When the Contact Tray renders</td>
+      <td>Then the extra fields are appended below the default form, rendered by type (text/email/tel/textarea/select/checkbox), with the proper required indicator</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- Sign-Up Tray -->
+    <tr>
+      <td class="section-col">Signup Tray &mdash; Path Picker</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the Signup Tray opens with no preselected path<br>When the user views Step 1</td>
+      <td>Then two CTA buttons are shown: "Create a New B&amp;H B2B Account" and "Convert an Existing B&amp;H Account" with helper text under each</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Signup Tray &mdash; Create Form</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the Create path is selected<br>When the user fills Email, Confirm Email, First Name, Last Name, Password, optional Newsletter, and clicks "Proceed to Next Step"</td>
+      <td>Then the user advances to the Org Info step</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Signup Tray &mdash; Convert Form</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the Convert path is selected<br>When the user fills Email + Password and clicks "Log In &amp; Proceed to Next Step"</td>
+      <td>Then the user advances to the Org Info step</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Signup Tray &mdash; Whitelist Detection</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given Email matches a whitelisted domain (Create or Convert)<br>When the user types the email</td>
+      <td>Then a green "X account detected" pill appears, and on Proceed the user is routed directly to the Finish state (skipping Org Info &amp; Billing)</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Signup Tray &mdash; Password Toggle</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the password input is shown<br>When the user clicks the Show/Hide toggle</td>
+      <td>Then the input switches between masked and visible text</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Signup Tray &mdash; Org Info (State types)</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the user selects an Org Type that requires a state (Higher Ed, K-12, State/Local, Federal)<br>When the user proceeds to fill state and contract dropdowns</td>
+      <td>Then State and Available Contracts dropdowns are shown; if Omnia is selected, an additional "Omnia Member ID or Authorization #" input appears</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Signup Tray &mdash; Org Info (Employees types)</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the user selects an Org Type of SMB or Corporate<br>When the form renders</td>
+      <td>Then a "Number of Employees" dropdown is shown</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Signup Tray &mdash; Org Info (Non-Profit)</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the user selects Non-Profit as Org Type<br>When the form renders</td>
+      <td>Then a "Federal Tax ID" input is shown</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Signup Tray &mdash; Role Multi-Select</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the role options all fit under the configured char-cap<br>When the role checkboxes render</td>
+      <td>Then the checkboxes are laid out in a 2-column grid</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Signup Tray &mdash; Role Multi-Select</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given at least one role label exceeds the char-cap<br>When the role checkboxes render</td>
+      <td>Then the checkboxes collapse into a single-column layout</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Signup Tray &mdash; Role "Other"</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the role list includes "Other"<br>When the user selects "Other"</td>
+      <td>Then a "Role Description" text input is revealed</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Signup Tray &mdash; Billing</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given <code>signupPath === "convert"</code><br>When the Billing step renders</td>
+      <td>Then an additional "transfer Tax Exemptions and Net Terms" checkbox is shown</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Signup Tray &mdash; Billing (Demo Selector)</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the user is on the Billing step (prototype)<br>When the user picks a result state (finish/denied/denied1/denied2) and clicks "Complete Registration"</td>
+      <td>Then the tray advances to the selected completion state</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Signup Tray &mdash; Finish (Success)</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the Success state is shown<br>When the page renders</td>
+      <td>Then a green ✓ icon, "Verify Your Account" heading, and body text with substituted <code>{User}</code>/<code>{email}</code>/<code>{Segment}</code> tokens are displayed</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Signup Tray &mdash; Finish (Whitelisted)</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the user's email is on the whitelist<br>When the Finish state renders</td>
+      <td>Then custom portal-specific copy mentioning the portalName is shown</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Signup Tray &mdash; Denied</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the Denied state is shown<br>When the user clicks "Shop B&amp;H B2C"</td>
+      <td>Then the configured B2C URL action is invoked</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Signup Tray &mdash; Denied / Contact Link</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the Denied / Denied1 / Denied2 state is shown<br>When the user clicks the inline "contact a B&amp;H B2B Specialist" link</td>
+      <td>Then the tray switches to the in-tray Contact Drawer step</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Signup Tray &mdash; Denied1 (1 Option)</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the Denied1 state is shown<br>When the user clicks "Join B&amp;H B2B for {Vertical}"</td>
+      <td>Then the user is routed to the relevant Join flow / vertical (per config)</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Signup Tray &mdash; Denied2 (2 Options)</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the Denied2 state is shown<br>When the user clicks either of the two Join CTAs</td>
+      <td>Then the user is routed to the corresponding vertical (Vertical or Vertical2)</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Signup Tray &mdash; Contact Drawer</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the in-tray Contact Drawer is shown<br>When the user fills Email, Name, Phone, Message and clicks Submit</td>
+      <td>Then the submission carries the previously-entered signup form data (per code comment) and the tray confirms submission</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Signup Tray &mdash; Navigation</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the Signup Tray is open beyond Step 1<br>When the user clicks the back arrow</td>
+      <td>Then the tray walks back one step (back arrow is hidden on result states)</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Signup Tray &mdash; Pre-Population</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the user clicks Sign Up from a contract or segment page<br>When the Signup Tray opens</td>
+      <td>Then orgType and selectedContract auto-populate, signupPath defaults to "create", and the tray opens at the Org Info step</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Signup Tray &mdash; Step Indicators</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the Signup Tray is open<br>When the user progresses through Account → Org Info → Billing</td>
+      <td>Then the indicators show the active step in green and completed steps with a checkmark</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- Logged-Out Footer -->
+    <tr>
+      <td class="section-col">Logged-Out Footer</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the footer is visible<br>When the user clicks "Contact Us" in the Your Account Rep column</td>
+      <td>Then the Contact Tray opens</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Logged-Out Footer</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the footer is visible<br>When the user views the legal bar and trust badges</td>
+      <td>Then BBB, America's Best, USA Today, Most Loved Brands 2025, "Your Privacy Choices", and the copyright line are rendered (visual only)</td>
+      <td class="notes-col"></td>
+    </tr>
+
+    <!-- Breadcrumbs -->
+    <tr>
+      <td class="section-col">Breadcrumbs</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the user is on a segment, contract, or static page<br>When the user clicks the "Home" link in the breadcrumb</td>
+      <td>Then the user is returned to the Hub Home entry view</td>
+      <td class="notes-col"></td>
+    </tr>
+
+
+    <!-- ========== CROSS-CUTTING ========== -->
+    <tr class="group-row"><td colspan="5">Cross-Cutting &amp; Edge States</td></tr>
+
+    <tr>
+      <td class="section-col">Portal Mapping Resolution</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given a contract has multiple portal mappings (state+segment, state only, national segment, global)<br>When the customer's state and segment are evaluated</td>
+      <td>Then resolution follows priority: exact state+segment → state only → national segment → global fallback</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Token Replacement</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given a completion state body contains tokens<br>When the body is rendered</td>
+      <td>Then <code>{User}</code>, <code>{email}</code>, <code>{Segment}</code>, <code>{Vertical}</code>, <code>{Vertical2}</code> are replaced with live values</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Drag Reorder &mdash; CMS to Customer</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given the admin drags Core Pages or Segment Pages in the sidebar<br>When the drag drops</td>
+      <td>Then the customer-facing top nav and home channel tiles instantly re-order to match</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">Approvals &mdash; Role Gate</td>
+      <td><span class="badge badge-cms">CMS</span></td>
+      <td>Given a non-Ariel user submits a change and switches to Ariel mid-test<br>When Ariel opens Approvals</td>
+      <td>Then the Approve / Reject buttons become visible on the pending card</td>
+      <td class="notes-col"></td>
+    </tr>
+    <tr>
+      <td class="section-col">State Filter &mdash; No Matches</td>
+      <td><span class="badge badge-customer">Customer</span></td>
+      <td>Given the user selects a state with no state-specific contracts mapped<br>When the sidebar renders</td>
+      <td>Then only national-default contracts are shown</td>
+      <td class="notes-col"></td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+
+</body>
+</html>

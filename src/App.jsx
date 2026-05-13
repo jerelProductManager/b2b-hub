@@ -44,6 +44,13 @@ const USERS = [
 const INITIAL_CONFIG = {
   meta: { lastUpdatedBy: "system", lastUpdatedAt: "2026-03-20T09:00:00Z", version: "2.0.0" },
 
+  // ── Navigation / Display Order ────────────────────────────────────────────
+  // Single source of truth for the order of Core Pages (header nav + CMS sidebar)
+  // and Segment Pages (Business Channels grid + CMS sidebar). Drag-reorderable
+  // in the CMS sidebar.
+  coreOrder:    ["contracts", "eprocurement", "studio", "it_services", "contact"],
+  segmentOrder: ["higher_ed", "k12", "federal", "state_local", "nonprofit", "healthcare", "corporate", "smb", "creative", "si", "diversity"],
+
   hero: {
     headline:   "B&H B2B",
     subheadline:"Exclusive pricing, cooperative contracts, and dedicated support for organizations of every size.",
@@ -606,9 +613,6 @@ function ImageUploadField({ label, value, onChange, hint }) {
 }
 
 // ─── Contact Form Fields Editor (CMS — per-page extra fields) ────────────────
-// Used by the per-page CMS editors to manage additional fields appended to the
-// contact form. The default form (Business/Industry vs Gov/EDU/State + base
-// fields) is never modified — only extras are appended.
 function ContactFormFieldsEditor({ value, onChange }) {
   const list = Array.isArray(value) ? value : [];
   const update = (next) => onChange(next);
@@ -618,7 +622,7 @@ function ContactFormFieldsEditor({ value, onChange }) {
   return (
     <div style={{ marginTop: 20, paddingTop: 16, borderTop: `1px solid ${T.gray2}` }}>
       <div style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, marginBottom: 6 }}>Contact Form — Extra Fields</div>
-      <div style={{ fontSize: 11, color: T.gray4, marginBottom: 12 }}>Appended after the default contact fields (which include the Business / Industry vs Gov-EDU / State entry gate plus name, email, phone, etc.). The default form is never changed — only these extras are added.</div>
+      <div style={{ fontSize: 11, color: T.gray4, marginBottom: 12 }}>Appended after the default contact fields (Business / Industry vs Gov-EDU / State entry gate + name, email, phone, etc.). Defaults never change.</div>
       {list.length === 0 && (
         <div style={{ fontSize: 12, color: T.gray4, fontStyle: "italic", padding: "10px 4px", marginBottom: 8, background: T.gray1, borderRadius: 6 }}>No extra fields yet for this page. Defaults only.</div>
       )}
@@ -741,8 +745,6 @@ export default function App() {
     setSignupPath(null);
     setShowSignupTray(true);
   };
-  // Convenience for contract page (binds the current contract on open)
-  const handleSignUpForContract = (contractId) => () => handleSignUp(contractId);
   const goStatic   = (id) => { setRoute({ view: "static", id }); setMainTab("hub"); window.scrollTo(0, 0); };
   const goSegment  = (id) => { setRoute({ view: "segment", id }); setMainTab("hub"); window.scrollTo(0, 0); };
   const goContract = (id) => { setRoute({ view: "contract", id }); setMainTab("hub"); window.scrollTo(0, 0); };
@@ -781,17 +783,23 @@ export default function App() {
         </button>
         {/* Vertical divider */}
         <div style={{ width: 1, height: 32, background: T.gray3, margin: "0 20px", flexShrink: 0 }} />
-        {[
-          { label: "Contracts",       action: () => goStatic("contracts") },
-          { label: "eProcurement",    action: () => goStatic("eprocurement") },
-          { label: "The Studio",      action: () => goStatic("studio") },
-          { label: "B2B IT Services", action: () => goStatic("it_services") },
-          { label: "Contact Us",      action: () => setShowContactTray(true) },
-        ].map(lk => (
-          <button key={lk.label} onClick={lk.action} style={{ background: "none", border: "none", cursor: "pointer", padding: "18px 14px", fontSize: 14, fontWeight: 600, color: T.gray6, fontFamily: "Open Sans,sans-serif", whiteSpace: "nowrap" }}>
-            {lk.label}
-          </button>
-        ))}
+        {(() => {
+          // Header nav — sequence driven by config.coreOrder (drag-reorderable in CMS)
+          const NAV_BY_ID = {
+            contracts:    { label: "Contracts",       action: () => goStatic("contracts") },
+            eprocurement: { label: "eProcurement",    action: () => goStatic("eprocurement") },
+            studio:       { label: "The Studio",      action: () => goStatic("studio") },
+            it_services:  { label: "B2B IT Services", action: () => goStatic("it_services") },
+            contact:      { label: "Contact Us",      action: () => setShowContactTray(true) },
+          };
+          const fallback = ["contracts", "eprocurement", "studio", "it_services", "contact"];
+          const order = (c?.coreOrder && c.coreOrder.length) ? c.coreOrder : fallback;
+          return order.map(id => NAV_BY_ID[id]).filter(Boolean).map(lk => (
+            <button key={lk.label} onClick={lk.action} style={{ background: "none", border: "none", cursor: "pointer", padding: "18px 14px", fontSize: 14, fontWeight: 600, color: T.gray6, fontFamily: "Open Sans,sans-serif", whiteSpace: "nowrap" }}>
+              {lk.label}
+            </button>
+          ));
+        })()}
         <div style={{ flex: 1 }} />
         <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
           <select value={currentUser.id} onChange={e => setCurrentUser(USERS.find(u => u.id === e.target.value))} style={{ fontSize: 12, border: `1px solid ${T.gray3}`, borderRadius: 4, padding: "4px 8px", background: T.white, cursor: "pointer" }}>
@@ -809,9 +817,6 @@ export default function App() {
         </div>
       </div>
 
-      {/* Sticky Sign-Up bar — appears once scrolled past the fold, on all hub-view pages */}
-      {mainTab === "hub" && <StickySignupBar onSignUp={handleSignUp} />}
-
       {/* Pages */}
       {mainTab === "hub" && route.view === "hub" && <HubView config={c} hubStep={hubStep} setHubStep={setHubStep} showSignupTray={showSignupTray} setShowSignupTray={setShowSignupTray} signupPath={signupPath} setSignupPath={setSignupPath} onGoSegment={goSegment} onGoContract={goContract} onGoStatic={goStatic} />}
       {mainTab === "hub" && route.view === "static" && route.id && <StaticPageView pageId={route.id} config={c} onGoHub={goHub} onGoSegment={goSegment} onGoContract={goContract} onGoStatic={goStatic} onSignUp={handleSignUp} onOpenContact={() => setShowContactTray(true)} />}
@@ -827,6 +832,9 @@ export default function App() {
           prepopulatedContractId={signupContractId}
         />
       )}
+
+      {/* Sticky Sign-Up bar — appears once scrolled past the fold, on all hub-view pages */}
+      {mainTab === "hub" && <StickySignupBar onSignUp={handleSignUp} />}
       {mainTab === "hub" && route.view === "segment" && route.id && <SegmentPageView segmentId={route.id} config={c} onGoHub={goHub} onGoSegment={goSegment} onGoContract={goContract} onSignUp={handleSignUp} />}
       {mainTab === "hub" && route.view === "contract" && route.id && <ContractPageView contractId={route.id} config={c} onGoHub={goHub} onGoContract={goContract} onSignUp={() => handleSignUp(route.id)} />}
       {mainTab === "admin" && <AdminView config={draftConfig} liveConfig={liveConfig} onChange={updateDraft} adminTab={adminTab} setAdminTab={setAdminTab} jsonText={jsonText} jsonError={jsonError} onJsonChange={handleJsonChange} currentUser={currentUser} onPublishOrSubmit={handlePublishOrSubmit} hasUnsaved={hasUnsaved} activeSection={activeSection} setActiveSection={setActiveSection} onGoSegment={goSegment} onGoContract={goContract} />}
@@ -862,7 +870,7 @@ function StickySignupBar({ onSignUp, ctaLabel = "Sign Up For a Free Account" }) 
         <div style={{ width: 1, height: 30, background: T.gray3 }} />
         <span style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 18, color: T.gray6 }}>B2B</span>
       </div>
-      <button onClick={onSignUp} style={{
+      <button onClick={() => onSignUp()} style={{
         background: T.green, color: T.white, border: "none",
         padding: "12px 28px", borderRadius: 6,
         fontFamily: "Montserrat,sans-serif", fontWeight: 700, fontSize: 15,
@@ -1198,7 +1206,6 @@ function SignupTray({ signupPath, setSignupPath, onClose, config, prepopulatedCo
     if (!prepopulatedContractId) return;
     const ct = (config?.contracts || []).find(x => x.id === prepopulatedContractId);
     if (!ct) return;
-    // Pick a sensible org-type whose segment matches the contract's eligible segments
     const segs = ct.segments || [];
     const matchOrgType = (config?.signupForm?.orgTypes || ORG_TYPES).find(o => segs.includes(o.segment));
     if (matchOrgType) setOrgType(matchOrgType.id);
@@ -1826,7 +1833,10 @@ function HubView({ config: c, hubStep, setHubStep, showSignupTray, setShowSignup
             <div style={{ padding: "32px 32px 24px" }}>
               <h2 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 22, fontWeight: 800, color: T.gray6, textAlign: "center", marginBottom: 28 }}>Business Channels We Serve</h2>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 4, overflowX: "auto" }}>
-                {[
+                {(() => {
+                  // Channel tiles sort by config.segmentOrder so one drag in the CMS
+                  // reorders the nav, sidebar, AND this grid in lockstep.
+                  const CHANNELS = [
                   { id: "higher_ed",  label: "Higher Ed",                 svg: <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="40" height="40"><path d="M20 8L4 16l16 8 16-8-16-8z"/><path d="M8 18v8c0 3 5 6 12 6s12-3 12-6v-8"/><path d="M34 16v8"/></svg> },
                   { id: "k12",        label: "K-12",                      svg: <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="40" height="40"><circle cx="14" cy="12" r="4"/><circle cx="26" cy="12" r="4"/><path d="M6 32c0-5 3-8 8-8h12c5 0 8 3 8 8"/><line x1="14" y1="20" x2="14" y2="26"/><line x1="26" y1="20" x2="26" y2="26"/><line x1="10" y1="24" x2="30" y2="24"/></svg> },
                   { id: "state_local",label: "State & Local\nGovernment",  svg: <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="40" height="40"><rect x="6" y="18" width="28" height="16"/><path d="M6 18l14-12 14 12"/><line x1="6" y1="34" x2="34" y2="34"/><rect x="16" y="24" width="8" height="10"/><line x1="20" y1="6" x2="20" y2="10"/></svg> },
@@ -1839,29 +1849,40 @@ function HubView({ config: c, hubStep, setHubStep, showSignupTray, setShowSignup
                   { id: "healthcare", label: "Healthcare",                  svg: <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="40" height="40"><path d="M20 34s-14-8-14-18a8 8 0 0114-4.9A8 8 0 0134 16c0 10-14 18-14 18z"/><polyline points="14,18 18,18 20,14 22,22 24,18 26,18"/></svg> },
                   { id: "nonprofit",  label: "Non-Profit",                  svg: <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="40" height="40"><circle cx="20" cy="20" r="14"/><path d="M20 12v2m0 12v2"/><path d="M15 16.5c0-2.5 2.2-4 5-4s5 1.5 5 3.5c0 4.5-10 4-10 9 0 2.5 2.2 4 5 4s5-1.5 5-4"/></svg> },
                   { id: "federal",    label: "Federal\nMarketplace",        badge: "GSA", badgeSub: "Contract Holder\n#47QSMA22D08Q0", svg: <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="40" height="40"><rect x="6" y="20" width="28" height="14"/><path d="M6 20l14-14 14 14"/><line x1="6" y1="34" x2="34" y2="34"/><rect x="10" y="24" width="5" height="10"/><rect x="23" y="24" width="5" height="10"/><rect x="17" y="24" width="6" height="6"/><line x1="20" y1="6" x2="20" y2="10"/><path d="M16 10h8"/></svg> },
-                ].map((ch, i) => {
-                  const isActive = selectedChannel === i;
-                  return (
-                    <button
-                      key={ch.id + i}
-                      onClick={() => { setSelectedChannel(isActive ? null : i); setChannelState(""); }}
-                      style={{ flex: "0 0 auto", minWidth: 68, display: "flex", flexDirection: "column", alignItems: "center", gap: 8, padding: "10px 8px", borderRadius: 8, border: "none", background: isActive ? T.bondLight : "transparent", cursor: "pointer", position: "relative" }}
-                    >
-                      {ch.badge && (
-                        <div style={{ position: "absolute", top: 0, right: 0, background: "#003087", color: T.white, fontSize: 8, fontWeight: 800, padding: "2px 4px", borderRadius: 3, lineHeight: 1 }}>{ch.badge}</div>
-                      )}
-                      <span style={{ color: isActive ? T.bond : T.gray6 }}>{ch.svg}</span>
-                      <span style={{ fontSize: 11, fontWeight: isActive ? 700 : 500, color: isActive ? T.bond : T.gray6, textAlign: "center", lineHeight: 1.35 }}>
-                        {ch.label.split("\n").map((l, j) => <span key={j} style={{ display: "block" }}>{l}</span>)}
-                      </span>
-                      {ch.badgeSub && (
-                        <span style={{ fontSize: 9, color: T.gray4, textAlign: "center", lineHeight: 1.3 }}>
-                          {ch.badgeSub.split("\n").map((l, j) => <span key={j} style={{ display: "block" }}>{l}</span>)}
+                  ];
+                  const segOrder = (c?.segmentOrder && c.segmentOrder.length) ? c.segmentOrder : [];
+                  const ordered = [...CHANNELS].sort((a, b) => {
+                    const ia = segOrder.indexOf(a.id);
+                    const ib = segOrder.indexOf(b.id);
+                    if (ia === -1 && ib === -1) return 0;
+                    if (ia === -1) return 1;
+                    if (ib === -1) return -1;
+                    return ia - ib;
+                  });
+                  return ordered.map((ch, i) => {
+                    const isActive = selectedChannel === i;
+                    return (
+                      <button
+                        key={ch.id + i}
+                        onClick={() => { setSelectedChannel(isActive ? null : i); setChannelState(""); }}
+                        style={{ flex: "0 0 auto", minWidth: 68, display: "flex", flexDirection: "column", alignItems: "center", gap: 8, padding: "10px 8px", borderRadius: 8, border: "none", background: isActive ? T.bondLight : "transparent", cursor: "pointer", position: "relative" }}
+                      >
+                        {ch.badge && (
+                          <div style={{ position: "absolute", top: 0, right: 0, background: "#003087", color: T.white, fontSize: 8, fontWeight: 800, padding: "2px 4px", borderRadius: 3, lineHeight: 1 }}>{ch.badge}</div>
+                        )}
+                        <span style={{ color: isActive ? T.bond : T.gray6 }}>{ch.svg}</span>
+                        <span style={{ fontSize: 11, fontWeight: isActive ? 700 : 500, color: isActive ? T.bond : T.gray6, textAlign: "center", lineHeight: 1.35 }}>
+                          {ch.label.split("\n").map((l, j) => <span key={j} style={{ display: "block" }}>{l}</span>)}
                         </span>
-                      )}
-                    </button>
-                  );
-                })}
+                        {ch.badgeSub && (
+                          <span style={{ fontSize: 9, color: T.gray4, textAlign: "center", lineHeight: 1.3 }}>
+                            {ch.badgeSub.split("\n").map((l, j) => <span key={j} style={{ display: "block" }}>{l}</span>)}
+                          </span>
+                        )}
+                      </button>
+                    );
+                  });
+                })()}
               </div>
             </div>
 
@@ -2208,13 +2229,12 @@ function SegmentPageView({ segmentId, config: c, onGoHub, onGoSegment, onGoContr
   const [state, setState] = useState("");
   if (!sp || !seg) return <div style={{ padding: 40, textAlign: "center" }}>Segment not found.</div>;
 
-  // State-limited contract filter:
-  //   • A contract is "national" / default-for-industry if it has at least one portalMapping with state="" (any state).
-  //   • If a contract has ONLY state-specific mappings, hide it from the default view; only show after the
-  //     customer selects a state matching one of its mappings.
+  // State-limited contract filter: a contract is "default for industry" only if it
+  // has at least one national (state="") portalMapping. State-only contracts hide
+  // until the customer selects a matching state.
   const contractAvailableHere = (ct) => {
     const maps = ct.portalMappings || [];
-    if (!maps.length) return true; // no mappings = treat as national fallback
+    if (!maps.length) return true;
     const hasNational = maps.some(m => !m.state);
     if (!state) return hasNational;
     return hasNational || maps.some(m => m.state === state);
@@ -2882,10 +2902,10 @@ function StaticPageView({ pageId, config: c, onGoHub, onGoSegment, onGoContract,
 }
 
 // ─── Shared ───────────────────────────────────────────────────────────────────
-// Logged-out B2B footer — rebuilt per Jay's design (May 2026).
-// Removed B2C inheritance: newsletter signup, social media row, currency
-// selector, Live Chat, Federal Marketplace, B2B Corp/Gov/EDU, Student Advantage,
-// Affiliate Program, Mobile Apps, B2C help links, Sales/Customer-Service phones.
+// Logged-out B2B footer — rebuilt per Jay's design (May 2026). Removed B2C
+// inheritance: newsletter, social row, currency selector, Live Chat, Federal
+// Marketplace, B2B Corp/Gov/EDU, Student Advantage, Affiliate Program, Mobile
+// Apps, B2C help links, and Sales/Customer-Service phones.
 function HubFooter({ config: c }) {
   const accountRep = c?.footer || {};
   const repPhone = accountRep.repPhone   || "###-###-####";
@@ -2941,7 +2961,6 @@ function HubFooter({ config: c }) {
         </div>
       </div>
 
-      {/* ── Divider ── */}
       <div style={{ borderTop: "1px solid #444", margin: "0 40px" }} />
 
       {/* ── B&H brand + storefront ── */}
@@ -3295,36 +3314,107 @@ function AdminView({ config, liveConfig, onChange, adminTab, setAdminTab, jsonTe
     { id: "segments", label: "Segments", icon: "🏷" }, { id: "contracts", label: "Contracts", icon: "📋" },
     { id: "errors", label: "Error States", icon: "⚠️" }, { id: "footer", label: "Footer", icon: "📌" },
   ];
-  const coreSections = [
-    { id: "cp_contracts",     label: "Contracts",       icon: "📄" },
-    { id: "cp_eprocurement",  label: "eProcurement",    icon: "🔗" },
-    { id: "cp_studio",        label: "The Studio",      icon: "🎬" },
-    { id: "cp_it_services",   label: "B2B IT Services", icon: "💻" },
-    { id: "cp_contact",       label: "Contact Us",      icon: "📞" },
-  ];
-  const segSections = Object.keys(config.segmentPages).map(id => ({ id: `seg_${id}`, label: config.segments[id]?.name || id, icon: config.signupForm.orgTypes.find(ot => ot.segment === id)?.icon || "🏢" }));
+
+  // Core pages — order driven by config.coreOrder (drag-reorderable below)
+  const CORE_LABELS = {
+    contracts:    { label: "Contracts",       icon: "📄" },
+    eprocurement: { label: "eProcurement",    icon: "🔗" },
+    studio:       { label: "The Studio",      icon: "🎬" },
+    it_services:  { label: "B2B IT Services", icon: "💻" },
+    contact:      { label: "Contact Us",      icon: "📞" },
+  };
+  const coreOrder = (config.coreOrder && config.coreOrder.length) ? config.coreOrder : Object.keys(CORE_LABELS);
+  const coreSections = coreOrder
+    .filter(id => CORE_LABELS[id])
+    .map(id => ({ id: `cp_${id}`, rawId: id, label: CORE_LABELS[id].label, icon: CORE_LABELS[id].icon }));
+
+  // Segment pages — order driven by config.segmentOrder
+  const segOrder = (config.segmentOrder && config.segmentOrder.length) ? config.segmentOrder : Object.keys(config.segmentPages);
+  const segSections = segOrder
+    .filter(id => config.segmentPages[id])
+    .map(id => ({ id: `seg_${id}`, rawId: id, label: config.segments[id]?.name || id, icon: config.signupForm.orgTypes.find(ot => ot.segment === id)?.icon || "🏢" }));
+
   const ctrSections = Object.keys(config.contractPages).map(id => { const ct = config.contracts.find(c => c.id === id); return { id: `ctr_${id}`, label: ct?.name || id, icon: "📄" }; });
   const allSections = [...hubSections, ...coreSections, ...segSections, ...ctrSections];
   const currentLabel = allSections.find(s => s.id === activeSection)?.label || activeSection;
 
-  const SGroup = ({ label, items }) => (
-    <div style={{ marginBottom: 4 }}>
-      <div style={{ background: T.gray1, padding: "7px 14px", fontSize: 10, fontWeight: 700, color: T.gray4, letterSpacing: 1, textTransform: "uppercase" }}>{label}</div>
-      {items.map(s => (
-        <button key={s.id} onClick={() => { setActiveSection(s.id); setAdminTab("form"); }} style={{ display: "flex", alignItems: "center", gap: 8, width: "100%", padding: "9px 14px", background: activeSection === s.id && adminTab === "form" ? T.scarletLight : "transparent", border: "none", borderBottom: `1px solid ${T.gray1}`, cursor: "pointer", textAlign: "left", fontSize: 13, fontWeight: activeSection === s.id ? 700 : 500, color: activeSection === s.id ? T.scarlet : T.gray5 }}>
-          <span style={{ fontSize: 12 }}>{s.icon}</span>{s.label}
-        </button>
-      ))}
-    </div>
-  );
+  // Reorder callbacks — commit new order back into config
+  const reorderCore = (newIds) => onChange(d => { d.coreOrder = newIds; });
+  const reorderSeg  = (newIds) => onChange(d => { d.segmentOrder = newIds; });
+
+  const SGroup = ({ label, items, onReorder }) => {
+    const [dragIdx, setDragIdx] = useState(null);
+    const [overIdx, setOverIdx] = useState(null);
+    const handleDragStart = (i) => (e) => {
+      if (!onReorder) return;
+      setDragIdx(i);
+      e.dataTransfer.effectAllowed = "move";
+      try { e.dataTransfer.setData("text/plain", String(i)); } catch (_) {}
+    };
+    const handleDragOver = (i) => (e) => {
+      if (!onReorder || dragIdx === null) return;
+      e.preventDefault();
+      e.dataTransfer.dropEffect = "move";
+      if (overIdx !== i) setOverIdx(i);
+    };
+    const handleDrop = (i) => (e) => {
+      if (!onReorder || dragIdx === null) return;
+      e.preventDefault();
+      if (i !== dragIdx) {
+        const next = items.map(x => x.rawId);
+        const [moved] = next.splice(dragIdx, 1);
+        next.splice(i, 0, moved);
+        onReorder(next);
+      }
+      setDragIdx(null);
+      setOverIdx(null);
+    };
+    const handleDragEnd = () => { setDragIdx(null); setOverIdx(null); };
+
+    return (
+      <div style={{ marginBottom: 4 }}>
+        <div style={{ background: T.gray1, padding: "7px 14px", fontSize: 10, fontWeight: 700, color: T.gray4, letterSpacing: 1, textTransform: "uppercase", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span>{label}</span>
+          {onReorder && <span style={{ fontSize: 9, color: T.gray4, textTransform: "none", letterSpacing: 0, fontWeight: 500 }}>drag to reorder</span>}
+        </div>
+        {items.map((s, i) => {
+          const isOver  = onReorder && overIdx === i && dragIdx !== null && dragIdx !== i;
+          const isDragging = onReorder && dragIdx === i;
+          return (
+            <div
+              key={s.id}
+              draggable={!!onReorder}
+              onDragStart={handleDragStart(i)}
+              onDragOver={handleDragOver(i)}
+              onDrop={handleDrop(i)}
+              onDragEnd={handleDragEnd}
+              style={{
+                borderTop: isOver && dragIdx > i ? `2px solid ${T.scarlet}` : "2px solid transparent",
+                borderBottom: isOver && dragIdx < i ? `2px solid ${T.scarlet}` : "2px solid transparent",
+                opacity: isDragging ? 0.4 : 1,
+              }}
+            >
+              <button
+                onClick={() => { setActiveSection(s.id); setAdminTab("form"); }}
+                style={{ display: "flex", alignItems: "center", gap: 8, width: "100%", padding: "9px 14px", background: activeSection === s.id && adminTab === "form" ? T.scarletLight : "transparent", border: "none", borderBottom: `1px solid ${T.gray1}`, cursor: onReorder ? "grab" : "pointer", textAlign: "left", fontSize: 13, fontWeight: activeSection === s.id ? 700 : 500, color: activeSection === s.id ? T.scarlet : T.gray5 }}
+              >
+                {onReorder && <span title="Drag to reorder" style={{ color: T.gray4, fontSize: 12, lineHeight: 1, cursor: "grab" }}>⋮⋮</span>}
+                <span style={{ fontSize: 12 }}>{s.icon}</span>{s.label}
+              </button>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
 
   return (
     <div style={{ maxWidth: 1280, margin: "0 auto", padding: "28px 24px", display: "flex", gap: 24 }}>
       <div style={{ width: 220, flexShrink: 0 }}>
         <div style={{ background: T.white, borderRadius: 10, border: `1px solid ${T.gray2}`, overflow: "hidden", marginBottom: 10 }}>
           <SGroup label="Hub Home" items={hubSections} />
-          <SGroup label="Core Pages" items={coreSections} />
-          <SGroup label="Segment Pages" items={segSections} />
+          <SGroup label="Core Pages" items={coreSections} onReorder={reorderCore} />
+          <SGroup label="Segment Pages" items={segSections} onReorder={reorderSeg} />
           <SGroup label="Contract Pages" items={ctrSections} />
         </div>
         <div style={{ background: T.white, borderRadius: 10, border: `1px solid ${T.gray2}`, overflow: "hidden", marginBottom: 10 }}>
@@ -3455,7 +3545,7 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
               onChange={e => onChange(d => { d.signupForm.roleLabelCharCap = Math.max(4, parseInt(e.target.value || "0", 10) || 0); })}
               style={{ width: 70, border: `1px solid ${T.gray3}`, borderRadius: 5, padding: "6px 8px", fontSize: 13 }}
             />
-            <span style={{ fontSize: 11, color: T.gray4 }}>If any role label exceeds this, the grid drops to 1 column. Confirm value with Jay.</span>
+            <span style={{ fontSize: 11, color: T.gray4 }}>If any role label exceeds this, the grid drops to 1 column.</span>
           </div>
         </div>
         <div style={{ marginBottom: 18 }}>
@@ -3747,10 +3837,10 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
             <EditField label="Platforms Footer Text"   value={cp.platformsFooter || ""} onChange={v => upd("platformsFooter", v)} hint="e.g. Don't see the platform your organization uses?" />
             <EditField label="Platforms CTA"           value={cp.platformsCta    || ""} onChange={v => upd("platformsCta", v)} />
 
-            {/* ── Platform Logos (CMS-controllable) ── */}
+            {/* ── Platform Logos (CMS-controllable, with hex color picker) ── */}
             <div style={{ marginTop: 20, paddingTop: 16, borderTop: `1px solid ${T.gray2}` }}>
               <div style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, marginBottom: 8 }}>Platform Logos</div>
-              <div style={{ fontSize: 11, color: T.gray4, marginBottom: 12 }}>SAP Ariba, JAGGAER, etc. Upload a logo image or fall back to colored text. The color preview + picker drive the text fallback color.</div>
+              <div style={{ fontSize: 11, color: T.gray4, marginBottom: 12 }}>SAP Ariba, JAGGAER, etc. Upload an image logo or fall back to colored text. The hex + picker drive the text fallback color.</div>
               {(cp.platforms || EPROCUREMENT_PLATFORMS).map((p, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8, padding: "8px 10px", border: `1px solid ${T.gray2}`, borderRadius: 6, background: T.white }}>
                   <input value={p.name} onChange={e => onChange(d => {

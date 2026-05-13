@@ -44,13 +44,6 @@ const USERS = [
 const INITIAL_CONFIG = {
   meta: { lastUpdatedBy: "system", lastUpdatedAt: "2026-03-20T09:00:00Z", version: "2.0.0" },
 
-  // ── Navigation / Display Order ────────────────────────────────────────────
-  // Single source of truth for the order of Core Pages (header nav + CMS sidebar)
-  // and Segment Pages (Business Channels grid + CMS sidebar). Drag-reorderable
-  // in the CMS sidebar.
-  coreOrder:    ["contracts", "eprocurement", "studio", "it_services", "contact"],
-  segmentOrder: ["higher_ed", "k12", "federal", "state_local", "nonprofit", "healthcare", "corporate", "smb", "creative", "si", "diversity"],
-
   hero: {
     headline:   "B&H B2B",
     subheadline:"Exclusive pricing, cooperative contracts, and dedicated support for organizations of every size.",
@@ -284,6 +277,17 @@ const INITIAL_CONFIG = {
       platformsTitle:   "We Support All Major Platforms",
       platformsFooter:  "Don't see the platform your organization uses?",
       platformsCta:     "Send Us a Message",
+      // CMS-controllable platform logo strip — each entry: { name, color, logoUrl }
+      platforms: [
+        { name: "SAP Ariba",  color: "#0070C0", logoUrl: "" },
+        { name: "JAGGAER",    color: "#D62027", logoUrl: "" },
+        { name: "ESM",        color: "#1B5E96", logoUrl: "" },
+        { name: "Unimarket",  color: "#E87722", logoUrl: "" },
+        { name: "Coupa",      color: "#E63946", logoUrl: "" },
+        { name: "SAP",        color: "#008FD3", logoUrl: "" },
+        { name: "EqualLevel", color: "#5B2D8E", logoUrl: "" },
+        { name: "Oracle",     color: "#C74634", logoUrl: "" },
+      ],
     },
     studio: {
       headline:     "The Studio B&H",
@@ -601,6 +605,48 @@ function ImageUploadField({ label, value, onChange, hint }) {
   );
 }
 
+// ─── Contact Form Fields Editor (CMS — per-page extra fields) ────────────────
+// Used by the per-page CMS editors to manage additional fields appended to the
+// contact form. The default form (Business/Industry vs Gov/EDU/State + base
+// fields) is never modified — only extras are appended.
+function ContactFormFieldsEditor({ value, onChange }) {
+  const list = Array.isArray(value) ? value : [];
+  const update = (next) => onChange(next);
+  const addField = () => update([...list, { key: `f_${Date.now()}`, label: "New Field", type: "text", required: false, options: "" }]);
+  const removeField = (i) => { const next = list.slice(); next.splice(i, 1); update(next); };
+  const setField = (i, k, v) => { const next = list.slice(); next[i] = { ...next[i], [k]: v }; update(next); };
+  return (
+    <div style={{ marginTop: 20, paddingTop: 16, borderTop: `1px solid ${T.gray2}` }}>
+      <div style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, marginBottom: 6 }}>Contact Form — Extra Fields</div>
+      <div style={{ fontSize: 11, color: T.gray4, marginBottom: 12 }}>Appended after the default contact fields (which include the Business / Industry vs Gov-EDU / State entry gate plus name, email, phone, etc.). The default form is never changed — only these extras are added.</div>
+      {list.length === 0 && (
+        <div style={{ fontSize: 12, color: T.gray4, fontStyle: "italic", padding: "10px 4px", marginBottom: 8, background: T.gray1, borderRadius: 6 }}>No extra fields yet for this page. Defaults only.</div>
+      )}
+      {list.map((f, i) => (
+        <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr 130px 70px 32px", gap: 6, alignItems: "center", marginBottom: 6, padding: "6px 4px", background: T.white, border: `1px solid ${T.gray2}`, borderRadius: 6 }}>
+          <input value={f.label || ""} onChange={e => setField(i, "label", e.target.value)} placeholder="Field label" style={{ padding: "6px 8px", border: `1px solid ${T.gray3}`, borderRadius: 5, fontSize: 12 }} />
+          <select value={f.type || "text"} onChange={e => setField(i, "type", e.target.value)} style={{ padding: "6px 6px", border: `1px solid ${T.gray3}`, borderRadius: 5, fontSize: 12, background: T.white }}>
+            <option value="text">Text</option>
+            <option value="email">Email</option>
+            <option value="tel">Phone</option>
+            <option value="textarea">Multi-line</option>
+            <option value="select">Dropdown</option>
+            <option value="checkbox">Checkbox</option>
+          </select>
+          <label style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11, color: T.gray5 }}>
+            <input type="checkbox" checked={!!f.required} onChange={e => setField(i, "required", e.target.checked)} /> Req
+          </label>
+          <button onClick={() => removeField(i)} title="Remove" style={{ background: T.scarletLight, border: "none", borderRadius: 5, color: T.scarlet, fontWeight: 700, fontSize: 13, cursor: "pointer", width: 28, height: 28 }}>✕</button>
+          {f.type === "select" && (
+            <textarea value={f.options || ""} onChange={e => setField(i, "options", e.target.value)} placeholder="Dropdown options, one per line" rows={3} style={{ gridColumn: "1 / -1", marginTop: 4, padding: "6px 8px", border: `1px solid ${T.gray3}`, borderRadius: 5, fontSize: 11, resize: "vertical", fontFamily: "Open Sans,sans-serif" }} />
+          )}
+        </div>
+      ))}
+      <button onClick={addField} style={{ background: "none", border: `1.5px dashed ${T.bond}`, color: T.bond, padding: "8px 16px", borderRadius: 6, fontWeight: 700, fontSize: 12, cursor: "pointer", width: "100%", marginTop: 4 }}>+ Add Field</button>
+    </div>
+  );
+}
+
 // ─── HeroBanner ───────────────────────────────────────────────────────────────
 function HeroBanner({ imageUrl, bgColor, fallbackStyle, children }) {
   const base = bgColor ? { background: bgColor } : imageUrl ? {} : fallbackStyle;
@@ -644,6 +690,7 @@ export default function App() {
   const [hubStep,        setHubStep]        = useState("entry");
   const [showSignupTray, setShowSignupTray]  = useState(false);
   const [signupPath,     setSignupPath]      = useState(null); // null | "create" | "convert"
+  const [signupContractId, setSignupContractId] = useState(null); // pre-selected contract from contract/segment page
   const [showContactTray,setShowContactTray] = useState(false);
   const [adminTab,     setAdminTab]     = useState("form");
   const [activeSection, setActiveSection] = useState("hero");
@@ -689,7 +736,13 @@ export default function App() {
 
   const goHub        = () => { setRoute({ view: "hub", id: null }); setMainTab("hub"); setHubStep("entry"); };
   const goSegmentsNav = () => { setRoute({ view: "hub", id: null }); setMainTab("hub"); setHubStep("segments_browse"); window.scrollTo(0, 0); };
-  const handleSignUp = () => { setSignupPath(null); setShowSignupTray(true); };
+  const handleSignUp = (contractId = null) => {
+    setSignupContractId(contractId);
+    setSignupPath(null);
+    setShowSignupTray(true);
+  };
+  // Convenience for contract page (binds the current contract on open)
+  const handleSignUpForContract = (contractId) => () => handleSignUp(contractId);
   const goStatic   = (id) => { setRoute({ view: "static", id }); setMainTab("hub"); window.scrollTo(0, 0); };
   const goSegment  = (id) => { setRoute({ view: "segment", id }); setMainTab("hub"); window.scrollTo(0, 0); };
   const goContract = (id) => { setRoute({ view: "contract", id }); setMainTab("hub"); window.scrollTo(0, 0); };
@@ -705,6 +758,7 @@ export default function App() {
         *{box-sizing:border-box;margin:0;}
         @keyframes fadeUp{from{transform:translateY(12px);opacity:0;}to{transform:translateY(0);opacity:1;}}
         @keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
+        @keyframes slideInRight{from{transform:translateX(100%);}to{transform:translateX(0);}}
         button:hover{opacity:0.9;}
       `}</style>
 
@@ -755,14 +809,67 @@ export default function App() {
         </div>
       </div>
 
+      {/* Sticky Sign-Up bar — appears once scrolled past the fold, on all hub-view pages */}
+      {mainTab === "hub" && <StickySignupBar onSignUp={handleSignUp} />}
+
       {/* Pages */}
       {mainTab === "hub" && route.view === "hub" && <HubView config={c} hubStep={hubStep} setHubStep={setHubStep} showSignupTray={showSignupTray} setShowSignupTray={setShowSignupTray} signupPath={signupPath} setSignupPath={setSignupPath} onGoSegment={goSegment} onGoContract={goContract} onGoStatic={goStatic} />}
       {mainTab === "hub" && route.view === "static" && route.id && <StaticPageView pageId={route.id} config={c} onGoHub={goHub} onGoSegment={goSegment} onGoContract={goContract} onGoStatic={goStatic} onSignUp={handleSignUp} onOpenContact={() => setShowContactTray(true)} />}
-      {showContactTray && <ContactTray config={c} onClose={() => setShowContactTray(false)} />}
+      {showContactTray && <ContactTray config={c} onClose={() => setShowContactTray(false)} pageType={route.view} pageId={route.id} />}
+
+      {/* Global Sign-Up Tray — available on every in-hub page */}
+      {showSignupTray && mainTab === "hub" && (
+        <SignupTray
+          signupPath={signupPath}
+          setSignupPath={setSignupPath}
+          onClose={() => { setShowSignupTray(false); setSignupPath(null); setSignupContractId(null); }}
+          config={c}
+          prepopulatedContractId={signupContractId}
+        />
+      )}
       {mainTab === "hub" && route.view === "segment" && route.id && <SegmentPageView segmentId={route.id} config={c} onGoHub={goHub} onGoSegment={goSegment} onGoContract={goContract} onSignUp={handleSignUp} />}
-      {mainTab === "hub" && route.view === "contract" && route.id && <ContractPageView contractId={route.id} config={c} onGoHub={goHub} onGoContract={goContract} onSignUp={handleSignUp} />}
+      {mainTab === "hub" && route.view === "contract" && route.id && <ContractPageView contractId={route.id} config={c} onGoHub={goHub} onGoContract={goContract} onSignUp={() => handleSignUp(route.id)} />}
       {mainTab === "admin" && <AdminView config={draftConfig} liveConfig={liveConfig} onChange={updateDraft} adminTab={adminTab} setAdminTab={setAdminTab} jsonText={jsonText} jsonError={jsonError} onJsonChange={handleJsonChange} currentUser={currentUser} onPublishOrSubmit={handlePublishOrSubmit} hasUnsaved={hasUnsaved} activeSection={activeSection} setActiveSection={setActiveSection} onGoSegment={goSegment} onGoContract={goContract} />}
       {mainTab === "approvals" && <ApprovalsView pendingChanges={pendingChanges} liveConfig={liveConfig} currentUser={currentUser} onApprove={handleApprove} onReject={handleReject} />}
+    </div>
+  );
+}
+
+// ─── Sticky Sign-Up Bar (top, appears once scrolled past the fold) ───────────
+function StickySignupBar({ onSignUp, ctaLabel = "Sign Up For a Free Account" }) {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setShow(window.scrollY > window.innerHeight * 0.75);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  if (!show) return null;
+  return (
+    <div style={{
+      position: "fixed", top: 0, left: 0, right: 0, zIndex: 900,
+      background: T.white, borderBottom: `1px solid ${T.gray2}`,
+      boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
+      padding: "10px 24px",
+      display: "flex", alignItems: "center", justifyContent: "space-between",
+      animation: "fadeUp .2s ease",
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+        <div style={{ background: "#990000", padding: "4px 8px", borderRadius: 2, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", lineHeight: 1 }}>
+          <span style={{ color: "#FFD700", fontWeight: 900, fontSize: 16, fontFamily: "Montserrat,sans-serif", letterSpacing: 1 }}>B&H</span>
+          <span style={{ color: T.white, fontWeight: 700, fontSize: 5, fontFamily: "Montserrat,sans-serif", letterSpacing: 1, marginTop: 1 }}>PHOTO · VIDEO · AUDIO</span>
+        </div>
+        <div style={{ width: 1, height: 30, background: T.gray3 }} />
+        <span style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 18, color: T.gray6 }}>B2B</span>
+      </div>
+      <button onClick={onSignUp} style={{
+        background: T.green, color: T.white, border: "none",
+        padding: "12px 28px", borderRadius: 6,
+        fontFamily: "Montserrat,sans-serif", fontWeight: 700, fontSize: 15,
+        cursor: "pointer",
+      }}>
+        {ctaLabel}
+      </button>
     </div>
   );
 }
@@ -866,9 +973,17 @@ const ORG_TYPE_TO_SEGMENT = {
 
 // ─── Sign-Up Tray ─────────────────────────────────────────────────────────────
 // ─── Contact Tray ─────────────────────────────────────────────────────────────
-function ContactTray({ config, onClose }) {
+function ContactTray({ config, onClose, pageType, pageId }) {
   const cc  = config?.corePages?.contact || {};
   const sf  = config?.signupForm || {};
+  // Page-level CMS-managed extra fields (appended after the default form)
+  const pageNode = pageType === "static"   ? config?.corePages?.[pageId]
+                : pageType === "segment"  ? config?.segmentPages?.[pageId]
+                : pageType === "contract" ? config?.contractPages?.[pageId]
+                : null;
+  const extraFields = (pageNode && Array.isArray(pageNode.contactFormFields)) ? pageNode.contactFormFields : [];
+  const [extraValues, setExtraValues] = useState({});
+  const setExtraValue = (key, v) => setExtraValues(prev => ({ ...prev, [key]: v }));
   const [tab,          setTab]          = useState("business"); // "business" | "govedu"
   const [industry,     setIndustry]     = useState("");
   const [contactState, setContactState] = useState("");
@@ -963,6 +1078,43 @@ function ContactTray({ config, onClose }) {
               </label>
               <div style={{ fontSize: 11, color: T.gray4, marginTop: -4 }}>{cc.trayUploadHint || "Supported file formats: jpg, png, pdf, doc or docx up to 5MB"}</div>
 
+              {/* ── Page-specific extra fields (CMS-managed) ── */}
+              {extraFields.length > 0 && (
+                <div style={{ marginTop: 8, paddingTop: 12, borderTop: `1px dashed ${T.gray2}`, display: "flex", flexDirection: "column", gap: 10 }}>
+                  {extraFields.map((f, i) => {
+                    const key = f.key || `f${i}`;
+                    const val = extraValues[key] || "";
+                    if (f.type === "textarea") {
+                      return (
+                        <textarea key={key} placeholder={f.label + (f.required ? " *" : "")} value={val} onChange={e => setExtraValue(key, e.target.value)} rows={3}
+                          style={{ width: "100%", padding: "12px 14px", border: `1px solid ${T.gray3}`, borderRadius: 4, fontSize: 14, color: T.gray6, outline: "none", resize: "vertical", fontFamily: "'Open Sans',sans-serif", boxSizing: "border-box" }} />
+                      );
+                    }
+                    if (f.type === "select") {
+                      const opts = (f.options || "").split("\n").map(s => s.trim()).filter(Boolean);
+                      return (
+                        <select key={key} value={val} onChange={e => setExtraValue(key, e.target.value)}
+                          style={{ width: "100%", padding: "11px 14px", border: `1px solid ${T.gray3}`, borderRadius: 4, fontSize: 14, color: val ? T.gray6 : T.gray4, background: T.white, fontFamily: "Open Sans,sans-serif", cursor: "pointer" }}>
+                          <option value="">{f.label + (f.required ? " *" : "")}</option>
+                          {opts.map(o => <option key={o} value={o}>{o}</option>)}
+                        </select>
+                      );
+                    }
+                    if (f.type === "checkbox") {
+                      return (
+                        <label key={key} style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer", fontSize: 13, color: T.gray6 }}>
+                          <input type="checkbox" checked={!!val} onChange={e => setExtraValue(key, e.target.checked)} />
+                          {f.label}{f.required ? " *" : ""}
+                        </label>
+                      );
+                    }
+                    return (
+                      <TrayInput key={key} placeholder={f.label + (f.required ? " *" : "")} value={val} onChange={e => setExtraValue(key, e.target.value)} type={f.type || "text"} />
+                    );
+                  })}
+                </div>
+              )}
+
               {/* Submit */}
               <button style={{ width: "100%", background: T.green, color: T.white, border: "none", padding: 14, borderRadius: 4, fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif", marginTop: 8 }}>
                 {cc.traySubmitCta || "Submit"}
@@ -975,7 +1127,7 @@ function ContactTray({ config, onClose }) {
   );
 }
 
-function SignupTray({ signupPath, setSignupPath, onClose, config }) {
+function SignupTray({ signupPath, setSignupPath, onClose, config, prepopulatedContractId }) {
   // ── Account step state ──
   const [trayStep,          setTrayStep]          = useState("account"); // "account" | "orgInfo" | "billing"
   const [newsletter,        setNewsletter]        = useState(true);
@@ -1039,6 +1191,21 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
   const segmentId        = ORG_TYPE_TO_SEGMENT[orgType] ?? null;
   const availableContracts = (config?.contracts ?? []).filter(ct => ct.active && segmentId && ct.segments.includes(segmentId));
   const [selectedContract, setSelectedContract] = useState("");
+  const [omniaAuthId,      setOmniaAuthId]      = useState(""); // Shown only when selectedContract === "omnia"
+
+  // Pre-populate from a contract page launch
+  useEffect(() => {
+    if (!prepopulatedContractId) return;
+    const ct = (config?.contracts || []).find(x => x.id === prepopulatedContractId);
+    if (!ct) return;
+    // Pick a sensible org-type whose segment matches the contract's eligible segments
+    const segs = ct.segments || [];
+    const matchOrgType = (config?.signupForm?.orgTypes || ORG_TYPES).find(o => segs.includes(o.segment));
+    if (matchOrgType) setOrgType(matchOrgType.id);
+    setSelectedContract(ct.id);
+    setTrayStep("orgInfo");
+    setSignupPath("create");
+  }, [prepopulatedContractId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Step config ──
   const sf = config?.signupForm || {};
@@ -1067,12 +1234,12 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
     : (sf.trayTitle || "Sign Up for a Free B&H B2B Account");
 
   return (
-    <div style={{ position: "fixed", inset: 0, zIndex: 1000, display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div style={{ position: "fixed", inset: 0, zIndex: 1000 }}>
       {/* Backdrop */}
       <div onClick={onClose} style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.5)" }} />
 
-      {/* Sheet */}
-      <div style={{ position: "relative", background: T.white, borderRadius: 16, width: "33%", minWidth: 340, maxWidth: 480, maxHeight: "90vh", overflowY: "auto", boxShadow: "0 8px 48px rgba(0,0,0,0.28)", animation: "fadeUp .25s ease" }}>
+      {/* Right-side slide-in tray (480px wide, full viewport height) */}
+      <div style={{ position: "absolute", top: 0, right: 0, bottom: 0, background: T.white, width: 480, maxWidth: "100vw", overflowY: "auto", boxShadow: "-8px 0 32px rgba(0,0,0,0.28)", animation: "slideInRight .25s ease", display: "flex", flexDirection: "column" }}>
 
         {/* Header */}
         <div style={{ padding: "20px 20px 0", display: "flex", alignItems: "center", gap: 10 }}>
@@ -1227,6 +1394,15 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
                   value={selectedContract}
                   onChange={e => setSelectedContract(e.target.value)}
                   options={[{ value: "", label: "Select a Contract" }, ...availableContracts.map(ct => ({ value: ct.id, label: ct.name }))]}
+                />
+              )}
+
+              {/* Omnia Member ID / Auth # — shown only when Omnia is the selected contract */}
+              {selectedContract === "omnia" && (
+                <FloatInput
+                  label="Omnia Member ID or Authorization #"
+                  value={omniaAuthId}
+                  onChange={e => setOmniaAuthId(e.target.value)}
                 />
               )}
 
@@ -1493,7 +1669,18 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
           </div>
         )}
 
-        {/* ══ CONTACT DRAWER ══ */}
+        {/*
+          ══ CONTACT DRAWER ══
+          ─────────────────────────────────────────────────────────────────────
+          BACKEND REQUIREMENT — DENIAL CONTACT PERSISTENCE (Ariel session, May 2026)
+          When a user reaches this step via denied / denied1 / denied2, the
+          outbound Contact Us email MUST include all previously-submitted form
+          data so the user does not have to re-enter it (orgType, orgName,
+          orgState, numEmployees, taxId, department, role[], roleDesc, purchaseVol,
+          needs[], segmentId, billing fields, userName, userEmail, demoResult,
+          detectedPortal). Backend / submit-handler concern — no front-end change.
+          ─────────────────────────────────────────────────────────────────────
+        */}
         {trayStep === "contact" && (
           <div style={{ padding: 28 }}>
             <h3 style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 18, color: T.gray6, marginBottom: 20 }}>{sf.trayContactTitle || "Contact a B&H B2B Specialist"}</h3>
@@ -2008,14 +2195,7 @@ function HubView({ config: c, hubStep, setHubStep, showSignupTray, setShowSignup
         </div>
       )}
 
-      {showSignupTray && (
-        <SignupTray
-          signupPath={signupPath}
-          setSignupPath={setSignupPath}
-          onClose={() => { setShowSignupTray(false); setSignupPath(null); }}
-          config={c}
-        />
-      )}
+      {/* SignupTray was lifted to App level so it works from segment / contract / static pages too. */}
       <HubFooter config={c} />
     </div>
   );
@@ -2027,8 +2207,25 @@ function SegmentPageView({ segmentId, config: c, onGoHub, onGoSegment, onGoContr
   const seg = c.segments[segmentId];
   const [state, setState] = useState("");
   if (!sp || !seg) return <div style={{ padding: 40, textAlign: "center" }}>Segment not found.</div>;
-  const featuredCt = sp.featuredContractId ? c.contracts.find(x => x.id === sp.featuredContractId) : null;
-  const otherCts = (sp.otherContractIds || []).map(id => c.contracts.find(x => x.id === id)).filter(Boolean);
+
+  // State-limited contract filter:
+  //   • A contract is "national" / default-for-industry if it has at least one portalMapping with state="" (any state).
+  //   • If a contract has ONLY state-specific mappings, hide it from the default view; only show after the
+  //     customer selects a state matching one of its mappings.
+  const contractAvailableHere = (ct) => {
+    const maps = ct.portalMappings || [];
+    if (!maps.length) return true; // no mappings = treat as national fallback
+    const hasNational = maps.some(m => !m.state);
+    if (!state) return hasNational;
+    return hasNational || maps.some(m => m.state === state);
+  };
+
+  const rawFeaturedCt = sp.featuredContractId ? c.contracts.find(x => x.id === sp.featuredContractId) : null;
+  const featuredCt = rawFeaturedCt && contractAvailableHere(rawFeaturedCt) ? rawFeaturedCt : null;
+  const otherCts = (sp.otherContractIds || [])
+    .map(id => c.contracts.find(x => x.id === id))
+    .filter(Boolean)
+    .filter(contractAvailableHere);
   const icon = c.signupForm.orgTypes.find(ot => ot.segment === segmentId)?.icon || "🏢";
   return (
     <div>
@@ -2074,10 +2271,14 @@ function SegmentPageView({ segmentId, config: c, onGoHub, onGoSegment, onGoContr
                 <h2 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 18, fontWeight: 700, color: seg.color, marginBottom: 16 }}>{sp.featuredTitle}</h2>
                 {featuredCt && (() => {
                   const resolvedFeatured = state ? resolvePortalMapping(featuredCt, state, segmentId) : null;
+                  // Prefer the child-contract logo from the resolved mapping; fall back to parent
+                  const featuredLogo = (resolvedFeatured && resolvedFeatured.logoUrl)
+                    ? { logoUrl: resolvedFeatured.logoUrl, logoLabel: resolvedFeatured.logoLabel || featuredCt.logoLabel }
+                    : featuredCt;
                   return (
                     <div style={{ marginBottom: 16 }}>
                       <div style={{ background: T.white, border: `1px solid ${T.gray2}`, borderRadius: 6, padding: "14px 18px", display: "inline-flex", alignItems: "center", gap: 10 }}>
-                        <ContractLogo contract={featuredCt} height={28} maxWidth={120} />
+                        <ContractLogo contract={featuredLogo} height={28} maxWidth={120} />
                         <span style={{ fontSize: 11, color: T.gray4 }}>{featuredCt.name}</span>
                       </div>
                       {resolvedFeatured && resolvedFeatured.portalId && (
@@ -2096,7 +2297,7 @@ function SegmentPageView({ segmentId, config: c, onGoHub, onGoSegment, onGoContr
                   </div>
                 ))}
                 <div style={{ display: "flex", gap: 12, marginTop: 20 }}>
-                  <button onClick={onSignUp} style={{ background: T.green, color: T.white, border: "none", padding: "12px 24px", borderRadius: 4, fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>{sp.featuredSignupCta}</button>
+                  <button onClick={() => onSignUp(featuredCt?.id)} style={{ background: T.green, color: T.white, border: "none", padding: "12px 24px", borderRadius: 4, fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>{sp.featuredSignupCta}</button>
                   {sp.featuredLearnMoreCta && (
                     <button onClick={featuredCt ? () => onGoContract(featuredCt.id) : undefined} style={{ background: T.white, color: T.green, border: `1.5px solid ${T.green}`, padding: "12px 24px", borderRadius: 4, fontWeight: 700, fontSize: 14, cursor: "pointer" }}>{sp.featuredLearnMoreCta}</button>
                   )}
@@ -2124,6 +2325,9 @@ function SegmentPageView({ segmentId, config: c, onGoHub, onGoSegment, onGoContr
               <div style={{ background: T.white, border: `1px solid ${T.gray2}`, borderRadius: 8, overflow: "hidden" }}>
                 {otherCts.map((ct, i) => {
                   const resolved = state ? resolvePortalMapping(ct, state, segmentId) : null;
+                  const childLogo = (resolved && resolved.logoUrl)
+                    ? { logoUrl: resolved.logoUrl, logoLabel: resolved.logoLabel || ct.logoLabel }
+                    : ct;
                   return (
                     <button key={ct.id} onClick={() => onGoContract(ct.id)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", padding: "13px 16px", background: T.white, border: "none", borderBottom: i < otherCts.length - 1 ? `1px solid ${T.gray2}` : "none", cursor: "pointer", textAlign: "left" }}>
                       <div>
@@ -2133,7 +2337,7 @@ function SegmentPageView({ segmentId, config: c, onGoHub, onGoSegment, onGoContr
                         )}
                       </div>
                       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                        <ContractLogo contract={ct} height={20} maxWidth={64} />
+                        <ContractLogo contract={childLogo} height={20} maxWidth={64} />
                         <span style={{ color: T.bond, fontWeight: 700 }}>›</span>
                       </div>
                     </button>
@@ -2188,27 +2392,9 @@ function ContractPageView({ contractId, config: c, onGoHub, onGoContract, onSign
             </div>
           </div>
         </div>
-        {/* Portal mappings table on contract page */}
-        {(ct.portalMappings || []).length > 0 && (
-          <div style={{ marginBottom: 40 }}>
-            <h3 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 16, fontWeight: 700, color: T.gray6, marginBottom: 16 }}>Available Portals by State & Segment</h3>
-            <div style={{ background: T.white, border: `1px solid ${T.gray2}`, borderRadius: 8, overflow: "hidden" }}>
-              <div style={{ display: "grid", gridTemplateColumns: "80px 160px 100px 1fr", gap: 0, background: T.gray1, padding: "10px 16px", borderBottom: `1px solid ${T.gray2}` }}>
-                {["State", "Segment", "Portal ID", "Label"].map(h => (
-                  <div key={h} style={{ fontSize: 11, fontWeight: 700, color: T.gray4, textTransform: "uppercase", letterSpacing: .4 }}>{h}</div>
-                ))}
-              </div>
-              {ct.portalMappings.map((m, i) => (
-                <div key={m.id} style={{ display: "grid", gridTemplateColumns: "80px 160px 100px 1fr", gap: 0, padding: "10px 16px", borderBottom: i < ct.portalMappings.length - 1 ? `1px solid ${T.gray2}` : "none", alignItems: "center" }}>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: m.state ? T.gray6 : T.gray4 }}>{m.state || "All"}</div>
-                  <div style={{ fontSize: 12, color: T.gray5 }}>{m.segment ? (ct.segments?.includes(m.segment) ? m.segment : m.segment) : "Any"}</div>
-                  <div style={{ fontFamily: "monospace", fontSize: 13, fontWeight: 700, color: T.bond }}>[{m.portalId || "—"}]</div>
-                  <div style={{ fontSize: 13, color: T.gray6 }}>{m.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        {/* "Available Portals by State & Segment" was removed from the customer-facing
+            contract page (Ariel session, May 2026). Admins can still see and manage
+            portal mappings in CMS → Contracts → (per contract) → Portal Mappings. */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32 }}>
           <div>
             <h3 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 16, fontWeight: 700, color: T.gray6, marginBottom: 16 }}>B&H: One Stop For Technology</h3>
@@ -2519,9 +2705,12 @@ function StaticPageView({ pageId, config: c, onGoHub, onGoSegment, onGoContract,
             <div style={{ padding: "56px 40px 48px", margin: "0 -40px", background: T.white }}>
               <h2 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 22, fontWeight: 800, color: T.gray6, textAlign: "center", marginBottom: 44 }}>{cp.platformsTitle || "We Support All Major Platforms"}</h2>
               <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "center", gap: "24px 48px", marginBottom: 48 }}>
-                {EPROCUREMENT_PLATFORMS.map(p => (
-                  <div key={p.name} style={{ display: "flex", alignItems: "center", justifyContent: "center", minWidth: 100 }}>
-                    <span style={{ fontWeight: 900, fontSize: 18, color: p.color, fontFamily: "Montserrat,sans-serif", letterSpacing: p.name === "JAGGAER" ? 1 : 0 }}>{p.name}</span>
+                {(cp.platforms || EPROCUREMENT_PLATFORMS).map(p => (
+                  <div key={p.name} style={{ display: "flex", alignItems: "center", justifyContent: "center", minWidth: 100, minHeight: 40 }}>
+                    {p.logoUrl
+                      ? <img src={p.logoUrl} alt={p.name} style={{ maxHeight: 36, maxWidth: 140, objectFit: "contain", display: "block" }} />
+                      : <span style={{ fontWeight: 900, fontSize: 18, color: p.color, fontFamily: "Montserrat,sans-serif", letterSpacing: p.name === "JAGGAER" ? 1 : 0 }}>{p.name}</span>
+                    }
                   </div>
                 ))}
               </div>
@@ -2693,142 +2882,122 @@ function StaticPageView({ pageId, config: c, onGoHub, onGoSegment, onGoContract,
 }
 
 // ─── Shared ───────────────────────────────────────────────────────────────────
+// Logged-out B2B footer — rebuilt per Jay's design (May 2026).
+// Removed B2C inheritance: newsletter signup, social media row, currency
+// selector, Live Chat, Federal Marketplace, B2B Corp/Gov/EDU, Student Advantage,
+// Affiliate Program, Mobile Apps, B2C help links, Sales/Customer-Service phones.
 function HubFooter({ config: c }) {
-  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const accountRep = c?.footer || {};
+  const repPhone = accountRep.repPhone   || "###-###-####";
+  const repEmail = accountRep.contactEmail || "xxxxxx@bhphoto.com";
   const FOOTER_COLS = [
     {
       heading: "Customer Service & Help",
-      links: ["Return Policy","Track/Request a Return","Manage Catalog Subscription","Payments","International","Store Pick Up","B&H Gift Cards","Free Expedited Shipping"],
-      bold: "All Help Topics",
+      links: ["Track/Request a Return", "Manage Catalog Subscription", "Site Directory", "Shop By Brand"],
+      bold:  "B2B Support",
     },
     {
       heading: "Company Information",
-      links: ["About B&H","Our NYC SuperStore","Hours of Operation","Payboo Credit Card","Manufacturers Directory","Shop By Brand","Career Opportunities","Site Directory"],
-      bold: "Trade in Your Gear",
+      links: ["About B&H", "Our NYC SuperStore", "Manufacturers Directory", "Download W9 Form"],
     },
     {
       heading: "Other B&H Sites",
-      links: ["Explora- News & Reviews","Federal Marketplace","Student Advantage","B2B Corp. Govt. & Edu.","B&H Photography Podcast","Affiliate Program","Event Space","Mobile Apps"],
-    },
-    {
-      heading: "Contact Us",
-      contact: [
-        { label: "Sales & Expert Advice", value: "800-606-6969" },
-        { label: "Customer Service",      value: "800-221-5743" },
-      ],
-      actions: ["Live Chat","Contact Us","Request Callback"],
+      links: ["Event Space", "Explora- News & Reviews", "B&H Photography Podcast"],
     },
   ];
-  const SOCIAL = [
-    { name: "TikTok",    svg: <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.97a8.2 8.2 0 004.79 1.53V7.07a4.84 4.84 0 01-1.02-.38z"/></svg> },
-    { name: "Facebook",  svg: <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg> },
-    { name: "X",         svg: <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.261 5.631 5.903-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> },
-    { name: "Instagram", svg: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg> },
-    { name: "YouTube",   svg: <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg> },
-    { name: "SoundCloud",svg: <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M11.56 8.87V17h8.76c1.5 0 1.68-2.02.36-2.5.32-1.98-1.33-3.36-3.04-2.84-.28-1.96-2.02-3.32-3.94-2.9-.44-1.04-1.52-1.68-2.14-.89zm-1.5.87c-.06 0-.13.01-.19.02C9.78 9.14 9.75 8.5 9.75 8c0-2.26-1.84-4-4.1-4-2.16 0-3.94 1.66-4.1 3.78-.01.14-.05.27-.05.42a4.1 4.1 0 100 8.2h3.56V9.74z"/></svg> },
+  const LEGAL_LINKS = ["Your Privacy Choices", "Privacy", "Terms of Use", "Export Policy", "Accessibility Statement"];
+  const TRUST_BADGES = [
+    { line1: "BBB",        line2: "ACCREDITED",        line3: "BUSINESS" },
+    { line1: "AMERICA'S",  line2: "BEST OF",           line3: "THE BEST 2025" },
+    { line1: "USA TODAY",  line2: "Most Trusted",      line3: "Brands 2025" },
+    { line1: "AMERICA'S",  line2: "MOST LOVED",        line3: "BRANDS 2025" },
   ];
-  const LEGAL_LINKS = ["Your Privacy Choices","Privacy","Terms of Use","Export Policy","Accessibility Statement"];
 
   return (
     <footer style={{ background: "#2d2d2d", marginTop: 0 }}>
-      {/* ── Main columns ── */}
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 40px 40px", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 32 }}>
+      {/* ── Main columns: 3 link cols + Your Account Rep ── */}
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 40px 36px", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 32 }}>
         {FOOTER_COLS.map(col => (
           <div key={col.heading}>
             <div style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 14, color: T.white, marginBottom: 18 }}>{col.heading}</div>
-            {col.links && col.links.map(l => (
+            {col.links.map(l => (
               <div key={l} style={{ fontSize: 13, color: "#b8b8b8", marginBottom: 10, cursor: "pointer" }}>{l}</div>
             ))}
             {col.bold && (
               <div style={{ fontSize: 13, color: T.white, fontWeight: 700, marginTop: 4, cursor: "pointer" }}>{col.bold}</div>
             )}
-            {col.contact && col.contact.map(item => (
-              <div key={item.label} style={{ marginBottom: 16 }}>
-                <div style={{ fontSize: 13, color: T.white, fontWeight: 700 }}>{item.label}</div>
-                <div style={{ fontSize: 13, color: T.white, fontWeight: 700 }}>{item.value}</div>
-              </div>
-            ))}
-            {col.actions && col.actions.map(a => (
-              <div key={a} style={{ fontSize: 13, color: "#b8b8b8", marginBottom: 10, cursor: "pointer" }}>{a}</div>
-            ))}
-            {col.heading === "Contact Us" && (
-              <div style={{ marginTop: 20 }}>
-                <button style={{ display: "flex", alignItems: "center", gap: 8, background: "transparent", border: `1px solid #666`, borderRadius: 4, padding: "8px 14px", cursor: "pointer", color: T.white, fontSize: 13 }}>
-                  🇺🇸 US Dollar
-                </button>
-              </div>
-            )}
           </div>
         ))}
-      </div>
 
-      {/* ── Divider ── */}
-      <div style={{ borderTop: "1px solid #444", margin: "0 40px" }} />
-
-      {/* ── Newsletter + Social ── */}
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "32px 40px", display: "flex", alignItems: "flex-start", gap: 40, flexWrap: "wrap" }}>
-        <div style={{ flex: "0 0 auto" }}>
-          <div style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 15, color: T.white, marginBottom: 14 }}>B&H News & Special Offers</div>
-          <div style={{ display: "flex", gap: 12, marginBottom: 10 }}>
-            <input
-              value={newsletterEmail}
-              onChange={e => setNewsletterEmail(e.target.value)}
-              placeholder="Email"
-              style={{ width: 260, padding: "11px 14px", background: "transparent", border: "1px solid #666", borderRadius: 2, fontSize: 14, color: T.white, outline: "none", fontFamily: "Open Sans,sans-serif" }}
-            />
-            <button style={{ padding: "11px 28px", background: "transparent", border: "1px solid #888", borderRadius: 2, color: T.white, fontSize: 14, fontWeight: 600, cursor: "pointer", fontFamily: "Open Sans,sans-serif" }}>Sign Up</button>
+        {/* Your Account Rep — B2B-specific (replaces B2C Contact Us column) */}
+        <div>
+          <div style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 14, color: T.white, marginBottom: 18 }}>Your Account Rep</div>
+          <div style={{ fontSize: 14, color: T.white, fontWeight: 700, marginBottom: 12 }}>{repPhone}</div>
+          <div style={{ fontSize: 14, color: T.white, fontWeight: 700, marginBottom: 16, wordBreak: "break-all" }}>{repEmail}</div>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer" }}>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke={T.white} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            <span style={{ fontSize: 14, color: T.white, fontWeight: 700 }}>Contact Us</span>
           </div>
-          <div style={{ fontSize: 12, color: T.bond, cursor: "pointer", textDecoration: "underline" }}>Manage Existing Email Subscriptions</div>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 24, paddingTop: 38 }}>
-          {SOCIAL.map(s => (
-            <span key={s.name} style={{ color: "#b8b8b8", cursor: "pointer", display: "flex" }}>{s.svg}</span>
-          ))}
         </div>
       </div>
 
       {/* ── Divider ── */}
       <div style={{ borderTop: "1px solid #444", margin: "0 40px" }} />
 
-      {/* ── B&H brand + store illustration ── */}
+      {/* ── B&H brand + storefront ── */}
       <div style={{ textAlign: "center", padding: "32px 40px 0" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 14, marginBottom: 24 }}>
-          <div style={{ background: "#990000", padding: "4px 8px", borderRadius: 2, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <span style={{ color: "#FFD700", fontWeight: 900, fontSize: 16, fontFamily: "Montserrat,sans-serif", letterSpacing: 1 }}>B&H</span>
+          <div style={{ background: "#990000", padding: "4px 10px", borderRadius: 2, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", lineHeight: 1 }}>
+            <span style={{ color: "#FFD700", fontWeight: 900, fontSize: 18, fontFamily: "Montserrat,sans-serif", letterSpacing: 1 }}>B&H</span>
+            <span style={{ color: T.white, fontWeight: 700, fontSize: 6, fontFamily: "Montserrat,sans-serif", letterSpacing: 1, marginTop: 1 }}>PHOTO · VIDEO · AUDIO</span>
           </div>
-          <span style={{ color: T.white, fontSize: 16, fontWeight: 600, fontFamily: "Open Sans,sans-serif" }}>Your Creative Partner Since 1973</span>
+          <span style={{ color: T.white, fontSize: 18, fontWeight: 600, fontFamily: "Open Sans,sans-serif" }}>Your Creative Partner Since 1973</span>
         </div>
-        {/* Store illustration placeholder */}
-        <div style={{ maxWidth: 400, margin: "0 auto", height: 120, background: "linear-gradient(to bottom, #3a3a3a, #2d2d2d)", borderRadius: "8px 8px 0 0", display: "flex", alignItems: "flex-end", justifyContent: "center", overflow: "hidden", paddingBottom: 0 }}>
-          <div style={{ display: "flex", alignItems: "flex-end", gap: 4, paddingBottom: 0 }}>
-            {[40,55,70,90,70,55,40].map((h,i) => (
-              <div key={i} style={{ width: 28, height: h, background: i === 3 ? "#4a7a6a" : "#3d5a52", borderRadius: "3px 3px 0 0", display: "flex", alignItems: "flex-start", justifyContent: "center", paddingTop: 4 }}>
-                {i === 3 && <span style={{ fontSize: 8, color: "#FFD700", fontWeight: 900, fontFamily: "Montserrat" }}>B&H</span>}
-              </div>
-            ))}
-          </div>
+        <div style={{ maxWidth: 460, margin: "0 auto 24px", height: 150, display: "flex", alignItems: "flex-end", justifyContent: "center" }}>
+          <svg viewBox="0 0 460 150" width="100%" height="100%" style={{ display: "block" }} aria-label="B&H NYC SuperStore">
+            <rect x="0" y="0" width="460" height="150" fill="#2d2d2d" />
+            <path d="M30 50 L60 50 L60 35 L90 35 L90 50 L160 50 L160 28 L200 28 L200 50 L260 50 L260 32 L310 32 L310 50 L400 50 L400 40 L430 40 L430 50 Z" fill="#1f1f1f" />
+            <rect x="30" y="50" width="400" height="80" fill="#3d5a52" />
+            <rect x="30" y="50" width="400" height="14" fill="#2d4338" />
+            <rect x="48" y="74" width="60" height="44" fill="#b8d4e0" opacity="0.9" />
+            <rect x="118" y="74" width="60" height="44" fill="#b8d4e0" opacity="0.9" />
+            <rect x="282" y="74" width="60" height="44" fill="#b8d4e0" opacity="0.9" />
+            <rect x="352" y="74" width="60" height="44" fill="#b8d4e0" opacity="0.9" />
+            <rect x="200" y="70" width="62" height="50" fill="#1a1a1a" />
+            <rect x="208" y="76" width="46" height="38" fill="#2a3a3a" />
+            <rect x="220" y="58" width="22" height="14" fill="#990000" />
+            <text x="231" y="68" fontFamily="Montserrat,sans-serif" fontWeight="900" fontSize="9" fill="#FFD700" textAnchor="middle">B&H</text>
+            <rect x="0" y="130" width="460" height="20" fill="#1a1a1a" />
+            <circle cx="22" cy="115" r="10" fill="#4a7a5a" />
+            <rect x="20" y="120" width="4" height="14" fill="#2a2a2a" />
+            <circle cx="438" cy="115" r="10" fill="#4a7a5a" />
+            <rect x="436" y="120" width="4" height="14" fill="#2a2a2a" />
+            <rect x="166" y="118" width="22" height="10" rx="2" fill="#f4c43c" />
+            <rect x="170" y="114" width="14" height="6" rx="1" fill="#f4c43c" />
+            <circle cx="172" cy="129" r="2" fill="#1a1a1a" />
+            <circle cx="184" cy="129" r="2" fill="#1a1a1a" />
+          </svg>
         </div>
       </div>
 
       {/* ── Legal bar ── */}
-      <div style={{ borderTop: "1px solid #444", padding: "20px 40px", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <span style={{ fontSize: 18 }}>🏳️</span>
-            {LEGAL_LINKS.map((l, i) => (
-              <span key={l} style={{ fontSize: 12, color: "#b8b8b8", cursor: "pointer" }}>
-                {i > 0 && <span style={{ color: "#555", marginRight: 10 }}>|</span>}
-                {l}
-              </span>
-            ))}
+      <div style={{ borderTop: "1px solid #444", padding: "20px 40px", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 4, flexWrap: "wrap" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "#1a73e8", padding: "2px 6px", borderRadius: 2, marginRight: 8 }}>
+            <svg viewBox="0 0 12 12" width="10" height="10"><rect width="12" height="12" rx="2" fill="#fff" /><path d="M3 6.5L5 8.5L9 4" stroke="#1a73e8" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            <span style={{ fontSize: 11, color: T.white, fontWeight: 600 }}>Your Privacy Choices</span>
           </div>
+          {LEGAL_LINKS.slice(1).map((l) => (
+            <span key={l} style={{ fontSize: 12, color: "#b8b8b8", cursor: "pointer", marginLeft: 14, textDecoration: l === "Export Policy" ? "underline" : "none" }}>{l}</span>
+          ))}
         </div>
-        <div style={{ fontSize: 12, color: "#888" }}>© 2000-2024 B & H Foto & Electronics Corp. 420 9th Ave, New York, NY 10001</div>
-        {/* Trust badges */}
-        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-          {["BBB\nAccredited", "Best of\nthe Best\n2025", "Most Trusted\nBrands", "Most Loved\nBrands"].map(b => (
-            <div key={b} style={{ width: 52, height: 52, border: "1px solid #555", borderRadius: 4, display: "flex", alignItems: "center", justifyContent: "center", padding: 4 }}>
-              <span style={{ fontSize: 8, color: "#888", textAlign: "center", whiteSpace: "pre-line", lineHeight: 1.3 }}>{b}</span>
+        <div style={{ fontSize: 12, color: "#888" }}>© 2000-2024 B &amp; H Foto &amp; Electronics Corp. 420 9th Ave, New York, NY 10001</div>
+        <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+          {TRUST_BADGES.map((b, i) => (
+            <div key={i} style={{ minWidth: 62, height: 50, border: "1px solid #555", borderRadius: 4, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "3px 4px", background: "#3a3a3a" }}>
+              <span style={{ fontSize: 7, color: "#ccc", fontWeight: 700, lineHeight: 1.2 }}>{b.line1}</span>
+              <span style={{ fontSize: 7, color: "#ccc", fontWeight: 700, lineHeight: 1.2 }}>{b.line2}</span>
+              <span style={{ fontSize: 7, color: "#ccc", fontWeight: 700, lineHeight: 1.2 }}>{b.line3}</span>
             </div>
           ))}
         </div>
@@ -2894,6 +3063,8 @@ function PortalMappingsEditor({ contractIndex, contract, segments, onChange }) {
       segment: eligibleSegments[0] || "",
       portalId: "",
       label: "",
+      logoUrl: "",   // Child-contract logo (e.g., E&I Virginia under E&I parent) — CMS-controllable
+      logoLabel: "", // Fallback text label if no image uploaded
     };
     onChange(d => {
       if (!d.contracts[contractIndex].portalMappings) d.contracts[contractIndex].portalMappings = [];
@@ -2934,42 +3105,69 @@ function PortalMappingsEditor({ contractIndex, contract, segments, onChange }) {
       {/* Mapping rows */}
       {mappings.map((m, rowIdx) => (
         <div key={m.id} style={{
-          display: "grid", gridTemplateColumns: "90px 170px 90px 1fr 32px", gap: 6,
-          alignItems: "center", marginBottom: 6, padding: "6px 4px",
+          marginBottom: 6, padding: "6px 4px",
           background: rowIdx % 2 === 0 ? T.white : "#fafafa",
           border: `1px solid ${T.gray2}`, borderRadius: 6,
         }}>
-          {/* State */}
-          <select value={m.state} onChange={e => updateMapping(m.id, "state", e.target.value)}
-            style={{ padding: "6px 6px", border: `1px solid ${T.gray3}`, borderRadius: 5, fontSize: 12, background: T.white, width: "100%" }}>
-            <option value="">All States</option>
-            {STATES.map(s => <option key={s} value={s}>{s}</option>)}
-          </select>
+          <div style={{ display: "grid", gridTemplateColumns: "90px 170px 90px 1fr 32px", gap: 6, alignItems: "center" }}>
+            {/* State */}
+            <select value={m.state} onChange={e => updateMapping(m.id, "state", e.target.value)}
+              style={{ padding: "6px 6px", border: `1px solid ${T.gray3}`, borderRadius: 5, fontSize: 12, background: T.white, width: "100%" }}>
+              <option value="">All States</option>
+              {STATES.map(s => <option key={s} value={s}>{s}</option>)}
+            </select>
 
-          {/* Segment */}
-          <select value={m.segment} onChange={e => updateMapping(m.id, "segment", e.target.value)}
-            style={{ padding: "6px 6px", border: `1px solid ${T.gray3}`, borderRadius: 5, fontSize: 12, background: T.white, width: "100%" }}>
-            <option value="">Any Segment</option>
-            {eligibleSegments.map(segId => (
-              <option key={segId} value={segId}>{segments[segId]?.name || segId}</option>
-            ))}
-          </select>
+            {/* Segment */}
+            <select value={m.segment} onChange={e => updateMapping(m.id, "segment", e.target.value)}
+              style={{ padding: "6px 6px", border: `1px solid ${T.gray3}`, borderRadius: 5, fontSize: 12, background: T.white, width: "100%" }}>
+              <option value="">Any Segment</option>
+              {eligibleSegments.map(segId => (
+                <option key={segId} value={segId}>{segments[segId]?.name || segId}</option>
+              ))}
+            </select>
 
-          {/* Portal ID */}
-          <input value={m.portalId} onChange={e => updateMapping(m.id, "portalId", e.target.value)}
-            placeholder="e.g. 944"
-            style={{ padding: "6px 8px", border: `1px solid ${T.gray3}`, borderRadius: 5, fontSize: 12, fontFamily: "monospace", background: T.white, width: "100%" }} />
+            {/* Portal ID */}
+            <input value={m.portalId} onChange={e => updateMapping(m.id, "portalId", e.target.value)}
+              placeholder="e.g. 944"
+              style={{ padding: "6px 8px", border: `1px solid ${T.gray3}`, borderRadius: 5, fontSize: 12, fontFamily: "monospace", background: T.white, width: "100%" }} />
 
-          {/* Label */}
-          <input value={m.label} onChange={e => updateMapping(m.id, "label", e.target.value)}
-            placeholder="e.g. E&I Virginia"
-            style={{ padding: "6px 8px", border: `1px solid ${T.gray3}`, borderRadius: 5, fontSize: 12, background: T.white, width: "100%" }} />
+            {/* Label */}
+            <input value={m.label} onChange={e => updateMapping(m.id, "label", e.target.value)}
+              placeholder="e.g. E&I Virginia"
+              style={{ padding: "6px 8px", border: `1px solid ${T.gray3}`, borderRadius: 5, fontSize: 12, background: T.white, width: "100%" }} />
 
-          {/* Remove */}
-          <button onClick={() => removeMapping(m.id)} title="Remove"
-            style={{ background: T.scarletLight, border: "none", borderRadius: 5, color: T.scarlet, fontWeight: 700, fontSize: 13, cursor: "pointer", width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-            ✕
-          </button>
+            {/* Remove */}
+            <button onClick={() => removeMapping(m.id)} title="Remove"
+              style={{ background: T.scarletLight, border: "none", borderRadius: 5, color: T.scarlet, fontWeight: 700, fontSize: 13, cursor: "pointer", width: 28, height: 28, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+              ✕
+            </button>
+          </div>
+
+          {/* Child-contract logo slot (CMS-controllable) */}
+          <div style={{ marginTop: 6, paddingTop: 6, borderTop: `1px dashed ${T.gray2}`, display: "flex", alignItems: "center", gap: 10, paddingLeft: 4 }}>
+            <span style={{ fontSize: 10, fontWeight: 700, color: T.gray4, textTransform: "uppercase", letterSpacing: .4, minWidth: 70 }}>Child Logo</span>
+            <label style={{ display: "inline-flex", alignItems: "center", gap: 6, background: T.bondLight, color: T.bond, border: `1px solid ${T.bond}`, borderRadius: 4, padding: "3px 8px", fontSize: 11, fontWeight: 700, cursor: "pointer" }}>
+              📁 Upload
+              <input type="file" accept="image/*" style={{ display: "none" }} onChange={e => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = ev => updateMapping(m.id, "logoUrl", ev.target.result);
+                reader.readAsDataURL(file);
+              }} />
+            </label>
+            <input value={m.logoLabel || ""} onChange={e => updateMapping(m.id, "logoLabel", e.target.value)}
+              placeholder="Logo text label (fallback)"
+              style={{ flex: 1, padding: "5px 8px", border: `1px solid ${T.gray3}`, borderRadius: 5, fontSize: 11, background: T.white, maxWidth: 200 }} />
+            {m.logoUrl ? (
+              <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                <img src={m.logoUrl} alt={m.logoLabel || m.label} style={{ maxHeight: 22, maxWidth: 70, objectFit: "contain" }} />
+                <button onClick={() => updateMapping(m.id, "logoUrl", "")} style={{ background: "none", border: "none", color: T.scarlet, cursor: "pointer", fontSize: 11, fontWeight: 700 }}>✕</button>
+              </div>
+            ) : (
+              <span style={{ fontSize: 10, color: T.gray4, fontStyle: "italic" }}>Uses parent contract logo if blank.</span>
+            )}
+          </div>
         </div>
       ))}
 
@@ -3245,9 +3443,20 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
           ))}
         </div>
         <div style={{ marginBottom: 18 }}>
-          <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 6 }}>Role Dropdown Options (one per line)</label>
-          <div style={{ fontSize: 11, color: T.gray4, marginBottom: 6 }}>"Select a Role" placeholder is added automatically.</div>
+          <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 6 }}>Role Options — Multi-Select (one per line)</label>
+          <div style={{ fontSize: 11, color: T.gray4, marginBottom: 6 }}>Customers may select more than one role. "Other" reveals a free-text Role Description field.</div>
           <textarea value={(config.signupForm.roleOptions || []).join("\n")} onChange={e => onChange(d => { d.signupForm.roleOptions = e.target.value.split("\n").filter(Boolean); })} rows={8} style={{ width: "100%", border: `1.5px solid ${T.gray3}`, borderRadius: 7, padding: "10px 12px", fontSize: 13, resize: "vertical", fontFamily: "Open Sans,sans-serif" }} />
+          <div style={{ marginTop: 10, display: "flex", alignItems: "center", gap: 10 }}>
+            <label style={{ fontSize: 11, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4 }}>Label char-cap for 2-column layout</label>
+            <input
+              type="number"
+              min={4}
+              value={config.signupForm.roleLabelCharCap ?? 18}
+              onChange={e => onChange(d => { d.signupForm.roleLabelCharCap = Math.max(4, parseInt(e.target.value || "0", 10) || 0); })}
+              style={{ width: 70, border: `1px solid ${T.gray3}`, borderRadius: 5, padding: "6px 8px", fontSize: 13 }}
+            />
+            <span style={{ fontSize: 11, color: T.gray4 }}>If any role label exceeds this, the grid drops to 1 column. Confirm value with Jay.</span>
+          </div>
         </div>
         <div style={{ marginBottom: 18 }}>
           <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 6 }}>Purchasing Needs Checkboxes (one per line)</label>
@@ -3443,10 +3652,13 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
 
   if (section === "footer") return (
     <div>
-      <SectionTitle>Footer</SectionTitle>
-      <EditField label="Contact Email"        value={config.footer.contactEmail} onChange={v => onChange(d => { d.footer.contactEmail = v; })} />
-      <EditField label="Representative Phone" value={config.footer.repPhone}     onChange={v => onChange(d => { d.footer.repPhone = v; })} />
-      <EditField label="Footer Tagline"       value={config.footer.tagline}      onChange={v => onChange(d => { d.footer.tagline = v; })} />
+      <SectionTitle>Footer — Your Account Rep</SectionTitle>
+      <div style={{ background: T.bondLight, border: `1px solid ${T.bond}`, borderRadius: 8, padding: "10px 14px", marginBottom: 16, fontSize: 12, color: T.bond }}>
+        These fields populate the <strong>Your Account Rep</strong> column in the logged-out B2B footer (per Jay's design, May 2026). B2C newsletter, social icons, currency selector, and Live Chat were removed from this footer.
+      </div>
+      <EditField label="Account Rep Phone" value={config.footer.repPhone}     onChange={v => onChange(d => { d.footer.repPhone = v; })} hint="Format e.g. 800-606-6969. Defaults to ###-###-#### placeholder if empty." />
+      <EditField label="Account Rep Email" value={config.footer.contactEmail} onChange={v => onChange(d => { d.footer.contactEmail = v; })} hint="Defaults to xxxxxx@bhphoto.com placeholder if empty." />
+      <EditField label="Tagline (legacy)"  value={config.footer.tagline}      onChange={v => onChange(d => { d.footer.tagline = v; })} hint="No longer shown in the new footer — kept for backwards compatibility." />
     </div>
   );
 
@@ -3465,6 +3677,23 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
     return (
       <div>
         <SectionTitle>{pageLabelMap[pageKey] || pageKey} — Core Page</SectionTitle>
+        {/* Hero / inline imagery — CMS-controllable for every core page */}
+        {pageKey !== "contact" && (
+          <ImageUploadField
+            label="Hero / Lead Image"
+            value={cp.heroImageUrl || ""}
+            onChange={v => upd("heroImageUrl", v)}
+            hint="Main image at the top of the page (hero banner or two-column intro). Falls back to a gradient if empty."
+          />
+        )}
+        {pageKey === "studio" && (
+          <ImageUploadField
+            label="STC Section Image"
+            value={cp.stcImageUrl || ""}
+            onChange={v => upd("stcImageUrl", v)}
+            hint="Image shown beside the Studio Technology Center section."
+          />
+        )}
         <EditField label="Page Headline" value={cp.headline || ""} onChange={v => upd("headline", v)} hint="Shown in the hero banner and breadcrumb." />
         {pageKey === "studio" && (
           <EditField label="Tagline" value={cp.tagline || ""} onChange={v => upd("tagline", v)} hint="Italic subline shown below the headline in the hero." />
@@ -3517,6 +3746,70 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
             <EditField label="Platforms Section Title" value={cp.platformsTitle  || ""} onChange={v => upd("platformsTitle", v)} />
             <EditField label="Platforms Footer Text"   value={cp.platformsFooter || ""} onChange={v => upd("platformsFooter", v)} hint="e.g. Don't see the platform your organization uses?" />
             <EditField label="Platforms CTA"           value={cp.platformsCta    || ""} onChange={v => upd("platformsCta", v)} />
+
+            {/* ── Platform Logos (CMS-controllable) ── */}
+            <div style={{ marginTop: 20, paddingTop: 16, borderTop: `1px solid ${T.gray2}` }}>
+              <div style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, marginBottom: 8 }}>Platform Logos</div>
+              <div style={{ fontSize: 11, color: T.gray4, marginBottom: 12 }}>SAP Ariba, JAGGAER, etc. Upload a logo image or fall back to colored text. The color preview + picker drive the text fallback color.</div>
+              {(cp.platforms || EPROCUREMENT_PLATFORMS).map((p, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8, padding: "8px 10px", border: `1px solid ${T.gray2}`, borderRadius: 6, background: T.white }}>
+                  <input value={p.name} onChange={e => onChange(d => {
+                    if (!d.corePages.eprocurement.platforms) d.corePages.eprocurement.platforms = [...EPROCUREMENT_PLATFORMS];
+                    d.corePages.eprocurement.platforms[i].name = e.target.value;
+                  })} placeholder="Name" style={{ flex: 1, border: `1px solid ${T.gray3}`, borderRadius: 5, padding: "6px 8px", fontSize: 12 }} />
+
+                  {/* Hex input + swatch + native color picker */}
+                  <div style={{ display: "flex", alignItems: "center", gap: 4, border: `1px solid ${T.gray3}`, borderRadius: 5, padding: "2px 4px 2px 2px", background: T.white }}>
+                    <input
+                      type="color"
+                      value={/^#[0-9a-f]{6}$/i.test(p.color || "") ? p.color : "#666666"}
+                      onChange={e => onChange(d => {
+                        if (!d.corePages.eprocurement.platforms) d.corePages.eprocurement.platforms = [...EPROCUREMENT_PLATFORMS];
+                        d.corePages.eprocurement.platforms[i].color = e.target.value;
+                      })}
+                      title="Pick color"
+                      style={{ width: 26, height: 24, border: "none", padding: 0, background: "none", cursor: "pointer" }}
+                    />
+                    <input value={p.color || ""} onChange={e => onChange(d => {
+                      if (!d.corePages.eprocurement.platforms) d.corePages.eprocurement.platforms = [...EPROCUREMENT_PLATFORMS];
+                      d.corePages.eprocurement.platforms[i].color = e.target.value;
+                    })} placeholder="#hex" style={{ width: 80, border: "none", outline: "none", padding: "4px 4px", fontSize: 11, fontFamily: "monospace" }} />
+                  </div>
+
+                  <label style={{ display: "inline-flex", alignItems: "center", gap: 6, background: T.bondLight, color: T.bond, border: `1px solid ${T.bond}`, borderRadius: 4, padding: "4px 10px", fontSize: 11, fontWeight: 700, cursor: "pointer" }}>
+                    📁 Upload
+                    <input type="file" accept="image/*" style={{ display: "none" }} onChange={e => {
+                      const file = e.target.files[0];
+                      if (!file) return;
+                      const reader = new FileReader();
+                      reader.onload = ev => onChange(d => {
+                        if (!d.corePages.eprocurement.platforms) d.corePages.eprocurement.platforms = [...EPROCUREMENT_PLATFORMS];
+                        d.corePages.eprocurement.platforms[i].logoUrl = ev.target.result;
+                      });
+                      reader.readAsDataURL(file);
+                    }} />
+                  </label>
+                  {p.logoUrl ? (
+                    <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                      <img src={p.logoUrl} alt={p.name} style={{ maxHeight: 22, maxWidth: 70, objectFit: "contain" }} />
+                      <button onClick={() => onChange(d => { d.corePages.eprocurement.platforms[i].logoUrl = ""; })} style={{ background: "none", border: "none", color: T.scarlet, cursor: "pointer", fontSize: 11, fontWeight: 700 }}>✕</button>
+                    </div>
+                  ) : (
+                    <span style={{ fontSize: 10, color: T.gray4, fontStyle: "italic" }}>text fallback</span>
+                  )}
+                  <button onClick={() => onChange(d => {
+                    if (!d.corePages.eprocurement.platforms) d.corePages.eprocurement.platforms = [...EPROCUREMENT_PLATFORMS];
+                    d.corePages.eprocurement.platforms.splice(i, 1);
+                  })} title="Remove" style={{ background: T.scarletLight, border: "none", borderRadius: 5, color: T.scarlet, fontWeight: 700, fontSize: 13, cursor: "pointer", width: 26, height: 26 }}>✕</button>
+                </div>
+              ))}
+              <button onClick={() => onChange(d => {
+                if (!d.corePages.eprocurement.platforms) d.corePages.eprocurement.platforms = [...EPROCUREMENT_PLATFORMS];
+                d.corePages.eprocurement.platforms.push({ name: "New Platform", color: "#666666", logoUrl: "" });
+              })} style={{ background: "none", border: `1.5px dashed ${T.bond}`, color: T.bond, padding: "8px 16px", borderRadius: 6, fontWeight: 700, fontSize: 12, cursor: "pointer", width: "100%", marginTop: 4 }}>
+                + Add Platform
+              </button>
+            </div>
           </div>
         )}
         {pageKey === "contact" && (
@@ -3531,6 +3824,13 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
             <EditField label="Upload Hint Text"      value={cc.trayUploadHint  || ""} onChange={v => updContact("trayUploadHint", v)} />
             <EditField label="Submit CTA"            value={cc.traySubmitCta   || ""} onChange={v => updContact("traySubmitCta", v)} />
           </div>
+        )}
+        {/* Contact form extra fields — for every core page that surfaces a contact tray */}
+        {pageKey !== "contact" && (
+          <ContactFormFieldsEditor
+            value={cp.contactFormFields || []}
+            onChange={next => upd("contactFormFields", next)}
+          />
         )}
         {pageKey === "contracts" && (
           <div>
@@ -3624,6 +3924,10 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
             <input type="checkbox" checked={!!sp.showStateFilter} onChange={e => onChange(d => { d.segmentPages[segId].showStateFilter = e.target.checked; })} />Show state filter in sidebar
           </label>
         </div>
+        <ContactFormFieldsEditor
+          value={sp.contactFormFields || []}
+          onChange={next => onChange(d => { d.segmentPages[segId].contactFormFields = next; })}
+        />
       </div>
     );
   }
@@ -3656,6 +3960,10 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
           <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 8 }}>Promo Bullets (one per line)</label>
           <textarea value={(cp.promoBullets || []).join("\n")} onChange={e => onChange(d => { d.contractPages[ctrId].promoBullets = e.target.value.split("\n").filter(Boolean); })} rows={4} style={{ width: "100%", border: `1.5px solid ${T.gray3}`, borderRadius: 7, padding: "10px 12px", fontSize: 13, resize: "vertical", fontFamily: "Open Sans,sans-serif" }} />
         </div>
+        <ContactFormFieldsEditor
+          value={cp.contactFormFields || []}
+          onChange={next => onChange(d => { d.contractPages[ctrId].contactFormFields = next; })}
+        />
       </div>
     );
   }

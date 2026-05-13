@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 
 // ─── B&H Design Tokens ───────────────────────────────────────────────────────
 const T = {
@@ -605,48 +605,6 @@ function ImageUploadField({ label, value, onChange, hint }) {
   );
 }
 
-// ─── Contact Form Fields Editor (CMS — per-page extra fields) ────────────────
-// Used by the per-page CMS editors to manage additional fields appended to the
-// contact form. The default form (Business/Industry vs Gov/EDU/State + base
-// fields) is never modified — only extras are appended.
-function ContactFormFieldsEditor({ value, onChange }) {
-  const list = Array.isArray(value) ? value : [];
-  const update = (next) => onChange(next);
-  const addField = () => update([...list, { key: `f_${Date.now()}`, label: "New Field", type: "text", required: false, options: "" }]);
-  const removeField = (i) => { const next = list.slice(); next.splice(i, 1); update(next); };
-  const setField = (i, k, v) => { const next = list.slice(); next[i] = { ...next[i], [k]: v }; update(next); };
-  return (
-    <div style={{ marginTop: 20, paddingTop: 16, borderTop: `1px solid ${T.gray2}` }}>
-      <div style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, marginBottom: 6 }}>Contact Form — Extra Fields</div>
-      <div style={{ fontSize: 11, color: T.gray4, marginBottom: 12 }}>Appended after the default contact fields (which include the Business / Industry vs Gov-EDU / State entry gate plus name, email, phone, etc.). The default form is never changed — only these extras are added.</div>
-      {list.length === 0 && (
-        <div style={{ fontSize: 12, color: T.gray4, fontStyle: "italic", padding: "10px 4px", marginBottom: 8, background: T.gray1, borderRadius: 6 }}>No extra fields yet for this page. Defaults only.</div>
-      )}
-      {list.map((f, i) => (
-        <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr 130px 70px 32px", gap: 6, alignItems: "center", marginBottom: 6, padding: "6px 4px", background: T.white, border: `1px solid ${T.gray2}`, borderRadius: 6 }}>
-          <input value={f.label || ""} onChange={e => setField(i, "label", e.target.value)} placeholder="Field label" style={{ padding: "6px 8px", border: `1px solid ${T.gray3}`, borderRadius: 5, fontSize: 12 }} />
-          <select value={f.type || "text"} onChange={e => setField(i, "type", e.target.value)} style={{ padding: "6px 6px", border: `1px solid ${T.gray3}`, borderRadius: 5, fontSize: 12, background: T.white }}>
-            <option value="text">Text</option>
-            <option value="email">Email</option>
-            <option value="tel">Phone</option>
-            <option value="textarea">Multi-line</option>
-            <option value="select">Dropdown</option>
-            <option value="checkbox">Checkbox</option>
-          </select>
-          <label style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 11, color: T.gray5 }}>
-            <input type="checkbox" checked={!!f.required} onChange={e => setField(i, "required", e.target.checked)} /> Req
-          </label>
-          <button onClick={() => removeField(i)} title="Remove" style={{ background: T.scarletLight, border: "none", borderRadius: 5, color: T.scarlet, fontWeight: 700, fontSize: 13, cursor: "pointer", width: 28, height: 28 }}>✕</button>
-          {f.type === "select" && (
-            <textarea value={f.options || ""} onChange={e => setField(i, "options", e.target.value)} placeholder="Dropdown options, one per line" rows={3} style={{ gridColumn: "1 / -1", marginTop: 4, padding: "6px 8px", border: `1px solid ${T.gray3}`, borderRadius: 5, fontSize: 11, resize: "vertical", fontFamily: "Open Sans,sans-serif" }} />
-          )}
-        </div>
-      ))}
-      <button onClick={addField} style={{ background: "none", border: `1.5px dashed ${T.bond}`, color: T.bond, padding: "8px 16px", borderRadius: 6, fontWeight: 700, fontSize: 12, cursor: "pointer", width: "100%", marginTop: 4 }}>+ Add Field</button>
-    </div>
-  );
-}
-
 // ─── HeroBanner ───────────────────────────────────────────────────────────────
 function HeroBanner({ imageUrl, bgColor, fallbackStyle, children }) {
   const base = bgColor ? { background: bgColor } : imageUrl ? {} : fallbackStyle;
@@ -690,7 +648,6 @@ export default function App() {
   const [hubStep,        setHubStep]        = useState("entry");
   const [showSignupTray, setShowSignupTray]  = useState(false);
   const [signupPath,     setSignupPath]      = useState(null); // null | "create" | "convert"
-  const [signupContractId, setSignupContractId] = useState(null); // pre-selected contract from contract/segment page
   const [showContactTray,setShowContactTray] = useState(false);
   const [adminTab,     setAdminTab]     = useState("form");
   const [activeSection, setActiveSection] = useState("hero");
@@ -736,13 +693,7 @@ export default function App() {
 
   const goHub        = () => { setRoute({ view: "hub", id: null }); setMainTab("hub"); setHubStep("entry"); };
   const goSegmentsNav = () => { setRoute({ view: "hub", id: null }); setMainTab("hub"); setHubStep("segments_browse"); window.scrollTo(0, 0); };
-  const handleSignUp = (contractId = null) => {
-    setSignupContractId(contractId);
-    setSignupPath(null);
-    setShowSignupTray(true);
-  };
-  // Convenience for contract page (binds the current contract on open)
-  const handleSignUpForContract = (contractId) => () => handleSignUp(contractId);
+  const handleSignUp = () => { setSignupPath(null); setShowSignupTray(true); };
   const goStatic   = (id) => { setRoute({ view: "static", id }); setMainTab("hub"); window.scrollTo(0, 0); };
   const goSegment  = (id) => { setRoute({ view: "segment", id }); setMainTab("hub"); window.scrollTo(0, 0); };
   const goContract = (id) => { setRoute({ view: "contract", id }); setMainTab("hub"); window.scrollTo(0, 0); };
@@ -758,7 +709,6 @@ export default function App() {
         *{box-sizing:border-box;margin:0;}
         @keyframes fadeUp{from{transform:translateY(12px);opacity:0;}to{transform:translateY(0);opacity:1;}}
         @keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
-        @keyframes slideInRight{from{transform:translateX(100%);}to{transform:translateX(0);}}
         button:hover{opacity:0.9;}
       `}</style>
 
@@ -809,67 +759,14 @@ export default function App() {
         </div>
       </div>
 
-      {/* Sticky Sign-Up bar — appears once scrolled past the fold, on all hub-view pages */}
-      {mainTab === "hub" && <StickySignupBar onSignUp={handleSignUp} />}
-
       {/* Pages */}
       {mainTab === "hub" && route.view === "hub" && <HubView config={c} hubStep={hubStep} setHubStep={setHubStep} showSignupTray={showSignupTray} setShowSignupTray={setShowSignupTray} signupPath={signupPath} setSignupPath={setSignupPath} onGoSegment={goSegment} onGoContract={goContract} onGoStatic={goStatic} />}
       {mainTab === "hub" && route.view === "static" && route.id && <StaticPageView pageId={route.id} config={c} onGoHub={goHub} onGoSegment={goSegment} onGoContract={goContract} onGoStatic={goStatic} onSignUp={handleSignUp} onOpenContact={() => setShowContactTray(true)} />}
-      {showContactTray && <ContactTray config={c} onClose={() => setShowContactTray(false)} pageType={route.view} pageId={route.id} />}
-
-      {/* Global Sign-Up Tray — available on every in-hub page */}
-      {showSignupTray && mainTab === "hub" && (
-        <SignupTray
-          signupPath={signupPath}
-          setSignupPath={setSignupPath}
-          onClose={() => { setShowSignupTray(false); setSignupPath(null); setSignupContractId(null); }}
-          config={c}
-          prepopulatedContractId={signupContractId}
-        />
-      )}
+      {showContactTray && <ContactTray config={c} onClose={() => setShowContactTray(false)} />}
       {mainTab === "hub" && route.view === "segment" && route.id && <SegmentPageView segmentId={route.id} config={c} onGoHub={goHub} onGoSegment={goSegment} onGoContract={goContract} onSignUp={handleSignUp} />}
-      {mainTab === "hub" && route.view === "contract" && route.id && <ContractPageView contractId={route.id} config={c} onGoHub={goHub} onGoContract={goContract} onSignUp={() => handleSignUp(route.id)} />}
+      {mainTab === "hub" && route.view === "contract" && route.id && <ContractPageView contractId={route.id} config={c} onGoHub={goHub} onGoContract={goContract} onSignUp={handleSignUp} />}
       {mainTab === "admin" && <AdminView config={draftConfig} liveConfig={liveConfig} onChange={updateDraft} adminTab={adminTab} setAdminTab={setAdminTab} jsonText={jsonText} jsonError={jsonError} onJsonChange={handleJsonChange} currentUser={currentUser} onPublishOrSubmit={handlePublishOrSubmit} hasUnsaved={hasUnsaved} activeSection={activeSection} setActiveSection={setActiveSection} onGoSegment={goSegment} onGoContract={goContract} />}
       {mainTab === "approvals" && <ApprovalsView pendingChanges={pendingChanges} liveConfig={liveConfig} currentUser={currentUser} onApprove={handleApprove} onReject={handleReject} />}
-    </div>
-  );
-}
-
-// ─── Sticky Sign-Up Bar (top, appears once scrolled past the fold) ───────────
-function StickySignupBar({ onSignUp, ctaLabel = "Sign Up For a Free Account" }) {
-  const [show, setShow] = useState(false);
-  useEffect(() => {
-    const onScroll = () => setShow(window.scrollY > window.innerHeight * 0.75);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-  if (!show) return null;
-  return (
-    <div style={{
-      position: "fixed", top: 0, left: 0, right: 0, zIndex: 900,
-      background: T.white, borderBottom: `1px solid ${T.gray2}`,
-      boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
-      padding: "10px 24px",
-      display: "flex", alignItems: "center", justifyContent: "space-between",
-      animation: "fadeUp .2s ease",
-    }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-        <div style={{ background: "#990000", padding: "4px 8px", borderRadius: 2, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", lineHeight: 1 }}>
-          <span style={{ color: "#FFD700", fontWeight: 900, fontSize: 16, fontFamily: "Montserrat,sans-serif", letterSpacing: 1 }}>B&H</span>
-          <span style={{ color: T.white, fontWeight: 700, fontSize: 5, fontFamily: "Montserrat,sans-serif", letterSpacing: 1, marginTop: 1 }}>PHOTO · VIDEO · AUDIO</span>
-        </div>
-        <div style={{ width: 1, height: 30, background: T.gray3 }} />
-        <span style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 18, color: T.gray6 }}>B2B</span>
-      </div>
-      <button onClick={onSignUp} style={{
-        background: T.green, color: T.white, border: "none",
-        padding: "12px 28px", borderRadius: 6,
-        fontFamily: "Montserrat,sans-serif", fontWeight: 700, fontSize: 15,
-        cursor: "pointer",
-      }}>
-        {ctaLabel}
-      </button>
     </div>
   );
 }
@@ -973,17 +870,9 @@ const ORG_TYPE_TO_SEGMENT = {
 
 // ─── Sign-Up Tray ─────────────────────────────────────────────────────────────
 // ─── Contact Tray ─────────────────────────────────────────────────────────────
-function ContactTray({ config, onClose, pageType, pageId }) {
+function ContactTray({ config, onClose }) {
   const cc  = config?.corePages?.contact || {};
   const sf  = config?.signupForm || {};
-  // Page-level CMS-managed extra fields (appended after the default form)
-  const pageNode = pageType === "static"   ? config?.corePages?.[pageId]
-                : pageType === "segment"  ? config?.segmentPages?.[pageId]
-                : pageType === "contract" ? config?.contractPages?.[pageId]
-                : null;
-  const extraFields = (pageNode && Array.isArray(pageNode.contactFormFields)) ? pageNode.contactFormFields : [];
-  const [extraValues, setExtraValues] = useState({});
-  const setExtraValue = (key, v) => setExtraValues(prev => ({ ...prev, [key]: v }));
   const [tab,          setTab]          = useState("business"); // "business" | "govedu"
   const [industry,     setIndustry]     = useState("");
   const [contactState, setContactState] = useState("");
@@ -1078,43 +967,6 @@ function ContactTray({ config, onClose, pageType, pageId }) {
               </label>
               <div style={{ fontSize: 11, color: T.gray4, marginTop: -4 }}>{cc.trayUploadHint || "Supported file formats: jpg, png, pdf, doc or docx up to 5MB"}</div>
 
-              {/* ── Page-specific extra fields (CMS-managed) ── */}
-              {extraFields.length > 0 && (
-                <div style={{ marginTop: 8, paddingTop: 12, borderTop: `1px dashed ${T.gray2}`, display: "flex", flexDirection: "column", gap: 10 }}>
-                  {extraFields.map((f, i) => {
-                    const key = f.key || `f${i}`;
-                    const val = extraValues[key] || "";
-                    if (f.type === "textarea") {
-                      return (
-                        <textarea key={key} placeholder={f.label + (f.required ? " *" : "")} value={val} onChange={e => setExtraValue(key, e.target.value)} rows={3}
-                          style={{ width: "100%", padding: "12px 14px", border: `1px solid ${T.gray3}`, borderRadius: 4, fontSize: 14, color: T.gray6, outline: "none", resize: "vertical", fontFamily: "'Open Sans',sans-serif", boxSizing: "border-box" }} />
-                      );
-                    }
-                    if (f.type === "select") {
-                      const opts = (f.options || "").split("\n").map(s => s.trim()).filter(Boolean);
-                      return (
-                        <select key={key} value={val} onChange={e => setExtraValue(key, e.target.value)}
-                          style={{ width: "100%", padding: "11px 14px", border: `1px solid ${T.gray3}`, borderRadius: 4, fontSize: 14, color: val ? T.gray6 : T.gray4, background: T.white, fontFamily: "Open Sans,sans-serif", cursor: "pointer" }}>
-                          <option value="">{f.label + (f.required ? " *" : "")}</option>
-                          {opts.map(o => <option key={o} value={o}>{o}</option>)}
-                        </select>
-                      );
-                    }
-                    if (f.type === "checkbox") {
-                      return (
-                        <label key={key} style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer", fontSize: 13, color: T.gray6 }}>
-                          <input type="checkbox" checked={!!val} onChange={e => setExtraValue(key, e.target.checked)} />
-                          {f.label}{f.required ? " *" : ""}
-                        </label>
-                      );
-                    }
-                    return (
-                      <TrayInput key={key} placeholder={f.label + (f.required ? " *" : "")} value={val} onChange={e => setExtraValue(key, e.target.value)} type={f.type || "text"} />
-                    );
-                  })}
-                </div>
-              )}
-
               {/* Submit */}
               <button style={{ width: "100%", background: T.green, color: T.white, border: "none", padding: 14, borderRadius: 4, fontWeight: 700, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif", marginTop: 8 }}>
                 {cc.traySubmitCta || "Submit"}
@@ -1127,7 +979,7 @@ function ContactTray({ config, onClose, pageType, pageId }) {
   );
 }
 
-function SignupTray({ signupPath, setSignupPath, onClose, config, prepopulatedContractId }) {
+function SignupTray({ signupPath, setSignupPath, onClose, config }) {
   // ── Account step state ──
   const [trayStep,          setTrayStep]          = useState("account"); // "account" | "orgInfo" | "billing"
   const [newsletter,        setNewsletter]        = useState(true);
@@ -1191,21 +1043,6 @@ function SignupTray({ signupPath, setSignupPath, onClose, config, prepopulatedCo
   const segmentId        = ORG_TYPE_TO_SEGMENT[orgType] ?? null;
   const availableContracts = (config?.contracts ?? []).filter(ct => ct.active && segmentId && ct.segments.includes(segmentId));
   const [selectedContract, setSelectedContract] = useState("");
-  const [omniaAuthId,      setOmniaAuthId]      = useState(""); // Shown only when selectedContract === "omnia"
-
-  // Pre-populate from a contract page launch
-  useEffect(() => {
-    if (!prepopulatedContractId) return;
-    const ct = (config?.contracts || []).find(x => x.id === prepopulatedContractId);
-    if (!ct) return;
-    // Pick a sensible org-type whose segment matches the contract's eligible segments
-    const segs = ct.segments || [];
-    const matchOrgType = (config?.signupForm?.orgTypes || ORG_TYPES).find(o => segs.includes(o.segment));
-    if (matchOrgType) setOrgType(matchOrgType.id);
-    setSelectedContract(ct.id);
-    setTrayStep("orgInfo");
-    setSignupPath("create");
-  }, [prepopulatedContractId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Step config ──
   const sf = config?.signupForm || {};
@@ -1234,12 +1071,12 @@ function SignupTray({ signupPath, setSignupPath, onClose, config, prepopulatedCo
     : (sf.trayTitle || "Sign Up for a Free B&H B2B Account");
 
   return (
-    <div style={{ position: "fixed", inset: 0, zIndex: 1000 }}>
+    <div style={{ position: "fixed", inset: 0, zIndex: 1000, display: "flex", alignItems: "center", justifyContent: "center" }}>
       {/* Backdrop */}
       <div onClick={onClose} style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.5)" }} />
 
-      {/* Right-side slide-in tray (480px wide, full viewport height) */}
-      <div style={{ position: "absolute", top: 0, right: 0, bottom: 0, background: T.white, width: 480, maxWidth: "100vw", overflowY: "auto", boxShadow: "-8px 0 32px rgba(0,0,0,0.28)", animation: "slideInRight .25s ease", display: "flex", flexDirection: "column" }}>
+      {/* Sheet */}
+      <div style={{ position: "relative", background: T.white, borderRadius: 16, width: "33%", minWidth: 340, maxWidth: 480, maxHeight: "90vh", overflowY: "auto", boxShadow: "0 8px 48px rgba(0,0,0,0.28)", animation: "fadeUp .25s ease" }}>
 
         {/* Header */}
         <div style={{ padding: "20px 20px 0", display: "flex", alignItems: "center", gap: 10 }}>
@@ -1394,15 +1231,6 @@ function SignupTray({ signupPath, setSignupPath, onClose, config, prepopulatedCo
                   value={selectedContract}
                   onChange={e => setSelectedContract(e.target.value)}
                   options={[{ value: "", label: "Select a Contract" }, ...availableContracts.map(ct => ({ value: ct.id, label: ct.name }))]}
-                />
-              )}
-
-              {/* Omnia Member ID / Auth # — shown only when Omnia is the selected contract */}
-              {selectedContract === "omnia" && (
-                <FloatInput
-                  label="Omnia Member ID or Authorization #"
-                  value={omniaAuthId}
-                  onChange={e => setOmniaAuthId(e.target.value)}
                 />
               )}
 
@@ -1673,12 +1501,24 @@ function SignupTray({ signupPath, setSignupPath, onClose, config, prepopulatedCo
           ══ CONTACT DRAWER ══
           ─────────────────────────────────────────────────────────────────────
           BACKEND REQUIREMENT — DENIAL CONTACT PERSISTENCE (Ariel session, May 2026)
-          When a user reaches this step via denied / denied1 / denied2, the
-          outbound Contact Us email MUST include all previously-submitted form
-          data so the user does not have to re-enter it (orgType, orgName,
-          orgState, numEmployees, taxId, department, role[], roleDesc, purchaseVol,
-          needs[], segmentId, billing fields, userName, userEmail, demoResult,
-          detectedPortal). Backend / submit-handler concern — no front-end change.
+
+          When a user reaches this step via the denied / denied1 / denied2 paths
+          (i.e., they were already signed in to the registration tray and submitted
+          Org Info + Billing before being declined), the outbound Contact Us email
+          MUST include all previously-submitted form data so the user does not have
+          to re-enter it. Fields to carry forward:
+
+            • Org Info: orgType, orgName, orgState, numEmployees, taxId, department,
+              role (array), roleDesc, purchaseVol, needs (array), segmentId
+            • Billing:  billAddress1, billAddress2, billCity, billState, billZip,
+              billPhone, billExt, transferExemption
+            • Account:  userName, userEmail
+            • Denial:   demoResult ("denied"|"denied1"|"denied2"), detectedPortal
+
+          Implementation note: this is purely a backend / submit-handler concern.
+          No front-end re-render or extra inputs are required — the data is already
+          in component state when the user clicks the Contact button. The Submit
+          handler should bundle these values into the email payload.
           ─────────────────────────────────────────────────────────────────────
         */}
         {trayStep === "contact" && (
@@ -2195,7 +2035,14 @@ function HubView({ config: c, hubStep, setHubStep, showSignupTray, setShowSignup
         </div>
       )}
 
-      {/* SignupTray was lifted to App level so it works from segment / contract / static pages too. */}
+      {showSignupTray && (
+        <SignupTray
+          signupPath={signupPath}
+          setSignupPath={setSignupPath}
+          onClose={() => { setShowSignupTray(false); setSignupPath(null); }}
+          config={c}
+        />
+      )}
       <HubFooter config={c} />
     </div>
   );
@@ -2207,25 +2054,8 @@ function SegmentPageView({ segmentId, config: c, onGoHub, onGoSegment, onGoContr
   const seg = c.segments[segmentId];
   const [state, setState] = useState("");
   if (!sp || !seg) return <div style={{ padding: 40, textAlign: "center" }}>Segment not found.</div>;
-
-  // State-limited contract filter:
-  //   • A contract is "national" / default-for-industry if it has at least one portalMapping with state="" (any state).
-  //   • If a contract has ONLY state-specific mappings, hide it from the default view; only show after the
-  //     customer selects a state matching one of its mappings.
-  const contractAvailableHere = (ct) => {
-    const maps = ct.portalMappings || [];
-    if (!maps.length) return true; // no mappings = treat as national fallback
-    const hasNational = maps.some(m => !m.state);
-    if (!state) return hasNational;
-    return hasNational || maps.some(m => m.state === state);
-  };
-
-  const rawFeaturedCt = sp.featuredContractId ? c.contracts.find(x => x.id === sp.featuredContractId) : null;
-  const featuredCt = rawFeaturedCt && contractAvailableHere(rawFeaturedCt) ? rawFeaturedCt : null;
-  const otherCts = (sp.otherContractIds || [])
-    .map(id => c.contracts.find(x => x.id === id))
-    .filter(Boolean)
-    .filter(contractAvailableHere);
+  const featuredCt = sp.featuredContractId ? c.contracts.find(x => x.id === sp.featuredContractId) : null;
+  const otherCts = (sp.otherContractIds || []).map(id => c.contracts.find(x => x.id === id)).filter(Boolean);
   const icon = c.signupForm.orgTypes.find(ot => ot.segment === segmentId)?.icon || "🏢";
   return (
     <div>
@@ -2271,14 +2101,10 @@ function SegmentPageView({ segmentId, config: c, onGoHub, onGoSegment, onGoContr
                 <h2 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 18, fontWeight: 700, color: seg.color, marginBottom: 16 }}>{sp.featuredTitle}</h2>
                 {featuredCt && (() => {
                   const resolvedFeatured = state ? resolvePortalMapping(featuredCt, state, segmentId) : null;
-                  // Prefer the child-contract logo from the resolved mapping; fall back to parent
-                  const featuredLogo = (resolvedFeatured && resolvedFeatured.logoUrl)
-                    ? { logoUrl: resolvedFeatured.logoUrl, logoLabel: resolvedFeatured.logoLabel || featuredCt.logoLabel }
-                    : featuredCt;
                   return (
                     <div style={{ marginBottom: 16 }}>
                       <div style={{ background: T.white, border: `1px solid ${T.gray2}`, borderRadius: 6, padding: "14px 18px", display: "inline-flex", alignItems: "center", gap: 10 }}>
-                        <ContractLogo contract={featuredLogo} height={28} maxWidth={120} />
+                        <ContractLogo contract={featuredCt} height={28} maxWidth={120} />
                         <span style={{ fontSize: 11, color: T.gray4 }}>{featuredCt.name}</span>
                       </div>
                       {resolvedFeatured && resolvedFeatured.portalId && (
@@ -2297,7 +2123,7 @@ function SegmentPageView({ segmentId, config: c, onGoHub, onGoSegment, onGoContr
                   </div>
                 ))}
                 <div style={{ display: "flex", gap: 12, marginTop: 20 }}>
-                  <button onClick={() => onSignUp(featuredCt?.id)} style={{ background: T.green, color: T.white, border: "none", padding: "12px 24px", borderRadius: 4, fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>{sp.featuredSignupCta}</button>
+                  <button onClick={onSignUp} style={{ background: T.green, color: T.white, border: "none", padding: "12px 24px", borderRadius: 4, fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}>{sp.featuredSignupCta}</button>
                   {sp.featuredLearnMoreCta && (
                     <button onClick={featuredCt ? () => onGoContract(featuredCt.id) : undefined} style={{ background: T.white, color: T.green, border: `1.5px solid ${T.green}`, padding: "12px 24px", borderRadius: 4, fontWeight: 700, fontSize: 14, cursor: "pointer" }}>{sp.featuredLearnMoreCta}</button>
                   )}
@@ -2325,9 +2151,6 @@ function SegmentPageView({ segmentId, config: c, onGoHub, onGoSegment, onGoContr
               <div style={{ background: T.white, border: `1px solid ${T.gray2}`, borderRadius: 8, overflow: "hidden" }}>
                 {otherCts.map((ct, i) => {
                   const resolved = state ? resolvePortalMapping(ct, state, segmentId) : null;
-                  const childLogo = (resolved && resolved.logoUrl)
-                    ? { logoUrl: resolved.logoUrl, logoLabel: resolved.logoLabel || ct.logoLabel }
-                    : ct;
                   return (
                     <button key={ct.id} onClick={() => onGoContract(ct.id)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", padding: "13px 16px", background: T.white, border: "none", borderBottom: i < otherCts.length - 1 ? `1px solid ${T.gray2}` : "none", cursor: "pointer", textAlign: "left" }}>
                       <div>
@@ -2337,7 +2160,7 @@ function SegmentPageView({ segmentId, config: c, onGoHub, onGoSegment, onGoContr
                         )}
                       </div>
                       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                        <ContractLogo contract={childLogo} height={20} maxWidth={64} />
+                        <ContractLogo contract={ct} height={20} maxWidth={64} />
                         <span style={{ color: T.bond, fontWeight: 700 }}>›</span>
                       </div>
                     </button>
@@ -2392,9 +2215,34 @@ function ContractPageView({ contractId, config: c, onGoHub, onGoContract, onSign
             </div>
           </div>
         </div>
-        {/* "Available Portals by State & Segment" was removed from the customer-facing
-            contract page (Ariel session, May 2026). Admins can still see and manage
-            portal mappings in CMS → Contracts → (per contract) → Portal Mappings. */}
+        {/* Portal mappings table on contract page */}
+        {(ct.portalMappings || []).length > 0 && (
+          <div style={{ marginBottom: 40 }}>
+            <h3 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 16, fontWeight: 700, color: T.gray6, marginBottom: 16 }}>Available Portals by State & Segment</h3>
+            <div style={{ background: T.white, border: `1px solid ${T.gray2}`, borderRadius: 8, overflow: "hidden" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "80px 90px 160px 100px 1fr", gap: 0, background: T.gray1, padding: "10px 16px", borderBottom: `1px solid ${T.gray2}` }}>
+                {["State", "Logo", "Segment", "Portal ID", "Label"].map(h => (
+                  <div key={h} style={{ fontSize: 11, fontWeight: 700, color: T.gray4, textTransform: "uppercase", letterSpacing: .4 }}>{h}</div>
+                ))}
+              </div>
+              {ct.portalMappings.map((m, i) => (
+                <div key={m.id} style={{ display: "grid", gridTemplateColumns: "80px 90px 160px 100px 1fr", gap: 0, padding: "10px 16px", borderBottom: i < ct.portalMappings.length - 1 ? `1px solid ${T.gray2}` : "none", alignItems: "center" }}>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: m.state ? T.gray6 : T.gray4 }}>{m.state || "All"}</div>
+                  <div>
+                    {m.logoUrl
+                      ? <img src={m.logoUrl} alt={m.logoLabel || m.label} style={{ maxHeight: 22, maxWidth: 70, objectFit: "contain", display: "block" }} />
+                      : m.logoLabel
+                        ? <span style={{ fontFamily: "Montserrat,sans-serif", fontWeight: 800, fontSize: 12, color: T.gray5 }}>{m.logoLabel}</span>
+                        : <span style={{ fontSize: 10, color: T.gray3, fontStyle: "italic" }}>—</span>}
+                  </div>
+                  <div style={{ fontSize: 12, color: T.gray5 }}>{m.segment ? (ct.segments?.includes(m.segment) ? m.segment : m.segment) : "Any"}</div>
+                  <div style={{ fontFamily: "monospace", fontSize: 13, fontWeight: 700, color: T.bond }}>[{m.portalId || "—"}]</div>
+                  <div style={{ fontSize: 13, color: T.gray6 }}>{m.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32 }}>
           <div>
             <h3 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 16, fontWeight: 700, color: T.gray6, marginBottom: 16 }}>B&H: One Stop For Technology</h3>
@@ -2883,13 +2731,17 @@ function StaticPageView({ pageId, config: c, onGoHub, onGoSegment, onGoContract,
 
 // ─── Shared ───────────────────────────────────────────────────────────────────
 // Logged-out B2B footer — rebuilt per Jay's design (May 2026).
-// Removed B2C inheritance: newsletter signup, social media row, currency
+// Removed from B2C inheritance: newsletter signup, social media row, currency
 // selector, Live Chat, Federal Marketplace, B2B Corp/Gov/EDU, Student Advantage,
-// Affiliate Program, Mobile Apps, B2C help links, Sales/Customer-Service phones.
+// Affiliate Program, Mobile Apps, Return Policy/Payments/International/Store
+// Pick Up/Gift Cards/Free Shipping, Hours of Operation, Payboo Credit Card,
+// Career Opportunities, Trade in Your Gear, All Help Topics, Sales & Customer
+// Service phone numbers.
 function HubFooter({ config: c }) {
   const accountRep = c?.footer || {};
   const repPhone = accountRep.repPhone   || "###-###-####";
   const repEmail = accountRep.contactEmail || "xxxxxx@bhphoto.com";
+
   const FOOTER_COLS = [
     {
       heading: "Customer Service & Help",
@@ -2915,7 +2767,7 @@ function HubFooter({ config: c }) {
 
   return (
     <footer style={{ background: "#2d2d2d", marginTop: 0 }}>
-      {/* ── Main columns: 3 link cols + Your Account Rep ── */}
+      {/* ── Main columns: 3 link cols + Account Rep ── */}
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 40px 36px", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 32 }}>
         {FOOTER_COLS.map(col => (
           <div key={col.heading}>
@@ -2944,7 +2796,7 @@ function HubFooter({ config: c }) {
       {/* ── Divider ── */}
       <div style={{ borderTop: "1px solid #444", margin: "0 40px" }} />
 
-      {/* ── B&H brand + storefront ── */}
+      {/* ── B&H brand + store illustration ── */}
       <div style={{ textAlign: "center", padding: "32px 40px 0" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 14, marginBottom: 24 }}>
           <div style={{ background: "#990000", padding: "4px 10px", borderRadius: 2, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", lineHeight: 1 }}>
@@ -2953,35 +2805,57 @@ function HubFooter({ config: c }) {
           </div>
           <span style={{ color: T.white, fontSize: 18, fontWeight: 600, fontFamily: "Open Sans,sans-serif" }}>Your Creative Partner Since 1973</span>
         </div>
+        {/* Store illustration — B&H NYC SuperStore */}
         <div style={{ maxWidth: 460, margin: "0 auto 24px", height: 150, display: "flex", alignItems: "flex-end", justifyContent: "center" }}>
           <svg viewBox="0 0 460 150" width="100%" height="100%" style={{ display: "block" }} aria-label="B&H NYC SuperStore">
+            {/* Sky / background sliver */}
             <rect x="0" y="0" width="460" height="150" fill="#2d2d2d" />
+            {/* Building roof skyline */}
             <path d="M30 50 L60 50 L60 35 L90 35 L90 50 L160 50 L160 28 L200 28 L200 50 L260 50 L260 32 L310 32 L310 50 L400 50 L400 40 L430 40 L430 50 Z" fill="#1f1f1f" />
+            {/* Storefront body */}
             <rect x="30" y="50" width="400" height="80" fill="#3d5a52" />
+            {/* Awning stripes */}
             <rect x="30" y="50" width="400" height="14" fill="#2d4338" />
+            {/* Windows */}
             <rect x="48" y="74" width="60" height="44" fill="#b8d4e0" opacity="0.9" />
             <rect x="118" y="74" width="60" height="44" fill="#b8d4e0" opacity="0.9" />
             <rect x="282" y="74" width="60" height="44" fill="#b8d4e0" opacity="0.9" />
             <rect x="352" y="74" width="60" height="44" fill="#b8d4e0" opacity="0.9" />
+            {/* Central entrance */}
             <rect x="200" y="70" width="62" height="50" fill="#1a1a1a" />
             <rect x="208" y="76" width="46" height="38" fill="#2a3a3a" />
+            {/* Door sign — red B&H */}
             <rect x="220" y="58" width="22" height="14" fill="#990000" />
             <text x="231" y="68" fontFamily="Montserrat,sans-serif" fontWeight="900" fontSize="9" fill="#FFD700" textAnchor="middle">B&H</text>
+            {/* Sidewalk */}
             <rect x="0" y="130" width="460" height="20" fill="#1a1a1a" />
+            {/* Trees */}
             <circle cx="22" cy="115" r="10" fill="#4a7a5a" />
             <rect x="20" y="120" width="4" height="14" fill="#2a2a2a" />
             <circle cx="438" cy="115" r="10" fill="#4a7a5a" />
             <rect x="436" y="120" width="4" height="14" fill="#2a2a2a" />
+            {/* Pedestrians */}
+            <circle cx="140" cy="124" r="3" fill="#d4a06a" />
+            <rect x="138" y="127" width="4" height="7" fill="#2a4a6a" />
+            <circle cx="280" cy="124" r="3" fill="#d4a06a" />
+            <rect x="278" y="127" width="4" height="7" fill="#5a2a2a" />
+            {/* Yellow cab */}
             <rect x="166" y="118" width="22" height="10" rx="2" fill="#f4c43c" />
             <rect x="170" y="114" width="14" height="6" rx="1" fill="#f4c43c" />
             <circle cx="172" cy="129" r="2" fill="#1a1a1a" />
             <circle cx="184" cy="129" r="2" fill="#1a1a1a" />
+            {/* Bicyclist */}
+            <circle cx="320" cy="120" r="2.5" fill="#d4a06a" />
+            <rect x="318" y="122" width="4" height="6" fill="#3a5a3a" />
+            <circle cx="315" cy="130" r="3" fill="none" stroke="#888" strokeWidth="1" />
+            <circle cx="325" cy="130" r="3" fill="none" stroke="#888" strokeWidth="1" />
           </svg>
         </div>
       </div>
 
       {/* ── Legal bar ── */}
       <div style={{ borderTop: "1px solid #444", padding: "20px 40px", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
+        {/* Privacy Choices + legal links */}
         <div style={{ display: "flex", alignItems: "center", gap: 4, flexWrap: "wrap" }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "#1a73e8", padding: "2px 6px", borderRadius: 2, marginRight: 8 }}>
             <svg viewBox="0 0 12 12" width="10" height="10"><rect width="12" height="12" rx="2" fill="#fff" /><path d="M3 6.5L5 8.5L9 4" stroke="#1a73e8" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -2992,6 +2866,7 @@ function HubFooter({ config: c }) {
           ))}
         </div>
         <div style={{ fontSize: 12, color: "#888" }}>© 2000-2024 B &amp; H Foto &amp; Electronics Corp. 420 9th Ave, New York, NY 10001</div>
+        {/* Trust badges */}
         <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
           {TRUST_BADGES.map((b, i) => (
             <div key={i} style={{ minWidth: 62, height: 50, border: "1px solid #555", borderRadius: 4, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "3px 4px", background: "#3a3a3a" }}>
@@ -3654,7 +3529,7 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
     <div>
       <SectionTitle>Footer — Your Account Rep</SectionTitle>
       <div style={{ background: T.bondLight, border: `1px solid ${T.bond}`, borderRadius: 8, padding: "10px 14px", marginBottom: 16, fontSize: 12, color: T.bond }}>
-        These fields populate the <strong>Your Account Rep</strong> column in the logged-out B2B footer (per Jay's design, May 2026). B2C newsletter, social icons, currency selector, and Live Chat were removed from this footer.
+        These fields populate the <strong>Your Account Rep</strong> column in the logged-out B2B footer (per Jay's design, May 2026). The B2C newsletter, social icons, currency selector, and Live Chat were removed from this footer.
       </div>
       <EditField label="Account Rep Phone" value={config.footer.repPhone}     onChange={v => onChange(d => { d.footer.repPhone = v; })} hint="Format e.g. 800-606-6969. Defaults to ###-###-#### placeholder if empty." />
       <EditField label="Account Rep Email" value={config.footer.contactEmail} onChange={v => onChange(d => { d.footer.contactEmail = v; })} hint="Defaults to xxxxxx@bhphoto.com placeholder if empty." />
@@ -3677,23 +3552,6 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
     return (
       <div>
         <SectionTitle>{pageLabelMap[pageKey] || pageKey} — Core Page</SectionTitle>
-        {/* Hero / inline imagery — CMS-controllable for every core page */}
-        {pageKey !== "contact" && (
-          <ImageUploadField
-            label="Hero / Lead Image"
-            value={cp.heroImageUrl || ""}
-            onChange={v => upd("heroImageUrl", v)}
-            hint="Main image at the top of the page (hero banner or two-column intro). Falls back to a gradient if empty."
-          />
-        )}
-        {pageKey === "studio" && (
-          <ImageUploadField
-            label="STC Section Image"
-            value={cp.stcImageUrl || ""}
-            onChange={v => upd("stcImageUrl", v)}
-            hint="Image shown beside the Studio Technology Center section."
-          />
-        )}
         <EditField label="Page Headline" value={cp.headline || ""} onChange={v => upd("headline", v)} hint="Shown in the hero banner and breadcrumb." />
         {pageKey === "studio" && (
           <EditField label="Tagline" value={cp.tagline || ""} onChange={v => upd("tagline", v)} hint="Italic subline shown below the headline in the hero." />
@@ -3747,35 +3605,20 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
             <EditField label="Platforms Footer Text"   value={cp.platformsFooter || ""} onChange={v => upd("platformsFooter", v)} hint="e.g. Don't see the platform your organization uses?" />
             <EditField label="Platforms CTA"           value={cp.platformsCta    || ""} onChange={v => upd("platformsCta", v)} />
 
-            {/* ── Platform Logos (CMS-controllable) ── */}
+            {/* ── Platform Logo Strip (CMS-controllable) ── */}
             <div style={{ marginTop: 20, paddingTop: 16, borderTop: `1px solid ${T.gray2}` }}>
               <div style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, marginBottom: 8 }}>Platform Logos</div>
-              <div style={{ fontSize: 11, color: T.gray4, marginBottom: 12 }}>SAP Ariba, JAGGAER, etc. Upload a logo image or fall back to colored text. The color preview + picker drive the text fallback color.</div>
+              <div style={{ fontSize: 11, color: T.gray4, marginBottom: 12 }}>SAP Ariba, Jaggaer, etc. Upload a logo image, or fall back to the colored text name.</div>
               {(cp.platforms || EPROCUREMENT_PLATFORMS).map((p, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8, padding: "8px 10px", border: `1px solid ${T.gray2}`, borderRadius: 6, background: T.white }}>
                   <input value={p.name} onChange={e => onChange(d => {
                     if (!d.corePages.eprocurement.platforms) d.corePages.eprocurement.platforms = [...EPROCUREMENT_PLATFORMS];
                     d.corePages.eprocurement.platforms[i].name = e.target.value;
                   })} placeholder="Name" style={{ flex: 1, border: `1px solid ${T.gray3}`, borderRadius: 5, padding: "6px 8px", fontSize: 12 }} />
-
-                  {/* Hex input + swatch + native color picker */}
-                  <div style={{ display: "flex", alignItems: "center", gap: 4, border: `1px solid ${T.gray3}`, borderRadius: 5, padding: "2px 4px 2px 2px", background: T.white }}>
-                    <input
-                      type="color"
-                      value={/^#[0-9a-f]{6}$/i.test(p.color || "") ? p.color : "#666666"}
-                      onChange={e => onChange(d => {
-                        if (!d.corePages.eprocurement.platforms) d.corePages.eprocurement.platforms = [...EPROCUREMENT_PLATFORMS];
-                        d.corePages.eprocurement.platforms[i].color = e.target.value;
-                      })}
-                      title="Pick color"
-                      style={{ width: 26, height: 24, border: "none", padding: 0, background: "none", cursor: "pointer" }}
-                    />
-                    <input value={p.color || ""} onChange={e => onChange(d => {
-                      if (!d.corePages.eprocurement.platforms) d.corePages.eprocurement.platforms = [...EPROCUREMENT_PLATFORMS];
-                      d.corePages.eprocurement.platforms[i].color = e.target.value;
-                    })} placeholder="#hex" style={{ width: 80, border: "none", outline: "none", padding: "4px 4px", fontSize: 11, fontFamily: "monospace" }} />
-                  </div>
-
+                  <input value={p.color || ""} onChange={e => onChange(d => {
+                    if (!d.corePages.eprocurement.platforms) d.corePages.eprocurement.platforms = [...EPROCUREMENT_PLATFORMS];
+                    d.corePages.eprocurement.platforms[i].color = e.target.value;
+                  })} placeholder="#hex" style={{ width: 80, border: `1px solid ${T.gray3}`, borderRadius: 5, padding: "6px 8px", fontSize: 11, fontFamily: "monospace" }} />
                   <label style={{ display: "inline-flex", alignItems: "center", gap: 6, background: T.bondLight, color: T.bond, border: `1px solid ${T.bond}`, borderRadius: 4, padding: "4px 10px", fontSize: 11, fontWeight: 700, cursor: "pointer" }}>
                     📁 Upload
                     <input type="file" accept="image/*" style={{ display: "none" }} onChange={e => {
@@ -3805,7 +3648,7 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
               ))}
               <button onClick={() => onChange(d => {
                 if (!d.corePages.eprocurement.platforms) d.corePages.eprocurement.platforms = [...EPROCUREMENT_PLATFORMS];
-                d.corePages.eprocurement.platforms.push({ name: "New Platform", color: "#666666", logoUrl: "" });
+                d.corePages.eprocurement.platforms.push({ name: "New Platform", color: "#666", logoUrl: "" });
               })} style={{ background: "none", border: `1.5px dashed ${T.bond}`, color: T.bond, padding: "8px 16px", borderRadius: 6, fontWeight: 700, fontSize: 12, cursor: "pointer", width: "100%", marginTop: 4 }}>
                 + Add Platform
               </button>
@@ -3824,13 +3667,6 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
             <EditField label="Upload Hint Text"      value={cc.trayUploadHint  || ""} onChange={v => updContact("trayUploadHint", v)} />
             <EditField label="Submit CTA"            value={cc.traySubmitCta   || ""} onChange={v => updContact("traySubmitCta", v)} />
           </div>
-        )}
-        {/* Contact form extra fields — for every core page that surfaces a contact tray */}
-        {pageKey !== "contact" && (
-          <ContactFormFieldsEditor
-            value={cp.contactFormFields || []}
-            onChange={next => upd("contactFormFields", next)}
-          />
         )}
         {pageKey === "contracts" && (
           <div>
@@ -3924,10 +3760,6 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
             <input type="checkbox" checked={!!sp.showStateFilter} onChange={e => onChange(d => { d.segmentPages[segId].showStateFilter = e.target.checked; })} />Show state filter in sidebar
           </label>
         </div>
-        <ContactFormFieldsEditor
-          value={sp.contactFormFields || []}
-          onChange={next => onChange(d => { d.segmentPages[segId].contactFormFields = next; })}
-        />
       </div>
     );
   }
@@ -3960,10 +3792,6 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
           <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 8 }}>Promo Bullets (one per line)</label>
           <textarea value={(cp.promoBullets || []).join("\n")} onChange={e => onChange(d => { d.contractPages[ctrId].promoBullets = e.target.value.split("\n").filter(Boolean); })} rows={4} style={{ width: "100%", border: `1.5px solid ${T.gray3}`, borderRadius: 7, padding: "10px 12px", fontSize: 13, resize: "vertical", fontFamily: "Open Sans,sans-serif" }} />
         </div>
-        <ContactFormFieldsEditor
-          value={cp.contactFormFields || []}
-          onChange={next => onChange(d => { d.contractPages[ctrId].contactFormFields = next; })}
-        />
       </div>
     );
   }

@@ -996,7 +996,7 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
   const [numEmployees, setNumEmployees] = useState("");
   const [taxId,        setTaxId]        = useState("");
   const [department,   setDepartment]   = useState("");
-  const [role,         setRole]         = useState("");
+  const [role,         setRole]         = useState([]); // MULTI-SELECT: array of role strings
   const [roleDesc,     setRoleDesc]     = useState("");
   const [purchaseVol,  setPurchaseVol]  = useState("");
   const [needs,        setNeeds]        = useState([]);
@@ -1251,16 +1251,36 @@ function SignupTray({ signupPath, setSignupPath, onClose, config }) {
               {/* Department — always shown */}
               <FloatInput label={sf.trayLabelDept || "Department"} value={department} onChange={e => setDepartment(e.target.value)} />
 
-              {/* Your Role — always shown */}
-              <FloatSelect
-                label="Your Role"
-                value={role}
-                onChange={e => setRole(e.target.value)}
-                options={[{ value: "", label: "Select a Role" }, ...(config?.signupForm?.roleOptions ?? ROLES.slice(1)).map(r => ({ value: r, label: r }))]}
-              />
+              {/* Your Role — MULTI-SELECT (restored) */}
+              {(() => {
+                const roleOpts  = config?.signupForm?.roleOptions ?? ROLES.slice(1);
+                const charCap   = config?.signupForm?.roleLabelCharCap ?? 18;
+                const longest   = roleOpts.reduce((m, r) => Math.max(m, (r || "").length), 0);
+                const twoCol    = longest <= charCap;
+                return (
+                  <div>
+                    <label style={{ fontSize: 12, fontWeight: 700, color: T.gray5, textTransform: "uppercase", letterSpacing: .4, display: "block", marginBottom: 8 }}>
+                      {sf.trayLabelRole || "Your Role"} <span style={{ fontWeight: 400, textTransform: "none", letterSpacing: 0, color: T.gray4 }}>(select all that apply)</span>
+                    </label>
+                    <div style={{ display: "grid", gridTemplateColumns: twoCol ? "repeat(2,1fr)" : "1fr", gap: "8px 16px" }}>
+                      {roleOpts.map(r => {
+                        const checked = role.includes(r);
+                        return (
+                          <label key={r} onClick={() => setRole(checked ? role.filter(x => x !== r) : [...role, r])} style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer" }}>
+                            <div style={{ width: 18, height: 18, minWidth: 18, borderRadius: 4, background: checked ? T.green : T.white, border: `2px solid ${checked ? T.green : T.gray3}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                              {checked && <span style={{ color: T.white, fontSize: 11, lineHeight: 1 }}>✓</span>}
+                            </div>
+                            <span style={{ fontSize: 13, color: T.gray6 }}>{r}</span>
+                          </label>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              })()}
 
               {/* Role Description — shown when "Other" selected */}
-              {role === "Other" && (
+              {role.includes("Other") && (
                 <FloatInput label="Role Description" value={roleDesc} onChange={e => setRoleDesc(e.target.value)} />
               )}
 
@@ -1850,10 +1870,10 @@ function HubView({ config: c, hubStep, setHubStep, showSignupTray, setShowSignup
             <div style={{ background: T.white, borderRadius: 10, border: `1px solid ${T.gray2}`, padding: "8px 0" }}>
               <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)" }}>
                 {[
-                  { stat: "<5 Mins",  label: "Contract Approval" },
+                  { stat: "<5 Mins",  label: "Registration Approval" },
                   { stat: "Instant",  label: "On-the-Spot Pricing" },
                   { stat: "53 Years", label: "of B2B Solutions" },
-                  { stat: "250+",     label: "Collaborative Contracts" },
+                  { stat: "150+",     label: "Collaborative Contracts" },
                   { stat: "3,000+",   label: "Brands Available" },
                   { stat: "500k+",    label: "Items in Stock" },
                 ].map((n, i) => (

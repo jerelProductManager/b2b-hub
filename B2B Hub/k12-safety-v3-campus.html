@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>K-12 School Safety — Low-Fi v3 (Campus Diagram)</title>
+<style>
+  :root {
+    --ink: #111;
+    --muted: #6f6f6f;
+    --line: #cdcdcd;
+    --bg: #f7f6f1;
+    --panel: #ffffff;
+    --hl: #b03a2e;
+    --tag: #ece9df;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .wf-note {
+    background: #fff8d6;
+    border-bottom: 1px dashed #b8a437;
+    padding: 8px 24px;
+    font-size: 12px;
+    color: #5a4a00;
+    text-align: center;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  .topbar {
+    border-bottom: 1px solid var(--line);
+    background: var(--panel);
+    padding: 16px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .btn {
+    display: inline-block; padding: 10px 18px;
+    border: 1px solid var(--ink); background: var(--ink); color:#fff;
+    font-size: 13px; text-decoration: none; cursor: pointer;
+    font-family: inherit;
+  }
+  .btn.outline { background: transparent; color: var(--ink); }
+  .btn.alert { background: var(--hl); border-color: var(--hl); }
+
+  /* HERO */
+  .hero {
+    max-width: 1280px; margin: 0 auto; padding: 50px 32px 30px;
+    text-align: center;
+  }
+  .hero .eyebrow { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  .hero h1 { font-size: 46px; margin: 0 0 18px; line-height: 1.1; max-width: 880px; margin-inline: auto; }
+  .hero p { font-size: 16px; color: var(--muted); max-width: 640px; margin: 0 auto 26px; }
+  .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  /* CAMPUS DIAGRAM */
+  .campus {
+    max-width: 1280px; margin: 30px auto 60px; padding: 0 32px;
+  }
+  .campus-frame {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 24px;
+  }
+  .campus-frame h2 { margin: 0 0 6px; font-size: 22px; }
+  .campus-frame p.sub { margin: 0 0 22px; color: var(--muted); font-size: 14px; }
+
+  .diagram {
+    position: relative;
+    border: 1px dashed var(--line);
+    background:
+      repeating-linear-gradient(0deg, transparent 0 39px, rgba(0,0,0,0.04) 39px 40px),
+      repeating-linear-gradient(90deg, transparent 0 39px, rgba(0,0,0,0.04) 39px 40px);
+    aspect-ratio: 16 / 8;
+    width: 100%;
+    overflow: hidden;
+  }
+  .building {
+    position: absolute;
+    border: 2px solid var(--ink);
+    background: #fcfaf3;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: var(--muted);
+    text-align: center;
+    padding: 6px;
+  }
+  .b1 { top: 22%; left: 18%; width: 22%; height: 36%; }
+  .b2 { top: 22%; left: 44%; width: 18%; height: 36%; }
+  .b3 { top: 22%; left: 66%; width: 16%; height: 26%; }
+  .b4 { top: 60%; left: 30%; width: 36%; height: 22%; }
+
+  .pin {
+    position: absolute;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: var(--ink); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px var(--ink);
+  }
+  .pin:hover { background: var(--hl); box-shadow: 0 0 0 1px var(--hl); }
+  .pin .tip {
+    position: absolute;
+    bottom: 38px; left: 50%; transform: translateX(-50%);
+    background: var(--panel); color: var(--ink);
+    border: 1px solid var(--ink); padding: 8px 12px;
+    font-size: 12px; font-weight: 400;
+    white-space: nowrap;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.15s;
+  }
+  .pin:hover .tip { opacity: 1; }
+
+  .legend {
+    margin-top: 18px;
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;
+    font-size: 12px;
+  }
+  .legend .li {
+    border: 1px solid var(--line); padding: 8px 10px;
+    display: flex; align-items: center; gap: 8px;
+    background: #fafaf5;
+  }
+  .legend .num {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--ink); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* CATEGORY ACCORDION-STYLE LIST */
+  .cats {
+    max-width: 1280px; margin: 0 auto 60px; padding: 0 32px;
+  }
+  .cats h2 {
+    font-size: 26px; margin: 0 0 6px;
+  }
+  .cats > p.sub { color: var(--muted); margin: 0 0 24px; }
+  .cat-row {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    margin-bottom: 12px;
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: 70px 1fr auto;
+    gap: 22px;
+    align-items: center;
+  }
+  .cat-num {
+    font-size: 36px; font-weight: 700; color: var(--ink);
+    border-right: 1px dashed var(--line);
+    padding-right: 20px;
+  }
+  .cat-row h3 { margin: 0 0 4px; font-size: 18px; }
+  .cat-row p { margin: 0; font-size: 13px; color: var(--muted); }
+  .cat-row .items {
+    margin-top: 6px;
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .cat-row .items span {
+    font-size: 11px; padding: 3px 8px; background: var(--tag);
+    border: 1px solid var(--line);
+  }
+
+  /* LAW BLOCK */
+  .laws {
+    max-width: 1280px; margin: 0 auto 60px; padding: 0 32px;
+  }
+  .webinar-block {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 28px;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 30px;
+    align-items: center;
+  }
+  .webinar-vid {
+    aspect-ratio: 16 / 9;
+    border: 1px dashed var(--line);
+    background:
+      repeating-linear-gradient(45deg, transparent 0 14px, rgba(0,0,0,0.05) 14px 15px);
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .webinar-vid .play {
+    width: 70px; height: 70px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.78);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .webinar-vid .play::after {
+    content: ''; width: 0; height: 0;
+    border-left: 20px solid #fff;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    margin-left: 5px;
+  }
+  .webinar-vid .stamp-tl {
+    position: absolute; top: 12px; left: 12px;
+    background: var(--panel); border: 1px solid var(--line);
+    padding: 4px 9px; font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .webinar-vid .stamp-bl {
+    position: absolute; bottom: 12px; left: 12px;
+    background: rgba(0,0,0,0.78); color: #fff;
+    padding: 4px 8px; font-size: 11px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  .webinar-vid .stamp-tr {
+    position: absolute; top: 12px; right: 12px;
+    background: var(--hl); color: #fff;
+    padding: 4px 8px; font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .webinar-text .eb {
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 8px;
+  }
+  .webinar-text h3 { margin: 0 0 10px; font-size: 24px; line-height: 1.2; }
+  .webinar-text p { margin: 0 0 14px; font-size: 14px; color: var(--muted); }
+  .webinar-text .agenda {
+    background: #f3f1ec; border: 1px dashed var(--line);
+    padding: 14px 16px; margin-bottom: 16px;
+    font-size: 13px;
+  }
+  .webinar-text .agenda b { display: block; margin-bottom: 6px; color: var(--ink); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .webinar-text .agenda ul { margin: 0; padding-left: 18px; color: var(--muted); }
+  .webinar-text .agenda li { padding: 2px 0; }
+  .law-hero {
+    background: var(--ink); color: #fff;
+    padding: 40px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 30px;
+    align-items: center;
+  }
+  .law-hero h2 { margin: 0 0 10px; color: #fff; font-size: 32px; }
+  .law-hero p { color: #d3d3d3; margin: 0 0 20px; font-size: 15px; }
+  .law-hero .quick-list {
+    background: #232323; padding: 22px; border: 1px solid #3a3a3a;
+  }
+  .law-hero .quick-list h4 { margin: 0 0 12px; color: #fff; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .law-hero .quick-list ul { margin: 0; padding-left: 18px; color: #d3d3d3; font-size: 14px; }
+  .law-hero .quick-list li { padding: 4px 0; }
+
+  /* CONTACT */
+  .contact-block {
+    max-width: 1280px; margin: 0 auto 60px; padding: 0 32px;
+  }
+  .contact-inner {
+    background: var(--panel); border: 1px solid var(--line);
+    display: grid; grid-template-columns: 1fr 1.3fr; gap: 0;
+  }
+  .contact-side {
+    padding: 36px; background: #efece4;
+    border-right: 1px solid var(--line);
+  }
+  .contact-side h2 { margin: 0 0 10px; font-size: 26px; }
+  .contact-side p { margin: 0 0 18px; color: var(--muted); }
+  .contact-side .step {
+    border-top: 1px dashed var(--line); padding: 12px 0;
+    display: grid; grid-template-columns: 28px 1fr; gap: 12px;
+    font-size: 13px;
+  }
+  .contact-side .step b { display: block; font-size: 14px; }
+  .contact-side .step .n {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--ink); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+  }
+
+  form.contact { padding: 36px; display: grid; gap: 14px; }
+  form.contact label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  form.contact input, form.contact select, form.contact textarea {
+    width: 100%; padding: 10px 12px; border: 1px solid var(--line);
+    background: #fafafa; font: inherit; font-size: 14px;
+  }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .check-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    font-size: 13px; padding: 8px 0;
+  }
+  .check-grid label {
+    text-transform: none; letter-spacing: 0; color: var(--ink); font-size: 13px;
+    display: flex; align-items: center; gap: 8px;
+    border: 1px solid var(--line); padding: 8px 12px;
+    cursor: pointer;
+  }
+
+  footer.site {
+    background: var(--ink); color: #c8c8c8; padding: 36px 32px;
+    font-size: 13px;
+  }
+  footer.site .row { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  footer.site b { color: #fff; display: block; margin-bottom: 10px; }
+  footer.site a { color: #c8c8c8; text-decoration: none; display: block; padding: 3px 0; }
+
+  @media (max-width: 980px) {
+    .legend { grid-template-columns: repeat(2, 1fr); }
+    .cat-row { grid-template-columns: 50px 1fr; }
+    .cat-row .btn { grid-column: 2; justify-self: start; margin-top: 10px; }
+    .law-hero, .contact-inner { grid-template-columns: 1fr; }
+    .contact-side { border-right: none; border-bottom: 1px solid var(--line); }
+  }
+</style>
+</head>
+<body>
+
+<div class="wf-note">LOW-FIDELITY WIREFRAME · v3 Campus Diagram · Hover the numbered pins</div>
+
+<div class="topbar">
+  <div style="display:flex; align-items:center; gap:18px;">
+    <div style="width:110px; height:36px; border:1px dashed var(--line); display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--muted);">[ B&amp;H LOGO ]</div>
+    <span style="font-size:13px; color:var(--muted);">K-12 School Safety</span>
+  </div>
+  <div style="display:flex; gap:10px;">
+    <a class="btn outline" href="#contact">Contact a specialist</a>
+    <a class="btn" href="#">Back to K-12 Portal &rarr;</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="eyebrow">K-12 School Safety Resource</div>
+  <h1>Every entry point. Every classroom. Every student.</h1>
+  <p>From the front gate to the network closet, B&amp;H supplies the products K-12 administrators trust to keep buildings, staff, and students safe — and to meet new state mandates like Alyssa's Law.</p>
+  <div class="cta-row">
+    <a class="btn" href="#categories">Browse safety categories</a>
+    <a class="btn outline" href="#laws">Learn about Alyssa's Law</a>
+  </div>
+</div>
+
+<!-- CAMPUS DIAGRAM -->
+<div class="campus">
+  <div class="campus-frame">
+    <h2>The connected campus</h2>
+    <p class="sub">A visual map of where each safety pillar lives on a typical K-12 site. Hover the pins.</p>
+
+    <div class="diagram">
+      <!-- Buildings -->
+      <div class="building b1">MAIN BUILDING<br>(Classrooms)</div>
+      <div class="building b2">GYM</div>
+      <div class="building b3">ADMIN</div>
+      <div class="building b4">CAFETERIA / COMMONS</div>
+
+      <!-- Pins -->
+      <div class="pin" style="top: 40%; left: 14%;">1
+        <div class="tip">Perimeter cameras &amp; outdoor speakers</div>
+      </div>
+      <div class="pin" style="top: 22%; left: 74%;">2
+        <div class="tip">Visitor management at admin entrance</div>
+      </div>
+      <div class="pin" style="top: 40%; left: 29%;">3
+        <div class="tip">Smart locks &amp; access control on classrooms</div>
+      </div>
+      <div class="pin" style="top: 40%; left: 53%;">4
+        <div class="tip">Mass notification &amp; panic devices</div>
+      </div>
+      <div class="pin" style="top: 71%; left: 48%;">5
+        <div class="tip">Vape detectors in commons restrooms</div>
+      </div>
+      <div class="pin" style="top: 88%; left: 80%;">6
+        <div class="tip">Network closet — segmentation &amp; cybersecurity</div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="li"><span class="num">1</span> Perimeter security</div>
+      <div class="li"><span class="num">2</span> Visitor management</div>
+      <div class="li"><span class="num">3</span> Access control</div>
+      <div class="li"><span class="num">4</span> Mass notification</div>
+      <div class="li"><span class="num">5</span> Student wellness</div>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORY ROWS -->
+<div class="cats" id="categories">
+  <h2>Five pillars of school safety</h2>
+  <p class="sub">Click any pillar to shop the curated SKU list in the K-12 portal.</p>
+
+  <div class="cat-row">
+    <div class="cat-num">01</div>
+    <div>
+      <h3>Physical Security &amp; Access Control</h3>
+      <p>Decide who enters, when, and where.</p>
+      <div class="items">
+        <span>Access control</span><span>RFID readers</span><span>Smart locks</span><span>Video intercoms</span><span>Visitor mgmt</span><span>Door stations</span><span>Perimeter cameras</span><span>Mobile credentials</span><span>Battery backup</span>
+      </div>
+    </div>
+    <a class="btn outline" href="#">Shop &rarr;</a>
+  </div>
+
+  <div class="cat-row">
+    <div class="cat-num">02</div>
+    <div>
+      <h3>Emergency Communications &amp; Mass Notification</h3>
+      <p>Reach every corner of campus in seconds.</p>
+      <div class="items">
+        <span>IP paging</span><span>Panic devices</span><span>Classroom audio</span><span>Outdoor speakers</span><span>Portable radios</span><span>Unified comms</span><span>Digital signage</span><span>Strobes / beacons</span>
+      </div>
+    </div>
+    <a class="btn outline" href="#">Shop &rarr;</a>
+  </div>
+
+  <div class="cat-row">
+    <div class="cat-num">03</div>
+    <div>
+      <h3>Video Surveillance &amp; Situational Awareness</h3>
+      <p>See what's happening, when it happens.</p>
+      <div class="items">
+        <span>IP cameras</span><span>NVR systems</span><span>PTZ</span><span>Thermal</span><span>Monitoring displays</span><span>Storage</span>
+      </div>
+    </div>
+    <a class="btn outline" href="#">Shop &rarr;</a>
+  </div>
+
+  <div class="cat-row">
+    <div class="cat-num">04</div>
+    <div>
+      <h3>Cybersecurity &amp; Network Protection</h3>
+      <p>Harden the network all of this depends on.</p>
+      <div class="items">
+        <span>Secure networking</span><span>AV-over-IP</span><span>Segmentation</span><span>Digital signage</span><span>Panic notification</span>
+      </div>
+    </div>
+    <a class="btn outline" href="#">Shop &rarr;</a>
+  </div>
+
+  <div class="cat-row">
+    <div class="cat-num">05</div>
+    <div>
+      <h3>Student Wellness &amp; Mental Health</h3>
+      <p>Tools that support healthy, focused students.</p>
+      <div class="items">
+        <span>Vape detectors</span><span>Device disinfection</span><span>Phone sequestration</span><span>Remote learning</span>
+      </div>
+    </div>
+    <a class="btn outline" href="#">Shop &rarr;</a>
+  </div>
+</div>
+
+<!-- LAW SECTION -->
+<div class="laws" id="laws">
+
+  <!-- WEBINAR VIDEO -->
+  <div class="webinar-block">
+    <div class="webinar-vid">
+      <span class="stamp-tl">[ Webinar Video ]</span>
+      <span class="stamp-tr">On Demand</span>
+      <div class="play"></div>
+      <span class="stamp-bl">▶ 42:17</span>
+    </div>
+    <div class="webinar-text">
+      <div class="eb">Featured Webinar · Alyssa's Law</div>
+      <h3>What every K-12 district should know about Alyssa's Law</h3>
+      <p>Our recorded webinar breaks down Alyssa's Law in plain language: what silent panic alert systems must do, which states have enacted (or are enacting) the mandate, common pitfalls in procurement, and how to scope a compliant deployment without overbuying.</p>
+      <div class="agenda">
+        <b>What's covered</b>
+        <ul>
+          <li>The law's origin and current state-by-state status</li>
+          <li>Technical requirements for panic alert systems</li>
+          <li>Live walk-through of compliant B&amp;H product options</li>
+          <li>Budgeting, grants, and bid documentation tips</li>
+          <li>Audience Q&amp;A with K-12 safety coordinators</li>
+        </ul>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="btn alert" href="#">Watch the webinar</a>
+        <a class="btn outline" href="#">Download the slides</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="law-hero">
+    <div>
+      <span style="background:var(--hl); color:#fff; font-size:11px; letter-spacing:0.1em; padding: 4px 10px; text-transform:uppercase;">Compliance focus</span>
+      <h2 style="margin-top:12px;">Alyssa's Law &amp; school safety mandates</h2>
+      <p>Alyssa's Law requires public elementary &amp; secondary schools to install silent panic alert systems linked directly to law enforcement. B&amp;H's mass-notification and panic-device catalog is curated to help your district meet the standard.</p>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="btn alert" href="#">Read the Alyssa's Law overview</a>
+        <a class="btn outline" href="#" style="border-color:#fff; color:#fff;">View state-by-state map</a>
+      </div>
+    </div>
+    <div class="quick-list">
+      <h4>Other regulations to know</h4>
+      <ul>
+        <li>CISA K-12 Safety Toolkit guidance</li>
+        <li>Stop School Violence Act (federal)</li>
+        <li>State-specific panic alert mandates</li>
+        <li>FERPA / data privacy intersections</li>
+        <li>EPA &amp; air-quality monitoring</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-block" id="contact">
+  <div class="contact-inner">
+    <aside class="contact-side">
+      <div style="font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:10px;">Talk to a specialist</div>
+      <h2>Routed to your territory.</h2>
+      <p>Fill out the form. We'll match you with your regional K-12 account manager — no call-center middleman.</p>
+      <div class="step"><span class="n">1</span><span><b>Submit</b>Tell us about your school and the products you're considering.</span></div>
+      <div class="step"><span class="n">2</span><span><b>Routed by state</b>Your form goes directly to the account manager for your territory.</span></div>
+      <div class="step"><span class="n">3</span><span><b>1-day response</b>You'll hear back within one business day to discuss your project.</span></div>
+    </aside>
+
+    <form class="contact">
+      <div class="grid-2">
+        <div><label>First name</label><input type="text" placeholder="Jane" /></div>
+        <div><label>Last name</label><input type="text" placeholder="Doe" /></div>
+      </div>
+      <div class="grid-2">
+        <div><label>Work email</label><input type="email" placeholder="jane@district.edu" /></div>
+        <div><label>Phone (optional)</label><input type="tel" /></div>
+      </div>
+      <div class="grid-2">
+        <div><label>School / District</label><input type="text" /></div>
+        <div>
+          <label>State (routes territory)</label>
+          <select>
+            <option>Select your state…</option>
+            <option>New York</option><option>New Jersey</option><option>Pennsylvania</option>
+            <option>California</option><option>Texas</option><option>Florida</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label>Categories you're interested in (check all that apply)</label>
+        <div class="check-grid">
+          <label><input type="checkbox" /> Physical Security &amp; Access</label>
+          <label><input type="checkbox" /> Emergency Comms</label>
+          <label><input type="checkbox" /> Video Surveillance</label>
+          <label><input type="checkbox" /> Cybersecurity &amp; Network</label>
+          <label><input type="checkbox" /> Student Wellness</label>
+          <label><input type="checkbox" /> Not sure — need guidance</label>
+        </div>
+      </div>
+      <div>
+        <label>Project details</label>
+        <textarea rows="3" placeholder="Building type, timeline, budget range, specific products…"></textarea>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn" type="button">Connect me with my account manager</button>
+        <a class="btn outline" href="#">Or shop the K-12 portal</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="row">
+    <div>
+      <b>K-12 at B&amp;H</b>
+      <a href="#">K-12 B2B portal</a>
+      <a href="#">School safety</a>
+      <a href="#">Bid &amp; quote services</a>
+    </div>
+    <div>
+      <b>Safety solutions</b>
+      <a href="#">Physical security</a>
+      <a href="#">Emergency comms</a>
+      <a href="#">Video surveillance</a>
+      <a href="#">Cybersecurity</a>
+      <a href="#">Student wellness</a>
+    </div>
+    <div>
+      <b>Compliance</b>
+      <a href="#">Alyssa's Law overview</a>
+      <a href="#">State mandate map</a>
+      <a href="#">Funding &amp; grants</a>
+    </div>
+    <div>
+      <b>Talk to us</b>
+      <a href="#">Find your account manager</a>
+      <a href="#contact">Contact form</a>
+      <p style="color:#888; font-size:12px; margin-top: 10px;">© B&amp;H · For educational institutions</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

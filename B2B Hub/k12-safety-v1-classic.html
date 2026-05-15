@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>K-12 School Safety — Low-Fi v1 (Classic Scroll)</title>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --muted: #6b6b6b;
+    --line: #c9c9c9;
+    --bg: #f5f5f3;
+    --panel: #ffffff;
+    --accent: #2a2a2a;
+    --tag: #e7e7e3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.45;
+  }
+  .wf-note {
+    background: #fff8d6;
+    border-bottom: 1px dashed #b8a437;
+    padding: 8px 24px;
+    font-size: 12px;
+    color: #5a4a00;
+    text-align: center;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  header.topbar {
+    border-bottom: 1px solid var(--line);
+    background: var(--panel);
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo-box {
+    width: 110px; height: 36px;
+    border: 1px dashed var(--line);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: var(--muted);
+  }
+  nav ul {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; gap: 22px; font-size: 14px;
+  }
+  nav a { color: var(--ink); text-decoration: none; border-bottom: 1px solid transparent; }
+  nav a:hover { border-bottom: 1px solid var(--ink); }
+
+  /* HERO */
+  .hero {
+    padding: 64px 32px 56px;
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    align-items: center;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+  .hero h1 {
+    font-size: 44px;
+    line-height: 1.1;
+    margin: 0 0 16px;
+    font-weight: 700;
+  }
+  .hero p { font-size: 16px; color: var(--muted); max-width: 520px; margin: 0 0 28px; }
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    padding: 12px 22px;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .btn.secondary { background: transparent; color: var(--ink); }
+  .hero-image {
+    height: 320px;
+    border: 1px dashed var(--line);
+    background:
+      repeating-linear-gradient(45deg, transparent 0 14px, rgba(0,0,0,0.04) 14px 15px);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 14px;
+  }
+
+  /* SECTION SHELL */
+  section { max-width: 1240px; margin: 0 auto; padding: 56px 32px; }
+  .section-head { margin-bottom: 28px; }
+  .section-head .eyebrow {
+    font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 6px;
+  }
+  .section-head h2 { font-size: 28px; margin: 0 0 6px; }
+  .section-head p { color: var(--muted); margin: 0; max-width: 640px; }
+
+  /* CATEGORY GRID */
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .cat-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 22px;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+  }
+  .cat-thumb {
+    height: 110px;
+    border: 1px dashed var(--line);
+    margin-bottom: 14px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 12px;
+  }
+  .cat-card h3 { margin: 0 0 8px; font-size: 17px; }
+  .cat-card ul {
+    list-style: none; padding: 0; margin: 0 0 14px;
+    font-size: 13px; color: var(--muted);
+  }
+  .cat-card ul li { padding: 3px 0; border-bottom: 1px dotted var(--line); }
+  .cat-card a.shop { font-size: 13px; color: var(--ink); margin-top: auto; }
+
+  /* LAW STRIP */
+  .law {
+    background: #efece6;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .law-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+  }
+
+  /* VIDEO BLOCK */
+  .video-wrap {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 28px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 24px;
+    margin-bottom: 28px;
+    align-items: center;
+  }
+  .video-player {
+    aspect-ratio: 16 / 9;
+    border: 1px dashed var(--line);
+    background:
+      repeating-linear-gradient(45deg, transparent 0 14px, rgba(0,0,0,0.05) 14px 15px);
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+  .play-btn {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.78);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .play-btn::after {
+    content: ''; display: block;
+    width: 0; height: 0;
+    border-left: 18px solid #fff;
+    border-top: 11px solid transparent;
+    border-bottom: 11px solid transparent;
+    margin-left: 4px;
+  }
+  .video-meta {
+    position: absolute; bottom: 10px; left: 10px;
+    background: rgba(0,0,0,0.72); color: #fff;
+    padding: 4px 8px; font-size: 11px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  .video-label {
+    position: absolute; top: 10px; left: 10px;
+    background: var(--panel); color: var(--muted);
+    padding: 4px 8px; font-size: 10px; letter-spacing: 0.08em;
+    text-transform: uppercase; border: 1px solid var(--line);
+  }
+  .video-info .eyebrow-sm {
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 8px;
+  }
+  .video-info h3 { margin: 0 0 10px; font-size: 22px; }
+  .video-info p { margin: 0 0 14px; font-size: 14px; color: var(--muted); }
+  .video-info .speakers {
+    display: flex; flex-direction: column; gap: 4px;
+    font-size: 12px; color: var(--muted); margin-bottom: 14px;
+    padding: 10px 12px; background: #f3f1ec; border: 1px dashed var(--line);
+  }
+  .video-info .speakers b { color: var(--ink); }
+  .law-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 22px;
+  }
+  .law-card .tag {
+    display: inline-block; background: var(--tag); padding: 3px 8px; font-size: 11px;
+    margin-bottom: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .law-card h4 { margin: 0 0 6px; font-size: 16px; }
+  .law-card p { font-size: 13px; color: var(--muted); margin: 0 0 12px; }
+  .law-card a { font-size: 13px; }
+
+  /* CONTACT */
+  .contact-wrap {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+    align-items: start;
+  }
+  form.contact {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 28px;
+    display: grid; gap: 14px;
+  }
+  form.contact label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  form.contact input, form.contact select, form.contact textarea {
+    width: 100%; padding: 10px 12px; border: 1px solid var(--line); background: #fafafa;
+    font-family: inherit; font-size: 14px;
+  }
+  form.contact textarea { min-height: 90px; resize: vertical; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .helper {
+    border: 1px dashed var(--line); padding: 22px; background: var(--panel);
+    font-size: 14px; color: var(--muted);
+  }
+  .helper h4 { color: var(--ink); margin: 0 0 8px; }
+
+  /* FOOTER */
+  footer.site {
+    background: var(--ink); color: #d6d6d6;
+    padding: 36px 32px; margin-top: 40px;
+    font-size: 13px;
+  }
+  footer.site .row { max-width: 1240px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
+  footer.site a { color: #d6d6d6; text-decoration: none; display: block; padding: 3px 0; }
+
+  @media (max-width: 880px) {
+    .hero, .cat-grid, .law-grid, .contact-wrap { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wf-note">LOW-FIDELITY WIREFRAME · v1 Classic Scroll · Not visual design</div>
+
+<header class="topbar">
+  <div style="display:flex; align-items:center; gap:18px;">
+    <div class="logo-box">[ B&amp;H LOGO ]</div>
+    <span style="font-size:13px; color:var(--muted);">B2B / K-12 / School Safety</span>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#categories">Categories</a></li>
+      <li><a href="#laws">Compliance</a></li>
+      <li><a href="#contact">Talk to an Expert</a></li>
+      <li><a href="#">K-12 Portal &rarr;</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div style="font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:14px;">K-12 School Safety Resource</div>
+    <h1>Safer schools, built from the door to the network.</h1>
+    <p>Explore the products, systems, and compliance guidance B&amp;H offers to help K-12 administrators harden their campuses — from access control and mass notification to student wellness.</p>
+    <div class="cta-row">
+      <a class="btn" href="#">Shop the K-12 Portal</a>
+      <a class="btn secondary" href="#contact">Talk to a Safety Specialist</a>
+    </div>
+  </div>
+  <div class="hero-image">[ HERO IMAGE / VIDEO PLACEHOLDER ]</div>
+</div>
+
+<!-- CATEGORIES -->
+<section id="categories">
+  <div class="section-head">
+    <div class="eyebrow">Solution Categories</div>
+    <h2>Five pillars of campus safety</h2>
+    <p>Each pillar links to curated product lists in the K-12 portal. Account managers can build full-system quotes from any combination.</p>
+  </div>
+
+  <div class="cat-grid">
+    <div class="cat-card">
+      <div class="cat-thumb">[ ICON / IMG ]</div>
+      <h3>Physical Security &amp; Access Control</h3>
+      <ul>
+        <li>Access control systems</li>
+        <li>RFID / badge readers</li>
+        <li>Smart locks</li>
+        <li>Video intercoms</li>
+        <li>Visitor management hardware</li>
+        <li>Perimeter cameras</li>
+        <li>Mobile credential systems</li>
+      </ul>
+      <a class="shop" href="#">Shop category &rarr;</a>
+    </div>
+
+    <div class="cat-card">
+      <div class="cat-thumb">[ ICON / IMG ]</div>
+      <h3>Emergency Comms &amp; Mass Notification</h3>
+      <ul>
+        <li>IP paging systems</li>
+        <li>Mass notification &amp; panic devices</li>
+        <li>Classroom audio</li>
+        <li>Outdoor speakers</li>
+        <li>Portable radios</li>
+        <li>Strobes / beacons</li>
+      </ul>
+      <a class="shop" href="#">Shop category &rarr;</a>
+    </div>
+
+    <div class="cat-card">
+      <div class="cat-thumb">[ ICON / IMG ]</div>
+      <h3>Video Surveillance &amp; Situational Awareness</h3>
+      <ul>
+        <li>IP cameras</li>
+        <li>NVR systems</li>
+        <li>PTZ &amp; thermal cameras</li>
+        <li>Monitoring displays</li>
+        <li>Storage infrastructure</li>
+      </ul>
+      <a class="shop" href="#">Shop category &rarr;</a>
+    </div>
+
+    <div class="cat-card">
+      <div class="cat-thumb">[ ICON / IMG ]</div>
+      <h3>Cybersecurity &amp; Network Protection</h3>
+      <ul>
+        <li>Secure networking</li>
+        <li>Secure AV-over-IP</li>
+        <li>Network segmentation hardware</li>
+        <li>Digital signage</li>
+        <li>Panic notification devices</li>
+      </ul>
+      <a class="shop" href="#">Shop category &rarr;</a>
+    </div>
+
+    <div class="cat-card">
+      <div class="cat-thumb">[ ICON / IMG ]</div>
+      <h3>Student Wellness &amp; Mental Health</h3>
+      <ul>
+        <li>Vape detectors</li>
+        <li>Device disinfection cabinets</li>
+        <li>Mobile device sequestration</li>
+        <li>Remote learning devices</li>
+      </ul>
+      <a class="shop" href="#">Shop category &rarr;</a>
+    </div>
+
+    <div class="cat-card" style="background:#efece6;">
+      <div class="cat-thumb">[ ICON ]</div>
+      <h3>Not sure where to start?</h3>
+      <p style="font-size:13px; color:var(--muted);">A B&amp;H K-12 specialist can scope a multi-category safety stack for your district.</p>
+      <a class="shop" href="#contact">Request a consultation &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- LAW EDUCATION STRIP -->
+<div class="law">
+  <section>
+    <div class="section-head">
+      <div class="eyebrow">Compliance &amp; Education</div>
+      <h2>Know the laws shaping K-12 safety.</h2>
+      <p>Stay aligned with state and federal requirements. We've mapped relevant product categories to each.</p>
+    </div>
+
+    <!-- ALYSSA'S LAW WEBINAR VIDEO -->
+    <div class="video-wrap">
+      <div class="video-player">
+        <span class="video-label">[ Webinar Video ]</span>
+        <div class="play-btn"></div>
+        <span class="video-meta">▶ 42:17</span>
+      </div>
+      <div class="video-info">
+        <div class="eyebrow-sm">Featured Webinar</div>
+        <h3>Alyssa's Law: What K-12 Districts Need to Know</h3>
+        <p>A 40-minute recorded webinar walking K-12 administrators and IT directors through the requirements of Alyssa's Law — what silent panic alert systems must do, which states have enacted the mandate, and how to evaluate compliant solutions. Includes a live product walk-through and Q&amp;A.</p>
+        <div class="speakers">
+          <div><b>Host:</b> B&amp;H K-12 Safety Team</div>
+          <div><b>Guests:</b> Manufacturer partners + district safety coordinator</div>
+          <div><b>Recorded:</b> Spring 2026 · 42 min</div>
+        </div>
+        <a class="btn" href="#">Watch the webinar</a>
+        <a class="btn secondary" href="#" style="margin-left:8px;">Download slides</a>
+      </div>
+    </div>
+
+    <div class="law-grid">
+      <div class="law-card">
+        <span class="tag">Featured</span>
+        <h4>Alyssa's Law</h4>
+        <p>Requires silent panic alert systems in public elementary and secondary schools. Currently enacted in several states.</p>
+        <a href="#">Read overview &rarr;</a>
+      </div>
+      <div class="law-card">
+        <span class="tag">Federal</span>
+        <h4>SAFETY Act &amp; CISA Guidance</h4>
+        <p>How federal designations and CISA's K-12 toolkit influence procurement decisions.</p>
+        <a href="#">Read overview &rarr;</a>
+      </div>
+      <div class="law-card">
+        <span class="tag">State</span>
+        <h4>State-by-state requirements</h4>
+        <p>Interactive map of school safety mandates relevant to your district.</p>
+        <a href="#">View map &rarr;</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-head">
+    <div class="eyebrow">Talk to a Specialist</div>
+    <h2>Get connected with your territory account manager.</h2>
+    <p>Tell us a bit about your project. We'll route you to the K-12 specialist who covers your area.</p>
+  </div>
+
+  <div class="contact-wrap">
+    <form class="contact">
+      <div class="form-row">
+        <div>
+          <label>First name</label>
+          <input type="text" placeholder="Jane" />
+        </div>
+        <div>
+          <label>Last name</label>
+          <input type="text" placeholder="Doe" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label>Work email</label>
+          <input type="email" placeholder="jane@district.edu" />
+        </div>
+        <div>
+          <label>Phone (optional)</label>
+          <input type="tel" placeholder="(555) 555-5555" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label>School / District</label>
+          <input type="text" placeholder="Springfield USD" />
+        </div>
+        <div>
+          <label>State (routes territory)</label>
+          <select>
+            <option>Select state…</option>
+            <option>New York</option>
+            <option>New Jersey</option>
+            <option>California</option>
+            <option>Texas</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label>Categories of interest</label>
+        <select multiple size="5">
+          <option>Physical Security &amp; Access Control</option>
+          <option>Emergency Comms &amp; Mass Notification</option>
+          <option>Video Surveillance</option>
+          <option>Cybersecurity &amp; Network</option>
+          <option>Student Wellness</option>
+        </select>
+      </div>
+      <div>
+        <label>Project details</label>
+        <textarea placeholder="Tell us about the building, timeline, budget range, and any specific products you've considered."></textarea>
+      </div>
+      <div>
+        <button class="btn" type="button">Send to my account manager</button>
+      </div>
+    </form>
+
+    <aside class="helper">
+      <h4>What happens next?</h4>
+      <p>1. Form is routed by state &rarr; territory map.<br>
+      2. Your K-12 account manager reaches out within 1 business day.<br>
+      3. They can build a quote, demo equipment, or loop in a manufacturer rep.</p>
+      <hr style="border:none; border-top:1px dashed var(--line); margin:18px 0;" />
+      <h4>Prefer to browse?</h4>
+      <p><a href="#" style="color:var(--ink);">Jump back to the K-12 Portal &rarr;</a></p>
+    </aside>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="row">
+    <div>
+      <strong style="color:#fff;">B&amp;H for K-12</strong>
+      <a href="#">K-12 Portal Home</a>
+      <a href="#">School Safety</a>
+      <a href="#">Quote Request</a>
+    </div>
+    <div>
+      <strong style="color:#fff;">Resources</strong>
+      <a href="#">Alyssa's Law guide</a>
+      <a href="#">State compliance map</a>
+      <a href="#">Funding &amp; grants</a>
+    </div>
+    <div>
+      <strong style="color:#fff;">Support</strong>
+      <a href="#">Find your account manager</a>
+      <a href="#">Contact</a>
+    </div>
+    <div style="max-width:280px;">
+      <strong style="color:#fff;">About this page</strong>
+      <p style="color:#9d9d9d;">Curated school safety solutions for K-12 administrators, IT directors, and facility planners.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

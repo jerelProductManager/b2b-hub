@@ -701,11 +701,6 @@ export default function App() {
   const [jsonText,     setJsonText]     = useState(JSON.stringify(INITIAL_CONFIG, null, 2));
   const [jsonError,    setJsonError]    = useState(null);
   const [currentUser,  setCurrentUser]  = useState(USERS[0]);
-  // ── Preview Mode ───────────────────────────────────────────────────────────
-  // null                                  → render the live (published) hub
-  // { source: "draft" }                   → render the operator's current draft
-  // { source: "change", changeId: "..." } → render a specific pending change's proposed draft
-  const [previewMode, setPreviewMode] = useState(null);
   const hasUnsaved = JSON.stringify(draftConfig) !== JSON.stringify(liveConfig);
 
   const updateDraft = useCallback((fn) => {
@@ -738,13 +733,9 @@ export default function App() {
       setLiveConfig(c.draft); setDraftConfig(c.draft); setJsonText(JSON.stringify(c.draft, null, 2));
       return { ...c, status: "approved" };
     }));
-    // If the operator was previewing this exact change, drop preview mode so they don't
-    // keep "previewing" something that is now live.
-    setPreviewMode(prev => (prev && prev.source === "change" && prev.changeId === id) ? null : prev);
   }, []);
   const handleReject = useCallback((id) => {
     setPendingChanges(prev => prev.map(c => c.id === id ? { ...c, status: "rejected" } : c));
-    setPreviewMode(prev => (prev && prev.source === "change" && prev.changeId === id) ? null : prev);
   }, []);
 
   const goHub        = () => { setRoute({ view: "hub", id: null }); setMainTab("hub"); setHubStep("entry"); };
@@ -757,55 +748,10 @@ export default function App() {
   const goStatic   = (id) => { setRoute({ view: "static", id }); setMainTab("hub"); window.scrollTo(0, 0); };
   const goSegment  = (id) => { setRoute({ view: "segment", id }); setMainTab("hub"); window.scrollTo(0, 0); };
   const goContract = (id) => { setRoute({ view: "contract", id }); setMainTab("hub"); window.scrollTo(0, 0); };
-  const goAdmin    = () => { setPreviewMode(null); setRoute({ view: "admin", id: null }); setMainTab("admin"); };
-  const goApprovals = () => { setPreviewMode(null); setRoute({ view: "approvals", id: null }); setMainTab("approvals"); };
+  const goAdmin    = () => { setRoute({ view: "admin", id: null }); setMainTab("admin"); };
+  const goApprovals = () => { setRoute({ view: "approvals", id: null }); setMainTab("approvals"); };
 
-  // ── Preview navigation ──────────────────────────────────────────────────────
-  // Enter preview mode on the operator's current draft, routed to a specific hub view.
-  const enterDraftPreview = (target) => {
-    setPreviewMode({ source: "draft" });
-    setRoute(target);
-    setMainTab("hub");
-    if (target.view === "hub") setHubStep("entry");
-    window.scrollTo(0, 0);
-  };
-  // Enter preview mode on a specific pending-change's proposed draft.
-  const enterChangePreview = (changeId, target = { view: "hub", id: null }) => {
-    setPreviewMode({ source: "change", changeId });
-    setRoute(target);
-    setMainTab("hub");
-    if (target.view === "hub") setHubStep("entry");
-    window.scrollTo(0, 0);
-  };
-  // Exit preview and bounce back to wherever the user came from.
-  const exitPreview = () => {
-    const wasChangePreview = previewMode && previewMode.source === "change";
-    setPreviewMode(null);
-    if (wasChangePreview) {
-      setRoute({ view: "approvals", id: null }); setMainTab("approvals");
-    } else {
-      setRoute({ view: "admin", id: null }); setMainTab("admin");
-    }
-    window.scrollTo(0, 0);
-  };
-  // Preview-aware navigation handlers passed into AdminView so its existing
-  // "👁 Preview Page →" buttons render the draft instead of the live page.
-  const previewSegmentFromDraft  = (id) => enterDraftPreview({ view: "segment",  id });
-  const previewContractFromDraft = (id) => enterDraftPreview({ view: "contract", id });
-  const previewDraftHubHome      = ()   => enterDraftPreview({ view: "hub",      id: null });
-
-  // Hub pages render from `c`. In preview mode `c` is swapped to the draft (operator's
-  // working draft, or a specific pending change's proposed draft) so operators and approvers
-  // can visualize updates before they go live. When previewMode is null, behavior is
-  // exactly as before: `c === liveConfig`.
-  const previewSourceConfig = previewMode
-    ? (previewMode.source === "draft"
-        ? draftConfig
-        : (previewMode.source === "change"
-            ? (pendingChanges.find(x => x.id === previewMode.changeId)?.draft || null)
-            : null))
-    : null;
-  const c = previewSourceConfig || liveConfig;
+  const c = liveConfig;
 
   return (
     <div style={{ fontFamily: "'Open Sans',sans-serif", background: T.gray1, minHeight: "100vh", color: T.gray6 }}>
@@ -871,16 +817,6 @@ export default function App() {
         </div>
       </div>
 
-      {/* Preview Mode banner — only visible while previewing draft/pending-change content on hub pages */}
-      {previewMode && mainTab === "hub" && (
-        <PreviewBanner
-          previewMode={previewMode}
-          previewConfig={c}
-          pendingChanges={pendingChanges}
-          onExit={exitPreview}
-        />
-      )}
-
       {/* Pages */}
       {mainTab === "hub" && route.view === "hub" && <HubView config={c} hubStep={hubStep} setHubStep={setHubStep} showSignupTray={showSignupTray} setShowSignupTray={setShowSignupTray} signupPath={signupPath} setSignupPath={setSignupPath} onGoSegment={goSegment} onGoContract={goContract} onGoStatic={goStatic} />}
       {mainTab === "hub" && route.view === "static" && route.id && <StaticPageView pageId={route.id} config={c} onGoHub={goHub} onGoSegment={goSegment} onGoContract={goContract} onGoStatic={goStatic} onSignUp={handleSignUp} onOpenContact={() => setShowContactTray(true)} />}
@@ -901,45 +837,8 @@ export default function App() {
       {mainTab === "hub" && <StickySignupBar onSignUp={handleSignUp} />}
       {mainTab === "hub" && route.view === "segment" && route.id && <SegmentPageView segmentId={route.id} config={c} onGoHub={goHub} onGoSegment={goSegment} onGoContract={goContract} onSignUp={handleSignUp} />}
       {mainTab === "hub" && route.view === "contract" && route.id && <ContractPageView contractId={route.id} config={c} onGoHub={goHub} onGoContract={goContract} onSignUp={() => handleSignUp(route.id)} />}
-      {mainTab === "admin" && <AdminView config={draftConfig} liveConfig={liveConfig} onChange={updateDraft} adminTab={adminTab} setAdminTab={setAdminTab} jsonText={jsonText} jsonError={jsonError} onJsonChange={handleJsonChange} currentUser={currentUser} onPublishOrSubmit={handlePublishOrSubmit} hasUnsaved={hasUnsaved} activeSection={activeSection} setActiveSection={setActiveSection} onGoSegment={previewSegmentFromDraft} onGoContract={previewContractFromDraft} onPreviewHub={previewDraftHubHome} />}
-      {mainTab === "approvals" && <ApprovalsView pendingChanges={pendingChanges} liveConfig={liveConfig} currentUser={currentUser} onApprove={handleApprove} onReject={handleReject} onPreview={enterChangePreview} />}
-    </div>
-  );
-}
-
-// ─── Preview Mode Banner ──────────────────────────────────────────────────────
-// Sticky banner pinned above hub pages whenever the operator/approver is
-// previewing draft (or pending-change) content. Eliminates any chance of
-// confusing preview output with the actually-published hub.
-function PreviewBanner({ previewMode, previewConfig, pendingChanges, onExit }) {
-  const isChange = previewMode && previewMode.source === "change";
-  const change = isChange ? (pendingChanges || []).find(x => x.id === previewMode.changeId) : null;
-  const fieldCount = change ? change.diff.length : null;
-  const label = isChange
-    ? `Previewing pending change · submitted by ${change?.submittedBy || "unknown"}${fieldCount != null ? ` · ${fieldCount} field${fieldCount !== 1 ? "s" : ""} changed` : ""}`
-    : `Previewing your unpublished draft · next version → ${previewConfig?.meta?.version || "?"}`;
-  return (
-    <div style={{
-      position: "sticky", top: 0, zIndex: 9999,
-      background: "linear-gradient(90deg,#ffb800,#ff8a00)",
-      color: "#1a1a1a",
-      padding: "10px 22px",
-      display: "flex", alignItems: "center", gap: 14,
-      borderBottom: "2px solid #c97600",
-      boxShadow: "0 2px 6px rgba(0,0,0,0.12)",
-      fontFamily: "'Open Sans',sans-serif",
-    }}>
-      <span style={{ fontSize: 18 }} aria-hidden>👁</span>
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontWeight: 800, fontSize: 13, letterSpacing: .3, textTransform: "uppercase" }}>Preview Mode</div>
-        <div style={{ fontSize: 12, marginTop: 2 }}>{label} — not visible to customers.</div>
-      </div>
-      <button
-        onClick={onExit}
-        style={{ background: "#1a1a1a", color: "#fff", border: "none", padding: "7px 14px", borderRadius: 5, fontSize: 12, fontWeight: 700, cursor: "pointer", whiteSpace: "nowrap" }}
-      >
-        ✗ Exit Preview
-      </button>
+      {mainTab === "admin" && <AdminView config={draftConfig} liveConfig={liveConfig} onChange={updateDraft} adminTab={adminTab} setAdminTab={setAdminTab} jsonText={jsonText} jsonError={jsonError} onJsonChange={handleJsonChange} currentUser={currentUser} onPublishOrSubmit={handlePublishOrSubmit} hasUnsaved={hasUnsaved} activeSection={activeSection} setActiveSection={setActiveSection} onGoSegment={goSegment} onGoContract={goContract} />}
+      {mainTab === "approvals" && <ApprovalsView pendingChanges={pendingChanges} liveConfig={liveConfig} currentUser={currentUser} onApprove={handleApprove} onReject={handleReject} />}
     </div>
   );
 }
@@ -2131,20 +2030,46 @@ function HubView({ config: c, hubStep, setHubStep, showSignupTray, setShowSignup
             </div>
           </div>
 
-          {/* ── The Studio @ B&H — horizontal banner ── */}
-          <div style={{ background: T.bondLight, borderRadius: 12, padding: "28px 36px", marginBottom: 32, display: "flex", alignItems: "center", gap: 24 }}>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <h2 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 22, fontWeight: 800, color: T.gray6, marginBottom: 10 }}>The Studio B&H</h2>
-              <p style={{ fontSize: 14, color: T.gray6, lineHeight: 1.6, maxWidth: 720, margin: 0 }}>
-                The Studio specializes in completely customized installations and solutions. Our experts work with you to find the right equipment — no matter how complex the project.
-              </p>
+          {/* ── Explainer Video ── */}
+          <div style={{ background: T.white, borderRadius: 12, border: `1px solid ${T.gray2}`, padding: "40px", marginBottom: 32, textAlign: "center" }}>
+            <h2 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 20, fontWeight: 800, color: T.gray6, marginBottom: 8 }}>Get to Know B&H B2B</h2>
+            <p style={{ fontSize: 14, color: T.gray5, marginBottom: 24, maxWidth: 560, margin: "0 auto 24px" }}>See how thousands of organizations rely on B&H for smarter technology purchasing.</p>
+            <div style={{ position: "relative", background: T.gray6, borderRadius: 10, overflow: "hidden", maxWidth: 680, margin: "0 auto 24px", aspectRatio: "16/9", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg,#1a1a1a,#330000)", opacity: 0.85 }} />
+              <div style={{ position: "relative", zIndex: 1, width: 64, height: 64, background: "rgba(255,255,255,0.15)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", border: "2px solid rgba(255,255,255,0.4)" }}>
+                <div style={{ width: 0, height: 0, borderTop: "14px solid transparent", borderBottom: "14px solid transparent", borderLeft: "22px solid white", marginLeft: 4 }} />
+              </div>
+              <div style={{ position: "absolute", bottom: 16, left: 20, color: "rgba(255,255,255,0.6)", fontSize: 12, fontWeight: 600, zIndex: 1 }}>B&H B2B — Your Professional Purchasing Partner</div>
             </div>
-            <button
-              onClick={() => onGoStatic("studio")}
-              style={{ flex: "0 0 auto", background: T.white, color: T.gray6, border: `1.5px solid ${T.gray6}`, padding: "10px 22px", borderRadius: 8, fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "Montserrat,sans-serif" }}
-            >
-              Learn More
-            </button>
+            <div style={{ textAlign: "center" }}>
+              <button onClick={() => onGoStatic("about")} style={{ display: "inline-block", minWidth: 360, background: T.green, color: T.white, border: "none", padding: "16px 32px", borderRadius: 8, fontWeight: 800, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif", boxShadow: "0 4px 20px rgba(63,154,89,.35)" }}>
+                Learn More About B&H →
+              </button>
+            </div>
+          </div>
+
+          {/* ── The Studio @ B&H ── */}
+          <div style={{ background: "linear-gradient(135deg,#1a1a1a 0%,#2a1a1a 60%,#330000 100%)", borderRadius: 12, padding: "40px 40px", marginBottom: 32 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
+              <div style={{ width: 44, height: 44, background: T.scarlet, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <span style={{ color: "#FFD700", fontWeight: 900, fontSize: 14, fontFamily: "Montserrat" }}>B&H</span>
+              </div>
+              <span style={{ fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.5)", letterSpacing: 2, textTransform: "uppercase" }}>Featured</span>
+            </div>
+            <h2 style={{ fontFamily: "Montserrat,sans-serif", fontSize: 24, fontWeight: 800, color: T.white, marginBottom: 12 }}>The Studio @ B&H</h2>
+            <p style={{ fontSize: 14, color: "rgba(255,255,255,0.75)", lineHeight: 1.7, marginBottom: 20, maxWidth: 640 }}>
+              The Studio specializes in completely customized installations and solutions. Our experts work with you to find the right equipment — no matter how complex the project.
+            </p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 28 }}>
+              {["🎬 Digital Camera Production", "📡 Broadcasting & Streaming", "🎙 Studio & ENG", "🎞 Editing, Color Grading & Post-Production", "🔧 System Design & Implementation", "🌐 Virtual Production"].map(s => (
+                <div key={s} style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.18)", borderRadius: 20, padding: "7px 16px", fontSize: 12, fontWeight: 600, color: "rgba(255,255,255,0.85)" }}>{s}</div>
+              ))}
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <button onClick={() => onGoStatic("studio")} style={{ display: "inline-block", minWidth: 360, background: T.green, color: T.white, border: "none", padding: "16px 32px", borderRadius: 8, fontWeight: 800, fontSize: 15, cursor: "pointer", fontFamily: "Montserrat,sans-serif", boxShadow: "0 4px 20px rgba(63,154,89,.35)" }}>
+                Tell Us About Your Project →
+              </button>
+            </div>
           </div>
 
           {/* ── Why Us ── */}
@@ -3383,7 +3308,7 @@ function SegmentPortalRoutingEditor({ segId, config, onChange }) {
 }
 
 // ─── Admin View ───────────────────────────────────────────────────────────────
-function AdminView({ config, liveConfig, onChange, adminTab, setAdminTab, jsonText, jsonError, onJsonChange, currentUser, onPublishOrSubmit, hasUnsaved, activeSection, setActiveSection, onGoSegment, onGoContract, onPreviewHub }) {
+function AdminView({ config, liveConfig, onChange, adminTab, setAdminTab, jsonText, jsonError, onJsonChange, currentUser, onPublishOrSubmit, hasUnsaved, activeSection, setActiveSection, onGoSegment, onGoContract }) {
   const hubSections = [
     { id: "hero", label: "Hero", icon: "🎯" }, { id: "signup", label: "Sign-Up Form", icon: "📝" },
     { id: "segments", label: "Segments", icon: "🏷" }, { id: "contracts", label: "Contracts", icon: "📋" },
@@ -3510,15 +3435,6 @@ function AdminView({ config, liveConfig, onChange, adminTab, setAdminTab, jsonTe
             {adminTab !== "json" ? `✏️ Editing: ${currentLabel}` : "{ } Raw JSON"}
           </div>
           {hasUnsaved && <span style={{ fontSize: 12, background: "#fff3cd", color: "#856404", padding: "3px 8px", borderRadius: 4, fontWeight: 600 }}>● Unsaved changes</span>}
-          {onPreviewHub && (
-            <button
-              onClick={onPreviewHub}
-              title="Open the full hub home in Preview Mode using your current draft — nothing is published or submitted."
-              style={{ background: T.bondLight, color: T.bond, border: `1px solid ${T.bond}`, padding: "7px 14px", borderRadius: 6, fontWeight: 700, fontSize: 12, cursor: "pointer" }}
-            >
-              👁 Preview Draft
-            </button>
-          )}
           <div style={{ fontSize: 12, color: T.gray4 }}>{currentUser.canDirectPublish ? "🟢 Direct publish" : "📋 Submit for approval"}</div>
           <button onClick={onPublishOrSubmit} disabled={!hasUnsaved} style={{ background: hasUnsaved ? (currentUser.canDirectPublish ? T.green : T.bond) : T.gray3, color: T.white, border: "none", padding: "8px 18px", borderRadius: 6, fontWeight: 700, fontSize: 13, cursor: hasUnsaved ? "pointer" : "not-allowed" }}>
             {currentUser.canDirectPublish ? "⬆ Publish Live" : "⬆ Submit for Approval"}
@@ -4146,7 +4062,7 @@ function SectionEditor({ section, config, onChange, onGoSegment, onGoContract })
 }
 
 // ─── Approvals View ───────────────────────────────────────────────────────────
-function ApprovalsView({ pendingChanges, liveConfig, currentUser, onApprove, onReject, onPreview }) {
+function ApprovalsView({ pendingChanges, liveConfig, currentUser, onApprove, onReject }) {
   const pending = pendingChanges.filter(c => c.status === "pending");
   const resolved = pendingChanges.filter(c => c.status !== "pending");
   const isAriel = currentUser.canDirectPublish;
@@ -4173,7 +4089,7 @@ function ApprovalsView({ pendingChanges, liveConfig, currentUser, onApprove, onR
             <span style={{ background: T.orange, color: T.white, borderRadius: "50%", width: 20, height: 20, display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: 12 }}>{pending.length}</span>
             Awaiting Approval
           </div>
-          {pending.map(c => <ChangeCard key={c.id} change={c} isAriel={isAriel} onApprove={onApprove} onReject={onReject} onPreview={onPreview} liveConfig={liveConfig} />)}
+          {pending.map(c => <ChangeCard key={c.id} change={c} isAriel={isAriel} onApprove={onApprove} onReject={onReject} liveConfig={liveConfig} />)}
         </div>
       ) : (
         <div style={{ background: T.greenLight, border: `1px solid ${T.green}`, borderRadius: 10, padding: "20px 24px", marginBottom: 24, textAlign: "center", color: T.green, fontWeight: 600 }}>✓ No pending approvals — hub is fully up to date.</div>
@@ -4181,14 +4097,14 @@ function ApprovalsView({ pendingChanges, liveConfig, currentUser, onApprove, onR
       {resolved.length > 0 && (
         <div>
           <div style={{ fontSize: 11, fontWeight: 700, color: T.gray4, letterSpacing: 1, textTransform: "uppercase", marginBottom: 14 }}>Recently Resolved</div>
-          {resolved.map(c => <ChangeCard key={c.id} change={c} isAriel={isAriel} onApprove={onApprove} onReject={onReject} onPreview={onPreview} liveConfig={liveConfig} resolved />)}
+          {resolved.map(c => <ChangeCard key={c.id} change={c} isAriel={isAriel} onApprove={onApprove} onReject={onReject} liveConfig={liveConfig} resolved />)}
         </div>
       )}
     </div>
   );
 }
 
-function ChangeCard({ change, isAriel, onApprove, onReject, onPreview, resolved }) {
+function ChangeCard({ change, isAriel, onApprove, onReject, resolved }) {
   const [expanded, setExpanded] = useState(false);
   const statusColor = { pending: T.orange, approved: T.green, rejected: T.scarlet }[change.status];
   return (
@@ -4203,15 +4119,6 @@ function ChangeCard({ change, isAriel, onApprove, onReject, onPreview, resolved 
         </div>
         <span style={{ background: statusColor, color: T.white, fontSize: 11, fontWeight: 700, padding: "4px 10px", borderRadius: 4, textTransform: "uppercase" }}>{change.status}</span>
         <button onClick={() => setExpanded(e => !e)} style={{ background: T.gray1, border: "none", padding: "6px 12px", borderRadius: 5, cursor: "pointer", fontSize: 12, fontWeight: 600, color: T.gray5 }}>{expanded ? "Hide diff ↑" : "Show diff ↓"}</button>
-        {onPreview && (
-          <button
-            onClick={() => onPreview(change.id)}
-            title="Render the hub using this change's proposed draft, so you can see the result before approving."
-            style={{ background: T.bondLight, color: T.bond, border: `1px solid ${T.bond}`, padding: "6px 12px", borderRadius: 5, cursor: "pointer", fontSize: 12, fontWeight: 700 }}
-          >
-            👁 Preview Changes
-          </button>
-        )}
         {isAriel && change.status === "pending" && (
           <div style={{ display: "flex", gap: 8 }}>
             <button onClick={() => onApprove(change.id)} style={{ background: T.green, color: T.white, border: "none", padding: "8px 16px", borderRadius: 6, fontWeight: 700, fontSize: 13, cursor: "pointer" }}>✓ Approve</button>

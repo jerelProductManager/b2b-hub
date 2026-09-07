@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
-<meta name="description" content="B&amp;H B2B cross-offering KPI specification: 91 adoption and impact metrics across awareness, user experience, acquisition and reactivation for the B2B Hub, EDU Advantage, The Studio and School Safety hub, with a per-owner funnel.">
+<meta name="description" content="B&amp;H B2B cross-offering KPI specification: 91 adoption and impact metrics across four offerings, filterable by date range, owner, metric type, device and instrumentation state.">
 <meta name="robots" content="noindex, nofollow">
 <title>B2B Offerings KPI Spec</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -56,6 +56,17 @@ body{font-family:'Montserrat',system-ui,sans-serif;background:var(--bg);color:va
 .leg-item{display:flex;align-items:center;gap:6px}
 .leg-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
 
+.custom{display:none;align-items:center;gap:9px;flex-wrap:wrap}
+.custom.on{display:flex}
+.custom label{font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted)}
+.custom input{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;color:var(--text);
+  border:1.5px solid var(--border);border-radius:5px;padding:4px 8px;background:var(--card)}
+.custom input:focus-visible{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--brand-ink)}
+.custom .span{font-size:10.5px;color:var(--text-muted);font-weight:600}
+.custom .span.err{color:var(--red);font-weight:700}
+.retain{background:var(--amber-bg);border:1px solid var(--gold-border);border-left:3px solid var(--amber);
+  border-radius:8px;padding:11px 16px;margin-bottom:18px;font-size:11.5px;color:var(--text-mid);line-height:1.55}
+.retain b{color:var(--amber);font-weight:700}
 .fun{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:15px 18px 16px;margin-bottom:18px}
 .fun-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:4px}
 .fun-title{font-size:11.5px;font-weight:700;color:var(--brand-ink)}
@@ -63,7 +74,7 @@ body{font-family:'Montserrat',system-ui,sans-serif;background:var(--bg);color:va
 .fun-note{font-size:11px;color:var(--text-mid);line-height:1.55;max-width:104ch;margin-bottom:14px}
 .fun-note b{color:var(--text)}
 .fun-strip{display:flex;align-items:stretch;overflow-x:auto;padding-bottom:2px}
-.fun-stage{flex:1 1 0;min-width:124px;border:1px solid var(--border);border-right:0;padding:9px 11px 15px;
+.fun-stage{flex:1 1 0;min-width:140px;border:1px solid var(--border);border-right:0;padding:9px 11px 15px;
   display:flex;flex-direction:column;gap:3px;position:relative;background:var(--card)}
 .fun-stage:first-child{border-radius:6px 0 0 6px}
 .fun-stage:last-child{border-right:1px solid var(--border);border-radius:0 6px 6px 0}
@@ -72,8 +83,13 @@ body{font-family:'Montserrat',system-ui,sans-serif;background:var(--bg);color:va
   transform:translateY(-50%) rotate(45deg);background:var(--card);z-index:2}
 .fun-mid{font-size:8.5px;font-weight:700;letter-spacing:.06em;color:var(--text-faint)}
 .fun-name{font-size:11px;font-weight:700;color:var(--text);line-height:1.3}
-.fun-val{font-size:17px;font-weight:800;color:var(--brand-ink);line-height:1;margin-top:auto;padding-top:8px;font-variant-numeric:tabular-nums}
-.fun-val.na{color:var(--text-faint);font-weight:600}
+.fun-devs{margin-top:auto;padding-top:9px;display:flex;flex-direction:column;gap:3px}
+.fun-dev{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+.fun-dev span{font-size:8.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted)}
+.fun-dev b{font-size:14px;font-weight:800;color:var(--brand-ink);line-height:1;font-variant-numeric:tabular-nums}
+.fun-dev.mob b{color:var(--brand-2)}
+.fun-dev.na b{color:var(--text-faint);font-weight:600}
+.fun-split{font-size:9.5px;color:var(--text-muted);font-weight:600;margin-top:2px}
 .fun-st{font-size:8px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-top:4px}
 .fun-bar{position:absolute;left:0;right:0;bottom:0;height:4px}
 .b-live{background:var(--green)}.b-partial{background:var(--amber)}.b-none{background:var(--red)}.b-na{background:var(--st-na)}
@@ -81,7 +97,7 @@ body{font-family:'Montserrat',system-ui,sans-serif;background:var(--bg);color:va
 
 .fun-rows{display:flex;flex-direction:column;gap:8px}
 .fun-row{display:flex;align-items:center;gap:12px}
-.fun-rlabel{width:132px;flex-shrink:0;font-size:11px;font-weight:700;color:var(--brand-ink);line-height:1.25}
+.fun-rlabel{width:150px;flex-shrink:0;font-size:11px;font-weight:700;color:var(--brand-ink);line-height:1.25}
 .fun-rlabel span{display:block;font-size:9.5px;color:var(--text-muted);font-weight:600;margin-top:1px}
 .fun-mini{display:flex;gap:3px;flex:1;min-width:0;overflow-x:auto}
 .fun-cell{flex:1 1 0;min-width:60px;height:28px;border-radius:2px;display:flex;align-items:center;justify-content:center;
@@ -111,9 +127,13 @@ body{font-family:'Montserrat',system-ui,sans-serif;background:var(--bg);color:va
 .sec-ships{font-size:10.5px;line-height:1.5;margin-top:6px;max-width:880px;color:var(--text-muted);
   background:var(--teal-bg);border-left:2px solid var(--teal);padding:5px 10px;border-radius:0 4px 4px 0}
 .sec-ships b{color:var(--teal);font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:9px}
+.sec-dims{font-size:10.5px;line-height:1.5;margin-top:5px;max-width:880px;color:var(--text-muted);
+  background:var(--amber-bg);border-left:2px solid var(--amber);padding:5px 10px;border-radius:0 4px 4px 0}
+.sec-dims b{color:var(--amber);font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:9px}
+.sec-dims em{font-style:normal;font-weight:700;color:var(--text-mid)}
 .sec-count{margin-left:auto;font-size:10px;font-weight:600;padding:2px 9px;border-radius:3px;background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-border);white-space:nowrap;flex-shrink:0}
 .tbl-wrap{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow-x:auto;margin-top:10px}
-table.sc{width:100%;border-collapse:collapse;font-size:12px;min-width:1120px}
+table.sc{width:100%;border-collapse:collapse;font-size:12px;min-width:1210px}
 table.sc th{font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);text-align:left;padding:10px 12px;border-bottom:2px solid var(--brand-wash);white-space:nowrap;background:var(--th-bg)}
 table.sc td{padding:10px 12px;border-bottom:1px solid var(--brand-wash);vertical-align:top;line-height:1.4}
 table.sc tr:last-child td{border-bottom:none}
@@ -124,6 +144,15 @@ table.sc tr.band:hover td{background:var(--th-bg)}
 .m-name{font-weight:700;color:var(--brand-ink)}
 .m-def{font-size:10.5px;color:var(--text-muted);font-weight:400;line-height:1.45;margin-top:3px;max-width:400px}
 .m-val{color:var(--text-mid);font-size:11.5px;white-space:nowrap}
+.m-dev{display:flex;flex-direction:column;gap:2px}
+.m-dev>div{display:flex;justify-content:space-between;gap:10px;align-items:baseline;white-space:nowrap}
+.m-dev span{font-size:8.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-faint)}
+.m-dev b{font-size:11.5px;font-weight:700;color:var(--text-mid);font-variant-numeric:tabular-nums}
+.m-dev b.tbd{color:var(--text-faint);font-weight:400;font-style:italic}
+.m-join{font-size:8.5px;color:var(--amber);font-weight:700;letter-spacing:.03em;text-transform:uppercase;margin-top:4px;white-space:nowrap}
+.m-nodev{font-size:10.5px;color:var(--text-faint);font-style:italic;white-space:normal;max-width:120px;line-height:1.35}
+body.only-desktop .r-mobile{display:none!important}
+body.only-mobile .r-desktop{display:none!important}
 .m-tbd{color:var(--text-faint);font-style:italic}
 .m-source{color:var(--text-muted);font-size:11px}
 .m-cadence{color:var(--text-muted);font-size:11px;white-space:nowrap}
@@ -171,6 +200,20 @@ table.cov .cov-o{font-size:10px;color:var(--text-muted);font-weight:600;margin-t
     <div class="sum-row" id="sum-row"></div>
     <div class="controls">
       <div class="ctrl-group">
+        <span class="ctrl-lbl">Date range</span>
+        <button class="chip" data-dim="range" data-val="7">Last 7 days</button>
+        <button class="chip" data-dim="range" data-val="30">Last 30 days</button>
+        <button class="chip active" data-dim="range" data-val="90">Last 90 days</button>
+        <button class="chip" data-dim="range" data-val="365">Last 12 months</button>
+        <button class="chip" data-dim="range" data-val="custom">Custom&hellip;</button>
+      </div>
+      <div class="custom" id="custom-row">
+        <span class="ctrl-lbl"></span>
+        <label for="d-from">From</label><input type="date" id="d-from">
+        <label for="d-to">To</label><input type="date" id="d-to">
+        <span class="span" id="d-span"></span>
+      </div>
+      <div class="ctrl-group">
         <span class="ctrl-lbl">Owner</span>
         <button class="chip active" data-dim="own" data-val="all">All four<span class="sm">Manny Steigman</span></button>
         <button class="chip" data-dim="own" data-val="hub">B2B Hub<span class="sm">Ariel Goldman · Live</span></button>
@@ -183,6 +226,12 @@ table.cov .cov-o{font-size:10px;color:var(--text-muted);font-weight:600;margin-t
         <button class="chip active" data-dim="type" data-val="all">All</button>
         <button class="chip" data-dim="type" data-val="adoption">Adoption</button>
         <button class="chip" data-dim="type" data-val="impact">Impact</button>
+      </div>
+      <div class="ctrl-group">
+        <span class="ctrl-lbl">Device</span>
+        <button class="chip active" data-dim="dev" data-val="all">All devices</button>
+        <button class="chip" data-dim="dev" data-val="desktop">Desktop</button>
+        <button class="chip" data-dim="dev" data-val="mobile">Mobile</button>
       </div>
       <div class="ctrl-group">
         <span class="ctrl-lbl">Instrumentation</span>
@@ -202,6 +251,8 @@ table.cov .cov-o{font-size:10px;color:var(--text-muted);font-weight:600;margin-t
     <span class="leg-item"><span class="leg-dot" style="background:var(--red)"></span>Not instrumented</span>
   </div>
 
+  <div class="retain" id="retain" hidden></div>
+
   <div class="fun" id="funnel"></div>
 
   <details class="reader">
@@ -215,6 +266,7 @@ table.cov .cov-o{font-size:10px;color:var(--text-muted);font-weight:600;margin-t
       <div class="rd-item"><strong>Why the adoption column is mostly red.</strong> Adoption metrics measure surfaces, and on three of the four offerings the surface either carries no tag (The Studio), has not shipped yet (School Safety), or does not exist at all — the B2B Hub home page has no sign-up CTA to be adopted, and there is no proactive-communication mechanism for existing customers to adopt. Impact metrics fare better only because order and account data lives in the warehouse regardless of what the front end does. Read a red adoption row as a product gap first and a tagging gap second.</div>
       <div class="rd-item"><strong>Four offerings, four different conversion objects.</strong> An approved organization account (Hub), a verified individual student (EDU), and two lead forms (Studio, School Safety) are not the same event and must never be summed. The only figure that legitimately rolls up across all four is <strong>AC-10 Qualified Action Rate</strong> — each property's own conversion over its own qualified sessions.</div>
       <div class="rd-item"><strong>Deliberately not in this register.</strong> Canonical integrity and template accessibility conformance are one-time audits rather than metrics that move, so they sit in the gap list instead. Both still need action: The Studio's canonical currently points at <em>/find/b2b/studio.jsp</em> while the live page is <em>/find/shared/b2bHub/theStudio.jsp</em>, and no template has been checked against WCAG AA — which public-sector buyers do ask about.</div>
+      <div class="rd-item"><strong>Dimensions, not device twins.</strong> Each theme declares the cuts every metric under it must support, device first among them. That is deliberate: a metric reported by device does not need a mobile copy of itself, so the register stays at 91 rows instead of doubling. <strong>UX-20</strong> is the single exception, because a desktop-versus-mobile <em>gap</em> is a comparison rather than a cut.</div><div class="rd-item"><strong>Device is only answerable at the top of the funnel.</strong> Of the 91 metrics, 62 split by device natively, 20 need a session join we do not have, and 9 are not device-scoped at all — CMS operator metrics, the manual review queue, Studio intake and punchout health have no device to speak of. The uncomfortable part is where those fall among the metrics that <em>work today</em>: all seven that split by device come from Search Console and CrUX, and all five warehouse metrics — first order, time to first order, AOV, orders per account, repeat rate — cannot be split at all until order records carry the session that produced them. So we can say mobile converts worse; we cannot yet say what mobile is worth.</div><div class="rd-item"><strong>Where device is a design question, not a reporting one.</strong> School Safety’s form is 533px tall on desktop but <strong>879px on the 375px mobile frame</strong>, and the intro CTAs are switched off — so on a phone the only route to the page’s single conversion moment is a long scroll. Worth settling before Oct 5.</div>
     </div>
   </details>
 
@@ -262,47 +314,51 @@ var ALL=['hub','edu','studio','safety'];
 /* Each offering's own funnel, coloured by whether the stage can be measured today.
    Values are illustrative placeholders; the colours are not. */
 var FUNNELS={
- hub:{note:'<b>Two stages have no surface to measure.</b> There is no sign-up CTA anywhere on the hub home — the only route forward is a segment tile — and the registration form is a hash-routed SPA that fires no page views. Both ends of this funnel are lit and the middle is dark, which is precisely why the baseline conversion rate has never been established.',
+ hub:{split:'70 / 30 desktop-mobile',
+  note:'<b>Mobile is 30% of sessions but 13% of first orders.</b> Procurement skews desktop and always will, but the mobile column falls off a cliff at sign-up: a 3.3% start rate against desktop&rsquo;s 5.6%, and we cannot see why, because neither the CTA nor the form steps emit events on any device. Two stages here have no surface to measure at all: there is no sign-up CTA on the hub home, and the registration form is a hash-routed SPA that fires no page views.',
   stages:[
-   {m:'AW-01',n:'Search impressions',v:'486,000',s:'live'},
-   {m:'AW-07',n:'Hub sessions',v:'42,000',s:'partial'},
-   {m:'UX-01',n:'Segment page',v:'14,700',s:'partial'},
-   {m:'AC-03',n:'Sign-up started',v:'2,050',s:'none'},
-   {m:'AC-04',n:'Submitted',v:'980',s:'none'},
-   {m:'AC-12',n:'Approved',v:'610',s:'partial'},
-   {m:'AC-15',n:'First order',v:'275',s:'live'},
-   {m:'RE-01',n:'Returned in 90d',v:'—',s:'none'}
+   {m:'AW-01',n:'Search impressions',d:316000,mo:170000,s:'live'},
+   {m:'AW-07',n:'Hub sessions',d:29400,mo:12600,s:'partial'},
+   {m:'UX-01',n:'Segment page',d:10900,mo:3800,s:'partial'},
+   {m:'AC-03',n:'Sign-up started',d:1640,mo:410,s:'none'},
+   {m:'AC-04',n:'Submitted',d:810,mo:170,s:'none'},
+   {m:'AC-12',n:'Approved',d:520,mo:90,s:'partial'},
+   {m:'AC-15',n:'First order',d:238,mo:37,s:'live'},
+   {m:'RE-01',n:'Returned in 90d',d:null,mo:null,s:'none'}
   ]},
- edu:{note:'<b>The funnel breaks in the middle, at a domain we do not own.</b> Students leave for UNiDAYS and come back counted as new referral traffic, so the verification step — the one that decides everything downstream — is the single stage we cannot see.',
+ edu:{split:'45 / 55 desktop-mobile',
+  note:'<b>The only offering where mobile is the majority.</b> Students arrive on phones, and the verification handoff they have to complete is the one stage we cannot see on either device — they leave for UNiDAYS and return counted as new referral traffic. If that handoff is worse on mobile, and it usually is, we currently have no way to know.',
   stages:[
-   {m:'AW-01',n:'Search impressions',v:'312,000',s:'live'},
-   {m:'AW-07',n:'EDU sessions',v:'28,400',s:'partial'},
-   {m:'AC-08',n:'Verification started',v:'4,900',s:'partial'},
-   {m:'UX-23',n:'Returned verified',v:'—',s:'none'},
-   {m:'AC-09',n:'Account created',v:'2,150',s:'partial'},
-   {m:'AC-21',n:'First order',v:'860',s:'partial'},
-   {m:'RE-20',n:'Re-verified',v:'—',s:'none'}
+   {m:'AW-01',n:'Search impressions',d:140000,mo:172000,s:'live'},
+   {m:'AW-07',n:'EDU sessions',d:12800,mo:15600,s:'partial'},
+   {m:'AC-08',n:'Verification started',d:2450,mo:2450,s:'partial'},
+   {m:'UX-23',n:'Returned verified',d:null,mo:null,s:'none'},
+   {m:'AC-09',n:'Account created',d:1180,mo:970,s:'partial'},
+   {m:'AC-21',n:'First order',d:520,mo:340,s:'partial'},
+   {m:'RE-20',n:'Re-verified',d:null,mo:null,s:'none'}
   ]},
- studio:{note:'<b>One lit stage, then nothing.</b> Search Console still reports impressions because it works at the domain level — but the page itself carries no GA4 tag, so every stage after the click has never produced a single data point. This is also the only offering still in design, which makes it the one place we can instrument before the build rather than after.',
+ studio:{split:'unknown — page untagged',
+  note:'<b>We cannot even answer what the device mix is.</b> Search Console still reports impressions because it works at the domain level, so the first stage splits by device — after that the page carries no GA4 tag, so desktop and mobile are equally invisible. This is also the only offering still in design, which makes it the one place we can instrument before the build rather than after.',
   stages:[
-   {m:'AW-01',n:'Search impressions',v:'94,000',s:'live'},
-   {m:'AW-11',n:'Studio sessions',v:'—',s:'none'},
-   {m:'UX-06',n:'Reached inquiry form',v:'—',s:'none'},
-   {m:'AC-07',n:'Inquiry submitted',v:'—',s:'none'},
-   {m:'AC-22',n:'Rep-accepted',v:'—',s:'none'},
-   {m:'AC-24',n:'Booked engagement',v:'—',s:'none'},
-   {m:'RE-22',n:'Repeat engagement',v:'—',s:'none'}
+   {m:'AW-01',n:'Search impressions',d:68000,mo:26000,s:'live'},
+   {m:'AW-11',n:'Studio sessions',d:null,mo:null,s:'none'},
+   {m:'UX-06',n:'Reached inquiry form',d:null,mo:null,s:'none'},
+   {m:'AC-07',n:'Inquiry submitted',d:null,mo:null,s:'none'},
+   {m:'AC-22',n:'Rep-accepted',d:null,mo:null,s:'none'},
+   {m:'AC-24',n:'Booked engagement',d:null,mo:null,s:'none'},
+   {m:'RE-22',n:'Repeat engagement',d:null,mo:null,s:'none'}
   ]},
- safety:{note:'<b>Nothing is measurable because nothing has shipped</b> — which makes this the only funnel that can be built correctly on day one. Every stage below already maps to an event in the launch schema. If those events ship <em>with</em> the page rather than after it, this is the one offering that never needs a retrofit.',
+ safety:{split:'not yet measurable',
+  note:'<b>Device is a live design question here, not just a reporting one.</b> The form is 533px tall on desktop but <b>879px on the 375px mobile frame</b>, and the intro CTAs are switched off — so on a phone the only route to the page\'s single conversion moment is a long scroll. Nothing has shipped, which makes this the one funnel that can be built correctly, and split by device, from day one.',
   stages:[
-   {m:'AW-01',n:'Search impressions',v:'—',s:'na'},
-   {m:'AW-07',n:'Page sessions',v:'—',s:'na'},
-   {m:'UX-05',n:'Tab engagement',v:'—',s:'na'},
-   {m:'UX-06',n:'Scrolled to form',v:'—',s:'na'},
-   {m:'AC-06',n:'Form started',v:'—',s:'na'},
-   {m:'AC-07',n:'Lead submitted',v:'—',s:'na'},
-   {m:'AC-22',n:'Rep-accepted',v:'—',s:'na'},
-   {m:'AC-23',n:'Became B2B account',v:'—',s:'na'}
+   {m:'AW-01',n:'Search impressions',d:null,mo:null,s:'na'},
+   {m:'AW-07',n:'Page sessions',d:null,mo:null,s:'na'},
+   {m:'UX-05',n:'Tab engagement',d:null,mo:null,s:'na'},
+   {m:'UX-06',n:'Scrolled to form',d:null,mo:null,s:'na'},
+   {m:'AC-06',n:'Form started',d:null,mo:null,s:'na'},
+   {m:'AC-07',n:'Lead submitted',d:null,mo:null,s:'na'},
+   {m:'AC-22',n:'Rep-accepted',d:null,mo:null,s:'na'},
+   {m:'AC-23',n:'Became B2B account',d:null,mo:null,s:'na'}
   ]}
 };
 
@@ -310,6 +366,7 @@ var THEMES=[
 {n:'01',key:'aware',title:'Awareness',
  q:'Do the buyers who can actually transact know these pages exist? Qualified reach, not reach — a procurement officer searching a cooperative contract by name is worth more than a thousand generic sessions.',
  ships:'SEO fields in the CMS · segment and contract page content · internal cross-links between the four offerings · the Alyssa’s Law seminar video · GA4 tagging on every page',
+ dims:'<em>Device</em> · offering · landing template · query type (brand / non-brand / cooperative-contract name)',
  metrics:[
   /* ---- adoption: is the surface reaching people? ---- */
   {id:'AW-01',name:'Search impressions, priority term set',def:'Impressions against the frozen 120-term procurement set. The first thing that moves when content or SEO fields change.',props:ALL,type:'adoption',baseline:'TBD',target:'TBD',source:'Search Console',cadence:'Weekly',state:'live'},
@@ -337,6 +394,7 @@ var THEMES=[
 {n:'02',key:'ux',title:'User Experience',
  q:'Once a buyer is here, can they finish the job? Covers both experiences the PRD names — the buyer’s and the CMS operator’s. A content team that waits weeks for a logo change is a UX failure that resurfaces months later as an awareness failure.',
  ships:'The CMS editor and draft/publish workflow · segment navigation · verification error messaging · contracts and procurement intake forms · the School Safety anchor tabs · site search',
+ dims:'<em>Device</em> · offering · page template · B2B segment (12 codes) · verification error code',
  metrics:[
   /* ---- adoption ---- */
   {id:'UX-01',name:'Segment tile click rate',def:'Home sessions clicking through to any of the 12 segment pages. Adoption of the only navigation the hub home offers.',props:['hub'],type:'adoption',baseline:'TBD',target:'45%',source:'GA4',cadence:'Weekly',state:'partial'},
@@ -359,7 +417,7 @@ var THEMES=[
   {id:'UX-17',name:'Site-search zero-result rate',def:'Internal searches returning nothing. A leading indicator of the dead-category problem.',props:['hub'],type:'impact',baseline:'TBD',target:'TBD',source:'Search logs',cadence:'Monthly',state:'none'},
   {id:'UX-18',name:'Support contacts per 1,000 sessions',def:'Deflection measure split by contact reason. Carries the PRD’s D&amp;B support target directly.',props:['hub','studio','safety'],type:'impact',baseline:'TBD',target:'−30% D&amp;B',source:'CRM + GA4',cadence:'Monthly',state:'partial'},
   {id:'UX-19',name:'Core Web Vitals pass rate',def:'LCP, INP and CLS per template rather than per URL, so a regression points at a component.',props:ALL,type:'impact',baseline:'TBD',target:'75th pct pass',source:'CrUX / GA4',cadence:'Monthly',state:'live'},
-  {id:'UX-20',name:'Mobile completion delta',def:'Gap between desktop and mobile completion on the same flow.',props:['hub','studio','safety'],type:'impact',baseline:'TBD',target:'TBD',source:'GA4',cadence:'Monthly',state:'partial'},
+  {id:'UX-20',name:'Mobile completion delta',def:'The one device metric that keeps its own row — it is a difference between two cuts, not a cut, so the reporting dimension alone will not surface it. Everything else splits by device rather than getting a device twin.',props:['hub','studio','safety'],type:'impact',baseline:'TBD',target:'TBD',source:'GA4',cadence:'Monthly',state:'partial'},
   {id:'UX-21',name:'Time to publish',def:'Median hours DRAFT → PUBLISHED. The operator-side outcome the whole CMS build is justified by.',props:['hub','studio'],type:'impact',baseline:'Weeks',target:'&lt; 4 hrs',source:'CMS audit log',cadence:'Monthly',state:'none'},
   {id:'UX-22',name:'CMS operator NPS',def:'Quarterly survey of the B2B team on the content management experience.',props:['hub','studio'],type:'impact',baseline:'TBD',target:'≥ 8/10',source:'Quarterly survey',cadence:'Quarterly',state:'none'},
   {id:'UX-23',name:'UNiDAYS return rate',def:'Students sent to UNiDAYS who return to B&amp;H verified. Measures a handoff we depend on but do not control.',props:['edu'],type:'impact',baseline:'TBD',target:'70%',source:'GA4 + UNiDAYS',cadence:'Monthly',state:'none'}
@@ -368,6 +426,7 @@ var THEMES=[
 {n:'03',key:'acq',title:'Acquisition',
  q:'Did the visit produce something? What "something" means differs by offering — an approved account, a verified student, an inquiry — so this theme keeps four separate funnels and compares them only on rate. The hub funnel deliberately does not end at "approved": an approved account that never orders is a support cost.',
  ships:'The hub-home sign-up CTA (not yet built) · the multi-step registration flow · the Studio inquiry form · the School Safety "Connect with an Expert" form · the UNiDAYS verification handoff',
+ dims:'<em>Device</em> · offering · B2B segment · funnel step · verification path (D&amp;B / whitelist / manual) · routing state',
  metrics:[
   /* ---- adoption ---- */
   {id:'AC-01',name:'Sign-up CTA exposure rate',def:'Share of hub sessions that see a sign-up call to action. Currently zero — the hub home has no CTA at all.',props:['hub'],type:'adoption',baseline:'0%',target:'Baseline first',source:'GA4',cadence:'Weekly',state:'none'},
@@ -401,6 +460,7 @@ var THEMES=[
 {n:'04',key:'react',title:'Reactivation',
  q:'Does the offering earn a second visit? Once a customer has a punchout portal their shopping need is met elsewhere and the Hub’s job changes — it becomes the account layer. Every hub metric here is unmeasurable today for one shared reason: logged-in accounts have no identity in analytics.',
  ships:'The Phase 2 logged-in account dashboard and its sections · expiring-contract notices · the portal change log · triggered reactivation email · EDU re-verification prompts',
+ dims:'<em>Device</em> · offering · B2B segment · account status (active / at-risk / dormant) · contract type · dashboard section',
  metrics:[
   /* ---- adoption ---- */
   {id:'RE-01',name:'Authenticated return rate',def:'Approved accounts with at least one hub session in 90 days. Adoption of the Hub as an account layer, and the metric the whole theme depends on.',props:['hub'],type:'adoption',baseline:'None',target:'Baseline first',source:'GA4 (user_id)',cadence:'Monthly',state:'none'},
@@ -431,6 +491,64 @@ var THEMES=[
  ]}
 ];
 
+
+/* Can this metric be split by device, and how?
+   split = the source carries device natively · join = needs a session join we do not have · na = not a device-scoped metric */
+function deviceMode(src){
+  if(/Search Console|GA4|CrUX|ESP|UNiDAYS/.test(src)) return 'split';
+  if(/Warehouse|Finance|CRM|Portal|Order|Search logs/.test(src)) return 'join';
+  return 'na';
+}
+/* Illustrative device baselines, only for metrics that are actually Live today. */
+var DEVICE_BASE={
+  'AW-01':['316,000','170,000'],
+  'AW-02':['4.1%','2.6%'],
+  'AW-03':['12,960','4,420'],
+  'AW-04':['38%','29%'],
+  'AW-05':['12.4','16.1'],
+  'AW-06':['71,000','23,000'],
+  'UX-19':['82% pass','61% pass']
+};
+function baselineCell(m){
+  var mode=deviceMode(m.source);
+  if(mode==='na') return '<div class="m-nodev">Not device-scoped</div>';
+  var v=DEVICE_BASE[m.id];
+  var d=v?v[0]:m.baseline, mo=v?v[1]:m.baseline;
+  var cls=v?'':' class="tbd"';
+  var join=(mode==='join')?'<div class="m-join">needs session join</div>':'';
+  return '<div class="m-dev">'
+    +'<div class="r-desktop"><span>Desktop</span><b'+cls+'>'+(mode==='join'?'—':d)+'</b></div>'
+    +'<div class="r-mobile"><span>Mobile</span><b'+cls+'>'+(mode==='join'?'—':mo)+'</b></div>'
+    +'</div>'+join;
+}
+
+
+var PRESET_LABEL={'7':'last 7 days','30':'last 30 days','90':'last 90 days','365':'last 12 months'};
+var CADENCE_MIN={'Weekly':7,'Monthly':30,'Quarterly':90,'Per campaign':30};
+var MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function parseDay(v){ if(!v) return null; var a=v.split('-'); return new Date(+a[0],+a[1]-1,+a[2]); }
+/* Days in the selected window — a preset, or the custom from/to span. */
+function rangeDays(){
+  if(filters.range!=='custom') return Number(filters.range);
+  var f=parseDay(filters.from), t=parseDay(filters.to);
+  if(!f||!t) return 0;
+  var d=Math.round((t-f)/86400000)+1;
+  return d>0?d:0;
+}
+function fmtDay(d){ return d.getDate()+' '+MONTHS[d.getMonth()]+' '+d.getFullYear(); }
+function windowLabel(){
+  if(filters.range!=='custom') return PRESET_LABEL[filters.range];
+  var f=parseDay(filters.from), t=parseDay(filters.to);
+  if(!f||!t||rangeDays()<1) return 'an invalid custom range';
+  return fmtDay(f)+' – '+fmtDay(t)+' ('+rangeDays()+' days)';
+}
+function reportsIn(cadence,days){ return days >= (CADENCE_MIN[cadence]||30); }
+function scaleVal(v,days){
+  if(v===null||v===undefined) return '—';
+  if(!days) return '—';
+  return Math.round(v*(days/90)).toLocaleString('en-US');
+}
+
 var TYPE_LABEL={adoption:'Adoption',impact:'Impact'};
 var STATE_LABEL={live:'Live',partial:'Partial',none:'Not instr.',na:'N/A'};
 var STATE_CLASS={live:'p-live',partial:'p-partial',none:'p-none',na:'p-na'};
@@ -456,11 +574,11 @@ document.getElementById('sections').innerHTML=THEMES.map(function(t){
     var props=m.props.map(function(p){
       return '<span class="prop '+OWNERS[p].cls+'" title="'+OWNERS[p].label+' · '+OWNERS[p].owner+'">'+OWNERS[p].abbr+'</span>';
     }).join('');
-    rows+='<tr class="mrow" data-own="'+m.props.join(' ')+'" data-type="'+m.type+'" data-state="'+m.state+'">'
+    rows+='<tr class="mrow" data-own="'+m.props.join(' ')+'" data-type="'+m.type+'" data-state="'+m.state+'" data-dev="'+deviceMode(m.source)+'" data-cad="'+m.cadence+'">'
       +'<td><div class="m-id">'+m.id+'</div><div class="m-name">'+m.name+'</div><div class="m-def">'+m.def+'</div></td>'
       +'<td>'+props+'</td>'
       +'<td><span class="pill p-'+m.type+'">'+TYPE_LABEL[m.type]+'</span></td>'
-      +'<td class="m-val'+(m.baseline==='TBD'?' m-tbd':'')+'">'+m.baseline+'</td>'
+      +'<td>'+baselineCell(m)+'</td>'
       +'<td class="m-val'+(m.target==='TBD'?' m-tbd':'')+'">'+m.target+'</td>'
       +'<td class="m-source">'+m.source+'</td>'
       +'<td class="m-cadence">'+m.cadence+'</td>'
@@ -471,9 +589,9 @@ document.getElementById('sections').innerHTML=THEMES.map(function(t){
   var ni=t.metrics.length-na;
   return '<div class="section" data-theme="'+t.key+'"><div class="sec-head"><div class="sec-icon">'+t.n+'</div>'
     +'<div class="sec-title-wrap"><div class="sec-title">'+t.title+'</div><div class="sec-q">'+t.q+'</div>'
-    +'<div class="sec-ships"><b>What we ship here</b> · '+t.ships+'</div></div>'
+    +'<div class="sec-ships"><b>What we ship here</b> · '+t.ships+'</div>'+'<div class="sec-dims"><b>Report every metric by</b> · '+t.dims+'</div></div>'
     +'<span class="sec-count" data-count data-na="'+na+'" data-ni="'+ni+'">'+na+' adoption · '+ni+' impact</span></div>'
-    +'<div class="tbl-wrap"><table class="sc"><thead><tr><th>Metric</th><th>Property</th><th>Type</th><th>Baseline</th><th>Target</th><th>Data source</th><th>Cadence</th><th>Instrumentation</th></tr></thead>'
+    +'<div class="tbl-wrap"><table class="sc"><thead><tr><th>Metric</th><th>Property</th><th>Type</th><th>Baseline — by device</th><th>Target</th><th>Data source</th><th>Cadence</th><th>Instrumentation</th></tr></thead>'
     +'<tbody>'+rows+'</tbody></table><div class="sec-empty" hidden>No metrics match the current filter.</div></div></div>';
 }).join('');
 
@@ -485,14 +603,15 @@ function renderFunnel(){
       var cells=FUNNELS[p].stages.map(function(st){
         return '<div class="fun-cell b-'+st.s+'" title="'+st.n+' · '+st.m+' · '+STATE_LABEL[st.s]+'">'+st.n+'</div>';
       }).join('');
-      return '<div class="fun-row"><div class="fun-rlabel">'+o.label+'<span>'+o.owner+'</span></div>'
+      return '<div class="fun-row"><div class="fun-rlabel">'+o.label+'<span>'+o.owner+'</span>'
+        +'<span>'+FUNNELS[p].split+'</span></div>'
         +'<div class="fun-mini">'+cells+'</div></div>';
     }).join('');
     el.innerHTML='<div class="fun-head"><span class="fun-title">Funnel by offering</span>'
       +'<span class="fun-who">All four · Manny Steigman</span></div>'
-      +'<div class="fun-note"><b>Four offerings, four different funnel shapes.</b> Each row is that offering’s own path to its own conversion object, coloured by whether the stage can be measured today. Pick an owner above to open their funnel in full. Green ends with red middles are instrumentation problems; rows that are red from the second cell onward are product problems.</div>'
+      +'<div class="fun-note"><b>Four offerings, four different funnel shapes.</b> Each row is that offering’s own path to its own conversion object, coloured by whether the stage can be measured today. Pick an owner above to open their funnel split by desktop and mobile. Green ends with red middles are instrumentation problems; rows that are red from the second cell onward are product problems.</div>'
       +'<div class="fun-rows">'+rows+'</div>'
-      +'<div class="fun-legend">Hover any cell for its stage and metric ID.</div>';
+      +'<div class="fun-legend">Hover any cell for its stage and metric ID. Device split is sessions, where we can measure them at all.</div>';
     return;
   }
   var o=OWNERS[filters.own], f=FUNNELS[filters.own];
@@ -500,7 +619,10 @@ function renderFunnel(){
     return '<div class="fun-stage">'
       +'<div class="fun-mid">'+st.m+'</div>'
       +'<div class="fun-name">'+st.n+'</div>'
-      +'<div class="fun-val'+(st.v==='—'?' na':'')+'">'+st.v+'</div>'
+      +'<div class="fun-devs">'
+        +'<div class="fun-dev r-desktop'+(st.d==='—'?' na':'')+'"><span>Desktop</span><b>'+scaleVal(st.d,rangeDays())+'</b></div>'
+        +'<div class="fun-dev mob r-mobile'+(st.mo==='—'?' na':'')+'"><span>Mobile</span><b>'+scaleVal(st.mo,rangeDays())+'</b></div>'
+      +'</div>'
       +'<div class="fun-st t-'+st.s+'">'+STATE_LABEL[st.s]+'</div>'
       +'<div class="fun-bar b-'+st.s+'"></div>'
     +'</div>';
@@ -509,19 +631,23 @@ function renderFunnel(){
     +'<span class="fun-who">'+o.owner+' · '+o.phase+'</span></div>'
     +'<div class="fun-note">'+f.note+'</div>'
     +'<div class="fun-strip">'+stages+'</div>'
-    +'<div class="fun-legend">Values are illustrative placeholders. The colour bar under each stage is not — it is whether that stage can be measured today.</div>';
+    +'<div class="fun-legend">Window: '+windowLabel()+'. Desktop and mobile values are illustrative placeholders. The colour bar under each stage is not — it is whether that stage can be measured today, on either device.</div>';
 }
 
-var filters={own:'all',type:'all',state:'all'};
+var filters={own:'all',type:'all',state:'all',dev:'all',range:'90',from:null,to:null};
 
 function rowVisible(r){
   if(filters.own!=='all' && r.getAttribute('data-own').split(' ').indexOf(filters.own)<0) return false;
   if(filters.type!=='all' && r.getAttribute('data-type')!==filters.type) return false;
   if(filters.state!=='all' && r.getAttribute('data-state')!==filters.state) return false;
+  if(filters.dev!=='all' && r.getAttribute('data-dev')==='na') return false;
+  if(!reportsIn(r.getAttribute('data-cad'),rangeDays())) return false;
   return true;
 }
 
 function applyFilter(){
+  document.body.classList.toggle('only-desktop',filters.dev==='desktop');
+  document.body.classList.toggle('only-mobile',filters.dev==='mobile');
   document.querySelectorAll('.section[data-theme]').forEach(function(sec){
     var shownA=0,shownI=0;
     sec.querySelectorAll('.mrow').forEach(function(r){
@@ -544,6 +670,30 @@ function applyFilter(){
     return a+['aw','ux','ac','re'].filter(function(k){return r[k]==='live';}).length;
   },0);
   document.getElementById('cov-count').textContent=covDone+' of '+covCells+' complete';
+  var rt=document.getElementById('retain'), wd=rangeDays();
+  var cr=document.getElementById('custom-row'), sp=document.getElementById('d-span');
+  cr.classList.toggle('on',filters.range==='custom');
+  if(filters.range==='custom'){
+    var okRange=wd>0;
+    sp.className='span'+(okRange?'':' err');
+    sp.textContent=okRange?(wd+' day'+(wd===1?'':'s')):'End date must fall on or after the start date';
+  }
+  if(wd<1){
+    rt.hidden=false;
+    rt.innerHTML='<b>No window selected.</b> Set an end date on or after the start date — until then nothing can report.';
+  } else if(wd>486){
+    rt.hidden=false;
+    rt.innerHTML='<b>This window runs past Search Console&rsquo;s 16-month retention.</b> Anything before roughly '+wd+' days ago cannot be recovered from Search Console at all, and GA4&rsquo;s default 14-month retention cuts in earlier still. A window this long can only be answered from the warehouse — which is exactly the half of the register that cannot be split by device.';
+  } else if(wd>=330){
+    rt.hidden=false;
+    rt.innerHTML='<b>A lookback of this length is close to two ceilings.</b> Search Console retains 16 months and GA4 data retention defaults to 14, so the pre-CMS baseline is perishable — capture it now rather than reconstructing it later. Two offerings cannot answer this window at all: The Studio has no history because it has never been tagged, and School Safety has none before launch.';
+  } else if(wd<7){
+    rt.hidden=false;
+    rt.innerHTML='<b>Shorter than any metric&rsquo;s cadence.</b> The fastest thing in this register reports weekly, so a window under seven days returns nothing. Widen it to at least a week.';
+  } else if(wd<30){
+    rt.hidden=false;
+    rt.innerHTML='<b>A window this short only reports weekly metrics.</b> Everything on a monthly or quarterly cadence is out of scope &mdash; useful for watching a fix land, but not a window to judge a B2B funnel on, where procurement cycles run in months.';
+  } else { rt.hidden=true; }
   renderFunnel();
   computeSummary();
 }
@@ -555,6 +705,8 @@ function computeSummary(){
     if(filters.own!=='all' && m.props.indexOf(filters.own)<0) return false;
     if(filters.type!=='all' && m.type!==filters.type) return false;
     if(filters.state!=='all' && m.state!==filters.state) return false;
+    if(filters.dev!=='all' && deviceMode(m.source)==='na') return false;
+    if(!reportsIn(m.cadence,rangeDays())) return false;
     return true;
   });
   function cntState(k){return vis.filter(function(m){return m.state===k;}).length;}
@@ -568,6 +720,26 @@ function computeSummary(){
     {n:cntState('none'),l:'Not instrumented',c:'r'}
   ].map(function(s){return '<div class="sum-cell"><div class="sum-num '+s.c+'">'+s.n+'</div><div class="sum-lbl">'+s.l+'</div></div>';}).join('');
 }
+
+(function initCustom(){
+  var to=new Date(), from=new Date(to.getTime()-89*86400000);
+  function iso(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  var fi=document.getElementById('d-from'), ti=document.getElementById('d-to');
+  fi.value=iso(from); ti.value=iso(to); fi.max=iso(to); ti.max=iso(to);
+  filters.from=fi.value; filters.to=ti.value;
+  [fi,ti].forEach(function(el){
+    el.addEventListener('change',function(){
+      filters.from=fi.value; filters.to=ti.value;
+      if(filters.range!=='custom'){
+        filters.range='custom';
+        document.querySelectorAll('.chip[data-dim="range"]').forEach(function(b){
+          b.classList.toggle('active',b.getAttribute('data-val')==='custom');
+        });
+      }
+      applyFilter();
+    });
+  });
+})();
 
 document.querySelectorAll('.chip[data-dim]').forEach(function(btn){
   btn.addEventListener('click',function(){

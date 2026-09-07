@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Four-pillar measurement framework and dashboard for the B&amp;H B2B Hub, EDU Advantage and School Safety hub: awareness, user experience, acquisition and reactivation, with the instrumentation gaps blocking each metric.">
+<meta name="description" content="Four-pillar measurement framework for the B&amp;H B2B Hub, EDU Advantage, The Studio and School Safety hub: awareness, user experience, acquisition and reactivation, scoped by owner.">
 <meta name="robots" content="noindex, nofollow">
 <title>B2B Measurement Stack</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,103 +13,75 @@
 <style>
 :root{
   color-scheme: light;
-  --paper:#f7f6f2;
-  --surface:#ffffff;
-  --surface-2:#efece4;
-  --ink:#15140f;
-  --ink-2:#56534a;
-  --ink-3:#8a867a;
-  --rule:#e0dccf;
-  --rule-2:#c8c3b2;
-  --accent:#1d4e89;
-  --accent-2:#e9eff7;
-  --flag:#a24e0c;
-  --flag-2:#f9ece0;
-  --good:#0ca30c;
-  --warning:#fab219;
-  --serious:#ec835a;
-  --critical:#d03b3b;
+  --paper:#f7f6f2; --surface:#ffffff; --surface-2:#efece4;
+  --ink:#15140f; --ink-2:#56534a; --ink-3:#8a867a;
+  --rule:#e0dccf; --rule-2:#c8c3b2;
+  --accent:#1d4e89; --accent-2:#e9eff7;
+  --flag:#a24e0c; --flag-2:#f9ece0;
+  --good:#0ca30c; --warning:#fab219; --serious:#ec835a; --critical:#d03b3b;
   --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a;
   --o1:#86b6ef; --o2:#5598e7; --o3:#3987e5; --o4:#2a78d6; --o5:#256abf; --o6:#184f95;
   --grid:#e1e0d9; --axis:#c3c2b7;
-  --shadow: 0 1px 2px rgba(21,20,15,.05);
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     color-scheme: dark;
-    --paper:#100f0e;
-    --surface:#1a1a19;
-    --surface-2:#232321;
-    --ink:#f6f4ef;
-    --ink-2:#b8b4a8;
-    --ink-3:#8a867a;
-    --rule:#2e2d2a;
-    --rule-2:#454340;
-    --accent:#7fa8e2;
-    --accent-2:#1b2739;
-    --flag:#dc9257;
-    --flag-2:#2e2118;
+    --paper:#100f0e; --surface:#1a1a19; --surface-2:#232321;
+    --ink:#f6f4ef; --ink-2:#b8b4a8; --ink-3:#8a867a;
+    --rule:#2e2d2a; --rule-2:#454340;
+    --accent:#7fa8e2; --accent-2:#1b2739;
+    --flag:#dc9257; --flag-2:#2e2118;
     --s1:#3987e5; --s2:#d95926; --s3:#199e70;
-    --o1:#86b6ef; --o2:#5598e7; --o3:#3987e5; --o4:#2a78d6; --o5:#256abf; --o6:#184f95;
     --grid:#2c2c2a; --axis:#383835;
-    --shadow: none;
   }
 }
 :root[data-theme="dark"]{
   color-scheme: dark;
-  --paper:#100f0e;
-  --surface:#1a1a19;
-  --surface-2:#232321;
-  --ink:#f6f4ef;
-  --ink-2:#b8b4a8;
-  --ink-3:#8a867a;
-  --rule:#2e2d2a;
-  --rule-2:#454340;
-  --accent:#7fa8e2;
-  --accent-2:#1b2739;
-  --flag:#dc9257;
-  --flag-2:#2e2118;
+  --paper:#100f0e; --surface:#1a1a19; --surface-2:#232321;
+  --ink:#f6f4ef; --ink-2:#b8b4a8; --ink-3:#8a867a;
+  --rule:#2e2d2a; --rule-2:#454340;
+  --accent:#7fa8e2; --accent-2:#1b2739;
+  --flag:#dc9257; --flag-2:#2e2118;
   --s1:#3987e5; --s2:#d95926; --s3:#199e70;
-  --o1:#86b6ef; --o2:#5598e7; --o3:#3987e5; --o4:#2a78d6; --o5:#256abf; --o6:#184f95;
   --grid:#2c2c2a; --axis:#383835;
-  --shadow: none;
 }
 
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 img{max-width:100%}
-body{
-  margin:0; background:var(--paper); color:var(--ink);
-  font-family:"IBM Plex Sans", system-ui, -apple-system, sans-serif;
-  font-size:14px; line-height:1.5;
-  -webkit-font-smoothing:antialiased;
-}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1200px;margin:0 auto;padding:0 28px}
-h1,h2,h3,h4{font-family:"Archivo", system-ui, sans-serif;margin:0;text-wrap:balance;letter-spacing:-.012em}
+h1,h2,h3,h4{font-family:"Archivo",system-ui,sans-serif;margin:0;text-wrap:balance;letter-spacing:-.012em}
 a{color:var(--accent)}
-code,.mono{font-family:"IBM Plex Mono", ui-monospace, monospace}
+code,.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
 
-/* ---------- masthead ---------- */
 .mast{border-bottom:1px solid var(--rule);background:var(--surface)}
-.mast-in{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between;padding:26px 0 20px}
+.mast-in{padding:26px 0 20px}
 .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
 .mast h1{font-size:27px;font-weight:700;margin-top:5px}
-.mast .sub{color:var(--ink-2);margin-top:6px;max-width:60ch}
-.props{display:flex;gap:0;border:1px solid var(--rule);border-radius:3px;overflow:hidden;flex-shrink:0}
-.prop{padding:9px 14px;border-right:1px solid var(--rule);min-width:112px}
-.prop:last-child{border-right:0}
-.prop .n{font-size:11.5px;font-weight:600;line-height:1.3}
-.prop .s{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;margin-top:4px;display:flex;align-items:center;gap:5px;color:var(--ink-3)}
-.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.mast .sub{color:var(--ink-2);margin-top:6px;max-width:66ch}
 
-/* ---------- notice ---------- */
 .notice{background:var(--flag-2);border-bottom:1px solid var(--rule);color:var(--ink-2)}
-.notice-in{padding:9px 0;font-size:12.5px;display:flex;gap:9px;align-items:baseline}
+.notice-in{padding:9px 0;font-size:12.5px}
 .notice b{color:var(--flag);font-weight:600}
 
-/* ---------- tabs ---------- */
+/* owner lens */
+.lens{background:var(--surface);border-bottom:1px solid var(--rule)}
+.lens-in{display:flex;align-items:center;gap:12px;padding:11px 0;flex-wrap:wrap}
+.lens .lab{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);flex-shrink:0}
+.owners{display:flex;gap:6px;flex-wrap:wrap}
+.owner{appearance:none;background:var(--surface);border:1px solid var(--rule-2);border-radius:2px;cursor:pointer;
+  padding:6px 11px;text-align:left;font-family:"IBM Plex Sans",sans-serif;color:var(--ink-2);line-height:1.25}
+.owner .who{display:block;font-size:12px;font-weight:600;color:var(--ink)}
+.owner .what{display:block;font-size:10px;color:var(--ink-3);margin-top:1px}
+.owner:hover{border-color:var(--ink-3)}
+.owner[aria-pressed="true"]{background:var(--accent-2);border-color:var(--accent)}
+.owner[aria-pressed="true"] .who{color:var(--accent)}
+.owner:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+
 .nav{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--rule)}
-.nav-in{display:flex;gap:2px;overflow-x:auto;scrollbar-width:thin}
+.nav-in{display:flex;gap:2px;overflow-x:auto}
 .tab{appearance:none;background:none;border:0;border-bottom:2px solid transparent;color:var(--ink-2);
   font-family:"IBM Plex Sans",sans-serif;font-size:12.5px;font-weight:500;padding:12px 13px;cursor:pointer;white-space:nowrap;margin-bottom:-1px}
 .tab .idx{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--ink-3);margin-right:6px}
@@ -120,17 +92,16 @@ code,.mono{font-family:"IBM Plex Mono", ui-monospace, monospace}
 
 main{padding:30px 0 70px}
 .panel{display:flex;flex-direction:column;gap:26px}
-.lede{max-width:70ch}
+.lede{max-width:72ch}
 .lede h2{font-size:20px;font-weight:600}
 .lede .q{color:var(--ink-2);margin-top:7px;font-size:14.5px}
 
-/* ---------- tiles ---------- */
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(212px,1fr));gap:0;border:1px solid var(--rule);border-radius:3px;background:var(--surface);overflow:hidden}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(212px,1fr));border:1px solid var(--rule);border-radius:3px;background:var(--surface);overflow:hidden}
 .tile{padding:15px 17px 16px;border-right:1px solid var(--rule);display:flex;flex-direction:column;gap:7px}
 .tile:last-child{border-right:0}
 .tile .id{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.07em;color:var(--ink-3)}
 .tile .lbl{font-size:12.5px;font-weight:600;line-height:1.35}
-.tile .val{font-family:"Archivo",sans-serif;font-size:29px;font-weight:600;line-height:1;letter-spacing:-.02em;margin-top:2px}
+.tile .val{font-family:"Archivo",sans-serif;font-size:29px;font-weight:600;line-height:1;letter-spacing:-.02em;margin-top:2px;font-variant-numeric:tabular-nums}
 .tile .val.na{color:var(--ink-3);font-weight:500}
 .tile .meta{font-size:11.5px;color:var(--ink-2);margin-top:-2px}
 .tile .meta .up{color:var(--good);font-weight:600}
@@ -143,7 +114,6 @@ main{padding:30px 0 70px}
 .chip.none{border-color:var(--critical);color:var(--critical)}
 .chip.pre{border-color:var(--rule-2);color:var(--ink-3)}
 
-/* ---------- figure ---------- */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 @media (max-width:900px){.grid2{grid-template-columns:1fr}}
 figure{margin:0;background:var(--surface);border:1px solid var(--rule);border-radius:3px;padding:17px 18px 14px;position:relative}
@@ -158,23 +128,24 @@ svg{display:block;width:100%;height:auto;overflow:visible}
   padding:6px 9px;border-radius:3px;transform:translate(-50%,-135%);white-space:nowrap;z-index:5;line-height:1.45;box-shadow:0 2px 8px rgba(0,0,0,.18)}
 .tip b{font-family:"IBM Plex Mono",monospace;font-weight:500}
 
-/* ---------- tables ---------- */
 .tblwrap{overflow-x:auto;border:1px solid var(--rule);border-radius:3px;background:var(--surface)}
-table{border-collapse:collapse;width:100%;font-size:12.5px;min-width:760px}
+table{border-collapse:collapse;width:100%;font-size:12.5px;min-width:740px}
 th{text-align:left;font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
   color:var(--ink-3);font-weight:400;padding:10px 13px;border-bottom:1px solid var(--rule-2);background:var(--surface-2);white-space:nowrap}
 td{padding:11px 13px;border-bottom:1px solid var(--rule);vertical-align:top}
 tr:last-child td{border-bottom:0}
 td.mid{white-space:nowrap}
-.mid-num{font-variant-numeric:tabular-nums}
-td .mid-id{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);white-space:nowrap}
+td .mid-id,.mid-id{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);white-space:nowrap}
 td strong{font-weight:600}
 td .f{display:block;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-2);margin-top:4px;line-height:1.5}
 tbody tr:hover{background:var(--surface-2)}
+table.matrix{min-width:640px}
+table.matrix td{text-align:center}
+table.matrix td:first-child{text-align:left;white-space:nowrap}
+table.matrix td .own{display:block;font-size:10.5px;color:var(--ink-3);margin-top:2px;font-weight:400}
 
-/* ---------- gap cards ---------- */
-.gaps{display:flex;flex-direction:column;gap:0;border:1px solid var(--rule);border-radius:3px;background:var(--surface);overflow:hidden}
-.gap{display:grid;grid-template-columns:44px 1fr 200px;gap:0;border-bottom:1px solid var(--rule)}
+.gaps{display:flex;flex-direction:column;border:1px solid var(--rule);border-radius:3px;background:var(--surface);overflow:hidden}
+.gap{display:grid;grid-template-columns:44px 1fr 210px;border-bottom:1px solid var(--rule)}
 .gap:last-child{border-bottom:0}
 .gap .rank{padding:16px 0 16px 16px;font-family:"Archivo",sans-serif;font-size:15px;font-weight:600;color:var(--ink-3);font-variant-numeric:tabular-nums}
 .gap .body{padding:16px 18px 16px 4px}
@@ -184,101 +155,117 @@ tbody tr:hover{background:var(--surface-2)}
 .gap .fix{padding:16px 18px;border-left:1px solid var(--rule);background:var(--surface-2);font-size:11.5px;color:var(--ink-2)}
 .gap .fix .h{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:5px}
 .gap .fix code{color:var(--ink);font-size:11px}
-.sev{width:3px;height:100%}
 @media (max-width:820px){.gap{grid-template-columns:36px 1fr}.gap .fix{grid-column:1/-1;border-left:0;border-top:1px solid var(--rule)}}
 
-.note{border-left:2px solid var(--accent);padding:2px 0 2px 15px;color:var(--ink-2);font-size:13px;max-width:76ch}
+.note{border-left:2px solid var(--accent);padding:2px 0 2px 15px;color:var(--ink-2);font-size:13px;max-width:78ch}
 .note b{color:var(--ink)}
+.empty{border:1px dashed var(--rule-2);border-radius:3px;padding:22px 20px;background:var(--surface);color:var(--ink-2);font-size:13px;max-width:none}
+.empty h4{font-size:14px;font-weight:600;margin-bottom:6px;display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.empty p{margin:0;max-width:76ch}
 .sechead{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);
   padding-bottom:9px;border-bottom:1px solid var(--rule-2);margin-bottom:-8px}
+
+.score{display:flex;gap:0;border:1px solid var(--rule);border-radius:3px;background:var(--surface);overflow:hidden;flex-wrap:wrap}
+.score div{padding:16px 20px;border-right:1px solid var(--rule);flex:1 1 150px}
+.score div:last-child{border-right:0}
+.score .n{font-family:"Archivo",sans-serif;font-size:32px;font-weight:600;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.score .k{font-size:12px;color:var(--ink-2);margin-top:6px}
 
 footer{border-top:1px solid var(--rule);padding:22px 0 40px;color:var(--ink-3);font-size:11.5px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<header class="mast">
-  <div class="wrap mast-in">
-    <div>
-      <div class="eyebrow">B&amp;H Photo Video · B2B Product · Measurement Spec v0.1</div>
-      <h1>The B2B Measurement Stack</h1>
-      <p class="sub">One metric tree across three properties, ordered by the lifecycle it describes: get found, get understood, get an account, get them back.</p>
-    </div>
-    <div class="props" aria-label="Properties covered">
-      <div class="prop"><div class="n">B2B Hub</div><div class="s"><span class="dot" style="background:var(--warning)"></span>Live · partial</div></div>
-      <div class="prop"><div class="n">EDU Advantage</div><div class="s"><span class="dot" style="background:var(--warning)"></span>Live · partial</div></div>
-      <div class="prop"><div class="n">School Safety</div><div class="s"><span class="dot" style="background:var(--ink-3)"></span>Pre-launch</div></div>
-    </div>
-  </div>
-</header>
+<header class="mast"><div class="wrap mast-in">
+  <div class="eyebrow">B&amp;H Photo Video · B2B Product · Measurement Spec v0.3</div>
+  <h1>The B2B Measurement Stack</h1>
+  <p class="sub">Four offerings, four owners, one metric tree — ordered by the lifecycle it describes: get found, get understood, get an account, get them back.</p>
+</div></header>
 
 <div class="notice"><div class="wrap notice-in">
-  <span><b>Illustrative figures.</b> No data source is connected. Every number below is a plausible placeholder showing the shape of the metric — never a B&amp;H reading. Metrics marked <span class="chip none">not instrumented</span> show an em dash because they cannot be measured at any value today.</span>
+  <b>Illustrative figures.</b> No data source is connected. Every number is a plausible placeholder showing the shape of a metric, never a B&amp;H reading. Anything marked <span class="chip none">not instrumented</span> shows an em dash because it cannot be measured at any value today.
+</div></div>
+
+<div class="lens"><div class="wrap lens-in">
+  <span class="lab">Viewing as</span>
+  <div class="owners" role="group" aria-label="Scope by owner">
+    <button class="owner" aria-pressed="true" data-own="all"><span class="who">Manny Steigman</span><span class="what">All four offerings</span></button>
+    <button class="owner" aria-pressed="false" data-own="hub"><span class="who">Ariel Goldman</span><span class="what">B2B Hub</span></button>
+    <button class="owner" aria-pressed="false" data-own="edu"><span class="who">Kailee Richey</span><span class="what">EDU Advantage</span></button>
+    <button class="owner" aria-pressed="false" data-own="studio"><span class="who">Danielo Garcia</span><span class="what">The Studio</span></button>
+    <button class="owner" aria-pressed="false" data-own="safety"><span class="who">Rachel Nicastro</span><span class="what">School Safety</span></button>
+  </div>
 </div></div>
 
 <nav class="nav"><div class="wrap"><div class="nav-in" role="tablist">
-  <button class="tab" role="tab" aria-selected="true" data-p="overview">Overview</button>
-  <button class="tab" role="tab" aria-selected="false" data-p="aware"><span class="idx">01</span>Awareness</button>
-  <button class="tab" role="tab" aria-selected="false" data-p="ux"><span class="idx">02</span>Experience</button>
-  <button class="tab" role="tab" aria-selected="false" data-p="acq"><span class="idx">03</span>Acquisition</button>
-  <button class="tab" role="tab" aria-selected="false" data-p="react"><span class="idx">04</span>Reactivation</button>
-  <button class="tab" role="tab" aria-selected="false" data-p="gaps">Instrumentation gaps</button>
-  <button class="tab" role="tab" aria-selected="false" data-p="ss">School Safety launch</button>
+  <button class="tab" role="tab" aria-selected="true" data-p="cover" data-prop="all">Coverage</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="aware" data-prop="all"><span class="idx">01</span>Awareness</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="ux" data-prop="all"><span class="idx">02</span>Experience</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="acq" data-prop="all"><span class="idx">03</span>Acquisition</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="react" data-prop="all"><span class="idx">04</span>Reactivation</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="gaps" data-prop="all">Instrumentation gaps</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="ss" data-prop="safety">School Safety launch</button>
+  <button class="tab" role="tab" aria-selected="false" data-p="own" data-prop="all">Owners &amp; next actions</button>
 </div></div></nav>
 
 <main class="wrap">
 
-<!-- ══════════════ OVERVIEW ══════════════ -->
-<section class="panel" id="p-overview">
+<!-- ══════════ COVERAGE ══════════ -->
+<section class="panel" id="p-cover">
   <div class="lede">
-    <h2>North Star: Active B2B Accounts (trailing 12 months)</h2>
-    <p class="q">Approved B2B accounts with at least one order in the last 12 months. The four pillars are not four dashboards — they are the two halves of that number. Awareness → Experience → Acquisition grows the new half. Reactivation defends the half you already have, which is the half B&amp;H is currently losing quietly.</p>
+    <h2>How we're tracking across all four</h2>
+    <p class="q">We aren't — not yet, and not anywhere. Sixteen cells below: four offerings against four pillars. None of them is fully instrumented, five are partial, and ten produce no data at all. This is the honest baseline, and it's a better starting point than a dashboard that reports confident numbers off broken plumbing.</p>
   </div>
 
-  <div class="tiles">
-    <div class="tile">
-      <span class="id">NS-00</span>
-      <span class="lbl">Active B2B accounts <span class="chip partial">partial</span></span>
-      <span class="val mid-num">4,390</span>
-      <span class="meta"><span class="up">+4.5%</span> vs. prior quarter</span>
-    </div>
-    <div class="tile">
-      <span class="id">NS-01</span>
-      <span class="lbl">New approved accounts / mo <span class="chip partial">partial</span></span>
-      <span class="val mid-num">610</span>
-      <span class="meta">Verification pass rate 62%</span>
-    </div>
-    <div class="tile">
-      <span class="id">NS-02</span>
-      <span class="lbl">Dormant account base <span class="chip partial">partial</span></span>
-      <span class="val mid-num">3,640</span>
-      <span class="meta"><span class="dn">+17.4%</span> in 4 quarters</span>
-    </div>
-    <div class="tile">
-      <span class="id">NS-03</span>
-      <span class="lbl">Hub → account conversion <span class="chip none">not instrumented</span></span>
-      <span class="val na">—</span>
-      <span class="meta">PRD open question #6</span>
-    </div>
+  <div class="score">
+    <div><div class="n">0<span style="color:var(--ink-3);font-size:20px"> / 16</span></div><div class="k">Property × pillar cells fully instrumented</div></div>
+    <div><div class="n" style="color:var(--flag)">5</div><div class="k">Partial — data exists but can't be joined or trusted</div></div>
+    <div><div class="n" style="color:var(--critical)">10</div><div class="k">No data at all</div></div>
+    <div><div class="n">4</div><div class="k">Different conversion objects across four offerings</div></div>
   </div>
 
-  <div class="note"><b>Read the last two tiles together.</b> The dormant base is growing roughly four times faster than the active base, and the single conversion rate the PRD sets a <span class="mono">+15%</span> target against has no baseline because it isn't measured. Those are the two facts this dashboard exists to fix.</div>
+  <div class="sechead">Coverage matrix — what each owner can actually see today</div>
+  <div class="tblwrap"><table class="matrix">
+    <thead><tr><th>Offering</th><th>01 Awareness</th><th>02 Experience</th><th>03 Acquisition</th><th>04 Reactivation</th></tr></thead>
+    <tbody>
+      <tr data-prop="hub"><td><strong>B2B Hub</strong> <span class="own">Live · Ariel Goldman</span></td>
+        <td><span class="chip partial">partial</span></td><td><span class="chip partial">partial</span></td><td><span class="chip none">none</span></td><td><span class="chip none">none</span></td></tr>
+      <tr data-prop="edu"><td><strong>EDU Advantage</strong> <span class="own">Live · Kailee Richey</span></td>
+        <td><span class="chip partial">partial</span></td><td><span class="chip partial">partial</span></td><td><span class="chip partial">partial</span></td><td><span class="chip none">none</span></td></tr>
+      <tr data-prop="studio"><td><strong>The Studio</strong> <span class="own">Design · Danielo Garcia</span></td>
+        <td><span class="chip none">none</span></td><td><span class="chip none">none</span></td><td><span class="chip none">none</span></td><td><span class="chip none">none</span></td></tr>
+      <tr data-prop="safety"><td><strong>School Safety</strong> <span class="own">Development · Rachel Nicastro</span></td>
+        <td><span class="chip none">none</span></td><td><span class="chip none">none</span></td><td><span class="chip none">none</span></td><td><span class="chip pre">n/a</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note" data-prop="all"><b>The Studio row is the one to look at.</b> It is a live, indexed, revenue-generating page that has been running untagged — zero traffic or engagement data has ever existed for it. It is also the only offering currently in design, which makes it the one place we can define measurement before the build instead of retrofitting it afterwards.</div>
+
+  <div class="sechead">Why there is no single acquisition number</div>
+  <div class="tblwrap"><table>
+    <thead><tr><th>Offering</th><th>Conversion object</th><th>Mechanism</th><th>Lands in</th><th>Owner</th></tr></thead>
+    <tbody>
+      <tr data-prop="hub"><td><strong>B2B Hub</strong></td><td>Approved <em>organization</em> account</td><td>Multi-step SPA sign-up, then D&amp;B / whitelist / manual review</td><td>B2B account system</td><td>Ariel Goldman</td></tr>
+      <tr data-prop="edu"><td><strong>EDU Advantage</strong></td><td>Verified <em>individual</em> discount</td><td>UNiDAYS third-party redirect + B&amp;H account</td><td>Consumer account, discount flag</td><td>Kailee Richey</td></tr>
+      <tr data-prop="studio"><td><strong>The Studio</strong></td><td><strong>Inquiry lead</strong></td><td>Anchor form — Email, Name, Phone, Message<span class="f">#studioContactForm</span></td><td>Studio team inbox</td><td>Danielo Garcia</td></tr>
+      <tr data-prop="safety"><td><strong>School Safety</strong></td><td><strong>Routed sales lead</strong></td><td>"Connect with an Expert" form, routed by State</td><td>CRM queue</td><td>Rachel Nicastro</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note" data-prop="all"><b>Four offerings, four different conversion objects.</b> An approved org account, a verified student, and two lead forms are not the same event and should not be added together. What <em>does</em> roll up is the rate: <strong>Qualified Action Rate</strong> — the property's own conversion divided by its qualified sessions. Different numerators, comparable denominators, one number Manny can read across all four without anyone having to pretend a Studio inquiry equals a signed B2B account.</div>
+
+  <div class="note" data-prop="all"><b>And two of the four are the same shape.</b> The Studio and School Safety both convert on a lead form. They should share one event schema and one lead-to-account bridge rather than inventing two — which is worth settling now, while School Safety is still in development and The Studio is still in design.</div>
 
   <div class="grid2">
-    <figure id="fig-funnel">
-      <figcaption>
-        <div class="t">Acquisition funnel, hub landing → first order</div>
-        <div class="d">Six stages. Three of the five transitions cannot be observed today — those bars are the shape the funnel would take, not a reading.</div>
-      </figcaption>
+    <figure id="fig-funnel" data-prop="hub">
+      <figcaption><div class="t">B2B Hub — acquisition funnel</div>
+      <div class="d">Six stages. Three of the five transitions can't be observed today; those bars are the shape the funnel would take, not a reading.</div></figcaption>
       <svg id="svg-funnel" viewBox="0 0 620 268" role="img" aria-label="Funnel from 42,000 hub sessions to 275 first orders"></svg>
     </figure>
-
-    <figure id="fig-base">
-      <figcaption>
-        <div class="t">Approved account base by engagement state</div>
-        <div class="d">Active = ordered in 180 days. At risk = 180–365 days. Dormant = no order in 365 days.</div>
-      </figcaption>
-      <svg id="svg-base" viewBox="0 0 620 268" role="img" aria-label="Stacked bars of account base by quarter, showing dormant growing fastest"></svg>
+    <figure id="fig-base" data-prop="hub">
+      <figcaption><div class="t">B2B Hub — account base by engagement state</div>
+      <div class="d">Active = ordered within 180 days. At risk = 180–365. Dormant = no order in 365 days.</div></figcaption>
+      <svg id="svg-base" viewBox="0 0 620 268" role="img" aria-label="Stacked bars of account base by quarter"></svg>
       <div class="legend">
         <span><i class="swatch" style="background:var(--o6)"></i>Active</span>
         <span><i class="swatch" style="background:var(--o4)"></i>At risk</span>
@@ -287,334 +274,332 @@ footer{border-top:1px solid var(--rule);padding:22px 0 40px;color:var(--ink-3);f
     </figure>
   </div>
 
-  <div class="sechead">Property matrix — the three properties do not share a conversion object</div>
-  <div class="tblwrap"><table>
-    <thead><tr><th>&nbsp;</th><th>B2B Hub</th><th>EDU Advantage</th><th>School Safety Hub</th></tr></thead>
-    <tbody>
-      <tr><td><strong>Status</strong></td><td>Live</td><td>Live</td><td>Pre-launch · target Oct 5</td></tr>
-      <tr><td><strong>Audience</strong></td><td>12 procurement segments; buyers arrive with a contract in mind</td><td>Students &amp; faculty; individual buyers</td><td>K-12 admins, safety directors, district IT</td></tr>
-      <tr><td><strong>Conversion object</strong></td><td>Approved <em>organization</em> account</td><td>Verified <em>individual</em> discount</td><td><strong>Routed sales lead</strong> — not an account</td></tr>
-      <tr><td><strong>Verification gate</strong></td><td>D&amp;B match, email whitelist, or manual review</td><td>UNiDAYS third-party redirect</td><td>None — free-text form</td></tr>
-      <tr><td><strong>Lands in</strong></td><td>B2B account system</td><td>Consumer account + discount flag</td><td>CRM queue, routed by <span class="mono">State</span></td></tr>
-      <tr><td><strong>Analytics today</strong></td><td><span class="chip partial">partial</span> Studio untagged, funnel invisible</td><td><span class="chip partial">partial</span> cross-domain break</td><td><span class="chip none">none</span> must ship at launch</td></tr>
-    </tbody>
-  </table></div>
-
-  <div class="note"><b>The row that changes the plan is "conversion object."</b> School Safety's only conversion moment is a <span class="mono">Connect with an Expert</span> form that produces a CRM lead, not a B2B account. If you measure it on the hub's funnel it will look like it converts at zero. It needs its own funnel plus a lead-to-account bridge — see the launch tab.</div>
+  <div class="empty" data-prop="edu"><h4>EDU Advantage <span class="chip partial">partial</span></h4>
+    <p>Search visibility and on-page behaviour are readable. The verification funnel is not: students leave for UNiDAYS and come back counted as new referral traffic, so the middle of the funnel is missing. There is also no account layer to reactivate — students re-verify annually rather than returning to a portal.</p></div>
+  <div class="empty" data-prop="studio"><h4>The Studio <span class="chip none">no data</span></h4>
+    <p>Nothing to chart. The page carries no GA4 tag, so no traffic, engagement or inquiry data has ever been collected. Tagging it is a standalone task with no dependency on the CMS build or the redesign — see gap 03.</p></div>
+  <div class="empty" data-prop="safety"><h4>School Safety <span class="chip pre">pre-launch</span></h4>
+    <p>Nothing to chart until the page ships. Unlike the other three, this one can be instrumented correctly on day one — the event schema is on the School Safety launch tab.</p></div>
 </section>
 
-<!-- ══════════════ AWARENESS ══════════════ -->
+<!-- ══════════ AWARENESS ══════════ -->
 <section class="panel" id="p-aware" hidden>
-  <div class="lede">
-    <h2>01 — Awareness</h2>
-    <p class="q">Do the buyers who can actually transact know these pages exist? Awareness here is not reach; it is <em>qualified</em> reach. A procurement officer searching a cooperative contract name by name is worth more than a thousand generic sessions, and the metrics are picked to say so.</p>
-  </div>
+  <div class="lede"><h2>01 — Awareness</h2>
+    <p class="q">Do the buyers who can actually transact know these pages exist? Awareness here is qualified reach, not reach. A procurement officer searching a cooperative contract by name is worth more than a thousand generic sessions, and the metrics are chosen to say so.</p></div>
 
   <div class="tiles">
-    <div class="tile"><span class="id">AW-01</span><span class="lbl">Non-brand organic clicks / mo <span class="chip live">live</span></span><span class="val mid-num">22.8k</span><span class="meta"><span class="up">+11.6%</span> vs. prior 90 days</span></div>
-    <div class="tile"><span class="id">AW-02</span><span class="lbl">Priority keyword top-10 coverage <span class="chip live">live</span></span><span class="val mid-num">34%</span><span class="meta">41 of 120 procurement terms</span></div>
-    <div class="tile"><span class="id">AW-04</span><span class="lbl">Institutional referral share <span class="chip partial">partial</span></span><span class="val mid-num">6.2%</span><span class="meta">.gov / .edu / .k12 referrers</span></div>
-    <div class="tile"><span class="id">AW-07</span><span class="lbl">The Studio — all traffic <span class="chip none">not instrumented</span></span><span class="val na">—</span><span class="meta">Page carries no GA4 tag</span></div>
+    <div class="tile" data-prop="hub edu"><span class="id">AW-01</span><span class="lbl">Non-brand organic clicks / mo <span class="chip live">live</span></span><span class="val">22.8k</span><span class="meta"><span class="up">+11.6%</span> vs. prior 90 days</span></div>
+    <div class="tile" data-prop="hub edu safety"><span class="id">AW-02</span><span class="lbl">Priority keyword top-10 coverage <span class="chip live">live</span></span><span class="val">34%</span><span class="meta">41 of 120 procurement terms</span></div>
+    <div class="tile" data-prop="hub"><span class="id">AW-04</span><span class="lbl">Institutional referral share <span class="chip partial">partial</span></span><span class="val">6.2%</span><span class="meta">.gov / .edu / .k12 referrers</span></div>
+    <div class="tile" data-prop="studio"><span class="id">AW-07</span><span class="lbl">The Studio — all traffic <span class="chip none">not instrumented</span></span><span class="val na">—</span><span class="meta">Page carries no GA4 tag</span></div>
   </div>
 
-  <figure id="fig-organic">
-    <figcaption>
-      <div class="t">Non-brand organic clicks by property</div>
-      <div class="d">EDU's July–September spike is back-to-school demand, not a content win — which is exactly why the two properties need separate baselines rather than one blended awareness number.</div>
-    </figcaption>
-    <svg id="svg-organic" viewBox="0 0 620 260" role="img" aria-label="Monthly non-brand organic clicks for B2B Hub and EDU Advantage over twelve months"></svg>
+  <figure id="fig-organic" data-prop="hub edu">
+    <figcaption><div class="t">Non-brand organic clicks by property</div>
+    <div class="d">EDU's July–September spike is back-to-school demand, not a content win — which is exactly why each property needs its own baseline rather than one blended awareness number.</div></figcaption>
+    <svg id="svg-organic" viewBox="0 0 620 260" role="img" aria-label="Monthly non-brand organic clicks for B2B Hub and EDU Advantage"></svg>
     <div class="legend">
-      <span><i class="swatch" style="background:var(--s1)"></i>B2B Hub</span>
-      <span><i class="swatch" style="background:var(--s2)"></i>EDU Advantage</span>
+      <span data-prop="hub"><i class="swatch" style="background:var(--s1)"></i>B2B Hub</span>
+      <span data-prop="edu"><i class="swatch" style="background:var(--s2)"></i>EDU Advantage</span>
     </div>
   </figure>
 
+  <div class="empty" data-prop="studio"><h4>The Studio — a canonical tag pointing at the wrong page <span class="chip none">action needed</span></h4>
+    <p>The CMS sets The Studio's canonical URL to <span class="mono">/find/b2b/studio.jsp</span>, but the live page the hub navigation links to is <span class="mono">/find/shared/b2bHub/theStudio.jsp</span>. If that canonical ships as configured it tells search engines to credit a different URL — on a page that already has no analytics to notice the damage. Worth checking before the redesign, not after.</p></div>
+  <div class="empty" data-prop="safety"><h4>School Safety — the keyword set is aiming at content that doesn't exist yet <span class="chip pre">decision</span></h4>
+    <p>The SEO strategy targets federal grant spending, but the design contains no grant module and no downloadable guide — Alyssa's Law is the only regulatory content present. Either build the grant section or drop grant terms from AW-02, because right now the metric would be scoring us against a page we never made.</p></div>
+
   <div class="tblwrap"><table>
-    <thead><tr><th>ID</th><th>Metric</th><th>Definition &amp; formula</th><th>Source</th><th>Target</th><th>State</th></tr></thead>
+    <thead><tr><th>ID</th><th>Metric</th><th>Definition &amp; formula</th><th>Source</th><th>Applies to</th><th>State</th></tr></thead>
     <tbody>
-      <tr><td class="mid-id">AW-01</td><td><strong>Non-brand organic clicks</strong></td><td>Search clicks where the query does not match the brand pattern.<span class="f">clicks WHERE query !~ /b\s?&amp;\s?h|bhphoto/i</span></td><td>Search Console</td><td class="mid">+25% / 2 qtrs</td><td><span class="chip live">live</span></td></tr>
-      <tr><td class="mid-id">AW-02</td><td><strong>Priority keyword coverage</strong></td><td>Share of a fixed 120-term procurement set ranking in the top 10. Term set is defined once and frozen so the metric can't drift.<span class="f">E&amp;I · OMNIA · TIPS · BuyBoard · PEPPM · Equalis · MHEC · GSA · Alyssa's Law · panic alarm</span></td><td>Search Console</td><td class="mid">55%</td><td><span class="chip live">live</span></td></tr>
-      <tr><td class="mid-id">AW-03</td><td><strong>Qualified new-visitor sessions</strong></td><td>New users landing on any hub, EDU or safety URL, excluding sessions carrying a B2B account id.<span class="f">sessions WHERE is_new AND b2b_account_id IS NULL</span></td><td>GA4</td><td class="mid">+20%</td><td><span class="chip partial">partial</span></td></tr>
-      <tr><td class="mid-id">AW-04</td><td><strong>Institutional referral share</strong></td><td>Share of sessions referred from a .gov, .edu or .k12.*.us domain. The strongest available proxy for "a real procurement officer sent this link to a colleague."</td><td>GA4</td><td class="mid">9%</td><td><span class="chip partial">partial</span></td></tr>
-      <tr><td class="mid-id">AW-05</td><td><strong>Segment demand mix</strong></td><td>Sessions per segment page indexed against approved accounts per segment. Where the two diverge you have either wasted traffic or an underserved segment.<span class="f">sessions[org] / Σsessions ÷ approved[org] / Σapproved</span></td><td>GA4 + warehouse</td><td class="mid">Diagnostic</td><td><span class="chip none">not instr.</span></td></tr>
-      <tr><td class="mid-id">AW-06</td><td><strong>Content freshness</strong></td><td>Median days since last publish across CMS-managed pages. An awareness input, not an outcome — stale contract pages lose rankings before they lose conversions.</td><td>CMS audit log</td><td class="mid">&lt; 90 days</td><td><span class="chip none">not instr.</span></td></tr>
-      <tr><td class="mid-id">AW-07</td><td><strong>The Studio — all traffic</strong></td><td>Sessions, entrances and engaged sessions for the Studio hub page.</td><td>GA4</td><td class="mid">Baseline</td><td><span class="chip none">not instr.</span></td></tr>
+      <tr data-prop="hub edu safety studio"><td class="mid-id">AW-01</td><td><strong>Non-brand organic clicks</strong></td><td>Search clicks where the query does not match the brand pattern.<span class="f">clicks WHERE query !~ /b\s?&amp;\s?h|bhphoto/i</span></td><td>Search Console</td><td class="mid">All four</td><td><span class="chip live">live</span></td></tr>
+      <tr data-prop="hub edu safety"><td class="mid-id">AW-02</td><td><strong>Priority keyword coverage</strong></td><td>Share of a fixed 120-term set ranking top 10. Frozen once so the metric can't drift.<span class="f">E&amp;I · OMNIA · TIPS · BuyBoard · PEPPM · Equalis · MHEC · GSA · Alyssa's Law</span></td><td>Search Console</td><td class="mid">Hub, EDU, Safety</td><td><span class="chip live">live</span></td></tr>
+      <tr data-prop="hub edu safety studio"><td class="mid-id">AW-03</td><td><strong>Qualified new-visitor sessions</strong></td><td>New users landing on any of the four properties, excluding sessions carrying a B2B account id.<span class="f">sessions WHERE is_new AND b2b_account_id IS NULL</span></td><td>GA4</td><td class="mid">All four</td><td><span class="chip partial">partial</span></td></tr>
+      <tr data-prop="hub safety"><td class="mid-id">AW-04</td><td><strong>Institutional referral share</strong></td><td>Sessions referred from .gov, .edu or .k12.*.us. The best available proxy for a procurement officer forwarding a link to a colleague.</td><td>GA4</td><td class="mid">Hub, Safety</td><td><span class="chip partial">partial</span></td></tr>
+      <tr data-prop="hub"><td class="mid-id">AW-05</td><td><strong>Segment demand mix</strong></td><td>Sessions per segment page indexed against approved accounts per segment. Divergence means either wasted traffic or an underserved segment.</td><td>GA4 + warehouse</td><td class="mid">Hub</td><td><span class="chip none">not instr.</span></td></tr>
+      <tr data-prop="hub studio"><td class="mid-id">AW-06</td><td><strong>Content freshness</strong></td><td>Median days since last publish across CMS-managed pages. An awareness input — stale contract pages lose rankings before they lose conversions.</td><td>CMS audit log</td><td class="mid">Hub, Studio</td><td><span class="chip none">not instr.</span></td></tr>
+      <tr data-prop="studio"><td class="mid-id">AW-07</td><td><strong>The Studio — all traffic</strong></td><td>Sessions, entrances and engaged sessions. Currently zero of these exist.</td><td>GA4</td><td class="mid">Studio</td><td><span class="chip none">not instr.</span></td></tr>
+      <tr data-prop="studio"><td class="mid-id">AW-08</td><td><strong>Canonical integrity</strong></td><td>Pages whose canonical URL resolves to themselves. A one-off audit that becomes a standing check once the CMS owns SEO fields.</td><td>Crawl + CMS</td><td class="mid">Studio, Hub</td><td><span class="chip none">not instr.</span></td></tr>
     </tbody>
   </table></div>
 </section>
 
-<!-- ══════════════ EXPERIENCE ══════════════ -->
+<!-- ══════════ EXPERIENCE ══════════ -->
 <section class="panel" id="p-ux" hidden>
-  <div class="lede">
-    <h2>02 — User Experience</h2>
-    <p class="q">Once a buyer is here, can they finish the job? This pillar covers both experiences the PRD names: the buyer's, and the CMS operator's. A content team that waits weeks for a logo change is a UX failure that shows up months later as an awareness failure.</p>
-  </div>
+  <div class="lede"><h2>02 — User Experience</h2>
+    <p class="q">Once a buyer is here, can they finish the job? This covers both experiences the PRD names — the buyer's and the CMS operator's. A content team that waits weeks for a logo change is a UX failure that surfaces months later as an awareness failure.</p></div>
 
   <div class="tiles">
-    <div class="tile"><span class="id">UX-01</span><span class="lbl">Segment selection rate <span class="chip partial">partial</span></span><span class="val mid-num">35%</span><span class="meta">Home sessions clicking a segment tile</span></div>
-    <div class="tile"><span class="id">UX-04</span><span class="lbl">Verification failure rate <span class="chip none">not instrumented</span></span><span class="val na">—</span><span class="meta">No error-code events fire</span></div>
-    <div class="tile"><span class="id">UX-07</span><span class="lbl">Median time to publish <span class="chip partial">partial</span></span><span class="val mid-num">—</span><span class="meta">Target &lt; 4 hrs, from weeks</span></div>
-    <div class="tile"><span class="id">UX-08</span><span class="lbl">CMS self-service rate <span class="chip pre">post-launch</span></span><span class="val na">—</span><span class="meta">Target 80% within 6 months</span></div>
+    <div class="tile" data-prop="hub"><span class="id">UX-01</span><span class="lbl">Segment selection rate <span class="chip partial">partial</span></span><span class="val">35%</span><span class="meta">Home sessions clicking a segment tile</span></div>
+    <div class="tile" data-prop="hub"><span class="id">UX-04</span><span class="lbl">Verification failure rate <span class="chip none">not instrumented</span></span><span class="val na">—</span><span class="meta">No error-code events fire</span></div>
+    <div class="tile" data-prop="hub studio"><span class="id">UX-07</span><span class="lbl">Median time to publish <span class="chip pre">post-launch</span></span><span class="val na">—</span><span class="meta">Target &lt; 4 hrs, from weeks</span></div>
+    <div class="tile" data-prop="edu"><span class="id">UX-09</span><span class="lbl">UNiDAYS return rate <span class="chip none">not instrumented</span></span><span class="val na">—</span><span class="meta">Cross-domain handoff breaks</span></div>
   </div>
 
-  <figure id="fig-verify">
-    <figcaption>
-      <div class="t">Sign-up verification outcomes, per 1,000 submissions</div>
-      <div class="d">The three failure codes at the bottom are the PRD's <span class="mono">−30% support contact</span> target in chart form. None of them currently emit an event, so this is the single most consequential blind spot in the experience pillar.</div>
-    </figcaption>
-    <svg id="svg-verify" viewBox="0 0 620 258" role="img" aria-label="Verification outcomes per thousand submissions by result code"></svg>
+  <figure id="fig-verify" data-prop="hub">
+    <figcaption><div class="t">B2B Hub — verification outcomes per 1,000 sign-up submissions</div>
+    <div class="d">The three failure codes are the PRD's <span class="mono">−30% support contact</span> target in chart form. None of them emits an event, which makes this the most consequential blind spot in the experience pillar.</div></figcaption>
+    <svg id="svg-verify" viewBox="0 0 620 258" role="img" aria-label="Verification outcomes by result code"></svg>
   </figure>
 
+  <div class="empty" data-prop="studio"><h4>The Studio — the redesign should carry its measurement with it <span class="chip none">no data</span></h4>
+    <p>Nothing is measurable today, so there is no baseline to design against and no way to prove the redesign worked. Two things to settle while it is still in design: tag the current page now so the redesign has a before to compare to, and define the inquiry form's event schema as part of the design rather than as a follow-up ticket. The current form allows a 1,024-character message and has no field-level tracking of any kind.</p></div>
+  <div class="empty" data-prop="safety"><h4>School Safety — the form sits at 55% scroll depth <span class="chip pre">pre-launch</span></h4>
+    <p>In the Figma the intro's primary and secondary CTAs are switched off, which leaves scrolling as the only route to the conversion form. That makes scroll-depth-to-form a first-class experience metric here rather than a vanity one — and it is worth asking whether those CTAs should be switched back on before launch.</p></div>
+
   <div class="tblwrap"><table>
-    <thead><tr><th>ID</th><th>Metric</th><th>Definition &amp; formula</th><th>Source</th><th>Target</th><th>State</th></tr></thead>
+    <thead><tr><th>ID</th><th>Metric</th><th>Definition &amp; formula</th><th>Source</th><th>Applies to</th><th>State</th></tr></thead>
     <tbody>
-      <tr><td class="mid-id">UX-01</td><td><strong>Segment selection rate</strong></td><td>Home sessions that click through to any of the 12 segment pages.<span class="f">sessions(/org/*) ÷ sessions(b2bHub/home.jsp)</span></td><td>GA4</td><td class="mid">45%</td><td><span class="chip partial">partial</span></td></tr>
-      <tr><td class="mid-id">UX-02</td><td><strong>Contract lookup success</strong></td><td>Sessions reaching a contract or eProcurement page that then click Sign Up or Contact, rather than exiting.</td><td>GA4</td><td class="mid">30%</td><td><span class="chip partial">partial</span></td></tr>
-      <tr><td class="mid-id">UX-03</td><td><strong>Dead category page rate</strong></td><td>Zero-result category views per 1,000 portal-filtered sessions. The known long-standing bug, given a number so it can be prioritised against everything else.</td><td>GA4 + portal logs</td><td class="mid">&lt; 5</td><td><span class="chip none">not instr.</span></td></tr>
-      <tr><td class="mid-id">UX-04</td><td><strong>Verification failure by code</strong></td><td>Failure share split by cause. Each code implies a different fix, so a blended failure rate is useless.<span class="f">NO_MATCH · TIMEOUT · DOMAIN_NOT_WHITELISTED · MANUAL_REVIEW</span></td><td>GA4 event + D&amp;B logs</td><td class="mid">&lt; 12%</td><td><span class="chip none">not instr.</span></td></tr>
-      <tr><td class="mid-id">UX-05</td><td><strong>Support contacts / 1k sessions</strong></td><td>Deflection proxy, split by contact reason. Carries the PRD's D&amp;B support target directly.</td><td>CRM + GA4</td><td class="mid">−30% D&amp;B</td><td><span class="chip partial">partial</span></td></tr>
-      <tr><td class="mid-id">UX-06</td><td><strong>Core Web Vitals by template</strong></td><td>LCP, INP and CLS reported per template rather than per URL — hub home, segment, contract, sign-up — so a regression points at a component.</td><td>CrUX / GA4</td><td class="mid">75th pct pass</td><td><span class="chip live">live</span></td></tr>
-      <tr><td class="mid-id">UX-07</td><td><strong>Time to publish</strong></td><td>Median hours from DRAFT to PUBLISHED in the CMS audit log. The operator-side UX metric.</td><td>CMS audit log</td><td class="mid">&lt; 4 hrs</td><td><span class="chip pre">post-launch</span></td></tr>
-      <tr><td class="mid-id">UX-08</td><td><strong>CMS self-service rate</strong></td><td>Share of content changes published with no linked dev ticket.<span class="f">publishes WHERE jira_ticket IS NULL ÷ all publishes</span></td><td>CMS log × Jira</td><td class="mid">80%</td><td><span class="chip pre">post-launch</span></td></tr>
-      <tr><td class="mid-id">UX-09</td><td><strong>UNiDAYS return rate</strong></td><td>Share of students sent to UNiDAYS who return to B&amp;H verified. Measures a third-party handoff you don't control but do depend on.</td><td>GA4 + UNiDAYS</td><td class="mid">70%</td><td><span class="chip none">not instr.</span></td></tr>
+      <tr data-prop="hub"><td class="mid-id">UX-01</td><td><strong>Segment selection rate</strong></td><td>Home sessions clicking through to any of the 12 segment pages.<span class="f">sessions(/org/*) ÷ sessions(b2bHub/home.jsp)</span></td><td>GA4</td><td class="mid">Hub</td><td><span class="chip partial">partial</span></td></tr>
+      <tr data-prop="hub"><td class="mid-id">UX-02</td><td><strong>Contract lookup success</strong></td><td>Sessions reaching a contract or eProcurement page that then click Sign Up or Contact rather than exiting.</td><td>GA4</td><td class="mid">Hub</td><td><span class="chip partial">partial</span></td></tr>
+      <tr data-prop="hub"><td class="mid-id">UX-03</td><td><strong>Dead category page rate</strong></td><td>Zero-result category views per 1,000 portal-filtered sessions. The known long-standing bug, given a number so it can be prioritised.</td><td>GA4 + portal logs</td><td class="mid">Hub</td><td><span class="chip none">not instr.</span></td></tr>
+      <tr data-prop="hub"><td class="mid-id">UX-04</td><td><strong>Verification failure by code</strong></td><td>Failure share split by cause — each code implies a different fix, so a blended rate is useless.<span class="f">NO_MATCH · TIMEOUT · DOMAIN_NOT_WHITELISTED · MANUAL_REVIEW</span></td><td>GA4 event + D&amp;B logs</td><td class="mid">Hub</td><td><span class="chip none">not instr.</span></td></tr>
+      <tr data-prop="hub studio safety"><td class="mid-id">UX-05</td><td><strong>Support contacts / 1k sessions</strong></td><td>Deflection proxy split by contact reason. Carries the PRD's D&amp;B support target directly.</td><td>CRM + GA4</td><td class="mid">Hub, Studio, Safety</td><td><span class="chip partial">partial</span></td></tr>
+      <tr data-prop="hub edu studio safety"><td class="mid-id">UX-06</td><td><strong>Core Web Vitals by template</strong></td><td>LCP, INP and CLS reported per template rather than per URL, so a regression points at a component.</td><td>CrUX / GA4</td><td class="mid">All four</td><td><span class="chip live">live</span></td></tr>
+      <tr data-prop="hub studio"><td class="mid-id">UX-07</td><td><strong>Time to publish</strong></td><td>Median hours DRAFT → PUBLISHED in the CMS audit log. The operator-side UX metric.</td><td>CMS audit log</td><td class="mid">Hub, Studio</td><td><span class="chip pre">post-launch</span></td></tr>
+      <tr data-prop="hub studio"><td class="mid-id">UX-08</td><td><strong>CMS self-service rate</strong></td><td>Content changes published with no linked dev ticket.<span class="f">publishes WHERE jira_ticket IS NULL ÷ all publishes</span></td><td>CMS log × Jira</td><td class="mid">Hub, Studio</td><td><span class="chip pre">post-launch</span></td></tr>
+      <tr data-prop="edu"><td class="mid-id">UX-09</td><td><strong>UNiDAYS return rate</strong></td><td>Students sent to UNiDAYS who return to B&amp;H verified. Measures a handoff we depend on but don't control.</td><td>GA4 + UNiDAYS</td><td class="mid">EDU</td><td><span class="chip none">not instr.</span></td></tr>
+      <tr data-prop="studio safety"><td class="mid-id">UX-10</td><td><strong>Scroll depth to form</strong></td><td>Sessions where the lead form enters the viewport. On both lead-form properties the form is well below the fold and there is no CTA above it.</td><td>GA4</td><td class="mid">Studio, Safety</td><td><span class="chip none">not instr.</span></td></tr>
     </tbody>
   </table></div>
 </section>
 
-<!-- ══════════════ ACQUISITION ══════════════ -->
+<!-- ══════════ ACQUISITION ══════════ -->
 <section class="panel" id="p-acq" hidden>
-  <div class="lede">
-    <h2>03 — Acquisition</h2>
-    <p class="q">Did they become an approved, ordering account? The hub's funnel has six stages and three of them are currently unobservable. Note that the funnel does not end at "approved" — an approved account that never orders is a support cost, not a win, so first order is the terminal stage.</p>
-  </div>
+  <div class="lede"><h2>03 — Acquisition</h2>
+    <p class="q">Did the visit produce something? What "something" means differs by offering — an approved account, a verified student, an inquiry — so this pillar keeps four separate funnels and compares them only on rate. Note that the hub funnel does not end at "approved": an approved account that never orders is a support cost, not a win.</p></div>
 
   <div class="tiles">
-    <div class="tile"><span class="id">AC-01</span><span class="lbl">Hub → sign-up start <span class="chip none">not instrumented</span></span><span class="val na">—</span><span class="meta">No CTA exists to click</span></div>
-    <div class="tile"><span class="id">AC-02</span><span class="lbl">Form start → submit <span class="chip none">not instrumented</span></span><span class="val na">—</span><span class="meta">Hash-routed steps, no events</span></div>
-    <div class="tile"><span class="id">AC-03</span><span class="lbl">Submit → approved <span class="chip partial">partial</span></span><span class="val mid-num">62%</span><span class="meta">Backend only, no funnel join</span></div>
-    <div class="tile"><span class="id">AC-05</span><span class="lbl">Median time to first order <span class="chip partial">partial</span></span><span class="val mid-num">23d</span><span class="meta">Approved → first transaction</span></div>
+    <div class="tile" data-prop="hub"><span class="id">AC-01</span><span class="lbl">Hub → sign-up start <span class="chip none">not instrumented</span></span><span class="val na">—</span><span class="meta">No CTA exists to click</span></div>
+    <div class="tile" data-prop="hub"><span class="id">AC-03</span><span class="lbl">Submit → approved <span class="chip partial">partial</span></span><span class="val">62%</span><span class="meta">Backend only, no funnel join</span></div>
+    <div class="tile" data-prop="hub"><span class="id">AC-05</span><span class="lbl">Median time to first order <span class="chip partial">partial</span></span><span class="val">23d</span><span class="meta">Approved → first transaction</span></div>
+    <div class="tile" data-prop="studio safety"><span class="id">AC-10</span><span class="lbl">Lead form completion <span class="chip none">not instrumented</span></span><span class="val na">—</span><span class="meta">Studio and Safety both</span></div>
   </div>
 
-  <div class="note"><b>Why AC-01 is blank rather than low.</b> The hub home page has no sign-up call to action anywhere on it — the only path forward is a segment tile, and Sign Up first appears one level deeper on the segment page. The top of the funnel isn't underperforming; it doesn't exist. That is a product fix (PRD P0, Hub UX — Streamlined Sign-Up Entry) before it is a measurement fix.</div>
+  <div class="note" data-prop="hub all"><b>Why AC-01 is blank rather than low.</b> The hub home page has no sign-up call to action anywhere on it — the only way forward is a segment tile, and <span class="mono">Sign Up</span> first appears one level deeper. The top of the funnel isn't underperforming; it doesn't exist. That's a product fix before it's a measurement fix.</div>
+
+  <div class="empty" data-prop="studio"><h4>The Studio — an inquiry form nobody can count <span class="chip none">no data</span></h4>
+    <p>The conversion path is a "Contact Us Online" anchor to a form asking for Email, Name, Phone and a message. There is no submit event, no field tracking, and no way to attribute an inquiry to the traffic that produced it. Inquiries arrive in an inbox and the funnel that produced them is invisible.</p></div>
 
   <div class="tblwrap"><table>
-    <thead><tr><th>ID</th><th>Metric</th><th>Definition &amp; formula</th><th>Source</th><th>Target</th><th>State</th></tr></thead>
+    <thead><tr><th>ID</th><th>Metric</th><th>Definition &amp; formula</th><th>Source</th><th>Applies to</th><th>State</th></tr></thead>
     <tbody>
-      <tr><td class="mid-id">AC-01</td><td><strong>Hub → sign-up start</strong></td><td>Sessions firing a sign-up start event, over hub sessions. The baseline the PRD's +15% target needs and does not have.<span class="f">signup_start ÷ sessions(content_group = b2b_hub)</span></td><td>GA4</td><td class="mid">Baseline first</td><td><span class="chip none">not instr.</span></td></tr>
-      <tr><td class="mid-id">AC-02</td><td><strong>Form start → submit</strong></td><td>Completion rate of the registration form, with per-field abandonment.<span class="f">signup_submit ÷ signup_start</span></td><td>GA4</td><td class="mid">60%</td><td><span class="chip none">not instr.</span></td></tr>
-      <tr><td class="mid-id">AC-03</td><td><strong>Submit → approved</strong></td><td>Verification pass rate across all three paths. Exists in the backend but cannot be joined to a session, so you can't tell which traffic converts.</td><td>Warehouse</td><td class="mid">75%</td><td><span class="chip partial">partial</span></td></tr>
-      <tr><td class="mid-id">AC-04</td><td><strong>Approved → first order</strong></td><td>Share of approved accounts placing an order within 30 / 60 / 90 days. Reported as three windows because B2B procurement cycles are long and a 30-day read will look like failure.</td><td>Warehouse</td><td class="mid">55% @ 90d</td><td><span class="chip live">live</span></td></tr>
-      <tr><td class="mid-id">AC-05</td><td><strong>Time to first order</strong></td><td>Median days from approval to first transaction. Also the denominator for onboarding work.</td><td>Warehouse</td><td class="mid">&lt; 18 days</td><td><span class="chip live">live</span></td></tr>
-      <tr><td class="mid-id">AC-06</td><td><strong>Approved accounts by segment</strong></td><td>Segment mix of approvals against segment mix of traffic. Requires segment as a dimension, which requires parsing it out of the URL path.</td><td>GA4 + warehouse</td><td class="mid">Diagnostic</td><td><span class="chip none">not instr.</span></td></tr>
-      <tr><td class="mid-id">AC-07</td><td><strong>Sign-up conversion vs. baseline</strong></td><td>The PRD's headline success metric. Blocked until AC-01 has a baseline.</td><td>GA4</td><td class="mid">+15%</td><td><span class="chip none">not instr.</span></td></tr>
-      <tr><td class="mid-id">AC-08</td><td><strong>EDU verified → first order</strong></td><td>UNiDAYS verified students who create a B&amp;H account and transact. Separate funnel — an individual, not an organization.</td><td>GA4 + warehouse</td><td class="mid">40%</td><td><span class="chip partial">partial</span></td></tr>
-      <tr><td class="mid-id">AC-09</td><td><strong>Safety lead → B2B account</strong></td><td>Routed leads that become approved B2B accounts, joined on work-email domain. The bridge between the safety hub and the hub funnel.<span class="f">JOIN lead.work_email_domain = account.email_domain</span></td><td>CRM + warehouse</td><td class="mid">Set at launch</td><td><span class="chip pre">pre-launch</span></td></tr>
+      <tr data-prop="hub edu studio safety"><td class="mid-id">AC-00</td><td><strong>Qualified Action Rate</strong></td><td>The one number that rolls up across all four. Each property's own conversion over its qualified sessions — different numerators, comparable rates.<span class="f">property_conversion ÷ qualified_sessions</span></td><td>GA4 + warehouse</td><td class="mid">All four</td><td><span class="chip none">not instr.</span></td></tr>
+      <tr data-prop="hub"><td class="mid-id">AC-01</td><td><strong>Hub → sign-up start</strong></td><td>Sessions firing a sign-up start event over hub sessions. The baseline the PRD's +15% target needs and doesn't have.<span class="f">signup_start ÷ sessions(content_group = b2b_hub)</span></td><td>GA4</td><td class="mid">Hub</td><td><span class="chip none">not instr.</span></td></tr>
+      <tr data-prop="hub"><td class="mid-id">AC-02</td><td><strong>Form start → submit</strong></td><td>Registration form completion with per-field abandonment.<span class="f">signup_submit ÷ signup_start</span></td><td>GA4</td><td class="mid">Hub</td><td><span class="chip none">not instr.</span></td></tr>
+      <tr data-prop="hub"><td class="mid-id">AC-03</td><td><strong>Submit → approved</strong></td><td>Verification pass rate across all three paths. Exists in the backend but can't be joined to a session, so we can't tell which traffic converts.</td><td>Warehouse</td><td class="mid">Hub</td><td><span class="chip partial">partial</span></td></tr>
+      <tr data-prop="hub"><td class="mid-id">AC-04</td><td><strong>Approved → first order</strong></td><td>Approved accounts ordering within 30 / 60 / 90 days. Three windows, because B2B cycles are long and a 30-day read looks like failure.</td><td>Warehouse</td><td class="mid">Hub</td><td><span class="chip live">live</span></td></tr>
+      <tr data-prop="hub"><td class="mid-id">AC-05</td><td><strong>Time to first order</strong></td><td>Median days from approval to first transaction. Also the denominator for onboarding work.</td><td>Warehouse</td><td class="mid">Hub</td><td><span class="chip live">live</span></td></tr>
+      <tr data-prop="hub"><td class="mid-id">AC-07</td><td><strong>Sign-up conversion vs. baseline</strong></td><td>The PRD's headline success metric. Blocked until AC-01 has a baseline.</td><td>GA4</td><td class="mid">Hub</td><td><span class="chip none">not instr.</span></td></tr>
+      <tr data-prop="edu"><td class="mid-id">AC-08</td><td><strong>EDU verified → first order</strong></td><td>UNiDAYS-verified students who create an account and transact. A separate funnel — an individual, not an organization.</td><td>GA4 + warehouse</td><td class="mid">EDU</td><td><span class="chip partial">partial</span></td></tr>
+      <tr data-prop="safety"><td class="mid-id">AC-09</td><td><strong>Safety lead → B2B account</strong></td><td>Routed leads that become approved B2B accounts, joined on work-email domain. The bridge between the safety hub and the hub funnel.<span class="f">JOIN lead.work_email_domain = account.email_domain</span></td><td>CRM + warehouse</td><td class="mid">Safety</td><td><span class="chip pre">pre-launch</span></td></tr>
+      <tr data-prop="studio safety"><td class="mid-id">AC-10</td><td><strong>Lead form completion</strong></td><td>Form starts, abandons and submits on the two lead-form properties. One shared schema, not two.<span class="f">form_submit ÷ form_start</span></td><td>GA4</td><td class="mid">Studio, Safety</td><td><span class="chip none">not instr.</span></td></tr>
+      <tr data-prop="studio"><td class="mid-id">AC-11</td><td><strong>Studio inquiry → engagement</strong></td><td>Inquiries that become a consultation, install, training or seminar booking. Needs the Studio team's intake to be structured, which today it isn't.</td><td>CRM / Studio intake</td><td class="mid">Studio</td><td><span class="chip none">not instr.</span></td></tr>
     </tbody>
   </table></div>
 </section>
 
-<!-- ══════════════ REACTIVATION ══════════════ -->
+<!-- ══════════ REACTIVATION ══════════ -->
 <section class="panel" id="p-react" hidden>
-  <div class="lede">
-    <h2>04 — Reactivation</h2>
-    <p class="q">Does the Hub earn a second visit? Once a customer has a punchout portal, their shopping need is met elsewhere and the Hub's job changes entirely — it becomes the account layer. The PRD is blunt that no mechanism exists to notify existing customers of anything, and has not for about five years. Every metric here is currently unmeasurable for the same underlying reason: logged-in accounts have no identity in analytics.</p>
-  </div>
+  <div class="lede"><h2>04 — Reactivation</h2>
+    <p class="q">Does the offering earn a second visit? Once a customer has a punchout portal their shopping need is met elsewhere and the Hub's job changes entirely — it becomes the account layer. Every metric here is unmeasurable today for one shared reason: logged-in accounts have no identity in analytics.</p></div>
 
   <div class="tiles">
-    <div class="tile"><span class="id">RE-01</span><span class="lbl">Authenticated return rate <span class="chip none">not instrumented</span></span><span class="val na">—</span><span class="meta">No account id in analytics</span></div>
-    <div class="tile"><span class="id">RE-02</span><span class="lbl">365-day dormancy rate <span class="chip partial">partial</span></span><span class="val mid-num">36%</span><span class="meta"><span class="dn">+4.1 pts</span> in 4 quarters</span></div>
-    <div class="tile"><span class="id">RE-04</span><span class="lbl">Contract expiry coverage <span class="chip none">not instrumented</span></span><span class="val na">—</span><span class="meta">No expiry notice exists</span></div>
-    <div class="tile"><span class="id">RE-06</span><span class="lbl">Portal utilization <span class="chip partial">partial</span></span><span class="val mid-num">71%</span><span class="meta">Portals with an order in 90d</span></div>
+    <div class="tile" data-prop="hub"><span class="id">RE-01</span><span class="lbl">Authenticated return rate <span class="chip none">not instrumented</span></span><span class="val na">—</span><span class="meta">No account id in analytics</span></div>
+    <div class="tile" data-prop="hub"><span class="id">RE-02</span><span class="lbl">365-day dormancy rate <span class="chip partial">partial</span></span><span class="val">36%</span><span class="meta"><span class="dn">+4.1 pts</span> in 4 quarters</span></div>
+    <div class="tile" data-prop="hub"><span class="id">RE-04</span><span class="lbl">Contract expiry coverage <span class="chip none">not instrumented</span></span><span class="val na">—</span><span class="meta">No expiry notice exists</span></div>
+    <div class="tile" data-prop="hub"><span class="id">RE-06</span><span class="lbl">Portal utilization <span class="chip partial">partial</span></span><span class="val">71%</span><span class="meta">Portals with an order in 90d</span></div>
   </div>
 
-  <div class="note"><b>Sequence this pillar with Phase 2, not after it.</b> The logged-in dashboard work already commits to shipping every section with a paired metric. RE-04 through RE-08 are those pairings written down in advance — an expiring-contracts module is worth building precisely because RE-04 says nobody is being told, and it stops being worth building the moment RE-04 says they are.</div>
+  <div class="note" data-prop="hub all"><b>Sequence this pillar with Phase 2, not after it.</b> The logged-in dashboard work already commits to shipping every section with a paired metric. RE-04 through RE-08 are those pairings written down in advance — an expiring-contracts module is worth building precisely because RE-04 says nobody is being told, and stops being worth building the moment RE-04 says they are.</div>
+
+  <div class="empty" data-prop="edu"><h4>EDU Advantage — there is no account to reactivate <span class="chip pre">n/a</span></h4>
+    <p>Students don't return to a portal; they re-verify when their status lapses. The equivalent metric here is annual re-verification rate and repeat purchase within the discount cohort — a retention question with a different shape, which is why the hub's reactivation metrics shouldn't be copied across.</p></div>
+  <div class="empty" data-prop="studio"><h4>The Studio — reactivation is a relationship, not a session <span class="chip none">no data</span></h4>
+    <p>Studio customers come back for the next installation or the next training, on a cycle measured in quarters. The meaningful metric is repeat engagement per client, which lives in the Studio team's records rather than in analytics — worth defining alongside the redesign.</p></div>
+  <div class="empty" data-prop="safety"><h4>School Safety — out of scope by design <span class="chip pre">n/a</span></h4>
+    <p>The page produces leads, and a lead reactivates as a B2B account or not at all. Its retention question is answered by AC-09 on the acquisition tab, not here.</p></div>
 
   <div class="tblwrap"><table>
-    <thead><tr><th>ID</th><th>Metric</th><th>Definition &amp; formula</th><th>Source</th><th>Target</th><th>State</th></tr></thead>
+    <thead><tr><th>ID</th><th>Metric</th><th>Definition &amp; formula</th><th>Source</th><th>Applies to</th><th>State</th></tr></thead>
     <tbody>
-      <tr><td class="mid-id">RE-01</td><td><strong>Authenticated return rate</strong></td><td>Approved accounts with at least one hub session in 90 days. The headline reactivation metric and the one the whole pillar depends on.<span class="f">distinct accounts WITH session(90d) ÷ approved accounts</span></td><td>GA4 (user_id)</td><td class="mid">Baseline first</td><td><span class="chip none">not instr.</span></td></tr>
-      <tr><td class="mid-id">RE-02</td><td><strong>Dormancy rate</strong></td><td>Approved accounts with no order in 180 / 365 days. Reported as two windows: 180 days is the intervention point, 365 is the loss.</td><td>Warehouse</td><td class="mid">&lt; 30% @ 365d</td><td><span class="chip partial">partial</span></td></tr>
-      <tr><td class="mid-id">RE-03</td><td><strong>Reactivation rate</strong></td><td>Dormant accounts placing an order within 90 days of a hub touch. The one metric that proves the Hub does account work rather than just describing it.</td><td>GA4 + warehouse</td><td class="mid">8%</td><td><span class="chip none">not instr.</span></td></tr>
-      <tr><td class="mid-id">RE-04</td><td><strong>Contract expiry coverage</strong></td><td>Share of accounts with a contract expiring in ≤ 90 days who have seen an expiry notice. Currently zero by construction — no notice exists.</td><td>Contract data + GA4</td><td class="mid">90%</td><td><span class="chip none">not instr.</span></td></tr>
-      <tr><td class="mid-id">RE-05</td><td><strong>Orders per active account</strong></td><td>Trailing-12-month order count per active account, split by segment. Depth of relationship rather than breadth of base.</td><td>Warehouse</td><td class="mid">+10%</td><td><span class="chip live">live</span></td></tr>
-      <tr><td class="mid-id">RE-06</td><td><strong>Portal utilization</strong></td><td>Provisioned portals with at least one order in 90 days. An unused portal is a configured, supported, and entirely unproductive asset.</td><td>Portal + orders</td><td class="mid">85%</td><td><span class="chip partial">partial</span></td></tr>
-      <tr><td class="mid-id">RE-07</td><td><strong>Punchout health</strong></td><td>eProcurement integrations with a successful transaction in 30 days. A broken punchout is silent — the customer usually finds out before B&amp;H does.</td><td>Integration logs</td><td class="mid">95%</td><td><span class="chip none">not instr.</span></td></tr>
-      <tr><td class="mid-id">RE-08</td><td><strong>Section → return rate</strong></td><td>Per logged-in dashboard section: return visits attributable to it. The paired metric each Phase 2 section ships with.</td><td>GA4</td><td class="mid">Per section</td><td><span class="chip pre">phase 2</span></td></tr>
+      <tr data-prop="hub"><td class="mid-id">RE-01</td><td><strong>Authenticated return rate</strong></td><td>Approved accounts with at least one hub session in 90 days. The headline metric, and the one the whole pillar depends on.<span class="f">distinct accounts WITH session(90d) ÷ approved accounts</span></td><td>GA4 (user_id)</td><td class="mid">Hub</td><td><span class="chip none">not instr.</span></td></tr>
+      <tr data-prop="hub"><td class="mid-id">RE-02</td><td><strong>Dormancy rate</strong></td><td>Accounts with no order in 180 / 365 days. Two windows: 180 is the intervention point, 365 is the loss.</td><td>Warehouse</td><td class="mid">Hub</td><td><span class="chip partial">partial</span></td></tr>
+      <tr data-prop="hub"><td class="mid-id">RE-03</td><td><strong>Reactivation rate</strong></td><td>Dormant accounts ordering within 90 days of a hub touch. The one metric that proves the Hub does account work rather than just describing it.</td><td>GA4 + warehouse</td><td class="mid">Hub</td><td><span class="chip none">not instr.</span></td></tr>
+      <tr data-prop="hub"><td class="mid-id">RE-04</td><td><strong>Contract expiry coverage</strong></td><td>Accounts with a contract expiring in ≤ 90 days who have seen an expiry notice. Currently zero by construction — no notice exists.</td><td>Contract data + GA4</td><td class="mid">Hub</td><td><span class="chip none">not instr.</span></td></tr>
+      <tr data-prop="hub"><td class="mid-id">RE-05</td><td><strong>Orders per active account</strong></td><td>Trailing-12-month order count per active account, by segment. Depth of relationship rather than breadth of base.</td><td>Warehouse</td><td class="mid">Hub</td><td><span class="chip live">live</span></td></tr>
+      <tr data-prop="hub"><td class="mid-id">RE-06</td><td><strong>Portal utilization</strong></td><td>Provisioned portals with an order in 90 days. An unused portal is a configured, supported and entirely unproductive asset.</td><td>Portal + orders</td><td class="mid">Hub</td><td><span class="chip partial">partial</span></td></tr>
+      <tr data-prop="hub"><td class="mid-id">RE-07</td><td><strong>Punchout health</strong></td><td>Integrations with a successful transaction in 30 days. A broken punchout is silent — the customer usually finds out before B&amp;H does.</td><td>Integration logs</td><td class="mid">Hub</td><td><span class="chip none">not instr.</span></td></tr>
+      <tr data-prop="hub"><td class="mid-id">RE-08</td><td><strong>Section → return rate</strong></td><td>Per logged-in dashboard section: return visits attributable to it. The paired metric each Phase 2 section ships with.</td><td>GA4</td><td class="mid">Hub</td><td><span class="chip pre">phase 2</span></td></tr>
+      <tr data-prop="edu"><td class="mid-id">RE-09</td><td><strong>Annual re-verification rate</strong></td><td>Verified students who re-verify when status lapses. EDU's equivalent of a return visit.</td><td>UNiDAYS + warehouse</td><td class="mid">EDU</td><td><span class="chip none">not instr.</span></td></tr>
+      <tr data-prop="studio"><td class="mid-id">RE-10</td><td><strong>Repeat engagement per client</strong></td><td>Studio clients with more than one project, training or seminar in 24 months. Lives in Studio team records, not analytics.</td><td>Studio intake</td><td class="mid">Studio</td><td><span class="chip none">not instr.</span></td></tr>
     </tbody>
   </table></div>
 </section>
 
-<!-- ══════════════ GAPS ══════════════ -->
+<!-- ══════════ GAPS ══════════ -->
 <section class="panel" id="p-gaps" hidden>
-  <div class="lede">
-    <h2>Instrumentation gaps</h2>
-    <p class="q">Nine findings, ranked by how many metrics above they unblock. The first five came out of walking the live funnel and reading the Figma, not out of the PRD — they are things you can go verify this afternoon.</p>
-  </div>
+  <div class="lede"><h2>Instrumentation gaps</h2>
+    <p class="q">Eleven findings, ranked by how many metrics each one unblocks. Most came from walking the live pages and reading the Figma rather than from the PRD — they're things anyone can go verify this afternoon.</p></div>
 
   <div class="gaps">
-    <div class="gap">
+    <div class="gap" data-prop="hub">
       <div class="rank">01</div>
-      <div class="body">
-        <h4>No sign-up CTA on the hub landing page <span class="chip none">critical</span></h4>
-        <p>The home page offers only twelve segment tiles. <span class="mono">Sign Up</span> first appears one level down, on the segment page. There is no top-of-funnel action to measure, which is why the PRD's baseline-conversion question has stayed open.</p>
-      </div>
-      <div class="fix"><span class="h">Unblocks</span>AC-01, AC-07, NS-03<br><span class="h" style="margin-top:8px">Fix</span>PRD P0 Hub UX story, plus <code>signup_cta_click</code> carrying <code>cta_location</code>.</div>
+      <div class="body"><h4>No sign-up CTA on the hub landing page <span class="chip none">critical</span> <span class="chip">B2B Hub</span></h4>
+        <p>The home page offers only twelve segment tiles. <span class="mono">Sign Up</span> first appears one level down, on the segment page. There is no top-of-funnel action to measure, which is why the baseline conversion question has stayed open.</p></div>
+      <div class="fix"><span class="h">Unblocks</span>AC-01, AC-07, AC-00<br><span class="h" style="margin-top:8px">Fix</span>PRD P0 Hub UX story, plus <code>signup_cta_click</code> carrying <code>cta_location</code>.</div>
     </div>
-    <div class="gap">
+    <div class="gap" data-prop="hub">
       <div class="rank">02</div>
-      <div class="body">
-        <h4>The sign-up form is a hash-routed SPA <span class="chip none">critical</span></h4>
-        <p>Registration lives at <span class="mono">/find/shared/b2b/b2bSignUp.jsp/org/HE#/createAcc</span>. Hash changes do not fire <span class="mono">page_view</span> in GA4 by default, so no step in the form is observable — you can see arrivals and, separately, approvals, with nothing in between.</p>
-      </div>
-      <div class="fix"><span class="h">Unblocks</span>AC-02, UX-04<br><span class="h" style="margin-top:8px">Fix</span>Push a <code>signup_step</code> event on every hash route change, with <code>step_name</code> and <code>step_index</code>.</div>
+      <div class="body"><h4>The sign-up form is a hash-routed SPA <span class="chip none">critical</span> <span class="chip">B2B Hub</span></h4>
+        <p>Registration lives at <span class="mono">/find/shared/b2b/b2bSignUp.jsp/org/HE#/createAcc</span>. Hash changes don't fire <span class="mono">page_view</span> in GA4 by default, so no step in the form is observable — arrivals and approvals are visible, with nothing in between.</p></div>
+      <div class="fix"><span class="h">Unblocks</span>AC-02, UX-04<br><span class="h" style="margin-top:8px">Fix</span><code>signup_step</code> on every hash route change, with <code>step_name</code> and <code>step_index</code>.</div>
     </div>
-    <div class="gap">
+    <div class="gap" data-prop="studio">
       <div class="rank">03</div>
-      <div class="body">
-        <h4>The Studio hub carries no GA4 tag at all <span class="chip none">critical</span></h4>
-        <p>Zero traffic or engagement data exists for the page. Already identified as a quick win independent of the CMS build — it needs no redesign, no ticket queue, and no Phase 1 dependency.</p>
-      </div>
-      <div class="fix"><span class="h">Unblocks</span>AW-07<br><span class="h" style="margin-top:8px">Fix</span>Standalone tagging task. Ship it before the baseline period starts, or the Studio is missing from every comparison you make later.</div>
+      <div class="body"><h4>The Studio carries no GA4 tag at all <span class="chip none">critical</span> <span class="chip">The Studio</span></h4>
+        <p>Zero traffic or engagement data has ever existed for this page. It needs no redesign, no ticket queue and no Phase 1 dependency — and until it's tagged, the redesign will ship with no before to compare against.</p></div>
+      <div class="fix"><span class="h">Unblocks</span>AW-07, AC-11, RE-10<br><span class="h" style="margin-top:8px">Fix</span>Standalone tagging task. Ship it before any baseline period starts.</div>
     </div>
-    <div class="gap">
+    <div class="gap" data-prop="hub">
       <div class="rank">04</div>
-      <div class="body">
-        <h4>The funnel spans two URL namespaces <span class="chip partial">high</span></h4>
-        <p>The hub is under <span class="mono">/find/shared/b2bHub/</span> but sign-up is under <span class="mono">/find/shared/b2b/</span>. Any path-scoped report silently cuts the funnel in half at exactly the moment that matters.</p>
-      </div>
-      <div class="fix"><span class="h">Unblocks</span>AC-01 – AC-03<br><span class="h" style="margin-top:8px">Fix</span>Define each property as a GA4 <em>content group</em>, never a path prefix. Do this before anyone builds a report on the path.</div>
+      <div class="body"><h4>The funnel spans two URL namespaces <span class="chip partial">high</span> <span class="chip">B2B Hub</span></h4>
+        <p>The hub sits under <span class="mono">/find/shared/b2bHub/</span> but sign-up sits under <span class="mono">/find/shared/b2b/</span>. Any path-scoped report silently cuts the funnel in half at the moment that matters.</p></div>
+      <div class="fix"><span class="h">Unblocks</span>AC-01 – AC-03<br><span class="h" style="margin-top:8px">Fix</span>Define each property as a GA4 <em>content group</em>, never a path prefix.</div>
     </div>
-    <div class="gap">
+    <div class="gap" data-prop="hub">
       <div class="rank">05</div>
-      <div class="body">
-        <h4>Federal routes outside the hub entirely <span class="chip partial">high</span></h4>
-        <p>Eleven segment tiles go to <span class="mono">/organizations.jsp/org/{CODE}</span>. Federal Marketplace goes to <span class="mono">/find/gsa.jsp</span> — a different template in a different namespace. One of twelve segments, and arguably the highest-value one, is absent from any hub-scoped view.</p>
-      </div>
-      <div class="fix"><span class="h">Unblocks</span>AW-05, AC-06<br><span class="h" style="margin-top:8px">Fix</span>Add <code>/find/gsa.jsp</code> to the hub content group and tag it <code>segment = FED</code>.</div>
+      <div class="body"><h4>Federal routes outside the hub entirely <span class="chip partial">high</span> <span class="chip">B2B Hub</span></h4>
+        <p>Eleven segment tiles go to <span class="mono">/organizations.jsp/org/{CODE}</span>. Federal Marketplace goes to <span class="mono">/find/gsa.jsp</span> — a different template in a different namespace. One of twelve segments, arguably the most valuable, is absent from any hub-scoped view.</p></div>
+      <div class="fix"><span class="h">Unblocks</span>AW-05, AC-06<br><span class="h" style="margin-top:8px">Fix</span>Add <code>/find/gsa.jsp</code> to the hub content group, tagged <code>segment = FED</code>.</div>
     </div>
-    <div class="gap">
+    <div class="gap" data-prop="hub">
       <div class="rank">06</div>
-      <div class="body">
-        <h4>Segment identity is buried in the URL path <span class="chip partial">high</span></h4>
-        <p>Segment is expressed as a path suffix — <span class="mono">/org/HE</span>, <span class="mono">/org/SLK</span>, <span class="mono">/org/CPP</span> — not a query parameter or data-layer value. Without extraction there is no segment dimension, and every segment-level question becomes a manual URL exercise.</p>
-      </div>
-      <div class="fix"><span class="h">Unblocks</span>AW-05, AC-06, RE-05<br><span class="h" style="margin-top:8px">Fix</span>GA4 custom dimension <code>b2b_segment</code>, extracted from the path in GTM; map all 12 codes including FED.</div>
+      <div class="body"><h4>Segment identity is buried in the URL path <span class="chip partial">high</span> <span class="chip">B2B Hub</span></h4>
+        <p>Segment is a path suffix — <span class="mono">/org/HE</span>, <span class="mono">/org/SLK</span>, <span class="mono">/org/CPP</span> — not a parameter or data-layer value. Without extraction there's no segment dimension, and every segment question becomes a manual URL exercise.</p></div>
+      <div class="fix"><span class="h">Unblocks</span>AW-05, AC-06, RE-05<br><span class="h" style="margin-top:8px">Fix</span>Custom dimension <code>b2b_segment</code> extracted in GTM; map all 12 codes including FED.</div>
     </div>
-    <div class="gap">
+    <div class="gap" data-prop="studio safety">
       <div class="rank">07</div>
-      <div class="body">
-        <h4>D&amp;B error codes are never evented <span class="chip pre">medium</span></h4>
-        <p>The verification paths produce named failures — <span class="mono">NO_MATCH</span>, <span class="mono">TIMEOUT</span>, <span class="mono">DOMAIN_NOT_WHITELISTED</span> — that reach the user as an error screen and reach analytics not at all. The PRD's −30% support target has no way to report itself.</p>
-      </div>
-      <div class="fix"><span class="h">Unblocks</span>UX-04, UX-05<br><span class="h" style="margin-top:8px">Fix</span><code>verification_error</code> with <code>error_code</code> and <code>verification_path</code>. Ships alongside the P0 error-copy work.</div>
+      <div class="body"><h4>Two lead forms, no shared schema <span class="chip partial">high</span> <span class="chip">Studio + Safety</span></h4>
+        <p>The Studio's inquiry form and School Safety's "Connect with an Expert" form are the same conversion pattern on two properties. Neither emits an event today, and if they're specced separately we'll get two incompatible schemas and no way to compare them.</p></div>
+      <div class="fix"><span class="h">Unblocks</span>AC-10, AC-11, UX-10<br><span class="h" style="margin-top:8px">Fix</span>One shared spec: <code>form_start</code>, <code>form_abandon</code>, <code>form_submit</code>, plus <code>email_domain_hash</code> as the join key. Agree it before Oct 5.</div>
     </div>
-    <div class="gap">
+    <div class="gap" data-prop="hub">
       <div class="rank">08</div>
-      <div class="body">
-        <h4>Logged-in accounts have no analytics identity <span class="chip pre">medium</span></h4>
-        <p>Nothing distinguishes an approved B2B account from an anonymous visitor in GA4. The entire reactivation pillar rests on being able to ask "did this account come back," and today that question has no subject.</p>
-      </div>
-      <div class="fix"><span class="h">Unblocks</span>RE-01, RE-03, AW-03<br><span class="h" style="margin-top:8px">Fix</span>Set GA4 <code>user_id</code> to a hashed <code>b2b_account_id</code>, plus a user property for <code>account_status</code>. Hash it — do not send the raw id.</div>
+      <div class="body"><h4>D&amp;B error codes are never evented <span class="chip pre">medium</span> <span class="chip">B2B Hub</span></h4>
+        <p>Verification produces named failures — <span class="mono">NO_MATCH</span>, <span class="mono">TIMEOUT</span>, <span class="mono">DOMAIN_NOT_WHITELISTED</span> — that reach the user as an error screen and reach analytics not at all. The −30% support target has no way to report itself.</p></div>
+      <div class="fix"><span class="h">Unblocks</span>UX-04, UX-05<br><span class="h" style="margin-top:8px">Fix</span><code>verification_error</code> with <code>error_code</code> and <code>verification_path</code>, alongside the P0 error-copy work.</div>
     </div>
-    <div class="gap">
+    <div class="gap" data-prop="hub">
       <div class="rank">09</div>
-      <div class="body">
-        <h4>EDU verification crosses a third-party domain <span class="chip pre">medium</span></h4>
-        <p>Students leave for UNiDAYS and come back. Without a referral exclusion, the return is counted as new traffic from a referral source and the verification funnel breaks in the middle.</p>
-      </div>
+      <div class="body"><h4>Logged-in accounts have no analytics identity <span class="chip pre">medium</span> <span class="chip">B2B Hub</span></h4>
+        <p>Nothing distinguishes an approved B2B account from an anonymous visitor. The whole reactivation pillar rests on asking "did this account come back," and today that question has no subject.</p></div>
+      <div class="fix"><span class="h">Unblocks</span>RE-01, RE-03, AW-03<br><span class="h" style="margin-top:8px">Fix</span>GA4 <code>user_id</code> = hashed <code>b2b_account_id</code>, plus an <code>account_status</code> user property. Hash it; don't send the raw id.</div>
+    </div>
+    <div class="gap" data-prop="edu">
+      <div class="rank">10</div>
+      <div class="body"><h4>EDU verification crosses a third-party domain <span class="chip pre">medium</span> <span class="chip">EDU Advantage</span></h4>
+        <p>Students leave for UNiDAYS and come back. Without a referral exclusion the return is counted as new traffic from a referral source, and the verification funnel breaks in the middle.</p></div>
       <div class="fix"><span class="h">Unblocks</span>UX-09, AC-08<br><span class="h" style="margin-top:8px">Fix</span>Referral exclusion for the UNiDAYS domain, plus a <code>verification_return</code> event on the callback.</div>
+    </div>
+    <div class="gap" data-prop="studio">
+      <div class="rank">11</div>
+      <div class="body"><h4>The Studio's canonical points at a different URL <span class="chip pre">medium</span> <span class="chip">The Studio</span></h4>
+        <p>The CMS sets the canonical to <span class="mono">/find/b2b/studio.jsp</span> while the live page is <span class="mono">/find/shared/b2bHub/theStudio.jsp</span>. On a page with no analytics, nobody would notice the ranking damage.</p></div>
+      <div class="fix"><span class="h">Unblocks</span>AW-08<br><span class="h" style="margin-top:8px">Fix</span>Confirm which URL is canonical before the CMS ships SEO field control, and audit the other core pages while you're in there.</div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════ SCHOOL SAFETY ══════════════ -->
+<!-- ══════════ SCHOOL SAFETY ══════════ -->
 <section class="panel" id="p-ss" hidden>
-  <div class="lede">
-    <h2>School Safety hub — launch instrumentation</h2>
-    <p class="q">Read from the Figma, not from a spec. This page is a different animal from the other two: its conversion moment is a lead form, and unlike the hub it has the rare luxury of being measurable correctly from day one — if the events ship with the page rather than after it.</p>
-  </div>
+  <div class="lede"><h2>School Safety hub — launch instrumentation</h2>
+    <p class="q">Read from the Figma rather than from a spec. This is the one property that can be measured correctly from day one — if the events ship <em>with</em> the page rather than after it. Owner: Rachel Nicastro.</p></div>
 
   <div class="sechead">What the design actually contains</div>
   <div class="tblwrap"><table>
     <thead><tr><th>Element</th><th>As designed</th><th>Measurement consequence</th></tr></thead>
     <tbody>
-      <tr><td><strong>Sub-navigation</strong></td><td>Four anchor tabs: <span class="mono">Introduction</span> · <span class="mono">Safety Fundamentals</span> · <span class="mono">Contact Us</span> · <span class="mono">Our Partners</span></td><td>Anchor clicks, not page views. Needs an explicit <code>tab_click</code> event or the page reads as one flat pageview with no internal behaviour.</td></tr>
-      <tr><td><strong>Conversion form</strong></td><td>"Connect with an Expert" — First Name, Last Name, Work Email, Phone, School/District, State, Categories of Interest, Project Details</td><td>Produces a <strong>routed CRM lead</strong>, not a B2B account. Needs its own funnel; <span class="mono">State</span> is the routing key and <span class="mono">Work Email</span> is the join key back to accounts.</td></tr>
-      <tr><td><strong>Form position</strong></td><td>Sits at roughly 55% scroll depth; the intro's primary and secondary CTAs are switched off in the design</td><td>Scroll depth to form becomes a first-class metric, because there is no other route to the form from the top of the page.</td></tr>
-      <tr><td><strong>Video</strong></td><td>One 16:9 embed in the intro — an Alyssa's Law seminar</td><td>The clearest engagement signal on the page. Needs start / 25 / 50 / 75 / complete events.</td></tr>
-      <tr><td><strong>Category rows</strong></td><td>Five: Security, Emergency, Surveillance, Cyber, Wellness</td><td>Commerce path alongside the lead path. Tag row and position so you can tell which category earns the click.</td></tr>
-      <tr><td><strong>Trust pillars</strong></td><td>Five commerce value props — awards, expertise, assortment, card, shipping</td><td>Do <em>not</em> tag these as the SchoolSafety.gov pillars. They are B&amp;H value props wearing a similar shape.</td></tr>
+      <tr><td><strong>Sub-navigation</strong></td><td>Four anchor tabs: <span class="mono">Introduction</span> · <span class="mono">Safety Fundamentals</span> · <span class="mono">Contact Us</span> · <span class="mono">Our Partners</span></td><td>Anchor clicks, not page views. Without an explicit <code>tab_click</code> the page reads as one flat pageview with no internal behaviour.</td></tr>
+      <tr><td><strong>Conversion form</strong></td><td>"Connect with an Expert" — First Name, Last Name, Work Email, Phone, School/District, State, Categories of Interest, Project Details</td><td>Produces a <strong>routed CRM lead</strong>, not an account. <span class="mono">State</span> is the routing key; <span class="mono">Work Email</span> domain is the join key back to B2B accounts.</td></tr>
+      <tr><td><strong>Form position</strong></td><td>Roughly 55% scroll depth; the intro's primary and secondary CTAs are switched off</td><td>Scroll depth to form becomes a first-class metric, because there's no other route to it from the top of the page.</td></tr>
+      <tr><td><strong>Video</strong></td><td>One 16:9 embed — an Alyssa's Law seminar</td><td>The clearest engagement signal on the page. Needs start / 25 / 50 / 75 / complete events.</td></tr>
+      <tr><td><strong>Category rows</strong></td><td>Five: Security, Emergency, Surveillance, Cyber, Wellness</td><td>A commerce path alongside the lead path. Tag row and position so we can tell which category earns the click.</td></tr>
+      <tr><td><strong>Trust pillars</strong></td><td>Five commerce value props — awards, expertise, assortment, card, shipping</td><td>Do <em>not</em> tag these as the SchoolSafety.gov pillars. They're B&amp;H value props wearing a similar shape.</td></tr>
     </tbody>
   </table></div>
 
-  <div class="sechead">Three things worth raising with the team before Oct 5</div>
+  <div class="sechead">Three things to raise before Oct 5</div>
   <div class="gaps">
-    <div class="gap">
-      <div class="rank">01</div>
-      <div class="body">
-        <h4>No federal grant content in the design <span class="chip partial">strategy</span></h4>
-        <p>The SEO strategy for this hub targets federal grant spending, but the design has no grant module, no funding guidance and no downloadable guide — Alyssa's Law is the only regulatory content present. Grant-intent search traffic would land on a page with nothing to convert against.</p>
-      </div>
-      <div class="fix"><span class="h">Suggested</span>Either add a grant section with a gated guide (a second, higher-intent conversion moment), or drop grant terms from the AW-02 keyword set so the metric isn't measuring against content you never built.</div>
-    </div>
-    <div class="gap">
-      <div class="rank">02</div>
-      <div class="body">
-        <h4>Template debris from the student page <span class="chip pre">QA</span></h4>
-        <p>Several hidden frames belong to the UNiDAYS student flow, and a hidden heading on the live form still reads <span class="mono">"Auto- Registration &amp;"</span>. The Project Details field also shows a <span class="mono">0/30</span> character counter — 30 characters is about four words, which is almost certainly not the intent.</p>
-      </div>
-      <div class="fix"><span class="h">Suggested</span>Pre-launch QA pass. Also worth noting the category layer is spelled <code>Survailance</code> in the file — that misspelling will propagate into event names if anyone derives them from Figma.</div>
-    </div>
-    <div class="gap">
-      <div class="rank">03</div>
-      <div class="body">
-        <h4>A guided-selling widget exists but is switched off <span class="chip pre">scope</span></h4>
-        <p>A "Let's find the right product for you" helper — three dropdowns and a submit — is fully designed and hidden at every breakpoint. If it ships it is a second intent-capture moment with its own event schema; if it doesn't, it should be cut rather than left dormant in the file.</p>
-      </div>
-      <div class="fix"><span class="h">Suggested</span>Get a decision before launch. A hidden widget that ships later without instrumentation is how the Studio page ended up untagged.</div>
-    </div>
+    <div class="gap"><div class="rank">01</div>
+      <div class="body"><h4>No federal grant content in the design <span class="chip partial">strategy</span></h4>
+        <p>The SEO strategy targets federal grant spending, but the design has no grant module, no funding guidance and no downloadable guide — Alyssa's Law is the only regulatory content present. Grant-intent traffic would land on a page with nothing to convert against.</p></div>
+      <div class="fix"><span class="h">Suggested</span>Either add a grant section with a gated guide — a second, higher-intent conversion moment — or drop grant terms from the AW-02 keyword set so we're not scoring against content we never built.</div></div>
+    <div class="gap"><div class="rank">02</div>
+      <div class="body"><h4>Template debris from the student page <span class="chip pre">QA</span></h4>
+        <p>Several hidden frames belong to the UNiDAYS student flow, and a hidden heading on the live form still reads <span class="mono">"Auto- Registration &amp;"</span>. Project Details also shows a <span class="mono">0/30</span> character counter — about four words. For comparison, The Studio's existing inquiry form allows 1,024.</p></div>
+      <div class="fix"><span class="h">Suggested</span>Pre-launch QA pass. Note the category layer is spelled <code>Survailance</code> in the file — that misspelling will propagate into event names if anyone derives them from Figma.</div></div>
+    <div class="gap"><div class="rank">03</div>
+      <div class="body"><h4>A guided-selling widget exists but is switched off <span class="chip pre">scope</span></h4>
+        <p>A "Let's find the right product for you" helper — three dropdowns and a submit — is fully designed and hidden at every breakpoint. If it ships it's a second intent-capture moment with its own schema; if it doesn't, it should be cut rather than left dormant.</p></div>
+      <div class="fix"><span class="h">Suggested</span>Get a decision before launch. A hidden widget that ships later without instrumentation is exactly how The Studio ended up untagged.</div></div>
   </div>
 
-  <div class="sechead">Launch-day event schema</div>
+  <div class="sechead">Launch-day event schema — shared with The Studio</div>
   <div class="tblwrap"><table>
     <thead><tr><th>Event</th><th>Fires when</th><th>Parameters</th><th>Feeds</th></tr></thead>
     <tbody>
-      <tr><td><span class="mid-id">tab_click</span></td><td>Any of the four anchor tabs is clicked</td><td><span class="mono">tab_name</span>, <span class="mono">tab_index</span></td><td>UX-02</td></tr>
-      <tr><td><span class="mid-id">scroll_to_form</span></td><td>The form enters the viewport</td><td><span class="mono">scroll_pct</span>, <span class="mono">time_to_reach</span></td><td>UX — form reach rate</td></tr>
-      <tr><td><span class="mid-id">video_progress</span></td><td>Seminar video start, 25, 50, 75, complete</td><td><span class="mono">video_title</span>, <span class="mono">percent</span></td><td>AW — engagement depth</td></tr>
-      <tr><td><span class="mid-id">form_start</span></td><td>First field focus in "Connect with an Expert"</td><td><span class="mono">form_id</span></td><td>AC-09 numerator</td></tr>
-      <tr><td><span class="mid-id">form_abandon</span></td><td>Form focused, then exit without submit</td><td><span class="mono">last_field</span></td><td>UX — field friction</td></tr>
-      <tr><td><span class="mid-id">form_submit</span></td><td>Successful submission, toast shown</td><td><span class="mono">state</span>, <span class="mono">category_of_interest</span>, <span class="mono">email_domain_hash</span></td><td>AC-09</td></tr>
-      <tr><td><span class="mid-id">category_click</span></td><td>Any of the five SKU row CTAs</td><td><span class="mono">category</span>, <span class="mono">row_position</span></td><td>Commerce path</td></tr>
+      <tr><td class="mid-id">tab_click</td><td>Any of the four anchor tabs is clicked</td><td><span class="mono">tab_name</span>, <span class="mono">tab_index</span></td><td>UX-02</td></tr>
+      <tr><td class="mid-id">scroll_to_form</td><td>The form enters the viewport</td><td><span class="mono">scroll_pct</span>, <span class="mono">time_to_reach</span></td><td>UX-10</td></tr>
+      <tr><td class="mid-id">video_progress</td><td>Seminar video start, 25, 50, 75, complete</td><td><span class="mono">video_title</span>, <span class="mono">percent</span></td><td>AW — engagement depth</td></tr>
+      <tr><td class="mid-id">form_start</td><td>First field focus</td><td><span class="mono">form_id</span>, <span class="mono">property</span></td><td>AC-10</td></tr>
+      <tr><td class="mid-id">form_abandon</td><td>Form focused, then exit without submit</td><td><span class="mono">last_field</span></td><td>UX — field friction</td></tr>
+      <tr><td class="mid-id">form_submit</td><td>Successful submission, toast shown</td><td><span class="mono">state</span>, <span class="mono">category_of_interest</span>, <span class="mono">email_domain_hash</span></td><td>AC-09, AC-10</td></tr>
+      <tr><td class="mid-id">category_click</td><td>Any of the five SKU row CTAs</td><td><span class="mono">category</span>, <span class="mono">row_position</span></td><td>Commerce path</td></tr>
     </tbody>
   </table></div>
 
-  <div class="note"><b>The one thing to get right on day one is the join key.</b> Hash the work-email domain on submit and carry it into the CRM record. That single field is what lets you answer, six months from now, whether the School Safety hub produced accounts or only produced leads — and it is effectively impossible to reconstruct retroactively.</div>
+  <div class="note"><b>The one thing to get right on day one is the join key.</b> Hash the work-email domain on submit and carry it into the CRM record. That single field is what lets us answer, six months from now, whether the School Safety hub produced accounts or only produced leads — and it's effectively impossible to reconstruct retroactively.</div>
+</section>
+
+<!-- ══════════ OWNERS ══════════ -->
+<section class="panel" id="p-own" hidden>
+  <div class="lede"><h2>Owners &amp; next actions</h2>
+    <p class="q">One accountable name per offering, plus the roll-up. Each owner's first action is the thing that unblocks the most metrics on their own property — not the most interesting thing, the most blocking one.</p></div>
+
+  <div class="tblwrap"><table>
+    <thead><tr><th>Owner</th><th>Offering</th><th>Phase</th><th>Can see today</th><th>First action</th></tr></thead>
+    <tbody>
+      <tr data-prop="hub"><td><strong>Ariel Goldman</strong></td><td>B2B Hub</td><td>Live</td><td>Search visibility and page traffic. Not the funnel, not the segments, not returning accounts.</td><td>Decide on the hub-home sign-up CTA (gap 01). It's a product decision that blocks the PRD's headline metric, and no amount of tagging substitutes for it.</td></tr>
+      <tr data-prop="edu"><td><strong>Kailee Richey</strong></td><td>EDU Advantage</td><td>Live</td><td>Traffic and search. The verification funnel breaks at the UNiDAYS handoff.</td><td>Add the UNiDAYS referral exclusion and the return event (gap 10). Small change, restores the middle of the funnel.</td></tr>
+      <tr data-prop="studio"><td><strong>Danielo Garcia</strong></td><td>The Studio</td><td>Design</td><td>Nothing. The page has never been tagged.</td><td>Tag the current page now (gap 03), before the redesign ships — otherwise there'll be no before to compare against. Then check the canonical (gap 11).</td></tr>
+      <tr data-prop="safety"><td><strong>Rachel Nicastro</strong></td><td>School Safety</td><td>Development</td><td>Nothing yet — and that's fine, it hasn't launched.</td><td>Land the event schema in the build for Oct 5 (gap 07), and get a decision on the grant content question.</td></tr>
+      <tr data-prop="all"><td><strong>Manny Steigman</strong></td><td>All four</td><td>—</td><td>The coverage matrix, and Qualified Action Rate once AC-00 is live.</td><td>Arbitrate the shared lead-form schema between Studio and School Safety (gap 07). It's the one decision that needs someone above both properties.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="sechead">Sequencing — what has to happen before a baseline period can start</div>
+  <div class="tblwrap"><table>
+    <thead><tr><th>#</th><th>Action</th><th>Owner</th><th>Why it's first</th></tr></thead>
+    <tbody>
+      <tr><td class="mid-id">1</td><td>Tag The Studio</td><td>Danielo Garcia</td><td>No dependency on anything. Every day it stays untagged is a day of baseline we can't recover.</td></tr>
+      <tr><td class="mid-id">2</td><td>Define properties as GA4 content groups</td><td>Analytics + Jerel</td><td>Everything else is reported through these. Doing it after reports exist means rebuilding them.</td></tr>
+      <tr><td class="mid-id">3</td><td>Agree the shared lead-form schema</td><td>Manny Steigman</td><td>School Safety ships Oct 5. After that it's a retrofit on two properties instead of a spec on one.</td></tr>
+      <tr><td class="mid-id">4</td><td>Decide the hub sign-up CTA</td><td>Ariel Goldman</td><td>Product decision with a long tail — design, build, then a baseline period before the +15% target means anything.</td></tr>
+      <tr><td class="mid-id">5</td><td>Connect the warehouse, replace placeholders</td><td>Jerel Smith</td><td>Only worth doing once 1 and 2 are in place, or the first real numbers will be wrong in ways nobody can see.</td></tr>
+    </tbody>
+  </table></div>
 </section>
 
 </main>
 
 <footer><div class="wrap">
-  Measurement spec v0.1 · B2B Hub · EDU Advantage · School Safety Hub · Live pages walked and Figma read September 2026. All figures illustrative pending source connection.
+  Measurement spec v0.3 · B2B Hub · EDU Advantage · The Studio · School Safety Hub · Live pages walked and Figma read September 2026. All figures illustrative pending source connection.
 </div></footer>
 
 <script>
 (function(){
-  /* ---------- tabs ---------- */
-  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
-  var panels = {};
-  tabs.forEach(function(t){ panels[t.dataset.p] = document.getElementById('p-'+t.dataset.p); });
-  tabs.forEach(function(t){
-    t.addEventListener('click', function(){
-      tabs.forEach(function(o){
-        o.setAttribute('aria-selected', String(o===t));
-        panels[o.dataset.p].hidden = (o!==t);
-      });
-      window.scrollTo({top:0, behavior:'auto'});
-    });
-  });
-
-  /* ---------- svg helpers ---------- */
   var NS='http://www.w3.org/2000/svg';
   function E(n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);return e;}
   function T(x,y,s,o){o=o||{};var t=E('text',{x:x,y:y,fill:o.fill||'var(--ink-2)','font-size':o.size||10.5,
@@ -622,70 +607,56 @@ footer{border-top:1px solid var(--rule);padding:22px 0 40px;color:var(--ink-3);f
     'font-weight':o.weight||400});t.textContent=s;return t;}
   function fmt(n){return n.toLocaleString('en-US');}
 
+  /* ---------- charts ---------- */
   function tipFor(figId){
-    var fig=document.getElementById(figId);
+    var fig=document.getElementById(figId); if(!fig) return null;
     var d=document.createElement('div'); d.className='tip'; d.hidden=true; fig.appendChild(d);
-    return {fig:fig, el:d,
-      show:function(ev,html){ d.innerHTML=html; d.hidden=false;
-        var r=fig.getBoundingClientRect();
-        d.style.left=Math.max(60,Math.min(r.width-60, ev.clientX-r.left))+'px';
-        d.style.top=(ev.clientY-r.top)+'px'; },
-      hide:function(){ d.hidden=true; }};
+    return {show:function(ev,html){d.innerHTML=html;d.hidden=false;var r=fig.getBoundingClientRect();
+        d.style.left=Math.max(60,Math.min(r.width-60,ev.clientX-r.left))+'px';d.style.top=(ev.clientY-r.top)+'px';},
+      hide:function(){d.hidden=true;}};
   }
-  function hoverable(node, tip, html){
-    node.style.cursor='default';
-    node.addEventListener('mousemove', function(e){ tip.show(e, html); });
-    node.addEventListener('mouseleave', function(){ tip.hide(); });
+  function hoverable(node,tip,html){
+    node.addEventListener('mousemove',function(e){tip.show(e,html);});
+    node.addEventListener('mouseleave',function(){tip.hide();});
   }
 
-  /* ---------- 1. funnel ---------- */
   (function(){
     var svg=document.getElementById('svg-funnel'); if(!svg) return;
     var tip=tipFor('fig-funnel');
     var data=[
-      {l:'Hub sessions',            v:42000, c:'var(--o6)', st:'partial'},
-      {l:'Segment page engaged',    v:14700, c:'var(--o5)', st:'partial'},
-      {l:'Sign-up started',         v:2050,  c:'var(--o4)', st:'none'},
-      {l:'Sign-up submitted',       v:980,   c:'var(--o3)', st:'none'},
-      {l:'Verified / approved',     v:610,   c:'var(--o2)', st:'partial'},
-      {l:'First order ≤ 90 days',   v:275,   c:'var(--o1)', st:'live'}
+      {l:'Hub sessions',v:42000,c:'var(--o6)',st:'partial'},
+      {l:'Segment page engaged',v:14700,c:'var(--o5)',st:'partial'},
+      {l:'Sign-up started',v:2050,c:'var(--o4)',st:'none'},
+      {l:'Sign-up submitted',v:980,c:'var(--o3)',st:'none'},
+      {l:'Verified / approved',v:610,c:'var(--o2)',st:'partial'},
+      {l:'First order ≤ 90 days',v:275,c:'var(--o1)',st:'live'}
     ];
-    var x0=136, x1=548, max=data[0].v, h=26, gap=14, y0=14;
+    var x0=136,x1=548,max=data[0].v,h=26,gap=14,y0=14;
     data.forEach(function(d,i){
-      var y=y0+i*(h+gap);
-      var w=Math.max(3,(d.v/max)*(x1-x0));
-      svg.appendChild(T(x0-9, y+h/2+4, d.l, {anchor:'end', size:11, fill:'var(--ink)'}));
+      var y=y0+i*(h+gap), w=Math.max(3,(d.v/max)*(x1-x0));
+      svg.appendChild(T(x0-9,y+h/2+4,d.l,{anchor:'end',size:11,fill:'var(--ink)'}));
       var bg=E('rect',{x:x0,y:y,width:(x1-x0),height:h,fill:'var(--grid)',opacity:'.45',rx:2});
-      svg.appendChild(bg);
       var bar=E('rect',{x:x0,y:y,width:w,height:h,fill:d.c,rx:2});
-      svg.appendChild(bar);
-      svg.appendChild(T(x0+w+9, y+h/2+4, fmt(d.v), {size:11, weight:600, fill:'var(--ink)', mono:true}));
+      svg.appendChild(bg); svg.appendChild(bar);
+      svg.appendChild(T(x0+w+9,y+h/2+4,fmt(d.v),{size:11,weight:600,fill:'var(--ink)',mono:true}));
       if(i>0){
         var pct=(d.v/data[i-1].v*100);
-        var lbl=T(x0+w+9+String(fmt(d.v)).length*7+10, y+h/2+4,
-          '▸ '+pct.toFixed(0)+'%', {size:10, fill: d.st==='none'?'var(--flag)':'var(--ink-3)', mono:true});
-        svg.appendChild(lbl);
+        svg.appendChild(T(x0+w+9+String(fmt(d.v)).length*7+10,y+h/2+4,'▸ '+pct.toFixed(0)+'%',
+          {size:10,fill:d.st==='none'?'var(--flag)':'var(--ink-3)',mono:true}));
       }
-      var state = d.st==='none' ? '<b style="color:#f0a06a">not instrumented</b>' :
-                  d.st==='partial' ? '<b>partially instrumented</b>' : '<b>instrumented</b>';
-      hoverable(bar, tip, d.l+' &middot; <b>'+fmt(d.v)+'</b><br>'+state);
-      hoverable(bg, tip, d.l+' &middot; <b>'+fmt(d.v)+'</b><br>'+state);
+      var state=d.st==='none'?'<b style="color:#f0a06a">not instrumented</b>':d.st==='partial'?'<b>partially instrumented</b>':'<b>instrumented</b>';
+      hoverable(bar,tip,d.l+' &middot; <b>'+fmt(d.v)+'</b><br>'+state);
+      hoverable(bg,tip,d.l+' &middot; <b>'+fmt(d.v)+'</b><br>'+state);
     });
-    svg.appendChild(T(x0, y0+6*(h+gap)+14, 'Stages 3 and 4 emit no events today — those two transitions are modelled, not measured.',
-      {size:10, fill:'var(--ink-3)'}));
+    svg.appendChild(T(x0,y0+6*(h+gap)+14,'Stages 3 and 4 emit no events — those transitions are modelled, not measured.',{size:10,fill:'var(--ink-3)'}));
   })();
 
-  /* ---------- 2. account base stacked ---------- */
   (function(){
     var svg=document.getElementById('svg-base'); if(!svg) return;
     var tip=tipFor('fig-base');
-    var q=[
-      {q:"Q4 '25", a:4200, r:1850, d:3100},
-      {q:"Q1 '26", a:4310, r:1920, d:3260},
-      {q:"Q2 '26", a:4260, r:2050, d:3480},
-      {q:"Q3 '26", a:4390, r:2110, d:3640}
-    ];
-    var max=10500, x0=52, x1=600, yT=16, yB=214, bw=62;
+    var q=[{q:"Q4 '25",a:4200,r:1850,d:3100},{q:"Q1 '26",a:4310,r:1920,d:3260},
+           {q:"Q2 '26",a:4260,r:2050,d:3480},{q:"Q3 '26",a:4390,r:2110,d:3640}];
+    var max=10500,x0=52,x1=600,yT=16,yB=214,bw=62;
     [0,2500,5000,7500,10000].forEach(function(v){
       var y=yB-(v/max)*(yB-yT);
       svg.appendChild(E('line',{x1:x0,y1:y,x2:x1,y2:y,stroke:'var(--grid)','stroke-width':1}));
@@ -693,32 +664,29 @@ footer{border-top:1px solid var(--rule);padding:22px 0 40px;color:var(--ink-3);f
     });
     var step=(x1-x0)/q.length;
     q.forEach(function(d,i){
-      var cx=x0+step*i+step/2-bw/2, acc=0;
-      var segs=[{k:'Dormant',v:d.d,c:'var(--o2)'},{k:'At risk',v:d.r,c:'var(--o4)'},{k:'Active',v:d.a,c:'var(--o6)'}];
-      var total=d.a+d.r+d.d;
-      segs.forEach(function(s){
-        var hh=(s.v/max)*(yB-yT);
-        var y=yB-acc-hh;
+      var cx=x0+step*i+step/2-bw/2,acc=0,total=d.a+d.r+d.d;
+      [{k:'Dormant',v:d.d,c:'var(--o2)'},{k:'At risk',v:d.r,c:'var(--o4)'},{k:'Active',v:d.a,c:'var(--o6)'}].forEach(function(s){
+        var hh=(s.v/max)*(yB-yT), y=yB-acc-hh;
         var rect=E('rect',{x:cx,y:y+1,width:bw,height:Math.max(1,hh-2),fill:s.c,rx:1.5});
         svg.appendChild(rect);
-        hoverable(rect, tip, d.q+' &middot; '+s.k+'<br><b>'+fmt(s.v)+'</b> accounts &middot; '+(s.v/total*100).toFixed(0)+'% of base');
+        hoverable(rect,tip,d.q+' &middot; '+s.k+'<br><b>'+fmt(s.v)+'</b> accounts &middot; '+(s.v/total*100).toFixed(0)+'% of base');
         acc+=hh;
       });
-      svg.appendChild(T(cx+bw/2, yB+16, d.q, {anchor:'middle',size:10.5,fill:'var(--ink-2)'}));
-      svg.appendChild(T(cx+bw/2, yB-acc-7, fmt(total), {anchor:'middle',size:10,fill:'var(--ink-3)',mono:true}));
+      svg.appendChild(T(cx+bw/2,yB+16,d.q,{anchor:'middle',size:10.5,fill:'var(--ink-2)'}));
+      svg.appendChild(T(cx+bw/2,yB-acc-7,fmt(total),{anchor:'middle',size:10,fill:'var(--ink-3)',mono:true}));
     });
     svg.appendChild(E('line',{x1:x0,y1:yB,x2:x1,y2:yB,stroke:'var(--axis)','stroke-width':1}));
-    svg.appendChild(T(x0, 250, 'Dormant grew 17.4% over four quarters; active grew 4.5%.', {size:10,fill:'var(--ink-3)'}));
+    svg.appendChild(T(x0,250,'Dormant grew 17.4% over four quarters; active grew 4.5%.',{size:10,fill:'var(--ink-3)'}));
   })();
 
-  /* ---------- 3. organic clicks lines ---------- */
+  var organicSeries=[];
   (function(){
     var svg=document.getElementById('svg-organic'); if(!svg) return;
     var tip=tipFor('fig-organic');
     var months=['Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep'];
     var hub=[8200,8600,8100,8900,9400,9100,9800,10200,10600,11100,11400,11900];
     var edu=[4100,6800,5200,4600,4400,4300,4700,5100,6200,9800,12400,10900];
-    var max=14000, x0=52, x1=516, yT=14, yB=206;
+    var max=14000,x0=52,x1=516,yT=14,yB=206;
     [0,3500,7000,10500,14000].forEach(function(v){
       var y=yB-(v/max)*(yB-yT);
       svg.appendChild(E('line',{x1:x0,y1:y,x2:x1,y2:y,stroke:'var(--grid)','stroke-width':1}));
@@ -726,50 +694,98 @@ footer{border-top:1px solid var(--rule);padding:22px 0 40px;color:var(--ink-3);f
     });
     var step=(x1-x0)/(months.length-1);
     function X(i){return x0+step*i;} function Y(v){return yB-(v/max)*(yB-yT);}
-    months.forEach(function(m,i){ svg.appendChild(T(X(i), yB+16, m, {anchor:'middle',size:10,fill:'var(--ink-3)'})); });
+    months.forEach(function(m,i){svg.appendChild(T(X(i),yB+16,m,{anchor:'middle',size:10,fill:'var(--ink-3)'}));});
     svg.appendChild(E('line',{x1:x0,y1:yB,x2:x1,y2:yB,stroke:'var(--axis)','stroke-width':1}));
-
-    [{d:hub,c:'var(--s1)',n:'B2B Hub'},{d:edu,c:'var(--s2)',n:'EDU Advantage'}].forEach(function(s){
-      var pts=s.d.map(function(v,i){return X(i)+','+Y(v);}).join(' ');
-      svg.appendChild(E('polyline',{points:pts,fill:'none',stroke:s.c,'stroke-width':2,'stroke-linejoin':'round','stroke-linecap':'round'}));
+    [{d:hub,c:'var(--s1)',n:'B2B Hub',p:'hub'},{d:edu,c:'var(--s2)',n:'EDU Advantage',p:'edu'}].forEach(function(s){
+      var g=E('g',{}); g.setAttribute('data-series',s.p);
+      g.appendChild(E('polyline',{points:s.d.map(function(v,i){return X(i)+','+Y(v);}).join(' '),
+        fill:'none',stroke:s.c,'stroke-width':2,'stroke-linejoin':'round','stroke-linecap':'round'}));
       s.d.forEach(function(v,i){
         var c=E('circle',{cx:X(i),cy:Y(v),r:4,fill:s.c,stroke:'var(--surface)','stroke-width':2});
-        svg.appendChild(c);
-        hoverable(c, tip, s.n+' &middot; '+months[i]+'<br><b>'+fmt(v)+'</b> non-brand clicks');
+        g.appendChild(c);
+        hoverable(c,tip,s.n+' &middot; '+months[i]+'<br><b>'+fmt(v)+'</b> non-brand clicks');
       });
       var last=s.d.length-1;
-      svg.appendChild(T(X(last)+10, Y(s.d[last])+4, s.n, {size:10.5, fill:'var(--ink-2)', weight:500}));
+      g.appendChild(T(X(last)+10,Y(s.d[last])+4,s.n,{size:10.5,fill:'var(--ink-2)',weight:500}));
+      svg.appendChild(g); organicSeries.push(g);
     });
-    svg.appendChild(T(x0, 248, 'School Safety has no history — its baseline period starts the day it launches.', {size:10,fill:'var(--ink-3)'}));
+    svg.appendChild(T(x0,248,'The Studio and School Safety have no history — their baselines start when they are tagged.',{size:10,fill:'var(--ink-3)'}));
   })();
 
-  /* ---------- 4. verification outcomes ---------- */
   (function(){
     var svg=document.getElementById('svg-verify'); if(!svg) return;
     var tip=tipFor('fig-verify');
-    var rows=[
-      {l:'Approved — D&B match',        v:620, ok:true},
-      {l:'Approved — domain whitelist', v:105, ok:true},
-      {l:'Approved — manual review',    v:88,  ok:true},
-      {l:'Failed — NO_MATCH',           v:92,  ok:false},
-      {l:'Failed — DOMAIN_NOT_WHITELISTED', v:61, ok:false},
-      {l:'Failed — TIMEOUT',            v:34,  ok:false}
-    ];
-    var x0=204, x1=556, max=620, h=22, gap=13, y0=12;
+    var rows=[{l:'Approved — D&B match',v:620,ok:true},{l:'Approved — domain whitelist',v:105,ok:true},
+      {l:'Approved — manual review',v:88,ok:true},{l:'Failed — NO_MATCH',v:92,ok:false},
+      {l:'Failed — DOMAIN_NOT_WHITELISTED',v:61,ok:false},{l:'Failed — TIMEOUT',v:34,ok:false}];
+    var x0=204,x1=556,max=620,h=22,gap=13,y0=12;
     rows.forEach(function(r,i){
-      var y=y0+i*(h+gap);
-      var w=Math.max(3,(r.v/max)*(x1-x0));
-      svg.appendChild(T(x0-9, y+h/2+4, r.l, {anchor:'end', size:10.5, fill: r.ok?'var(--ink)':'var(--flag)', mono:!r.ok}));
-      var bar=E('rect',{x:x0,y:y,width:w,height:h,fill: r.ok?'var(--o5)':'var(--o1)',rx:2});
+      var y=y0+i*(h+gap), w=Math.max(3,(r.v/max)*(x1-x0));
+      svg.appendChild(T(x0-9,y+h/2+4,r.l,{anchor:'end',size:10.5,fill:r.ok?'var(--ink)':'var(--flag)',mono:!r.ok}));
+      var bar=E('rect',{x:x0,y:y,width:w,height:h,fill:r.ok?'var(--o5)':'var(--o1)',rx:2});
       svg.appendChild(bar);
-      svg.appendChild(T(x0+w+9, y+h/2+4, r.v, {size:11, weight:600, fill:'var(--ink)', mono:true}));
-      hoverable(bar, tip, r.l+'<br><b>'+r.v+'</b> per 1,000 submissions &middot; '+(r.v/10).toFixed(1)+'%');
+      svg.appendChild(T(x0+w+9,y+h/2+4,r.v,{size:11,weight:600,fill:'var(--ink)',mono:true}));
+      hoverable(bar,tip,r.l+'<br><b>'+r.v+'</b> per 1,000 submissions &middot; '+(r.v/10).toFixed(1)+'%');
     });
     var yl=y0+3*(h+gap)-7;
     svg.appendChild(E('line',{x1:22,y1:yl,x2:x1,y2:yl,stroke:'var(--rule-2)','stroke-width':1,'stroke-dasharray':'2 3'}));
-    svg.appendChild(T(22, y0+6*(h+gap)+10, '187 of every 1,000 submissions fail. None of the three causes emits an event.',
-      {size:10,fill:'var(--ink-3)'}));
+    svg.appendChild(T(22,y0+6*(h+gap)+10,'187 of every 1,000 submissions fail. None of the three causes emits an event.',{size:10,fill:'var(--ink-3)'}));
   })();
+
+  /* ---------- owner lens + tabs ---------- */
+  var owners=Array.prototype.slice.call(document.querySelectorAll('.owner'));
+  var tabs=Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  var scope='all';
+
+  function matches(el){
+    if(scope==='all') return true;
+    var v=el.getAttribute('data-prop');
+    if(!v) return true;
+    return v==='all' || v.split(/\s+/).indexOf(scope)>-1;
+  }
+  function applyScope(){
+    document.querySelectorAll('[data-prop]').forEach(function(el){
+      if(el.classList.contains('tab')) return;
+      el.hidden=!matches(el);
+    });
+    organicSeries.forEach(function(g){
+      g.style.display=(scope==='all'||g.getAttribute('data-series')===scope)?'':'none';
+    });
+    // collapse containers left with nothing visible
+    document.querySelectorAll('.tiles, .grid2').forEach(function(c){
+      c.hidden=!Array.prototype.slice.call(c.children).some(function(x){return !x.hidden;});
+    });
+    document.querySelectorAll('.tblwrap').forEach(function(c){
+      var rows=c.querySelectorAll('tbody tr[data-prop]');
+      if(rows.length) c.hidden=!Array.prototype.slice.call(rows).some(function(r){return !r.hidden;});
+    });
+    document.querySelectorAll('.gaps').forEach(function(c){
+      var g=c.querySelectorAll('.gap[data-prop]');
+      if(g.length) c.hidden=!Array.prototype.slice.call(g).some(function(x){return !x.hidden;});
+    });
+    // tabs
+    tabs.forEach(function(t){ t.hidden=!matches(t); });
+    var cur=tabs.filter(function(t){return t.getAttribute('aria-selected')==='true';})[0];
+    if(!cur || cur.hidden) selectTab(tabs.filter(function(t){return !t.hidden;})[0]);
+  }
+  function selectTab(t){
+    if(!t) return;
+    tabs.forEach(function(o){
+      o.setAttribute('aria-selected',String(o===t));
+      var pn=document.getElementById('p-'+o.dataset.p);
+      if(pn) pn.hidden=(o!==t);
+    });
+  }
+  tabs.forEach(function(t){ t.addEventListener('click',function(){ selectTab(t); window.scrollTo({top:0,behavior:'auto'}); }); });
+  owners.forEach(function(b){
+    b.addEventListener('click',function(){
+      scope=b.dataset.own;
+      owners.forEach(function(o){ o.setAttribute('aria-pressed',String(o===b)); });
+      applyScope();
+      window.scrollTo({top:0,behavior:'auto'});
+    });
+  });
+  applyScope();
 })();
 </script>
 </body>

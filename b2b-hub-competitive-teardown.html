@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="A full-funnel competitive teardown of CDW, Grainger, Amazon Business and PBteen/Williams-Sonoma B2B, scored against the B&amp;H B2B Hub PRD v1.2.">
+<meta name="description" content="A full-funnel competitive teardown of CDW, Grainger, Amazon Business and PBteen/Williams-Sonoma B2B, scored against the B&amp;H B2B Hub PRD v1.2 and against the hub as it will launch.">
 <meta name="color-scheme" content="light dark">
 <title>B2B Hub Competitive Teardown</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -209,7 +209,7 @@
   .m-plan{background:var(--plan);opacity:.55;}
 
   .tablewrap{overflow-x:auto;border:1px solid var(--rule);background:var(--surface);}
-  table{border-collapse:collapse;width:100%;min-width:880px;font-size:.9375rem;}
+  table{border-collapse:collapse;width:100%;min-width:1010px;font-size:.9375rem;}
   thead th{
     position:sticky;top:0;z-index:3;
     background:var(--surface-2);
@@ -246,7 +246,19 @@
     border-right:1px solid var(--rule);
   }
   .grouprow td{background:var(--accent-wash);border-bottom:1px solid var(--rule);}
-  col.bh{background:color-mix(in srgb,var(--accent) 6%,transparent);}
+  col.bh{background:color-mix(in srgb,var(--accent) 5%,transparent);}
+  col.launch{background:color-mix(in srgb,var(--accent) 13%,transparent);}
+  .readout{
+    margin-top:26px;
+    display:grid;grid-template-columns:minmax(0,180px) minmax(0,1fr);
+    gap:0 34px;align-items:start;
+    border-top:2px solid var(--ink);padding-top:16px;
+  }
+  .readout h3{font-family:var(--f-display);font-size:var(--step-1);font-weight:700;letter-spacing:-.018em;}
+  .readout .body{display:flex;flex-direction:column;gap:11px;max-width:68ch;}
+  .readout p{color:var(--ink-2);}
+  .readout strong{color:var(--ink);font-weight:600;}
+  @media (max-width:820px){.readout{grid-template-columns:1fr;gap:12px;}}
 
   /* ---------- teardown blocks ---------- */
   .flow{display:flex;flex-direction:column;gap:34px;}
@@ -463,18 +475,18 @@
     <div class="sec-head">
       <p class="eyebrow">Capability matrix</p>
       <h2>Where each portal actually stands</h2>
-      <p class="dek">Scored from public evidence only. An open circle on a competitor means the capability exists but is thin, gated behind a rep, or inconsistently delivered. The B&amp;H column reflects the hub as PRD v1.2 describes it today, with planned items marked.</p>
+      <p class="dek">Scored from public evidence only. An open circle on a competitor means the capability exists but is thin, gated behind a rep, or inconsistently delivered. The two B&amp;H columns are <em>today</em> &mdash; the hub as it stands &mdash; and <em>at launch</em>, meaning Phase 1 shipped with the new layout and <strong>without CMS Light</strong>: the redesigned front door, the sign-up entry, the verification error work, the intake forms and the eProcurement cleanup, with content still hard-coded.</p>
     </div>
     <div class="legend">
       <span><i class="mark m-lead"></i> Strong / self-service</span>
       <span><i class="mark m-part"></i> Partial or rep-gated</span>
       <span><i class="mark m-gap"></i> Absent</span>
       <span><i class="mark m-unk"></i> Not publicly verifiable</span>
-      <span><i class="mark m-plan"></i> Planned (B&amp;H)</span>
+      <span><i class="mark m-plan"></i> Committed to a later phase</span>
     </div>
     <div class="tablewrap">
       <table>
-        <colgroup><col><col><col><col><col><col class="bh"></colgroup>
+        <colgroup><col><col><col><col><col><col class="bh"><col class="launch"></colgroup>
         <thead>
           <tr>
             <th scope="col">Capability</th>
@@ -483,88 +495,97 @@
             <th scope="col">Amazon Bus.</th>
             <th scope="col">PBteen / WSI</th>
             <th scope="col">B&amp;H today</th>
+            <th scope="col">B&amp;H at launch</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="grouprow"><th scope="row" colspan="1">Anonymous &amp; contract content</th><td colspan="5"></td></tr>
+          <tr class="grouprow"><th scope="row" colspan="1">Anonymous &amp; contract content</th><td colspan="6"></td></tr>
           <tr><th scope="row">Dedicated segment landing pages</th>
-            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong &mdash; 12 verticals on the shared program page"></i></td><td><i class="mark m-part" title="Partial"></i></td></tr>
+            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong &mdash; 12 verticals on the shared program page"></i></td><td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-lead" title="Twelve redesigned segment pages"></i></td></tr>
           <tr><th scope="row">Searchable / filterable contract finder</th>
-            <td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent &mdash; no cooperative contract vehicles"></i></td><td><i class="mark m-gap" title="Absent"></i></td></tr>
+            <td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent &mdash; no cooperative contract vehicles"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Not in Phase 1 scope"></i></td></tr>
           <tr><th scope="row">Contract page states number, term, eligibility</th>
-            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent &mdash; no cooperative contract vehicles"></i></td><td><i class="mark m-part" title="Partial"></i></td></tr>
+            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent &mdash; no cooperative contract vehicles"></i></td><td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-part" title="New contract page template and copy; the fields stay hard-coded without CMS Light"></i></td></tr>
           <tr><th scope="row">Contract exclusions &amp; fees disclosed up front</th>
-            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-lead" title="Strong &mdash; discount exclusions published in full"></i></td><td><i class="mark m-gap" title="Absent"></i></td></tr>
+            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-lead" title="Strong &mdash; discount exclusions published in full"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Not in Phase 1 scope"></i></td></tr>
           <tr><th scope="row">Named human contact per contract</th>
-            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-part" title="Partial &mdash; Account Executive by territory, not by contract"></i></td><td><i class="mark m-gap" title="Absent"></i></td></tr>
+            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-part" title="Partial &mdash; Account Executive by territory, not by contract"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Not in Phase 1 scope"></i></td></tr>
           <tr><th scope="row">Contract-scoped intake form (not a mailto)</th>
-            <td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent &mdash; email aliases only"></i></td><td><i class="mark m-gap" title="Absent"></i></td></tr>
+            <td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent &mdash; email aliases only"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-part" title="A forking intake form replaces the mailto, but it is not scoped per contract"></i></td></tr>
           <tr><th scope="row">Published response SLA on intake</th>
-            <td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong &mdash; 48&ndash;72 business hours, stated up front"></i></td><td><i class="mark m-gap" title="Absent"></i></td></tr>
+            <td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong &mdash; 48&ndash;72 business hours, stated up front"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Not specified in Phase 1"></i></td></tr>
           <tr><th scope="row">eProcurement platforms named publicly</th>
-            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-part" title="Partial &mdash; and the SAP/Ariba listing is wrong"></i></td></tr>
+            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-part" title="Partial &mdash; and the SAP/Ariba listing is wrong"></i></td><td><i class="mark m-lead" title="SAP/Ariba listing corrected and the platform list rebuilt"></i></td></tr>
           <tr><th scope="row">Punchout technical spec published (cXML / OCI)</th>
-            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td></tr>
+            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Not in Phase 1 scope"></i></td></tr>
 
-          <tr class="grouprow"><th scope="row">Sign-up, verification, onboarding</th><td colspan="5"></td></tr>
+          <tr class="grouprow"><th scope="row">Sign-up, verification, onboarding</th><td colspan="6"></td></tr>
           <tr><th scope="row">Sign-up reachable without completing a funnel</th>
-            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent &mdash; segment funnel gates sign-up"></i></td></tr>
+            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent &mdash; segment funnel gates sign-up"></i></td><td><i class="mark m-lead" title="Prominent sign-up CTA on hub entry"></i></td></tr>
           <tr><th scope="row">Explicit join-existing / new / personal fork</th>
-            <td><i class="mark m-unk" title="Not verifiable"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-part" title="Partial &mdash; one application, branching on profession"></i></td><td><i class="mark m-gap" title="Absent"></i></td></tr>
+            <td><i class="mark m-unk" title="Not verifiable"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-part" title="Partial &mdash; one application, branching on profession"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-part" title="Registration links an existing B&amp;H account, but there is no explicit three-way fork"></i></td></tr>
           <tr><th scope="row">Verification is exception-based, not a hard gate</th>
-            <td><i class="mark m-unk" title="Not verifiable"></i></td><td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-part" title="Partial &mdash; reviewed in 48&ndash;72h, but benefits unlock at email confirmation"></i></td><td><i class="mark m-gap" title="Absent &mdash; D&amp;B blocks at entry"></i></td></tr>
+            <td><i class="mark m-unk" title="Not verifiable"></i></td><td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-part" title="Partial &mdash; reviewed in 48&ndash;72h, but benefits unlock at email confirmation"></i></td><td><i class="mark m-gap" title="Absent &mdash; D&amp;B blocks at entry"></i></td><td><i class="mark m-gap" title="D&amp;B still gates entry"></i></td></tr>
           <tr><th scope="row">Failure states explained with a recovery path</th>
-            <td><i class="mark m-unk" title="Not verifiable"></i></td><td><i class="mark m-unk" title="Not verifiable"></i></td><td><i class="mark m-part" title="Partial &mdash; prevention rather than recovery"></i></td><td><i class="mark m-unk" title="Not verifiable"></i></td><td><i class="mark m-plan" title="Planned P0"></i></td></tr>
+            <td><i class="mark m-unk" title="Not verifiable"></i></td><td><i class="mark m-unk" title="Not verifiable"></i></td><td><i class="mark m-part" title="Partial &mdash; prevention rather than recovery"></i></td><td><i class="mark m-unk" title="Not verifiable"></i></td><td><i class="mark m-gap" title="Absent today"></i></td><td><i class="mark m-lead" title="Human-readable errors across all three paths &mdash; though without CMS Light the copy still needs a dev ticket to change"></i></td></tr>
           <tr><th scope="row">Consumer account &rarr; business account conversion</th>
-            <td><i class="mark m-unk" title="Not verifiable"></i></td><td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong &mdash; 12-digit Member ID bridges to the consumer account"></i></td><td><i class="mark m-plan" title="Planned P0 &mdash; account linkage in registration form"></i></td></tr>
+            <td><i class="mark m-unk" title="Not verifiable"></i></td><td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong &mdash; 12-digit Member ID bridges to the consumer account"></i></td><td><i class="mark m-gap" title="Absent today"></i></td><td><i class="mark m-part" title="Account linkage captured at registration"></i></td></tr>
           <tr><th scope="row">Domain-level account claiming (DNS verified)</th>
-            <td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td></tr>
+            <td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Not in Phase 1 scope"></i></td></tr>
           <tr><th scope="row">Tax exemption self-service upload &amp; status</th>
-            <td><i class="mark m-unk" title="Not verifiable"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-part" title="Partial &mdash; six exemption types, firm-level, but email-submitted"></i></td><td><i class="mark m-gap" title="Absent"></i></td></tr>
+            <td><i class="mark m-unk" title="Not verifiable"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-part" title="Partial &mdash; six exemption types, firm-level, but email-submitted"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Not in Phase 1 scope"></i></td></tr>
           <tr><th scope="row">Onboarding checklist or progress indicator</th>
-            <td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-plan" title="Planned Phase 2"></i></td></tr>
+            <td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent today"></i></td><td><i class="mark m-plan" title="Committed to Phase 2"></i></td></tr>
 
-          <tr class="grouprow"><th scope="row">Logged-in account layer</th><td colspan="5"></td></tr>
+          <tr class="grouprow"><th scope="row">Logged-in account layer</th><td colspan="6"></td></tr>
           <tr><th scope="row">Account dashboard as a destination</th>
-            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent &mdash; no epic exists"></i></td></tr>
+            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent &mdash; no epic exists"></i></td><td><i class="mark m-plan" title="Committed to Phase 2"></i></td></tr>
           <tr><th scope="row">Order history spanning online, phone and branch</th>
-            <td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-part" title="Partial &mdash; in-store enrollment reconciles, but a 24-hour lag before orders appear"></i></td><td><i class="mark m-plan" title="Planned Phase 2"></i></td></tr>
+            <td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-part" title="Partial &mdash; in-store enrollment reconciles, but a 24-hour lag before orders appear"></i></td><td><i class="mark m-gap" title="Absent today"></i></td><td><i class="mark m-plan" title="Committed to Phase 2"></i></td></tr>
           <tr><th scope="row">Company lists vs. personal lists as separate objects</th>
-            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td></tr>
+            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Not scoped"></i></td></tr>
           <tr><th scope="row">Self-service quotes created by the buyer</th>
-            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-gap" title="Absent &mdash; every quote is an email"></i></td><td><i class="mark m-plan" title="Planned Phase 2"></i></td></tr>
+            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-gap" title="Absent &mdash; every quote is an email"></i></td><td><i class="mark m-gap" title="Absent today"></i></td><td><i class="mark m-plan" title="Committed to Phase 2"></i></td></tr>
           <tr><th scope="row">Multi-user roles &amp; admin-managed access</th>
-            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-plan" title="Planned P2 tiered admin"></i></td></tr>
+            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent today"></i></td><td><i class="mark m-plan" title="Committed to Phase 2 &mdash; tiered admin, no ticket yet"></i></td></tr>
           <tr><th scope="row">Order approval workflows with escalation</th>
-            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td></tr>
+            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Not scoped"></i></td></tr>
           <tr><th scope="row">Budgets / spend limits enforced at checkout</th>
-            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td></tr>
+            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Not scoped"></i></td></tr>
           <tr><th scope="row">Buying policies &mdash; preferred / restricted / blocked</th>
-            <td><i class="mark m-part" title="Partial &mdash; via custom catalogs"></i></td><td><i class="mark m-part" title="Partial &mdash; via custom catalogs"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-part" title="Partial &mdash; portal-level exclusions, invisible to the buyer"></i></td></tr>
+            <td><i class="mark m-part" title="Partial &mdash; via custom catalogs"></i></td><td><i class="mark m-part" title="Partial &mdash; via custom catalogs"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-part" title="Partial &mdash; portal-level exclusions, invisible to the buyer"></i></td><td><i class="mark m-gap" title="Not scoped"></i></td></tr>
           <tr><th scope="row">Spend analytics dashboard (visual, not export)</th>
-            <td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td></tr>
+            <td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-plan" title="Committed to Phase 2"></i></td></tr>
           <tr><th scope="row">Line-item reconciliation export for AP</th>
-            <td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td></tr>
+            <td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Not scoped"></i></td></tr>
           <tr><th scope="row">Custom PO / GL / cost-center fields on documents</th>
-            <td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td></tr>
+            <td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Not scoped"></i></td></tr>
           <tr><th scope="row">Multi-location ship-to with per-location history</th>
-            <td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-unk" title="Not documented, despite a headline corporate gifting program"></i></td><td><i class="mark m-plan" title="Planned Phase 2"></i></td></tr>
+            <td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-part" title="Partial"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-unk" title="Not documented, despite a headline corporate gifting program"></i></td><td><i class="mark m-gap" title="Absent today"></i></td><td><i class="mark m-plan" title="Committed to Phase 2"></i></td></tr>
           <tr><th scope="row">Self-service punchout config with a test mode</th>
-            <td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td></tr>
+            <td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Not scoped"></i></td></tr>
           <tr><th scope="row">Punchout / integration health visible to the customer</th>
-            <td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-part" title="Partial &mdash; test mode only"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-plan" title="Planned Phase 3"></i></td></tr>
+            <td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-part" title="Partial &mdash; test mode only"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent today"></i></td><td><i class="mark m-plan" title="Committed to Phase 3"></i></td></tr>
           <tr><th scope="row">Invoices &amp; payment self-service</th>
-            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent &mdash; no net terms"></i></td><td><i class="mark m-gap" title="Absent"></i></td></tr>
+            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent &mdash; no net terms"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Not scoped"></i></td></tr>
           <tr><th scope="row">Contract expiry / renewal notification</th>
-            <td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-part" title="Partial &mdash; two-year membership renewal only"></i></td><td><i class="mark m-plan" title="Planned Phase 2"></i></td></tr>
+            <td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-part" title="Partial &mdash; two-year membership renewal only"></i></td><td><i class="mark m-gap" title="Absent today"></i></td><td><i class="mark m-plan" title="Committed to Phase 2"></i></td></tr>
           <tr><th scope="row">In-account &ldquo;what's new&rdquo; / change log</th>
-            <td><i class="mark m-part" title="Partial &mdash; Research Hub"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-part" title="Partial &mdash; bell + public release notes"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-plan" title="Planned P2/P3"></i></td></tr>
+            <td><i class="mark m-part" title="Partial &mdash; Research Hub"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-part" title="Partial &mdash; bell + public release notes"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent today"></i></td><td><i class="mark m-plan" title="Committed to P2/P3"></i></td></tr>
           <tr><th scope="row">Account team as a persistent logged-in page</th>
-            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-part" title="Partial &mdash; Customer Advisor, off-portal"></i></td><td><i class="mark m-part" title="Partial &mdash; public Find Your Account Executive lookup"></i></td><td><i class="mark m-gap" title="Absent"></i></td></tr>
+            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-part" title="Partial &mdash; Customer Advisor, off-portal"></i></td><td><i class="mark m-part" title="Partial &mdash; public Find Your Account Executive lookup"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Not scoped"></i></td></tr>
           <tr><th scope="row">Native mobile app with approvals &amp; push</th>
-            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td></tr>
+            <td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-lead" title="Strong"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Absent"></i></td><td><i class="mark m-gap" title="Not scoped"></i></td></tr>
         </tbody>
       </table>
+    </div>
+    <div class="readout">
+      <h3>Reading the launch column</h3>
+      <div class="body">
+        <p>Launch closes the acquisition gap and leaves the retention gap untouched. Of the nine anonymous and contract-content rows, we move on three. Of the eight sign-up rows, we move on five. Of the nineteen logged-in rows, <strong>we move on none</strong> &mdash; the entire account layer is Phase 2 or later, so on the day we launch, a customer who already has a portal still has no reason to come back to the hub.</p>
+        <p>That is the correct Phase 1 trade, and it is worth saying out loud to stakeholders rather than letting the redesign imply more than it delivers. The front door will be materially better than what CDW and Grainger put in front of a first-time buyer. Everything that makes those accounts hard to leave &mdash; roles, approvals, spend limits, quotes, reporting &mdash; is still ahead of us.</p>
+        <p><strong>Two things get quietly worse without CMS Light.</strong> The improved verification error copy ships hard-coded, so tuning the message for a specific failure code goes back to being a dev ticket &mdash; and that copy is exactly the kind we will want to iterate on weekly once real traffic hits it. Same for the new contract page template: better structure, same drift, because the fields behind it still can't be edited by the B2B team. If the CMS slips past launch, plan for a copy-change queue rather than assuming the new layout holds its quality.</p>
+      </div>
     </div>
   </div>
 </section>

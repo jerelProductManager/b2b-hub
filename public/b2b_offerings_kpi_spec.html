@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="description" content="B&amp;H B2B cross-offering KPI specification: 91 adoption and impact metrics across awareness, user experience, acquisition and reactivation for the B2B Hub, EDU Advantage, The Studio and School Safety hub, with a per-owner funnel.">
+<meta name="robots" content="noindex, nofollow">
+<title>B2B Offerings KPI Spec</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Single-theme by design: this spec renders light for every viewer,
+   matching the Used Department KPI spec it is a sibling to. */
+:root{
+  color-scheme:light;
+  --bg:#f4f5f7;--card:#fff;--border:#e2e4ea;--border-dark:#c8cad2;
+  --text:#1a1a1a;--text-mid:#444;--text-muted:#888;--text-faint:#bbb;
+  --brand:#0F1F4B;--brand-2:#1a2f60;--brand-ink:#0F1F4B;--brand-wash:rgba(15,31,75,.07);
+  --gold:#C8993A;--gold-bg:rgba(200,153,58,.12);--gold-border:rgba(200,153,58,.4);
+  --red:#C0392B;--red-bg:#FCECEA;--amber:#9C6400;--amber-bg:#FEF3DC;
+  --green:#1E7B45;--green-bg:#E8F5EE;--blue:#1A5FA8;--blue-bg:#E6F0FB;
+  --purple:#5247A8;--purple-bg:#EEECFB;--grey:#8894a8;--grey-bg:#eef0f4;
+  --teal:#0E6B72;--teal-bg:#E3F2F3;--st-na:#6b7689;
+  --row-hover:#fafbfc;--th-bg:#fafbfc;--header-ink:#fff;--header-sub:rgba(255,255,255,.52);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+body{font-family:'Montserrat',system-ui,sans-serif;background:var(--bg);color:var(--text);padding-bottom:48px}
+
+.topbar{height:4px;background:linear-gradient(90deg,var(--gold) 0%,#e8b84b 50%,var(--gold) 100%)}
+.header-card{background:var(--brand);padding:22px 28px}
+.header-inner{max-width:1280px;margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.header-eyebrow{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.header-title{font-size:23px;font-weight:800;color:var(--header-ink);letter-spacing:.2px}
+.header-sub{font-size:12px;color:var(--header-sub);margin-top:5px;max-width:740px;line-height:1.5}
+.header-right{font-size:11px;color:var(--header-sub);text-align:right;line-height:1.7}
+
+.shell{max-width:1280px;margin:0 auto;padding:22px 28px 0}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:18px}
+.sum-row{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:14px}
+.sum-num{font-size:22px;font-weight:800;color:var(--brand-ink);line-height:1}
+.sum-lbl{font-size:9.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted);margin-top:5px;line-height:1.3}
+.sum-num.b{color:var(--blue)}.sum-num.p{color:var(--purple)}
+.sum-num.g{color:var(--green)}.sum-num.a{color:var(--amber)}.sum-num.r{color:var(--red)}
+
+.controls{display:flex;flex-direction:column;gap:10px;padding-top:14px;margin-top:12px;border-top:1px solid var(--brand-wash)}
+.ctrl-group{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.ctrl-lbl{font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted);width:122px;flex-shrink:0}
+.chip{font-size:11px;font-weight:600;padding:4px 12px;border-radius:5px;border:1.5px solid var(--border);background:var(--card);color:var(--text-muted);cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .13s;text-align:left;line-height:1.3}
+.chip:hover{border-color:var(--brand-ink);color:var(--brand-ink)}
+.chip.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+.chip:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+.chip .sm{display:block;font-size:9px;font-weight:600;opacity:.72;margin-top:1px;letter-spacing:.02em}
+
+.leg{display:flex;gap:18px;flex-wrap:wrap;font-size:10.5px;color:var(--text-muted);font-weight:600;margin:-4px 0 18px 2px}
+.leg-item{display:flex;align-items:center;gap:6px}
+.leg-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+
+.fun{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:15px 18px 16px;margin-bottom:18px}
+.fun-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+.fun-title{font-size:11.5px;font-weight:700;color:var(--brand-ink)}
+.fun-who{font-size:10.5px;color:var(--text-muted);font-weight:600}
+.fun-note{font-size:11px;color:var(--text-mid);line-height:1.55;max-width:104ch;margin-bottom:14px}
+.fun-note b{color:var(--text)}
+.fun-strip{display:flex;align-items:stretch;overflow-x:auto;padding-bottom:2px}
+.fun-stage{flex:1 1 0;min-width:124px;border:1px solid var(--border);border-right:0;padding:9px 11px 15px;
+  display:flex;flex-direction:column;gap:3px;position:relative;background:var(--card)}
+.fun-stage:first-child{border-radius:6px 0 0 6px}
+.fun-stage:last-child{border-right:1px solid var(--border);border-radius:0 6px 6px 0}
+.fun-stage:not(:last-child)::after{content:'';position:absolute;right:-5px;top:50%;width:8px;height:8px;
+  border-top:1.5px solid var(--border-dark);border-right:1.5px solid var(--border-dark);
+  transform:translateY(-50%) rotate(45deg);background:var(--card);z-index:2}
+.fun-mid{font-size:8.5px;font-weight:700;letter-spacing:.06em;color:var(--text-faint)}
+.fun-name{font-size:11px;font-weight:700;color:var(--text);line-height:1.3}
+.fun-val{font-size:17px;font-weight:800;color:var(--brand-ink);line-height:1;margin-top:auto;padding-top:8px;font-variant-numeric:tabular-nums}
+.fun-val.na{color:var(--text-faint);font-weight:600}
+.fun-st{font-size:8px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-top:4px}
+.fun-bar{position:absolute;left:0;right:0;bottom:0;height:4px}
+.b-live{background:var(--green)}.b-partial{background:var(--amber)}.b-none{background:var(--red)}.b-na{background:var(--st-na)}
+.t-live{color:var(--green)}.t-partial{color:var(--amber)}.t-none{color:var(--red)}.t-na{color:var(--st-na)}
+
+.fun-rows{display:flex;flex-direction:column;gap:8px}
+.fun-row{display:flex;align-items:center;gap:12px}
+.fun-rlabel{width:132px;flex-shrink:0;font-size:11px;font-weight:700;color:var(--brand-ink);line-height:1.25}
+.fun-rlabel span{display:block;font-size:9.5px;color:var(--text-muted);font-weight:600;margin-top:1px}
+.fun-mini{display:flex;gap:3px;flex:1;min-width:0;overflow-x:auto}
+.fun-cell{flex:1 1 0;min-width:60px;height:28px;border-radius:2px;display:flex;align-items:center;justify-content:center;
+  font-size:8.5px;font-weight:700;color:#fff;letter-spacing:.02em;overflow:hidden;white-space:nowrap;padding:0 5px;text-overflow:ellipsis}
+.fun-legend{font-size:10px;color:var(--text-faint);font-weight:600;margin-top:11px}
+
+.reader{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:8px;margin-bottom:20px}
+.reader summary{list-style:none;cursor:pointer;padding:11px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-radius:0 6px 6px 0}
+.reader summary::-webkit-details-marker{display:none}
+.reader summary:hover{background:var(--row-hover)}
+.reader summary:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.rd-title{font-size:11.5px;font-weight:700;color:var(--text);flex-shrink:0}
+.rd-hint{font-size:10.5px;color:var(--text-muted);font-weight:600}
+.rd-chev{width:8px;height:8px;border-right:1.5px solid var(--text-muted);border-bottom:1.5px solid var(--text-muted);
+  transform:rotate(45deg);margin:-3px 0 0 auto;flex-shrink:0;transition:transform .15s}
+.reader[open] .rd-chev{transform:rotate(-135deg);margin-top:2px}
+.rd-body{padding:12px 16px 14px;display:flex;flex-direction:column;gap:11px;border-top:1px solid var(--brand-wash)}
+.rd-item{font-size:11.5px;color:var(--text-mid);line-height:1.6;max-width:100ch}
+.rd-item strong{color:var(--text)}
+
+.section{margin-bottom:22px}
+.sec-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:6px;padding-bottom:9px;border-bottom:1px solid var(--border)}
+.sec-icon{width:24px;height:24px;background:var(--brand);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold);font-size:12px;font-weight:800;margin-top:1px}
+.sec-title-wrap{flex:1;min-width:0}
+.sec-title{font-size:13.5px;font-weight:700;color:var(--brand-ink);letter-spacing:.02em}
+.sec-q{font-size:11px;color:var(--text-mid);line-height:1.5;margin-top:3px;max-width:880px}
+.sec-ships{font-size:10.5px;line-height:1.5;margin-top:6px;max-width:880px;color:var(--text-muted);
+  background:var(--teal-bg);border-left:2px solid var(--teal);padding:5px 10px;border-radius:0 4px 4px 0}
+.sec-ships b{color:var(--teal);font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:9px}
+.sec-count{margin-left:auto;font-size:10px;font-weight:600;padding:2px 9px;border-radius:3px;background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-border);white-space:nowrap;flex-shrink:0}
+.tbl-wrap{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow-x:auto;margin-top:10px}
+table.sc{width:100%;border-collapse:collapse;font-size:12px;min-width:1120px}
+table.sc th{font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);text-align:left;padding:10px 12px;border-bottom:2px solid var(--brand-wash);white-space:nowrap;background:var(--th-bg)}
+table.sc td{padding:10px 12px;border-bottom:1px solid var(--brand-wash);vertical-align:top;line-height:1.4}
+table.sc tr:last-child td{border-bottom:none}
+table.sc tbody tr:hover td{background:var(--row-hover)}
+table.sc tr.band td{background:var(--th-bg);padding:6px 12px;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted)}
+table.sc tr.band:hover td{background:var(--th-bg)}
+.m-id{font-size:9px;font-weight:700;letter-spacing:.06em;color:var(--text-faint);margin-bottom:2px}
+.m-name{font-weight:700;color:var(--brand-ink)}
+.m-def{font-size:10.5px;color:var(--text-muted);font-weight:400;line-height:1.45;margin-top:3px;max-width:400px}
+.m-val{color:var(--text-mid);font-size:11.5px;white-space:nowrap}
+.m-tbd{color:var(--text-faint);font-style:italic}
+.m-source{color:var(--text-muted);font-size:11px}
+.m-cadence{color:var(--text-muted);font-size:11px;white-space:nowrap}
+.pill{font-size:8.5px;font-weight:700;letter-spacing:.03em;padding:2px 7px;border-radius:3px;text-transform:uppercase;white-space:nowrap;display:inline-block}
+.p-adoption{background:var(--blue-bg);color:var(--blue)}
+.p-impact{background:var(--purple-bg);color:var(--purple)}
+.p-live{background:var(--green-bg);color:var(--green)}
+.p-partial{background:var(--amber-bg);color:var(--amber)}
+.p-none{background:var(--red-bg);color:var(--red)}
+.p-na{background:var(--grey-bg);color:var(--grey)}
+.prop{font-size:8.5px;font-weight:700;letter-spacing:.04em;padding:2px 6px;border-radius:3px;display:inline-block;margin:0 3px 3px 0;white-space:nowrap}
+.prop-hub{background:var(--blue-bg);color:var(--blue)}
+.prop-edu{background:var(--green-bg);color:var(--green)}
+.prop-studio{background:var(--purple-bg);color:var(--purple)}
+.prop-safety{background:var(--amber-bg);color:var(--amber)}
+.sec-empty{padding:16px 18px;font-size:11.5px;color:var(--text-faint);font-style:italic}
+
+table.cov{min-width:720px}
+table.cov td{text-align:center;white-space:nowrap}
+table.cov td:first-child,table.cov td:last-child{text-align:left}
+table.cov .cov-p{font-weight:700;color:var(--brand-ink);font-size:12px}
+table.cov .cov-o{font-size:10px;color:var(--text-muted);font-weight:600;margin-top:2px}
+
+.foot{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--text-faint);margin-top:20px;padding-top:14px;border-top:1px solid var(--border);flex-wrap:wrap;gap:8px}
+.foot-bh{font-size:10px;font-weight:700;background:var(--brand);color:var(--gold);padding:2px 8px;border-radius:3px;letter-spacing:.05em}
+@media(max-width:900px){.sum-row{grid-template-columns:repeat(3,1fr)}.ctrl-lbl{width:auto}}
+@media(max-width:560px){.sum-row{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="topbar"></div>
+<div class="header-card"><div class="header-inner">
+  <div>
+    <div class="header-eyebrow">B&amp;H B2B · Cross-Offering KPI Specification</div>
+    <div class="header-title">B2B Offerings — Measurement KPI Spec</div>
+    <div class="header-sub">Four offerings across four themes, each theme anchored to the surfaces we actually ship and broken into adoption metrics (is it being used?) and impact metrics (is it moving the business?). Every metric carries its instrumentation state, because most of them cannot be measured today.</div>
+  </div>
+  <div class="header-right">Author: Jerel Smith · B2B Product<br>Data: GA4 / Search Console / Warehouse / CRM / CMS / ESP<br>Draft v0.5 · Baselines &amp; targets to confirm</div>
+</div></div>
+
+<div class="shell">
+
+  <div class="panel">
+    <div class="sum-row" id="sum-row"></div>
+    <div class="controls">
+      <div class="ctrl-group">
+        <span class="ctrl-lbl">Owner</span>
+        <button class="chip active" data-dim="own" data-val="all">All four<span class="sm">Manny Steigman</span></button>
+        <button class="chip" data-dim="own" data-val="hub">B2B Hub<span class="sm">Ariel Goldman · Live</span></button>
+        <button class="chip" data-dim="own" data-val="edu">EDU Advantage<span class="sm">Kailee Richey · Live</span></button>
+        <button class="chip" data-dim="own" data-val="studio">The Studio<span class="sm">Danielo Garcia · Design</span></button>
+        <button class="chip" data-dim="own" data-val="safety">School Safety<span class="sm">Rachel Nicastro · Dev</span></button>
+      </div>
+      <div class="ctrl-group">
+        <span class="ctrl-lbl">Metric type</span>
+        <button class="chip active" data-dim="type" data-val="all">All</button>
+        <button class="chip" data-dim="type" data-val="adoption">Adoption</button>
+        <button class="chip" data-dim="type" data-val="impact">Impact</button>
+      </div>
+      <div class="ctrl-group">
+        <span class="ctrl-lbl">Instrumentation</span>
+        <button class="chip active" data-dim="state" data-val="all">All</button>
+        <button class="chip" data-dim="state" data-val="live">Live</button>
+        <button class="chip" data-dim="state" data-val="partial">Partial</button>
+        <button class="chip" data-dim="state" data-val="none">Not instrumented</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="leg">
+    <span class="leg-item"><span class="leg-dot" style="background:var(--blue)"></span>Adoption — is the surface/flow we shipped being reached and used?</span>
+    <span class="leg-item"><span class="leg-dot" style="background:var(--purple)"></span>Impact — is it moving acquisition, conversion, retention or revenue?</span>
+    <span class="leg-item"><span class="leg-dot" style="background:var(--green)"></span>Live</span>
+    <span class="leg-item"><span class="leg-dot" style="background:var(--amber)"></span>Partial</span>
+    <span class="leg-item"><span class="leg-dot" style="background:var(--red)"></span>Not instrumented</span>
+  </div>
+
+  <div class="fun" id="funnel"></div>
+
+  <details class="reader">
+    <summary>
+      <span class="rd-title">How to read this spec</span>
+      <span class="rd-hint">Adoption vs. impact · why the adoption column is red · four conversion objects · what is deliberately excluded</span>
+      <span class="rd-chev" aria-hidden="true"></span>
+    </summary>
+    <div class="rd-body">
+      <div class="rd-item"><strong>How to read this.</strong> Adoption and impact only mean anything when they are anchored to something we ship — so each theme opens by naming its surfaces, and every metric under it answers one of two questions about those surfaces. <strong>Adoption:</strong> is it reaching people and being used? <strong>Impact:</strong> is the business moving as a result? Baselines are marked TBD because no data pull has happened yet; targets appear only where the PRD already commits to one. Both are placeholders, not commitments.</div>
+      <div class="rd-item"><strong>Why the adoption column is mostly red.</strong> Adoption metrics measure surfaces, and on three of the four offerings the surface either carries no tag (The Studio), has not shipped yet (School Safety), or does not exist at all — the B2B Hub home page has no sign-up CTA to be adopted, and there is no proactive-communication mechanism for existing customers to adopt. Impact metrics fare better only because order and account data lives in the warehouse regardless of what the front end does. Read a red adoption row as a product gap first and a tagging gap second.</div>
+      <div class="rd-item"><strong>Four offerings, four different conversion objects.</strong> An approved organization account (Hub), a verified individual student (EDU), and two lead forms (Studio, School Safety) are not the same event and must never be summed. The only figure that legitimately rolls up across all four is <strong>AC-10 Qualified Action Rate</strong> — each property's own conversion over its own qualified sessions.</div>
+      <div class="rd-item"><strong>Deliberately not in this register.</strong> Canonical integrity and template accessibility conformance are one-time audits rather than metrics that move, so they sit in the gap list instead. Both still need action: The Studio's canonical currently points at <em>/find/b2b/studio.jsp</em> while the live page is <em>/find/shared/b2bHub/theStudio.jsp</em>, and no template has been checked against WCAG AA — which public-sector buyers do ask about.</div>
+    </div>
+  </details>
+
+  <div class="section">
+    <div class="sec-head">
+      <div class="sec-icon">·</div>
+      <div class="sec-title-wrap">
+        <div class="sec-title">Coverage today</div>
+        <div class="sec-q">Sixteen cells: four offerings against four themes. None is fully instrumented, five are partial, ten produce no data at all.</div>
+      </div>
+      <span class="sec-count" id="cov-count">0 of 16 complete</span>
+    </div>
+    <div class="tbl-wrap"><table class="sc cov">
+      <thead><tr><th>Offering</th><th>01 Awareness</th><th>02 User Experience</th><th>03 Acquisition</th><th>04 Reactivation</th><th>Conversion object</th></tr></thead>
+      <tbody id="cov-body"></tbody>
+    </table></div>
+  </div>
+
+  <div id="sections"></div>
+
+  <div class="foot">
+    <div style="display:flex;align-items:center;gap:8px"><span class="foot-bh">B&amp;H</span><span>B2B Offerings · Measurement KPI Specification · Confidential</span></div>
+    <span>GA4 + Search Console + Warehouse + CRM + CMS audit log + ESP · Draft v0.5</span>
+  </div>
+
+</div>
+
+<script>
+var OWNERS={
+  hub:{label:'B2B Hub',owner:'Ariel Goldman',phase:'Live',cls:'prop-hub',abbr:'HUB'},
+  edu:{label:'EDU Advantage',owner:'Kailee Richey',phase:'Live',cls:'prop-edu',abbr:'EDU'},
+  studio:{label:'The Studio',owner:'Danielo Garcia',phase:'Design',cls:'prop-studio',abbr:'STU'},
+  safety:{label:'School Safety',owner:'Rachel Nicastro',phase:'Development',cls:'prop-safety',abbr:'SAF'}
+};
+
+var COVERAGE=[
+  {p:'hub',    aw:'partial',ux:'partial',ac:'none',   re:'none', obj:'Approved <b>organization</b> account'},
+  {p:'edu',    aw:'partial',ux:'partial',ac:'partial',re:'none', obj:'Verified <b>individual</b> discount'},
+  {p:'studio', aw:'none',   ux:'none',   ac:'none',   re:'none', obj:'Inquiry lead — form to inbox'},
+  {p:'safety', aw:'none',   ux:'none',   ac:'none',   re:'na',   obj:'Routed sales lead — form to CRM'}
+];
+
+var ALL=['hub','edu','studio','safety'];
+
+/* Each offering's own funnel, coloured by whether the stage can be measured today.
+   Values are illustrative placeholders; the colours are not. */
+var FUNNELS={
+ hub:{note:'<b>Two stages have no surface to measure.</b> There is no sign-up CTA anywhere on the hub home — the only route forward is a segment tile — and the registration form is a hash-routed SPA that fires no page views. Both ends of this funnel are lit and the middle is dark, which is precisely why the baseline conversion rate has never been established.',
+  stages:[
+   {m:'AW-01',n:'Search impressions',v:'486,000',s:'live'},
+   {m:'AW-07',n:'Hub sessions',v:'42,000',s:'partial'},
+   {m:'UX-01',n:'Segment page',v:'14,700',s:'partial'},
+   {m:'AC-03',n:'Sign-up started',v:'2,050',s:'none'},
+   {m:'AC-04',n:'Submitted',v:'980',s:'none'},
+   {m:'AC-12',n:'Approved',v:'610',s:'partial'},
+   {m:'AC-15',n:'First order',v:'275',s:'live'},
+   {m:'RE-01',n:'Returned in 90d',v:'—',s:'none'}
+  ]},
+ edu:{note:'<b>The funnel breaks in the middle, at a domain we do not own.</b> Students leave for UNiDAYS and come back counted as new referral traffic, so the verification step — the one that decides everything downstream — is the single stage we cannot see.',
+  stages:[
+   {m:'AW-01',n:'Search impressions',v:'312,000',s:'live'},
+   {m:'AW-07',n:'EDU sessions',v:'28,400',s:'partial'},
+   {m:'AC-08',n:'Verification started',v:'4,900',s:'partial'},
+   {m:'UX-23',n:'Returned verified',v:'—',s:'none'},
+   {m:'AC-09',n:'Account created',v:'2,150',s:'partial'},
+   {m:'AC-21',n:'First order',v:'860',s:'partial'},
+   {m:'RE-20',n:'Re-verified',v:'—',s:'none'}
+  ]},
+ studio:{note:'<b>One lit stage, then nothing.</b> Search Console still reports impressions because it works at the domain level — but the page itself carries no GA4 tag, so every stage after the click has never produced a single data point. This is also the only offering still in design, which makes it the one place we can instrument before the build rather than after.',
+  stages:[
+   {m:'AW-01',n:'Search impressions',v:'94,000',s:'live'},
+   {m:'AW-11',n:'Studio sessions',v:'—',s:'none'},
+   {m:'UX-06',n:'Reached inquiry form',v:'—',s:'none'},
+   {m:'AC-07',n:'Inquiry submitted',v:'—',s:'none'},
+   {m:'AC-22',n:'Rep-accepted',v:'—',s:'none'},
+   {m:'AC-24',n:'Booked engagement',v:'—',s:'none'},
+   {m:'RE-22',n:'Repeat engagement',v:'—',s:'none'}
+  ]},
+ safety:{note:'<b>Nothing is measurable because nothing has shipped</b> — which makes this the only funnel that can be built correctly on day one. Every stage below already maps to an event in the launch schema. If those events ship <em>with</em> the page rather than after it, this is the one offering that never needs a retrofit.',
+  stages:[
+   {m:'AW-01',n:'Search impressions',v:'—',s:'na'},
+   {m:'AW-07',n:'Page sessions',v:'—',s:'na'},
+   {m:'UX-05',n:'Tab engagement',v:'—',s:'na'},
+   {m:'UX-06',n:'Scrolled to form',v:'—',s:'na'},
+   {m:'AC-06',n:'Form started',v:'—',s:'na'},
+   {m:'AC-07',n:'Lead submitted',v:'—',s:'na'},
+   {m:'AC-22',n:'Rep-accepted',v:'—',s:'na'},
+   {m:'AC-23',n:'Became B2B account',v:'—',s:'na'}
+  ]}
+};
+
+var THEMES=[
+{n:'01',key:'aware',title:'Awareness',
+ q:'Do the buyers who can actually transact know these pages exist? Qualified reach, not reach — a procurement officer searching a cooperative contract by name is worth more than a thousand generic sessions.',
+ ships:'SEO fields in the CMS · segment and contract page content · internal cross-links between the four offerings · the Alyssa’s Law seminar video · GA4 tagging on every page',
+ metrics:[
+  /* ---- adoption: is the surface reaching people? ---- */
+  {id:'AW-01',name:'Search impressions, priority term set',def:'Impressions against the frozen 120-term procurement set. The first thing that moves when content or SEO fields change.',props:ALL,type:'adoption',baseline:'TBD',target:'TBD',source:'Search Console',cadence:'Weekly',state:'live'},
+  {id:'AW-02',name:'Non-brand organic CTR',def:'Click-through rate on non-brand queries. Tests whether the title and meta description the CMS now controls are doing their job.',props:ALL,type:'adoption',baseline:'TBD',target:'TBD',source:'Search Console',cadence:'Weekly',state:'live'},
+  {id:'AW-03',name:'Non-brand organic clicks',def:'Search clicks where the query does not match the brand pattern.',props:ALL,type:'adoption',baseline:'TBD',target:'+25% / 2 qtrs',source:'Search Console',cadence:'Weekly',state:'live'},
+  {id:'AW-04',name:'Priority keyword top-10 coverage',def:'Share of the frozen 120-term set ranking in the top 10. Frozen once so the metric cannot drift.',props:['hub','edu','safety'],type:'adoption',baseline:'TBD',target:'55%',source:'Search Console',cadence:'Monthly',state:'live'},
+  {id:'AW-05',name:'Average position, priority set',def:'Mean position across the same term set. Moves before clicks do.',props:['hub','edu','safety'],type:'adoption',baseline:'TBD',target:'TBD',source:'Search Console',cadence:'Weekly',state:'live'},
+  {id:'AW-06',name:'Cooperative contract term impressions',def:'Impressions on E&amp;I, OMNIA, TIPS, BuyBoard, PEPPM, Equalis, MHEC and GSA queries — the highest-intent awareness surface we own.',props:['hub'],type:'adoption',baseline:'TBD',target:'TBD',source:'Search Console',cadence:'Monthly',state:'live'},
+  {id:'AW-07',name:'Organic sessions per offering',def:'Search-driven sessions landing on each of the four properties, reported separately rather than blended.',props:ALL,type:'adoption',baseline:'TBD',target:'TBD',source:'GA4',cadence:'Weekly',state:'partial'},
+  {id:'AW-08',name:'Indexed vs. published page count',def:'Pages live in the CMS against pages Google has indexed. Catches orphaned, blocked and duplicate pages before they cost traffic.',props:ALL,type:'adoption',baseline:'TBD',target:'≥ 95%',source:'Search Console',cadence:'Monthly',state:'partial'},
+  {id:'AW-09',name:'Internal cross-link CTR',def:'Click-through on links between the four offerings — hub to Studio, safety to segment pages, EDU to hub. Currently these barely exist.',props:ALL,type:'adoption',baseline:'TBD',target:'TBD',source:'GA4',cadence:'Monthly',state:'none'},
+  {id:'AW-10',name:'Entry page distribution',def:'Share of sessions entering deep, on a segment or contract page, versus at the hub home.',props:['hub'],type:'adoption',baseline:'TBD',target:'TBD',source:'GA4',cadence:'Monthly',state:'partial'},
+  {id:'AW-11',name:'The Studio — all traffic',def:'Sessions, entrances and engaged sessions. Zero of these have ever existed; the page carries no GA4 tag.',props:['studio'],type:'adoption',baseline:'None',target:'Baseline first',source:'GA4',cadence:'Weekly',state:'none'},
+  {id:'AW-12',name:'Seminar video play rate',def:'Plays as a share of sessions reaching the intro. The video is a shipped surface and currently has no measurement at all.',props:['safety'],type:'adoption',baseline:'None',target:'Set at launch',source:'GA4',cadence:'Monthly',state:'none'},
+  {id:'AW-13',name:'Grant-term impressions',def:'Impressions on federal grant and funding queries. Note the design currently contains no grant content to land them on.',props:['safety'],type:'adoption',baseline:'None',target:'Set at launch',source:'Search Console',cadence:'Monthly',state:'none'},
+  /* ---- impact: is qualified demand arriving? ---- */
+  {id:'AW-14',name:'Qualified new-visitor sessions',def:'New users landing on any of the four properties, excluding sessions carrying a B2B account id.',props:ALL,type:'impact',baseline:'TBD',target:'+20%',source:'GA4',cadence:'Weekly',state:'partial'},
+  {id:'AW-15',name:'New-to-B2B visitor sessions',def:'Visitors with no prior B2B account or portal history reaching a B2B surface for the first time. The awareness equivalent of a new customer.',props:ALL,type:'impact',baseline:'TBD',target:'TBD',source:'GA4 + Warehouse',cadence:'Monthly',state:'none'},
+  {id:'AW-16',name:'Institutional referral share',def:'Sessions referred from .gov, .edu or .k12.*.us — the best proxy for a procurement officer forwarding a link to a colleague.',props:['hub','safety'],type:'impact',baseline:'TBD',target:'9%',source:'GA4',cadence:'Monthly',state:'partial'},
+  {id:'AW-17',name:'B2B share of category traffic',def:'B2B-surface sessions as a share of all traffic in the same product categories. Tests whether B2B is growing or just moving traffic around.',props:['hub','studio'],type:'impact',baseline:'TBD',target:'TBD',source:'GA4',cadence:'Quarterly',state:'none'},
+  {id:'AW-18',name:'Segment demand mix vs. approval mix',def:'Sessions per segment page indexed against approved accounts per segment. Divergence means wasted traffic or an underserved segment.',props:['hub'],type:'impact',baseline:'TBD',target:'Diagnostic',source:'GA4 + Warehouse',cadence:'Quarterly',state:'none'},
+  {id:'AW-19',name:'Competitive share of voice',def:'Impression share against CDW, Grainger and Amazon Business on the priority term set.',props:['hub'],type:'impact',baseline:'TBD',target:'TBD',source:'Search Console + 3P',cadence:'Quarterly',state:'none'}
+ ]},
+
+{n:'02',key:'ux',title:'User Experience',
+ q:'Once a buyer is here, can they finish the job? Covers both experiences the PRD names — the buyer’s and the CMS operator’s. A content team that waits weeks for a logo change is a UX failure that resurfaces months later as an awareness failure.',
+ ships:'The CMS editor and draft/publish workflow · segment navigation · verification error messaging · contracts and procurement intake forms · the School Safety anchor tabs · site search',
+ metrics:[
+  /* ---- adoption ---- */
+  {id:'UX-01',name:'Segment tile click rate',def:'Home sessions clicking through to any of the 12 segment pages. Adoption of the only navigation the hub home offers.',props:['hub'],type:'adoption',baseline:'TBD',target:'45%',source:'GA4',cadence:'Weekly',state:'partial'},
+  {id:'UX-02',name:'Segment page → Sign Up click rate',def:'The first point at which a sign-up CTA actually exists on the hub.',props:['hub'],type:'adoption',baseline:'TBD',target:'TBD',source:'GA4',cadence:'Weekly',state:'none'},
+  {id:'UX-03',name:'Contract page → next action rate',def:'Sessions reaching a contract or eProcurement page that click Sign Up or Contact rather than exiting.',props:['hub'],type:'adoption',baseline:'TBD',target:'30%',source:'GA4',cadence:'Monthly',state:'partial'},
+  {id:'UX-04',name:'Procurement intake form start rate',def:'Adoption of the forking intake form that replaces the current "email us" CTA.',props:['hub'],type:'adoption',baseline:'None',target:'Set at launch',source:'GA4',cadence:'Monthly',state:'none'},
+  {id:'UX-05',name:'Anchor tab engagement rate',def:'Clicks on Introduction / Safety Fundamentals / Contact Us / Our Partners. Anchor clicks, not page views — they need their own event.',props:['safety'],type:'adoption',baseline:'None',target:'Set at launch',source:'GA4',cadence:'Weekly',state:'none'},
+  {id:'UX-06',name:'Scroll depth to lead form',def:'Sessions where the form enters the viewport. On both lead-form properties the form sits well below the fold with no CTA above it.',props:['studio','safety'],type:'adoption',baseline:'TBD',target:'TBD',source:'GA4',cadence:'Weekly',state:'none'},
+  {id:'UX-07',name:'Site-search usage rate',def:'Share of sessions using internal search, split by portal-filtered and open accounts.',props:['hub'],type:'adoption',baseline:'TBD',target:'TBD',source:'GA4',cadence:'Monthly',state:'partial'},
+  {id:'UX-08',name:'CMS self-service rate',def:'Content changes published with no linked dev ticket. The headline adoption metric for the CMS itself.',props:['hub','studio'],type:'adoption',baseline:'~0%',target:'80% / 6 mo',source:'CMS log × Jira',cadence:'Monthly',state:'none'},
+  {id:'UX-09',name:'CMS field coverage in use',def:'Share of editable fields that have been edited at least once. Reveals whether operators use the whole tool or three fields of it.',props:['hub','studio'],type:'adoption',baseline:'None',target:'TBD',source:'CMS audit log',cadence:'Quarterly',state:'none'},
+  {id:'UX-10',name:'Content freshness',def:'Median days since last publish across CMS-managed pages. Stale contract pages lose rankings before they lose conversions.',props:['hub','studio'],type:'adoption',baseline:'TBD',target:'&lt; 90 days',source:'CMS audit log',cadence:'Monthly',state:'none'},
+  {id:'UX-11',name:'Mobile share of sessions',def:'Mobile share by template. Procurement skews desktop; lead forms do not, and the two should not be judged on one benchmark.',props:ALL,type:'adoption',baseline:'TBD',target:'TBD',source:'GA4',cadence:'Monthly',state:'partial'},
+  /* ---- impact ---- */
+  {id:'UX-12',name:'Verification failure rate by code',def:'Failure share split by cause. Each code implies a different fix, so a blended rate is useless.',props:['hub'],type:'impact',baseline:'TBD',target:'&lt; 12%',source:'GA4 + D&amp;B logs',cadence:'Weekly',state:'none'},
+  {id:'UX-13',name:'Error-screen recovery rate',def:'Users who retry or take a next step after a failed verification, versus those who abandon. The direct payoff of the P0 error-copy work.',props:['hub'],type:'impact',baseline:'TBD',target:'TBD',source:'GA4',cadence:'Monthly',state:'none'},
+  {id:'UX-14',name:'Drop-off rate by flow step',def:'Where the sign-up and lead flows lose people, step by step.',props:['hub','studio','safety'],type:'impact',baseline:'None',target:'TBD',source:'GA4',cadence:'Weekly',state:'none'},
+  {id:'UX-15',name:'Form field abandonment',def:'Last field focused before exit. Identifies which single question kills the form.',props:['hub','studio','safety'],type:'impact',baseline:'TBD',target:'TBD',source:'GA4',cadence:'Weekly',state:'none'},
+  {id:'UX-16',name:'Dead category page rate',def:'Zero-result category views per 1,000 portal-filtered sessions. The long-standing bug, given a number so it can be prioritised.',props:['hub'],type:'impact',baseline:'TBD',target:'&lt; 5',source:'GA4 + portal logs',cadence:'Monthly',state:'none'},
+  {id:'UX-17',name:'Site-search zero-result rate',def:'Internal searches returning nothing. A leading indicator of the dead-category problem.',props:['hub'],type:'impact',baseline:'TBD',target:'TBD',source:'Search logs',cadence:'Monthly',state:'none'},
+  {id:'UX-18',name:'Support contacts per 1,000 sessions',def:'Deflection measure split by contact reason. Carries the PRD’s D&amp;B support target directly.',props:['hub','studio','safety'],type:'impact',baseline:'TBD',target:'−30% D&amp;B',source:'CRM + GA4',cadence:'Monthly',state:'partial'},
+  {id:'UX-19',name:'Core Web Vitals pass rate',def:'LCP, INP and CLS per template rather than per URL, so a regression points at a component.',props:ALL,type:'impact',baseline:'TBD',target:'75th pct pass',source:'CrUX / GA4',cadence:'Monthly',state:'live'},
+  {id:'UX-20',name:'Mobile completion delta',def:'Gap between desktop and mobile completion on the same flow.',props:['hub','studio','safety'],type:'impact',baseline:'TBD',target:'TBD',source:'GA4',cadence:'Monthly',state:'partial'},
+  {id:'UX-21',name:'Time to publish',def:'Median hours DRAFT → PUBLISHED. The operator-side outcome the whole CMS build is justified by.',props:['hub','studio'],type:'impact',baseline:'Weeks',target:'&lt; 4 hrs',source:'CMS audit log',cadence:'Monthly',state:'none'},
+  {id:'UX-22',name:'CMS operator NPS',def:'Quarterly survey of the B2B team on the content management experience.',props:['hub','studio'],type:'impact',baseline:'TBD',target:'≥ 8/10',source:'Quarterly survey',cadence:'Quarterly',state:'none'},
+  {id:'UX-23',name:'UNiDAYS return rate',def:'Students sent to UNiDAYS who return to B&amp;H verified. Measures a handoff we depend on but do not control.',props:['edu'],type:'impact',baseline:'TBD',target:'70%',source:'GA4 + UNiDAYS',cadence:'Monthly',state:'none'}
+ ]},
+
+{n:'03',key:'acq',title:'Acquisition',
+ q:'Did the visit produce something? What "something" means differs by offering — an approved account, a verified student, an inquiry — so this theme keeps four separate funnels and compares them only on rate. The hub funnel deliberately does not end at "approved": an approved account that never orders is a support cost.',
+ ships:'The hub-home sign-up CTA (not yet built) · the multi-step registration flow · the Studio inquiry form · the School Safety "Connect with an Expert" form · the UNiDAYS verification handoff',
+ metrics:[
+  /* ---- adoption ---- */
+  {id:'AC-01',name:'Sign-up CTA exposure rate',def:'Share of hub sessions that see a sign-up call to action. Currently zero — the hub home has no CTA at all.',props:['hub'],type:'adoption',baseline:'0%',target:'Baseline first',source:'GA4',cadence:'Weekly',state:'none'},
+  {id:'AC-02',name:'Sign-up CTA click-through rate',def:'Clicks as a share of exposures, split by CTA placement.',props:['hub'],type:'adoption',baseline:'None',target:'TBD',source:'GA4',cadence:'Weekly',state:'none'},
+  {id:'AC-03',name:'Sign-up start rate',def:'Sessions reaching the first step of registration over hub sessions. The baseline the PRD’s +15% target needs and does not have.',props:['hub'],type:'adoption',baseline:'None',target:'Baseline first',source:'GA4',cadence:'Weekly',state:'none'},
+  {id:'AC-04',name:'Sign-up form completion rate',def:'Start to submit. Invisible today because the form is a hash-routed SPA that fires no page views.',props:['hub'],type:'adoption',baseline:'TBD',target:'60%',source:'GA4',cadence:'Weekly',state:'none'},
+  {id:'AC-05',name:'Step progression rate',def:'Share of starters reaching each subsequent step of the registration flow.',props:['hub'],type:'adoption',baseline:'None',target:'TBD',source:'GA4',cadence:'Weekly',state:'none'},
+  {id:'AC-06',name:'Lead form start rate',def:'Sessions beginning the Studio inquiry or School Safety expert form. One shared event schema across both, not two.',props:['studio','safety'],type:'adoption',baseline:'None',target:'Set at launch',source:'GA4',cadence:'Weekly',state:'none'},
+  {id:'AC-07',name:'Lead form completion rate',def:'Start to submit on the two lead-form properties.',props:['studio','safety'],type:'adoption',baseline:'TBD',target:'TBD',source:'GA4',cadence:'Weekly',state:'none'},
+  {id:'AC-08',name:'UNiDAYS verification start rate',def:'Sessions initiating the student verification handoff.',props:['edu'],type:'adoption',baseline:'TBD',target:'TBD',source:'GA4',cadence:'Weekly',state:'partial'},
+  {id:'AC-09',name:'Verified → account created',def:'Verified students who go on to create or link a B&amp;H account.',props:['edu'],type:'adoption',baseline:'TBD',target:'TBD',source:'GA4 + UNiDAYS',cadence:'Monthly',state:'partial'},
+  /* ---- impact ---- */
+  {id:'AC-10',name:'Qualified Action Rate',def:'The one figure that rolls up across all four — each property’s own conversion over its qualified sessions. Different numerators, comparable rates.',props:ALL,type:'impact',baseline:'TBD',target:'Baseline first',source:'GA4 + Warehouse',cadence:'Monthly',state:'none'},
+  {id:'AC-11',name:'New approved B2B accounts',def:'Count of accounts passing verification, by month and segment. The headline acquisition number for the Hub.',props:['hub'],type:'impact',baseline:'TBD',target:'TBD',source:'Warehouse',cadence:'Monthly',state:'partial'},
+  {id:'AC-12',name:'Submit → approved rate',def:'Verification pass rate across all three paths. Exists in the backend but cannot be joined to a session, so we cannot tell which traffic converts.',props:['hub'],type:'impact',baseline:'TBD',target:'75%',source:'Warehouse',cadence:'Monthly',state:'partial'},
+  {id:'AC-13',name:'Approval path mix',def:'Share approved by D&amp;B match, domain whitelist and manual review. Shifts in the mix predict support volume before it arrives.',props:['hub'],type:'impact',baseline:'TBD',target:'Diagnostic',source:'Warehouse',cadence:'Monthly',state:'partial'},
+  {id:'AC-14',name:'Manual review queue time',def:'Median hours from submission to decision for manually reviewed accounts.',props:['hub'],type:'impact',baseline:'TBD',target:'&lt; 24 hrs',source:'B2B ops',cadence:'Weekly',state:'none'},
+  {id:'AC-15',name:'Approved → first order',def:'Approved accounts ordering within 30 / 60 / 90 days. Three windows, because B2B cycles are long and a 30-day read looks like failure.',props:['hub'],type:'impact',baseline:'TBD',target:'55% @ 90d',source:'Warehouse',cadence:'Monthly',state:'live'},
+  {id:'AC-16',name:'Median time to first order',def:'Days from approval to first transaction. Also the denominator for onboarding work.',props:['hub'],type:'impact',baseline:'TBD',target:'&lt; 18 days',source:'Warehouse',cadence:'Monthly',state:'live'},
+  {id:'AC-17',name:'First-order AOV, new accounts',def:'Average order value on a new B2B account’s first transaction, by segment.',props:['hub'],type:'impact',baseline:'TBD',target:'TBD',source:'Warehouse',cadence:'Monthly',state:'live'},
+  {id:'AC-18',name:'Approved accounts by segment',def:'Segment mix of approvals against segment mix of traffic. Requires segment as a dimension, which requires parsing it out of the URL path.',props:['hub'],type:'impact',baseline:'TBD',target:'Diagnostic',source:'GA4 + Warehouse',cadence:'Monthly',state:'none'},
+  {id:'AC-19',name:'Sign-up conversion vs. baseline',def:'The PRD’s headline success metric. Blocked until AC-03 has a baseline.',props:['hub'],type:'impact',baseline:'None',target:'+15%',source:'GA4',cadence:'Monthly',state:'none'},
+  {id:'AC-20',name:'Cost per approved account',def:'Blended acquisition cost per approved, ordering account. The number that makes awareness spend arguable.',props:['hub'],type:'impact',baseline:'TBD',target:'TBD',source:'Finance + GA4',cadence:'Quarterly',state:'none'},
+  {id:'AC-21',name:'EDU verified → first order',def:'Verified students who transact. A separate funnel — an individual, not an organization.',props:['edu'],type:'impact',baseline:'TBD',target:'40%',source:'GA4 + Warehouse',cadence:'Monthly',state:'partial'},
+  {id:'AC-22',name:'Lead → rep-accepted rate',def:'Leads a specialist accepts as genuinely qualified. The first real quality signal on a free-text form with no verification gate.',props:['studio','safety'],type:'impact',baseline:'None',target:'Set at launch',source:'CRM',cadence:'Monthly',state:'none'},
+  {id:'AC-23',name:'Safety lead → B2B account',def:'Routed leads that become approved B2B accounts, joined on hashed work-email domain. The bridge between the safety hub and the hub funnel.',props:['safety'],type:'impact',baseline:'None',target:'Set at launch',source:'CRM + Warehouse',cadence:'Quarterly',state:'none'},
+  {id:'AC-24',name:'Studio inquiry → booked engagement',def:'Inquiries becoming a consultation, installation, training or seminar booking. Needs structured intake, which today does not exist.',props:['studio'],type:'impact',baseline:'None',target:'Baseline first',source:'Studio intake',cadence:'Monthly',state:'none'},
+  {id:'AC-25',name:'Studio engagement revenue',def:'Revenue per booked Studio engagement, by service line.',props:['studio'],type:'impact',baseline:'TBD',target:'TBD',source:'Finance + Studio',cadence:'Quarterly',state:'none'}
+ ]},
+
+{n:'04',key:'react',title:'Reactivation',
+ q:'Does the offering earn a second visit? Once a customer has a punchout portal their shopping need is met elsewhere and the Hub’s job changes — it becomes the account layer. Every hub metric here is unmeasurable today for one shared reason: logged-in accounts have no identity in analytics.',
+ ships:'The Phase 2 logged-in account dashboard and its sections · expiring-contract notices · the portal change log · triggered reactivation email · EDU re-verification prompts',
+ metrics:[
+  /* ---- adoption ---- */
+  {id:'RE-01',name:'Authenticated return rate',def:'Approved accounts with at least one hub session in 90 days. Adoption of the Hub as an account layer, and the metric the whole theme depends on.',props:['hub'],type:'adoption',baseline:'None',target:'Baseline first',source:'GA4 (user_id)',cadence:'Monthly',state:'none'},
+  {id:'RE-02',name:'Dashboard section view rate',def:'Views per logged-in dashboard section. The paired adoption metric each Phase 2 module ships with.',props:['hub'],type:'adoption',baseline:'None',target:'Per section',source:'GA4',cadence:'Monthly',state:'none'},
+  {id:'RE-03',name:'Expiring-contract notice impressions',def:'Accounts with a contract expiring in ≤ 90 days who actually see the notice. Currently zero by construction — no notice exists.',props:['hub'],type:'adoption',baseline:'0%',target:'90%',source:'Contract data + GA4',cadence:'Monthly',state:'none'},
+  {id:'RE-04',name:'Expiry notice click-through rate',def:'Clicks on the renewal or re-qualification action inside the notice.',props:['hub'],type:'adoption',baseline:'None',target:'Set at launch',source:'GA4',cadence:'Monthly',state:'none'},
+  {id:'RE-05',name:'Portal change log view rate',def:'Accounts viewing the changelog after a portal parameter change. Customers have zero visibility into these today.',props:['hub'],type:'adoption',baseline:'None',target:'Set at launch',source:'BDBTools + GA4',cadence:'Monthly',state:'none'},
+  {id:'RE-06',name:'Reactivation email open rate',def:'Opens on triggered outreach to dormant accounts. There is no proactive communication mechanism today — this measures the one Phase 2 builds.',props:['hub'],type:'adoption',baseline:'None',target:'Set at launch',source:'ESP',cadence:'Per campaign',state:'none'},
+  {id:'RE-07',name:'Reactivation email CTR',def:'Clicks through to the hub or portal from triggered outreach.',props:['hub'],type:'adoption',baseline:'None',target:'Set at launch',source:'ESP',cadence:'Per campaign',state:'none'},
+  {id:'RE-08',name:'Sessions per returning account',def:'Depth of the return visit, not just the fact of it. Distinguishes a real check-in from a bounce.',props:['hub'],type:'adoption',baseline:'None',target:'TBD',source:'GA4 (user_id)',cadence:'Monthly',state:'none'},
+  {id:'RE-09',name:'Re-verification prompt engagement',def:'Students engaging with the prompt when their verified status lapses.',props:['edu'],type:'adoption',baseline:'None',target:'TBD',source:'ESP + UNiDAYS',cadence:'Per campaign',state:'none'},
+  /* ---- impact ---- */
+  {id:'RE-10',name:'Dormancy rate — 180 day',def:'Approved accounts with no order in 180 days. The intervention point.',props:['hub'],type:'impact',baseline:'TBD',target:'TBD',source:'Warehouse',cadence:'Monthly',state:'partial'},
+  {id:'RE-11',name:'Dormancy rate — 365 day',def:'Approved accounts with no order in a year. The loss.',props:['hub'],type:'impact',baseline:'TBD',target:'&lt; 30%',source:'Warehouse',cadence:'Monthly',state:'partial'},
+  {id:'RE-12',name:'Reactivation rate',def:'Dormant accounts ordering within 90 days of a hub touch. The one metric that proves the Hub does account work rather than just describing it.',props:['hub'],type:'impact',baseline:'None',target:'8%',source:'GA4 + Warehouse',cadence:'Monthly',state:'none'},
+  {id:'RE-13',name:'Revenue from reactivated accounts',def:'Order value attributable to accounts that were dormant before a hub or email touch.',props:['hub'],type:'impact',baseline:'None',target:'Set at launch',source:'Finance + Warehouse',cadence:'Monthly',state:'none'},
+  {id:'RE-14',name:'Expiry notice → renewal completed',def:'Accounts completing a renewal or re-qualification after seeing the notice. The impact half of RE-03 and RE-04.',props:['hub'],type:'impact',baseline:'None',target:'Set at launch',source:'Warehouse',cadence:'Monthly',state:'none'},
+  {id:'RE-15',name:'Orders per active account',def:'Trailing-12-month order count per active account, by segment. Depth of relationship rather than breadth of base.',props:['hub'],type:'impact',baseline:'TBD',target:'+10%',source:'Warehouse',cadence:'Quarterly',state:'live'},
+  {id:'RE-16',name:'Repeat order rate',def:'Accounts with a second order within 90 days of their first. The earliest reliable retention signal.',props:['hub'],type:'impact',baseline:'TBD',target:'TBD',source:'Warehouse',cadence:'Monthly',state:'live'},
+  {id:'RE-17',name:'Portal utilization',def:'Provisioned portals with an order in 90 days. An unused portal is a configured, supported and entirely unproductive asset.',props:['hub'],type:'impact',baseline:'TBD',target:'85%',source:'Portal + orders',cadence:'Monthly',state:'partial'},
+  {id:'RE-18',name:'Punchout health',def:'eProcurement integrations with a successful transaction in 30 days. A broken punchout is silent — the customer usually finds out before B&amp;H does.',props:['hub'],type:'impact',baseline:'TBD',target:'95%',source:'Integration logs',cadence:'Weekly',state:'none'},
+  {id:'RE-19',name:'Logged-in ticket deflection',def:'Support contacts per active account for contract, tax-certificate and integration questions — the three the account dashboard is meant to answer.',props:['hub'],type:'impact',baseline:'TBD',target:'TBD',source:'CRM',cadence:'Monthly',state:'partial'},
+  {id:'RE-20',name:'Annual re-verification rate',def:'Verified students who re-verify when status lapses. EDU’s equivalent of a return visit — there is no account to reactivate.',props:['edu'],type:'impact',baseline:'TBD',target:'TBD',source:'UNiDAYS + Warehouse',cadence:'Quarterly',state:'none'},
+  {id:'RE-21',name:'Repeat purchase in discount cohort',def:'Verified students purchasing more than once inside an academic year.',props:['edu'],type:'impact',baseline:'TBD',target:'TBD',source:'Warehouse',cadence:'Quarterly',state:'partial'},
+  {id:'RE-22',name:'Studio repeat engagement per client',def:'Studio clients with more than one project, training or seminar in 24 months. Lives in Studio team records, not analytics.',props:['studio'],type:'impact',baseline:'TBD',target:'TBD',source:'Studio intake',cadence:'Quarterly',state:'none'},
+  {id:'RE-23',name:'Studio client → B2B account overlap',def:'Share of Studio clients who also hold a B2B account. Tests whether the two offerings feed each other or run in parallel.',props:['studio','hub'],type:'impact',baseline:'TBD',target:'Diagnostic',source:'Studio + Warehouse',cadence:'Quarterly',state:'none'},
+  {id:'RE-24',name:'Safety lead nurture re-engagement',def:'Unconverted safety leads returning within two budget cycles. School procurement runs on fiscal calendars, not weeks.',props:['safety'],type:'impact',baseline:'None',target:'Set at launch',source:'CRM + GA4',cadence:'Quarterly',state:'none'}
+ ]}
+];
+
+var TYPE_LABEL={adoption:'Adoption',impact:'Impact'};
+var STATE_LABEL={live:'Live',partial:'Partial',none:'Not instr.',na:'N/A'};
+var STATE_CLASS={live:'p-live',partial:'p-partial',none:'p-none',na:'p-na'};
+
+document.getElementById('cov-body').innerHTML=COVERAGE.map(function(r){
+  var o=OWNERS[r.p];
+  function cell(s){return '<td><span class="pill '+STATE_CLASS[s]+'">'+STATE_LABEL[s]+'</span></td>';}
+  return '<tr data-own="'+r.p+'">'
+    +'<td><div class="cov-p">'+o.label+'</div><div class="cov-o">'+o.owner+' · '+o.phase+'</div></td>'
+    +cell(r.aw)+cell(r.ux)+cell(r.ac)+cell(r.re)
+    +'<td><span class="m-val" style="white-space:normal">'+r.obj+'</span></td></tr>';
+}).join('');
+
+document.getElementById('sections').innerHTML=THEMES.map(function(t){
+  var lastType=null, rows='';
+  t.metrics.forEach(function(m){
+    if(m.type!==lastType){
+      rows+='<tr class="band" data-band="'+m.type+'"><td colspan="8">'
+        +(m.type==='adoption'?'Adoption — is the surface being reached and used?':'Impact — is the business moving?')
+        +'</td></tr>';
+      lastType=m.type;
+    }
+    var props=m.props.map(function(p){
+      return '<span class="prop '+OWNERS[p].cls+'" title="'+OWNERS[p].label+' · '+OWNERS[p].owner+'">'+OWNERS[p].abbr+'</span>';
+    }).join('');
+    rows+='<tr class="mrow" data-own="'+m.props.join(' ')+'" data-type="'+m.type+'" data-state="'+m.state+'">'
+      +'<td><div class="m-id">'+m.id+'</div><div class="m-name">'+m.name+'</div><div class="m-def">'+m.def+'</div></td>'
+      +'<td>'+props+'</td>'
+      +'<td><span class="pill p-'+m.type+'">'+TYPE_LABEL[m.type]+'</span></td>'
+      +'<td class="m-val'+(m.baseline==='TBD'?' m-tbd':'')+'">'+m.baseline+'</td>'
+      +'<td class="m-val'+(m.target==='TBD'?' m-tbd':'')+'">'+m.target+'</td>'
+      +'<td class="m-source">'+m.source+'</td>'
+      +'<td class="m-cadence">'+m.cadence+'</td>'
+      +'<td><span class="pill '+STATE_CLASS[m.state]+'">'+STATE_LABEL[m.state]+'</span></td>'
+    +'</tr>';
+  });
+  var na=t.metrics.filter(function(m){return m.type==='adoption';}).length;
+  var ni=t.metrics.length-na;
+  return '<div class="section" data-theme="'+t.key+'"><div class="sec-head"><div class="sec-icon">'+t.n+'</div>'
+    +'<div class="sec-title-wrap"><div class="sec-title">'+t.title+'</div><div class="sec-q">'+t.q+'</div>'
+    +'<div class="sec-ships"><b>What we ship here</b> · '+t.ships+'</div></div>'
+    +'<span class="sec-count" data-count data-na="'+na+'" data-ni="'+ni+'">'+na+' adoption · '+ni+' impact</span></div>'
+    +'<div class="tbl-wrap"><table class="sc"><thead><tr><th>Metric</th><th>Property</th><th>Type</th><th>Baseline</th><th>Target</th><th>Data source</th><th>Cadence</th><th>Instrumentation</th></tr></thead>'
+    +'<tbody>'+rows+'</tbody></table><div class="sec-empty" hidden>No metrics match the current filter.</div></div></div>';
+}).join('');
+
+function renderFunnel(){
+  var el=document.getElementById('funnel');
+  if(filters.own==='all'){
+    var rows=ALL.map(function(p){
+      var o=OWNERS[p];
+      var cells=FUNNELS[p].stages.map(function(st){
+        return '<div class="fun-cell b-'+st.s+'" title="'+st.n+' · '+st.m+' · '+STATE_LABEL[st.s]+'">'+st.n+'</div>';
+      }).join('');
+      return '<div class="fun-row"><div class="fun-rlabel">'+o.label+'<span>'+o.owner+'</span></div>'
+        +'<div class="fun-mini">'+cells+'</div></div>';
+    }).join('');
+    el.innerHTML='<div class="fun-head"><span class="fun-title">Funnel by offering</span>'
+      +'<span class="fun-who">All four · Manny Steigman</span></div>'
+      +'<div class="fun-note"><b>Four offerings, four different funnel shapes.</b> Each row is that offering’s own path to its own conversion object, coloured by whether the stage can be measured today. Pick an owner above to open their funnel in full. Green ends with red middles are instrumentation problems; rows that are red from the second cell onward are product problems.</div>'
+      +'<div class="fun-rows">'+rows+'</div>'
+      +'<div class="fun-legend">Hover any cell for its stage and metric ID.</div>';
+    return;
+  }
+  var o=OWNERS[filters.own], f=FUNNELS[filters.own];
+  var stages=f.stages.map(function(st){
+    return '<div class="fun-stage">'
+      +'<div class="fun-mid">'+st.m+'</div>'
+      +'<div class="fun-name">'+st.n+'</div>'
+      +'<div class="fun-val'+(st.v==='—'?' na':'')+'">'+st.v+'</div>'
+      +'<div class="fun-st t-'+st.s+'">'+STATE_LABEL[st.s]+'</div>'
+      +'<div class="fun-bar b-'+st.s+'"></div>'
+    +'</div>';
+  }).join('');
+  el.innerHTML='<div class="fun-head"><span class="fun-title">'+o.label+' — funnel</span>'
+    +'<span class="fun-who">'+o.owner+' · '+o.phase+'</span></div>'
+    +'<div class="fun-note">'+f.note+'</div>'
+    +'<div class="fun-strip">'+stages+'</div>'
+    +'<div class="fun-legend">Values are illustrative placeholders. The colour bar under each stage is not — it is whether that stage can be measured today.</div>';
+}
+
+var filters={own:'all',type:'all',state:'all'};
+
+function rowVisible(r){
+  if(filters.own!=='all' && r.getAttribute('data-own').split(' ').indexOf(filters.own)<0) return false;
+  if(filters.type!=='all' && r.getAttribute('data-type')!==filters.type) return false;
+  if(filters.state!=='all' && r.getAttribute('data-state')!==filters.state) return false;
+  return true;
+}
+
+function applyFilter(){
+  document.querySelectorAll('.section[data-theme]').forEach(function(sec){
+    var shownA=0,shownI=0;
+    sec.querySelectorAll('.mrow').forEach(function(r){
+      var v=rowVisible(r); r.hidden=!v;
+      if(v){ if(r.getAttribute('data-type')==='adoption') shownA++; else shownI++; }
+    });
+    sec.querySelectorAll('tr.band').forEach(function(b){
+      b.hidden=(b.getAttribute('data-band')==='adoption')?(shownA===0):(shownI===0);
+    });
+    var shown=shownA+shownI;
+    sec.querySelector('.sec-empty').hidden=(shown!==0);
+    sec.querySelector('[data-count]').textContent=shownA+' adoption · '+shownI+' impact';
+  });
+  document.querySelectorAll('#cov-body tr').forEach(function(r){
+    r.hidden=(filters.own!=='all' && r.getAttribute('data-own')!==filters.own);
+  });
+  var covRows=COVERAGE.filter(function(r){return filters.own==='all'||r.p===filters.own;});
+  var covCells=covRows.length*4;
+  var covDone=covRows.reduce(function(a,r){
+    return a+['aw','ux','ac','re'].filter(function(k){return r[k]==='live';}).length;
+  },0);
+  document.getElementById('cov-count').textContent=covDone+' of '+covCells+' complete';
+  renderFunnel();
+  computeSummary();
+}
+
+function computeSummary(){
+  var all=[];
+  THEMES.forEach(function(t){t.metrics.forEach(function(m){all.push(m);});});
+  var vis=all.filter(function(m){
+    if(filters.own!=='all' && m.props.indexOf(filters.own)<0) return false;
+    if(filters.type!=='all' && m.type!==filters.type) return false;
+    if(filters.state!=='all' && m.state!==filters.state) return false;
+    return true;
+  });
+  function cntState(k){return vis.filter(function(m){return m.state===k;}).length;}
+  function cntType(k){return vis.filter(function(m){return m.type===k;}).length;}
+  document.getElementById('sum-row').innerHTML=[
+    {n:vis.length,l:'Metrics in scope',c:''},
+    {n:cntType('adoption'),l:'Adoption metrics',c:'b'},
+    {n:cntType('impact'),l:'Impact metrics',c:'p'},
+    {n:cntState('live'),l:'Live',c:'g'},
+    {n:cntState('partial'),l:'Partial',c:'a'},
+    {n:cntState('none'),l:'Not instrumented',c:'r'}
+  ].map(function(s){return '<div class="sum-cell"><div class="sum-num '+s.c+'">'+s.n+'</div><div class="sum-lbl">'+s.l+'</div></div>';}).join('');
+}
+
+document.querySelectorAll('.chip[data-dim]').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var dim=btn.getAttribute('data-dim');
+    filters[dim]=btn.getAttribute('data-val');
+    document.querySelectorAll('.chip[data-dim="'+dim+'"]').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    applyFilter();
+  });
+});
+
+applyFilter();
+</script>
+</body>
+</html>

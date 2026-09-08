@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
-<meta name="description" content="B&amp;H B2B cross-offering KPI specification: 91 adoption and impact metrics across four offerings, filterable by date range, owner, metric type, device and instrumentation state.">
+<meta name="description" content="B&amp;H B2B cross-offering KPI specification: 91 adoption and impact metrics across four offerings, filterable by owner, metric type, device, instrumentation state and date range.">
 <meta name="robots" content="noindex, nofollow">
 <title>B2B Offerings KPI Spec</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -36,7 +36,8 @@ body{font-family:'Montserrat',system-ui,sans-serif;background:var(--bg);color:va
 .header-right{font-size:11px;color:var(--header-sub);text-align:right;line-height:1.7}
 
 .shell{max-width:1280px;margin:0 auto;padding:22px 28px 0}
-.panel{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:18px}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:18px;
+  position:sticky;top:0;z-index:50;box-shadow:0 8px 18px -12px rgba(15,31,75,.34)}
 .sum-row{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:14px}
 .sum-num{font-size:22px;font-weight:800;color:var(--brand-ink);line-height:1}
 .sum-lbl{font-size:9.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted);margin-top:5px;line-height:1.3}
@@ -46,12 +47,18 @@ body{font-family:'Montserrat',system-ui,sans-serif;background:var(--bg);color:va
 .controls{display:flex;flex-direction:column;gap:10px;padding-top:14px;margin-top:12px;border-top:1px solid var(--brand-wash)}
 .ctrl-group{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 .ctrl-lbl{font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted);width:122px;flex-shrink:0}
+.ctrl-lbl.inline{width:auto;margin-left:2px}
+.ctrl-sep{width:1px;height:22px;background:var(--border-dark);opacity:.7;margin:0 8px;flex-shrink:0}
 .chip{font-size:11px;font-weight:600;padding:4px 12px;border-radius:5px;border:1.5px solid var(--border);background:var(--card);color:var(--text-muted);cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .13s;text-align:left;line-height:1.3}
 .chip:hover{border-color:var(--brand-ink);color:var(--brand-ink)}
 .chip.active{background:var(--brand);color:#fff;border-color:var(--brand)}
 .chip:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
 .chip .sm{display:block;font-size:9px;font-weight:600;opacity:.72;margin-top:1px;letter-spacing:.02em}
 
+.goal{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;background:var(--brand);
+  border-radius:10px;padding:14px 18px;margin-bottom:18px}
+.goal-eyebrow{font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);flex-shrink:0}
+.goal-text{font-size:14.5px;font-weight:700;color:var(--header-ink);letter-spacing:.01em;line-height:1.4}
 .leg{display:flex;gap:18px;flex-wrap:wrap;font-size:10.5px;color:var(--text-muted);font-weight:600;margin:-4px 0 18px 2px}
 .leg-item{display:flex;align-items:center;gap:6px}
 .leg-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
@@ -199,6 +206,32 @@ table.cov .cov-o{font-size:10px;color:var(--text-muted);font-weight:600;margin-t
   <div class="panel">
     <div class="sum-row" id="sum-row"></div>
     <div class="controls">
+
+      <div class="ctrl-group">
+        <span class="ctrl-lbl">Owner</span>
+        <button class="chip active" data-dim="own" data-val="all">All four<span class="sm">Manny Steigman</span></button>
+        <button class="chip" data-dim="own" data-val="hub">B2B Hub<span class="sm">Ariel Goldman · Live</span></button>
+        <button class="chip" data-dim="own" data-val="edu">EDU Advantage<span class="sm">Kailee Richey · Live</span></button>
+        <button class="chip" data-dim="own" data-val="studio">The Studio<span class="sm">Danielo Garcia · Design</span></button>
+        <button class="chip" data-dim="own" data-val="safety">School Safety<span class="sm">Rachel Nicastro · Dev</span></button>
+      </div>
+      <div class="ctrl-group">
+        <span class="ctrl-lbl">Metric type</span>
+        <button class="chip active" data-dim="type" data-val="all">All</button>
+        <button class="chip" data-dim="type" data-val="adoption">Adoption</button>
+        <button class="chip" data-dim="type" data-val="impact">Impact</button>
+        <span class="ctrl-sep"></span>
+        <span class="ctrl-lbl inline">Device</span>
+        <button class="chip active" data-dim="dev" data-val="all">All devices</button>
+        <button class="chip" data-dim="dev" data-val="desktop">Desktop</button>
+        <button class="chip" data-dim="dev" data-val="mobile">Mobile</button>
+        <span class="ctrl-sep"></span>
+        <span class="ctrl-lbl inline">Instrumentation</span>
+        <button class="chip active" data-dim="state" data-val="all">All</button>
+        <button class="chip" data-dim="state" data-val="live">Live</button>
+        <button class="chip" data-dim="state" data-val="partial">Partial</button>
+        <button class="chip" data-dim="state" data-val="none">Not instrumented</button>
+      </div>
       <div class="ctrl-group">
         <span class="ctrl-lbl">Date range</span>
         <button class="chip" data-dim="range" data-val="7">Last 7 days</button>
@@ -213,34 +246,12 @@ table.cov .cov-o{font-size:10px;color:var(--text-muted);font-weight:600;margin-t
         <label for="d-to">To</label><input type="date" id="d-to">
         <span class="span" id="d-span"></span>
       </div>
-      <div class="ctrl-group">
-        <span class="ctrl-lbl">Owner</span>
-        <button class="chip active" data-dim="own" data-val="all">All four<span class="sm">Manny Steigman</span></button>
-        <button class="chip" data-dim="own" data-val="hub">B2B Hub<span class="sm">Ariel Goldman · Live</span></button>
-        <button class="chip" data-dim="own" data-val="edu">EDU Advantage<span class="sm">Kailee Richey · Live</span></button>
-        <button class="chip" data-dim="own" data-val="studio">The Studio<span class="sm">Danielo Garcia · Design</span></button>
-        <button class="chip" data-dim="own" data-val="safety">School Safety<span class="sm">Rachel Nicastro · Dev</span></button>
-      </div>
-      <div class="ctrl-group">
-        <span class="ctrl-lbl">Metric type</span>
-        <button class="chip active" data-dim="type" data-val="all">All</button>
-        <button class="chip" data-dim="type" data-val="adoption">Adoption</button>
-        <button class="chip" data-dim="type" data-val="impact">Impact</button>
-      </div>
-      <div class="ctrl-group">
-        <span class="ctrl-lbl">Device</span>
-        <button class="chip active" data-dim="dev" data-val="all">All devices</button>
-        <button class="chip" data-dim="dev" data-val="desktop">Desktop</button>
-        <button class="chip" data-dim="dev" data-val="mobile">Mobile</button>
-      </div>
-      <div class="ctrl-group">
-        <span class="ctrl-lbl">Instrumentation</span>
-        <button class="chip active" data-dim="state" data-val="all">All</button>
-        <button class="chip" data-dim="state" data-val="live">Live</button>
-        <button class="chip" data-dim="state" data-val="partial">Partial</button>
-        <button class="chip" data-dim="state" data-val="none">Not instrumented</button>
-      </div>
     </div>
+  </div>
+
+  <div class="goal">
+    <span class="goal-eyebrow">2026 Goal</span>
+    <span class="goal-text">Grow B2B Platforms while elevating content quality across the site.</span>
   </div>
 
   <div class="leg">
